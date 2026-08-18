@@ -1,0 +1,45 @@
+name: coupeur_de_feu_app
+description: Application de suivi de patients pour la pratique de coupeur de feu.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  intl: ^0.19.0
+  share_plus: ^12.0.2
+  path_provider: ^2.1.0
+  file_picker: ^10.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.13
+  flutter_launcher_icons: "^0.13.1"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+
+# CETTE SECTION DOIT ÊTRE À LA RACINE (pas indentée sous 'flutter')
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  # image_path = version du logo avec le fond déjà incrusté (pas de
+  # transparence) : c'est ce qui évite le halo blanc autour de l'icône sur
+  # iOS et sur l'icône "legacy" Android (celle utilisée par ex. dans le
+  # sélecteur d'apps récentes).
+  image_path: "assets/icon.png"
+  # Sur Android 8+ (icônes adaptatives), on fournit en plus un premier plan
+  # transparent + une couleur de fond séparée pour un rendu plus net.
+  adaptive_icon_foreground: "assets/icon_foreground.png"
+  adaptive_icon_background: "#114153"
