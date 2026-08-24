@@ -20,7 +20,7 @@ class ProtocoleService {
 
   /// Version la plus haute connue. À incrémenter à chaque nouveau lot de
   /// contenu ajouté dans _lotsParVersion.
-  static const int _versionActuelle = 2;
+  static const int _versionActuelle = 3;
 
   static ValueListenable<Box<Protocole>> listenable() => _box.listenable();
 
@@ -181,6 +181,19 @@ Ainsi soit-il.
         ),
       ];
     },
+    3: (date) => [
+          Protocole(
+            titre: "Infection",
+            dateAjout: date,
+            estParDefaut: true,
+            priere: """Grand Saint Roch, toi qui as soigné les pestiférés et repoussé la maladie, je t'invoque pour combattre cette infection qui touche le corps de [NOM]. Que les forces de vie chassent ce qui ne doit pas y être, que le pus se résorbe, que la fièvre tombe, que la chair guérisse saine et propre. Par la force du feu qui purifie et non qui détruit, je chasse l'intrus. Ainsi soit-il.""",
+            etapes: """Contrairement aux autres protocoles (qui calment/refroidissent), celui-ci vise à extraire puis renforcer :
+1. Passes d'extraction : du centre de la zone infectée vers l'extérieur, main ouverte à 1-2 cm, comme pour tirer l'infection hors du corps. Secouer ou essuyer la main après chaque passe, pour ne pas la garder sur soi.
+2. Passes de renforcement en sens inverse (périphérie vers le centre), en visualisant une lumière blanche ou dorée (purification/renforcement, plutôt que la lumière bleue utilisée pour calmer une inflammation).
+3. Imposition 2 à 3 minutes sur la zone, avec l'intention de renforcer les défenses immunitaires.
+4. Optionnel : légers effleurements sur les ganglions lymphatiques proches (aine, aisselles, cou) pour activer le drainage.""",
+          ),
+        ],
   };
 
   static List<Protocole> getAll() {

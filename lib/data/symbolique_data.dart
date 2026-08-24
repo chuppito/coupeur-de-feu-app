@@ -13,7 +13,7 @@
 
 final List<String> typesMaladie = [
   "Eczéma", "Psoriasis", "Zona", "Brûlure", "Inflammation", "Aphtes",
-  "Rhumatismes / Arthrose", "Urticaire", "Otite",
+  "Rhumatismes / Arthrose", "Urticaire", "Otite", "Infection",
 ];
 
 final List<String> zonesCorps = [
@@ -75,6 +75,15 @@ final Map<String, ConflitType> conflitsTypes = {
         "(besoin d'être entendu, pleurs intérieurs non écoutés). Selon le type : otite externe = barrière dressée "
         "contre une intrusion verbale directe (« ne m'envahissez pas ! ») ; otite moyenne ou séreuse = tristesse "
         "refoulée, pleurs intérieurs bloqués derrière le tympan.",
+  ),
+  "Infection": const ConflitType(
+    "Conflit d'intrusion",
+    "Sentiment d'avoir été envahi par quelque chose ou quelqu'un ressenti comme sale, toxique ou menaçant : le "
+        "corps mobilise ses défenses (fièvre, pus, rougeur, chaleur) pour combattre et expulser cet « intrus », au "
+        "sens propre comme au figuré. Peut aussi traduire un conflit non réglé avec une personne associée dans "
+        "l'inconscient à l'origine du mal (« cette personne m'a contaminé »), une auto-dévalorisation (« je suis "
+        "sale », « je suis coupable de quelque chose »), ou une bataille intérieure entre deux forces qui reflète "
+        "un conflit relationnel ou une lutte de pouvoir vécue dans la vie de la personne.",
   ),
 };
 
@@ -155,31 +164,41 @@ String genererSynthese(String maladie, String zone, String nomPatient) {
   buffer.write(conflit.description);
   if (contexte != null) {
     buffer.write(
-        "\nQuestion à explorer avec $nomPatient : quelle situation, dans sa vie actuelle, pourrait expliquer cette réaction par rapport à $contexte ?");
+        "\nQuestion à explorer avec $nomPatient : quelle situation, dans sa vie actuelle, pourrait expliquer cette réaction en lien avec $contexte ?");
   }
   return buffer.toString();
 }
 
-/// Textes d'intention à réciter par le patient lui-même, à la première
-/// personne (contrairement aux prières, récitées par le praticien). Utile
-/// quand une maladie a une nuance différente selon la latéralité : ici,
-/// Otite droite = charge affective/familiale, Otite gauche = charge
-/// sociale/professionnelle (cohérent avec zoneContexte ci-dessus).
-/// Structure : maladie -> {zone -> texte}. Vide/absent = pas d'intention
-/// spécifique pour cette combinaison, la fiche n'affiche alors que la
-/// synthèse symbolique et la prière habituelles.
+/// Textes d'intention prononcés par le praticien, adressés directement au
+/// patient (tutoiement) — à dire après/avec la prière, contrairement à la
+/// prière elle-même qui invoque le divin. Utile quand une maladie a une
+/// nuance différente selon la latéralité : ici, Otite droite = charge
+/// affective/familiale, Otite gauche = charge sociale/professionnelle
+/// (cohérent avec zoneContexte ci-dessus).
+/// Structure : maladie -> {zone -> texte}. La clé spéciale "*" sert pour une
+/// intention générale, valable quelle que soit la zone (ex: Infection, qui
+/// n'a pas de logique droite/gauche) ; elle sert de repli si la zone exacte
+/// n'a pas d'entrée dédiée (voir son utilisation dans home_screen.dart).
+/// Vide/absent = pas d'intention spécifique pour cette combinaison, la
+/// fiche n'affiche alors que la synthèse symbolique et la prière habituelles.
 final Map<String, Map<String, String>> intentionsLateralisees = {
   "Otite": {
     "Oreille droite":
-        """J'entends ma colère et ma tristesse face à ce qui a été dit ou non-dit dans mon espace intime. """
-        """Je choisis aujourd'hui de libérer mon oreille droite de ce poids. Je pose des limites saines """
-        """autour de ce que j'accepte d'entendre. Mon cœur est en paix, mon oreille s'apaise, je retrouve """
-        """mon calme intérieur.""",
+        """J'entends ta colère et ta tristesse face à ce qui a été dit ou non-dit dans ton espace intime. """
+        """Je choisis aujourd'hui de libérer ton oreille droite de ce poids. Je pose des limites saines """
+        """autour de ce que tu acceptes d'entendre. Ton cœur est en paix, ton oreille s'apaise, tu retrouves """
+        """ton calme intérieur.""",
     "Oreille gauche":
-        """J'accueille et je libère la frustration liée à ce que je me sens obligée d'entendre, d'exécuter """
-        """ou de subir dans mon quotidien extérieur. Je refuse que les exigences ou les jugements des """
-        """autres polluent mon espace mental. Je réaffirme ma souveraineté : j'ai le droit de ne pas tout """
-        """accepter, j'écoute ma propre vérité et je retrouve ma sérénité.""",
+        """J'accueille et je libère la frustration liée à ce que tu te sens obligé(e) d'entendre, d'exécuter """
+        """ou de subir dans ton quotidien extérieur. Je refuse que les exigences ou les jugements des """
+        """autres polluent ton espace mental. Je réaffirme ta souveraineté : tu as le droit de ne pas tout """
+        """accepter, tu écoutes ta propre vérité et tu retrouves ta sérénité.""",
+  },
+  "Infection": {
+    "*":
+        """Je reconnais ce que tu n'as pas digéré, cette intrusion ressentie dans ton espace. Je choisis de """
+        """renforcer tes défenses et d'expulser ce qui ne t'appartient pas. Ton corps retrouve sa capacité à """
+        """se défendre et à guérir. Tu redeviens propre et fort(e).""",
   },
 };
 
@@ -229,4 +248,9 @@ Par le souffle de vie, je te commande de t'arrêter.
 Que la douleur se dissipe, que le conduit s'apaise,
 Que le calme et l'harmonie reviennent dans cette oreille.
 Ainsi soit-il.""",
+
+  "Infection": """Grand Saint Roch, toi qui as soigné les pestiférés et repoussé la maladie, je t'invoque pour """
+      """combattre cette infection qui touche le corps de [NOM]. Que les forces de vie chassent ce qui ne doit """
+      """pas y être, que le pus se résorbe, que la fièvre tombe, que la chair guérisse saine et propre. Par la """
+      """force du feu qui purifie et non qui détruit, je chasse l'intrus. Ainsi soit-il.""",
 };

@@ -5,6 +5,7 @@ import '../models/protocole.dart';
 import '../services/history_service.dart';
 import '../services/protocole_service.dart';
 import '../widgets/interactive_body.dart';
+import 'chakras_screen.dart';
 import 'history_screen.dart';
 import 'protocoles_screen.dart';
 
@@ -69,6 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Coupeur de Feu"),
         actions: [
+          IconButton(
+            tooltip: "Les 7 chakras",
+            icon: const Icon(Icons.brightness_7_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ChakrasScreen()),
+              );
+            },
+          ),
           IconButton(
             tooltip: "Techniques de magnétisme",
             icon: const Icon(Icons.self_improvement),
@@ -267,83 +278,143 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Fiche : $titreFiche"),
+        title: Row(
+          children: [
+            Icon(
+              aSymbolique ? Icons.auto_awesome : Icons.self_improvement,
+              color: aSymbolique ? Theme.of(context).colorScheme.primary : _couleurMagnetisme,
+            ),
+            const SizedBox(width: 10),
+            Expanded(child: Text(titreFiche)),
+          ],
+        ),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (aSymbolique) ...[
-                const Text("Analyse symbolique :", style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                for (final zone in zonesTriees) ...[
-                  Text(zone, style: const TextStyle(fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 2),
-                  Text(genererSynthese(_selectedMaladie!, zone, nom)),
-                  if (intentionsLateralisees[_selectedMaladie]?[zone] != null) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      "Intention (à dire par le patient) :",
-                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.teal.shade700, fontSize: 13),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      intentionsLateralisees[_selectedMaladie]![zone]!,
-                      style: const TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                  ],
-                  const SizedBox(height: 12),
-                ],
-                const Divider(),
-                const Text("Prière de soin :", style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                Text((prieres[_selectedMaladie] ?? "").replaceAll("[NOM]", nom)),
-              ],
-              if (aSymbolique && protocole != null) const SizedBox(height: 16),
-              if (protocole != null)
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: _couleurMagnetisme.withOpacity(0.08),
-                    border: Border.all(color: _couleurMagnetisme.withOpacity(0.3)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.self_improvement, color: _couleurMagnetisme, size: 18),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              "Magnétisme : ${protocole.titre}",
-                              style: TextStyle(fontWeight: FontWeight.bold, color: _couleurMagnetisme.shade700),
+                for (final zone in zonesTriees)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: _blocSection(
+                      context: context,
+                      icon: Icons.psychology_alt_outlined,
+                      couleur: Theme.of(context).colorScheme.primary,
+                      titre: zone,
+                      enfants: [
+                        Text(genererSynthese(_selectedMaladie!, zone, nom)),
+                        if ((intentionsLateralisees[_selectedMaladie]?[zone] ??
+                                intentionsLateralisees[_selectedMaladie]?['*']) !=
+                            null) ...[
+                          const SizedBox(height: 10),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.teal.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.record_voice_over, size: 16, color: Colors.teal.shade700),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      "Intention (à dire au patient)",
+                                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.teal.shade700, fontSize: 13),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  intentionsLateralisees[_selectedMaladie]?[zone] ??
+                                      intentionsLateralisees[_selectedMaladie]!['*']!,
+                                  style: const TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ],
                             ),
                           ),
                         ],
-                      ),
-                      if (protocole.priere.trim().isNotEmpty) ...[
-                        const SizedBox(height: 8),
-                        const Text("Prière :", style: TextStyle(fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 2),
-                        Text(protocole.priere.replaceAll("[NOM]", nom)),
                       ],
-                      if (protocole.etapes.trim().isNotEmpty) ...[
-                        const SizedBox(height: 8),
-                        const Text("Technique / passes :", style: TextStyle(fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 2),
-                        Text(protocole.etapes),
-                      ],
-                    ],
+                    ),
                   ),
+                _blocSection(
+                  context: context,
+                  icon: Icons.local_fire_department,
+                  couleur: Colors.deepOrange,
+                  titre: "Prière de soin",
+                  enfants: [Text((prieres[_selectedMaladie] ?? "").replaceAll("[NOM]", nom))],
+                ),
+              ],
+              if (aSymbolique && protocole != null) const SizedBox(height: 10),
+              if (protocole != null)
+                _blocSection(
+                  context: context,
+                  icon: Icons.self_improvement,
+                  couleur: _couleurMagnetisme,
+                  titre: "Magnétisme : ${protocole.titre}",
+                  enfants: [
+                    if (protocole.priere.trim().isNotEmpty) ...[
+                      const Text("Prière :", style: TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 2),
+                      Text(protocole.priere.replaceAll("[NOM]", nom)),
+                    ],
+                    if (protocole.etapes.trim().isNotEmpty) ...[
+                      if (protocole.priere.trim().isNotEmpty) const SizedBox(height: 8),
+                      const Text("Technique / passes :", style: TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 2),
+                      Text(protocole.etapes),
+                    ],
+                  ],
                 ),
             ],
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Fermer"))
+          FilledButton(onPressed: () => Navigator.pop(context), child: const Text("Fermer"))
+        ],
+      ),
+    );
+  }
+
+  /// Bloc visuel réutilisable pour chaque section de la fiche (zone
+  /// symbolique, prière, magnétisme...) : icône + titre coloré, fond teinté
+  /// léger, pour que l'œil distingue immédiatement les différentes parties
+  /// d'une fiche qui peut mélanger plusieurs zones et le magnétisme.
+  Widget _blocSection({
+    required BuildContext context,
+    required IconData icon,
+    required Color couleur,
+    required String titre,
+    required List<Widget> enfants,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: couleur.withOpacity(0.07),
+        border: Border.all(color: couleur.withOpacity(0.25)),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: couleur, size: 18),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  titre,
+                  style: TextStyle(fontWeight: FontWeight.bold, color: couleur, fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ...enfants,
         ],
       ),
     );
