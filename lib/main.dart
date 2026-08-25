@@ -4,6 +4,7 @@ import 'models/cadran.dart';
 import 'models/patient_session.dart';
 import 'models/protocole.dart';
 import 'screens/patients_screen.dart';
+import 'services/cadran_service.dart';
 import 'services/protocole_service.dart';
 
 void main() async {
@@ -17,6 +18,7 @@ void main() async {
   await Hive.openBox<Cadran>('cadrans');
   await Hive.openBox('app_meta');
   await ProtocoleService.seedNouveautesSiNecessaire();
+  await CadranService.seedNouveautesSiNecessaire();
   runApp(const MyApp()); // Ajout de 'const' ici
 }
 

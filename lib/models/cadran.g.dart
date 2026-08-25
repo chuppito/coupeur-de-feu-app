@@ -19,21 +19,33 @@ class CadranAdapter extends TypeAdapter<Cadran> {
     };
     return Cadran(
       titre: fields[0] as String,
-      cheminImage: fields[1] as String,
+      cheminImage: fields[1] == null ? '' : fields[1] as String,
       dateAjout: fields[2] as DateTime,
+      type: fields[3] == null ? 'image' : fields[3] as String,
+      labels: (fields[4] as List?)?.cast<String>(),
+      attribution: fields[5] as String?,
+      groupes: (fields[6] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Cadran obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.titre)
       ..writeByte(1)
       ..write(obj.cheminImage)
       ..writeByte(2)
-      ..write(obj.dateAjout);
+      ..write(obj.dateAjout)
+      ..writeByte(3)
+      ..write(obj.type)
+      ..writeByte(4)
+      ..write(obj.labels)
+      ..writeByte(5)
+      ..write(obj.attribution)
+      ..writeByte(6)
+      ..write(obj.groupes);
   }
 
   @override

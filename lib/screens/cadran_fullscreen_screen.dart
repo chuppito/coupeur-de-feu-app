@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import '../models/cadran.dart';
 import '../services/cadran_service.dart';
+import '../widgets/planche_eventail.dart';
+import 'pendule_screen.dart';
 
 /// Affiche un cadran en plein écran. L'écran est maintenu allumé tant que
 /// cette page est ouverte (WakelockPlus), pour pouvoir travailler au
@@ -42,6 +44,18 @@ class _CadranFullscreenScreenState extends State<CadranFullscreenScreen> {
               elevation: 0,
               title: Text(widget.cadran.titre),
               actions: [
+                if (widget.cadran.type == 'eventail')
+                  IconButton(
+                    icon: const Icon(Icons.edit_outlined),
+                    tooltip: "Modifier ce cadran",
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FormulaireEventail(cadran: widget.cadran)),
+                      );
+                      if (mounted) setState(() {});
+                    },
+                  ),
                 IconButton(
                   icon: const Icon(Icons.delete_outline),
                   tooltip: "Supprimer ce cadran",
@@ -56,7 +70,25 @@ class _CadranFullscreenScreenState extends State<CadranFullscreenScreen> {
           child: InteractiveViewer(
             minScale: 0.5,
             maxScale: 5,
-            child: Image.file(File(widget.cadran.cheminImage)),
+            child: widget.cadran.type == 'eventail'
+                ? Container(
+                    margin: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: SizedBox(
+                      width: 340,
+                      child: PlancheEventail(
+                        titre: widget.cadran.titre,
+                        labels: widget.cadran.labels ?? const [],
+                        groupes: widget.cadran.groupes,
+                        attribution: widget.cadran.attribution,
+                      ),
+                    ),
+                  )
+                : Image.file(File(widget.cadran.cheminImage)),
           ),
         ),
       ),
