@@ -133,6 +133,12 @@ class _LabelsEventail extends StatelessWidget {
         final aGroupes = groupes != null && groupes!.isNotEmpty;
         final rayonSecteurs = aGroupes ? rayonMax * 0.78 : rayonMax;
         final n = labels.length;
+        // Taille de police plus petite quand il y a beaucoup de secteurs,
+        // pour limiter le chevauchement.
+        final taillePoliceSecteurs = n > 20 ? 8.5 : (n > 10 ? 9.5 : 11.0);
+        // Libellés positionnés proche du bord : la longueur d'arc
+        // disponible y est plus grande qu'au centre, donc plus de place.
+        final rayonTexteSecteurs = rayonSecteurs * 0.82;
 
         final enfants = <Widget>[
           for (int i = 0; i < n; i++)
@@ -140,14 +146,15 @@ class _LabelsEventail extends StatelessWidget {
               labels[i],
               math.pi + ((i + 0.5) / n) * math.pi,
               centre,
-              rayonSecteurs * 0.6,
-              math.min(rayonSecteurs * math.pi / n, 90),
-              11,
+              rayonTexteSecteurs,
+              (rayonTexteSecteurs * math.pi / n).clamp(28.0, 130.0),
+              taillePoliceSecteurs,
             ),
         ];
 
         if (aGroupes) {
           final g = groupes!.length;
+          final taillePoliceGroupes = g > 10 ? 9.0 : 12.0;
           for (int i = 0; i < g; i++) {
             enfants.add(_labelAAngle(
               groupes![i],
@@ -155,7 +162,7 @@ class _LabelsEventail extends StatelessWidget {
               centre,
               (rayonSecteurs + rayonMax) / 2,
               (rayonMax * math.pi / g).clamp(40.0, 160.0),
-              12,
+              taillePoliceGroupes,
               gras: true,
             ));
           }
@@ -168,7 +175,9 @@ class _LabelsEventail extends StatelessWidget {
 
   Widget _labelAAngle(String texte, double angle, Offset centre, double rayonTexte, double largeur, double taillePolice, {bool gras = false}) {
     final point = Offset(centre.dx + rayonTexte * math.cos(angle), centre.dy + rayonTexte * math.sin(angle));
-    final rotation = angle - math.pi / 2;
+    // Oriente le texte comme un rayon partant du centre : à 0 quand il
+    // pointe vers le haut (angle = -90°/270°), puis tourne avec l'angle.
+    final rotation = angle + math.pi / 2;
 
     return Positioned(
       left: point.dx - largeur / 2,
