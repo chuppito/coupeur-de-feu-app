@@ -11,7 +11,13 @@ class ChakrasScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
         children: [
-          const _ChakraSilhouette(),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              'assets/chakras_poster.png',
+              fit: BoxFit.cover,
+            ),
+          ),
           const SizedBox(height: 16),
           _CartePratique(
             icone: Icons.park_outlined,
@@ -152,83 +158,4 @@ class _ChakraCard extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w700, color: couleur, fontSize: 13),
         ),
       );
-}
-
-/// Silhouette simplifiée avec les 7 points de chakra reliés par un dégradé,
-/// dessinée directement (pas d'image externe : évite tout souci de droits
-/// et rend net sur n'importe quelle taille d'écran).
-class _ChakraSilhouette extends StatelessWidget {
-  const _ChakraSilhouette();
-
-  @override
-  Widget build(BuildContext context) {
-    // Du sommet (Couronne) à la base (Racine) pour l'affichage de haut en bas.
-    final ordreAffichage = chakras.reversed.toList();
-
-    return SizedBox(
-      height: 300,
-      child: Center(
-        child: SizedBox(
-          width: 120,
-          height: 280,
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              // Silhouette (tête + buste), en arrière-plan
-              Positioned(
-                top: 36,
-                child: Container(
-                  width: 64,
-                  height: 220,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.13),
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 0,
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(color: Colors.grey.withOpacity(0.13), shape: BoxShape.circle),
-                ),
-              ),
-              // Ligne d'énergie en dégradé arc-en-ciel, reliant les 7 points
-              Positioned(
-                top: 20,
-                bottom: 6,
-                child: Container(
-                  width: 4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: ordreAffichage.map((c) => c.couleur).toList(),
-                    ),
-                  ),
-                ),
-              ),
-              // Les 7 points de chakra
-              for (final entry in ordreAffichage.asMap().entries)
-                Positioned(
-                  top: 12.0 + entry.key * 38.0,
-                  child: Container(
-                    width: 18,
-                    height: 18,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: entry.value.couleur,
-                      border: Border.all(color: Colors.white, width: 2),
-                      boxShadow: [BoxShadow(color: entry.value.couleur.withOpacity(0.6), blurRadius: 8, spreadRadius: 1)],
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
