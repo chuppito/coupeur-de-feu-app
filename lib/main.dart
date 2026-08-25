@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'models/cadran.dart';
 import 'models/patient_session.dart';
 import 'models/protocole.dart';
-import 'screens/home_screen.dart';
+import 'screens/patients_screen.dart';
 import 'services/protocole_service.dart';
 
 void main() async {
@@ -10,8 +11,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PatientSessionAdapter());
   Hive.registerAdapter(ProtocoleAdapter());
+  Hive.registerAdapter(CadranAdapter());
   await Hive.openBox<PatientSession>('sessions');
   await Hive.openBox<Protocole>('protocoles');
+  await Hive.openBox<Cadran>('cadrans');
   await Hive.openBox('app_meta');
   await ProtocoleService.seedNouveautesSiNecessaire();
   runApp(const MyApp()); // Ajout de 'const' ici
@@ -65,7 +68,7 @@ class MyApp extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
-      home: const HomeScreen(),
+      home: const PatientsScreen(),
     );
   }
 }

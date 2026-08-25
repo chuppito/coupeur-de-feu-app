@@ -5,9 +5,6 @@ import '../models/protocole.dart';
 import '../services/history_service.dart';
 import '../services/protocole_service.dart';
 import '../widgets/interactive_body.dart';
-import 'chakras_screen.dart';
-import 'history_screen.dart';
-import 'protocoles_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? prefillNom;
@@ -68,38 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Coupeur de Feu"),
-        actions: [
-          IconButton(
-            tooltip: "Les 7 chakras",
-            icon: const Icon(Icons.brightness_7_outlined),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ChakrasScreen()),
-              );
-            },
-          ),
-          IconButton(
-            tooltip: "Techniques de magnétisme",
-            icon: const Icon(Icons.self_improvement),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProtocolesScreen()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.history),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HistoryScreen()),
-              );
-            },
-          )
-        ],
+        title: Row(
+          children: [
+            const Icon(Icons.local_fire_department, color: Colors.deepOrange),
+            const SizedBox(width: 8),
+            Text(widget.prefillNom == null || widget.prefillNom!.isEmpty
+                ? "Nouveau soin"
+                : "Soin : ${widget.prefillNom}"),
+          ],
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
