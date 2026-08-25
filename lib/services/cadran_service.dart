@@ -1,13 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/cadran.dart';
 
-/// Gère la bibliothèque de cadrans de radiesthésie. Voir cadran.dart pour
-/// le choix de ne jamais pré-remplir cette bibliothèque (droits d'auteur).
+/// Gère la bibliothèque de cadrans de radiesthésie (pré-remplie par
+/// défaut, voir `seedNouveautesSiNecessaire`, et enrichissable par
+/// l'utilisateur).
 class CadranService {
   static Box<Cadran> get _box => Hive.box<Cadran>('cadrans');
 
@@ -83,189 +85,71 @@ class CadranService {
   }
 
   // ---------------------------------------------------------------------
-  // Pré-remplissage versionné (même principe que ProtocoleService) : ne
-  // sert que pour des cadrans dont la licence autorise explicitement la
-  // réutilisation, jamais pour du contenu protégé.
+  // Pré-remplissage versionné (même principe que ProtocoleService).
+  //
+  // Version 4 : la bibliothèque de cadrans est remise à plat et remplacée
+  // par les 9 planches en image fournies par l'utilisateur (assets/cadrans).
+  // Tout ce qui existait avant (éventails générés nativement lors des
+  // versions précédentes, ou cadrans ajoutés manuellement) est supprimé.
   // ---------------------------------------------------------------------
 
   static const String _cleVersion = 'cadrans_seed_version';
-  static const int _versionActuelle = 3;
+  static const int _versionActuelle = 4;
+
+  /// Planches fournies en asset, copiées dans le stockage de l'app au
+  /// premier lancement (ou à la mise à jour) pour être affichées comme les
+  /// cadrans "image" habituels (voir `add`).
+  static const List<({String asset, String titre})> _planchesParDefaut = [
+    (asset: 'assets/cadrans/pourcentages.png', titre: 'Pourcentages'),
+    (asset: 'assets/cadrans/affinites.png', titre: 'Affinités'),
+    (asset: 'assets/cadrans/origines_subtiles_maison.png', titre: 'Origines subtiles des problèmes (maison)'),
+    (asset: 'assets/cadrans/origines_problemes_maison.png', titre: 'Origines des problèmes (maison)'),
+    (asset: 'assets/cadrans/subtil_individuel.png', titre: 'Subtil individuel'),
+    (asset: 'assets/cadrans/taux_vibratoires_bovis.png', titre: 'Taux vibratoires (Bovis)'),
+    (asset: 'assets/cadrans/taux_vibratoires_bovis_log.png', titre: 'Taux vibratoires (Bovis, logarithmique)'),
+    (asset: 'assets/cadrans/chakras_personnels.png', titre: 'Chakras personnels'),
+    (asset: 'assets/cadrans/energetique_chakras.png', titre: 'Énergétique des chakras'),
+  ];
 
   static Future<void> seedNouveautesSiNecessaire() async {
     final meta = Hive.box('app_meta');
     int version = (meta.get(_cleVersion) as int?) ?? 0;
 
-    if (version < 1) {
-      await _box.add(Cadran(
-        titre: "Augmenter le taux vibratoire",
-        dateAjout: DateTime.now(),
-        type: 'eventail',
-        labels: const [
-          "Hygiène de vie",
-          "Positiver",
-          "Activité passion",
-          "Ressourcer nature",
-          "Lâcher prise",
-          "Rire, s'amuser",
-          "Purification énergétique",
-          "Alimentation spirituelle",
-          "Agir",
-          "Porter l'amour à un proche",
-          "Foi aux forces supérieures",
-          "Méditer",
-          "Prier",
-          "Développement capacités subtiles",
-          "Philosophie",
-        ],
-        attribution: "Cadran partagé par ocverclock sur subtil.net — Licence CC BY-NC 4.0",
-      ));
-    }
+    if (version < 4) {
+      // On vide entièrement la bibliothèque existante (fichiers + entrées
+      // Hive) avant de repartir sur les nouvelles planches par défaut.
+      for (final cadran in _box.values.toList()) {
+        if (cadran.cheminImage.trim().isNotEmpty) {
+          final fichier = File(cadran.cheminImage);
+          if (await fichier.exists()) {
+            await fichier.delete();
+          }
+        }
+      }
+      await _box.clear();
 
-    if (version < 2) {
-      final maintenant = DateTime.now();
-      await _box.addAll([
-        Cadran(
-          titre: "Planche de contrôle",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const ["Faux", "Désir", "Vrai"],
-        ),
-        Cadran(
-          titre: "Pourcentages",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: List.generate(21, (i) => "${i * 5}"),
-        ),
-        Cadran(
-          titre: "Chiffres",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: List.generate(10, (i) => "$i"),
-        ),
-        Cadran(
-          titre: "Intensité",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const ["Très faible", "Faible", "Moyenne", "Forte", "Très forte"],
-        ),
-        Cadran(
-          titre: "Jours / mois",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: List.generate(31, (i) => "${i + 1}"),
-          groupes: const [
-            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-            "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
-          ],
-        ),
-        Cadran(
-          titre: "Les 7 chakras",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const [
-            "1 · Chakra Racine",
-            "2 · Chakra Sacré",
-            "3 · Chakra Plexus Solaire",
-            "4 · Chakra Cœur",
-            "5 · Chakra Gorge",
-            "6 · Chakra 3ème Œil",
-            "7 · Chakra Coronal",
-          ],
-        ),
-        Cadran(
-          titre: "Lettres",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: List.generate(26, (i) => "${String.fromCharCode(65 + i)} · ${i + 1}"),
-          groupes: const ["Voyelle", "Consonne"],
-        ),
-        Cadran(
-          titre: "Énergétique des chakras",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const ["0%", "25%", "50%", "75%", "100%", "125%", "150%", "175%", "200%"],
-          groupes: const ["Faiblesse", "Équilibré", "Surcharge"],
-          attribution: "Note : \"Équilibré\" (100%) est ici étalé sur tout le tiers central par simplification, "
-              "alors que sur la planche d'origine il ne marque que le point 100% précisément.",
-        ),
-      ]);
-    }
+      final dir = await getApplicationDocumentsDirectory();
+      final cadransDir = Directory('${dir.path}/cadrans');
+      if (!await cadransDir.exists()) {
+        await cadransDir.create(recursive: true);
+      }
 
-    if (version < 3) {
       final maintenant = DateTime.now();
-      await _box.addAll([
-        Cadran(
-          titre: "Sécurité (Oui/Non)",
+      for (final planche in _planchesParDefaut) {
+        final octets = await rootBundle.load(planche.asset);
+        final nomFichier = planche.asset.split('/').last;
+        final destination = File('${cadransDir.path}/$nomFichier');
+        await destination.writeAsBytes(
+          octets.buffer.asUint8List(octets.offsetInBytes, octets.lengthInBytes),
+          flush: true,
+        );
+
+        await _box.add(Cadran(
+          titre: planche.titre,
+          cheminImage: destination.path,
           dateAjout: maintenant,
-          type: 'eventail',
-          labels: const [
-            "Un autre jour",
-            "Je reviens vers vous - date",
-            "Je planifie",
-            "plus tard",
-            "Pas mûr",
-            "Pas seul",
-            "Situation trop ardue",
-            "incompatible",
-            "Danger",
-            "Ennuis plus tard",
-            "A refuser",
-            "Perturbation venant du Karma",
-          ],
-          groupes: const ["OUI", "NON"],
-          attribution: "Cadran partagé par phreip sur subtil.net, le 28/05/2023 — Licence CC BY-NC 4.0",
-        ),
-        Cadran(
-          titre: "Origines subtiles des problèmes",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const [
-            "Présences",
-            "Mémoires des murs",
-            "Mémoire du lieu",
-            "Charges",
-            "Rituels",
-            "Ondes de forme",
-          ],
-          attribution: "Cadran partagé par Subtil sur subtil.net, le 09/05/2018 — Licence CC BY-NC 4.0",
-        ),
-        Cadran(
-          titre: "Origines des problèmes (bâtiment)",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const [
-            "Site Climat",
-            "Sous-sol",
-            "Bâtiment voisin",
-            "Forme du bâtiment",
-            "Orientation du bâtiment",
-            "Intérieur du bâtiment",
-            "Atmosphère",
-            "Autres causes",
-          ],
-          attribution: "Cadran partagé par Subtil sur subtil.net, le 09/05/2018 — Licence CC BY-NC 4.0",
-        ),
-        Cadran(
-          titre: "Planche d'erreur",
-          dateAjout: maintenant,
-          type: 'eventail',
-          labels: const [
-            "Erreur",
-            "Influence",
-            "Auto suggestion",
-            "Influence sous-sol",
-            "Ambiance mentale",
-            "Horaire / Jour",
-            "Pensée d'autrui",
-            "Radiation parasite",
-            "Virtualité",
-            "Ambiance physique",
-            "Traces du passé",
-            "Réalité",
-          ],
-          attribution: "Cadran partagé par Subtil sur subtil.net, le 09/05/2018 — Licence CC BY-NC 4.0",
-        ),
-      ]);
+        ));
+      }
     }
 
     if (version < _versionActuelle) {

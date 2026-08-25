@@ -8,9 +8,10 @@ import '../services/cadran_service.dart';
 import '../widgets/planche_eventail.dart';
 import 'cadran_fullscreen_screen.dart';
 
-/// Bibliothèque de cadrans de radiesthésie, entièrement alimentée par
-/// l'utilisateur (voir cadran.dart). Deux façons d'ajouter un cadran :
-/// importer une image, ou créer un éventail (texte) dessiné nativement.
+/// Bibliothèque de cadrans de radiesthésie : pré-remplie par défaut (voir
+/// cadran_service.dart), et enrichissable par l'utilisateur. Deux façons
+/// d'ajouter un cadran : importer une image, ou créer un éventail (texte)
+/// dessiné nativement.
 class PenduleScreen extends StatelessWidget {
   const PenduleScreen({super.key});
 

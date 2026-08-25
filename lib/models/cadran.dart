@@ -10,13 +10,11 @@ part 'cadran.g.dart';
 ///    (demi-cercle divisé en secteurs). Plus net à l'écran, et surtout
 ///    éditable directement dans l'app sans repasser par une image.
 ///
-/// Dans les deux cas, ce contenu n'est jamais pré-rempli par l'app : les
-/// planches "toutes faites" qu'on trouve en ligne sont très souvent
-/// protégées par des droits d'auteur explicites. Chaque cadran ici doit
-/// être le tien (dessiné, une licence Creative Commons qui autorise la
-/// réutilisation avec attribution, ou réellement dans le domaine public).
-/// Le champ `attribution` sert à créditer la source quand la licence
-/// l'exige (ex: CC BY).
+/// La bibliothèque est pré-remplie avec un jeu de planches par défaut (voir
+/// `CadranService.seedNouveautesSiNecessaire`), et l'utilisateur peut en
+/// ajouter d'autres : soit en important une image, soit en créant un
+/// éventail. Le champ `attribution` sert à créditer la source d'une
+/// planche quand sa licence l'exige (ex: CC BY).
 @HiveType(typeId: 2)
 class Cadran extends HiveObject {
   @HiveField(0)
