@@ -99,12 +99,12 @@ final List<Chakra> chakras = [
     intention: "Je te rappelle ta propre force. Tu n'as pas besoin de tout contrôler pour être en sécurité. "
         "Tu as le droit d'agir et de t'affirmer avec confiance.",
   ),
-  Chakra(
+  const Chakra(
     nom: "Cœur",
     nomSanskrit: "Anahata",
-    couleur: const Color(0xFF388E3C), // vert (parfois rose)
+    couleur: Color(0xFF388E3C), // vert (parfois rose)
     emplacement: "Centre de la poitrine",
-    zonesAssociees: const ["Torse"],
+    zonesAssociees: ["Torse"],
     signification: "Amour inconditionnel, compassion, pardon, capacité à donner et recevoir dans les relations. "
         "Point de bascule entre les chakras « matériels » (1-3) et « spirituels » (5-7).",
     blocages: "Difficulté à aimer ou à pardonner (à soi ou aux autres), jalousie, isolement affectif, besoin "

@@ -20,7 +20,7 @@ class ProtocoleService {
 
   /// Version la plus haute connue. À incrémenter à chaque nouveau lot de
   /// contenu ajouté dans _lotsParVersion.
-  static const int _versionActuelle = 3;
+  static const int _versionActuelle = 4;
 
   static ValueListenable<Box<Protocole>> listenable() => _box.listenable();
 
@@ -192,6 +192,24 @@ Ainsi soit-il.
 2. Passes de renforcement en sens inverse (périphérie vers le centre), en visualisant une lumière blanche ou dorée (purification/renforcement, plutôt que la lumière bleue utilisée pour calmer une inflammation).
 3. Imposition 2 à 3 minutes sur la zone, avec l'intention de renforcer les défenses immunitaires.
 4. Optionnel : légers effleurements sur les ganglions lymphatiques proches (aine, aisselles, cou) pour activer le drainage.""",
+          ),
+        ],
+    4: (date) => [
+          Protocole(
+            titre: "Verrue",
+            dateAjout: date,
+            estParDefaut: true,
+            priere: """(+)
+[NOM], je t'enlève tes verrues,
+De toutes à une,
+Et de une à rien,
+Qu'il en soit ainsi !
+(+)
+Au nom du Père, du Fils et du Saint-Esprit
+(+)
+(À réciter 3 fois d'affilée, chaque (+) marqué par un signe de croix.)""",
+            etapes: """1. Réciter la formule ci-dessus 3 fois de suite.
+2. Placer le bout des doigts au-dessus de la verrue (sans contact) et visualiser un rayon blanc qui en sort, pendant 2 à 3 minutes.""",
           ),
         ],
   };
