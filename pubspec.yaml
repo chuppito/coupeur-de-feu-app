@@ -1,7 +1,7 @@
 name: coupeur_de_feu_app
 description: Application de suivi de patients pour la pratique de coupeur de feu.
 publish_to: 'none'
-version: 2.1.0+2
+version: 2.2.0+3
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

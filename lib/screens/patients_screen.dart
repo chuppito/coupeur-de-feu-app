@@ -8,6 +8,7 @@ import '../models/patient_session.dart';
 import '../services/backup_service.dart';
 import '../services/history_service.dart';
 import 'chakras_screen.dart';
+import 'body_scan_screen.dart';
 import 'home_screen.dart';
 import 'pendule_screen.dart';
 import 'protocoles_screen.dart';
@@ -190,6 +191,20 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                   ],
                                 ),
                               )),
+                          ListTile(
+                            leading: const Icon(Icons.accessibility_new, color: Colors.teal),
+                            title: const Text("Scanner le corps au pendule"),
+                            subtitle: const Text("Nouveau scan pour ce patient"),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BodyScanScreen(
+                                  prefillNom: entry.value.first.nomPatient,
+                                  prefillNomFamille: entry.value.first.nomFamille,
+                                ),
+                              ),
+                            ),
+                          ),
                           ListTile(
                             leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
                             title: const Text("Ajouter un nouveau soin"),
@@ -428,6 +443,14 @@ class _MenuLateral extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const PenduleScreen()));
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.accessibility_new, color: Colors.teal),
+              title: const Text("Scan du corps au pendule"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const BodyScanScreen()));
+              },
+            ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.bar_chart),
@@ -457,7 +480,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.0.0",
+                "Coupeur de Feu · v2.2.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),

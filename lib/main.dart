@@ -16,6 +16,7 @@ void main() async {
   await Hive.openBox<PatientSession>('sessions');
   await Hive.openBox<Protocole>('protocoles');
   await Hive.openBox<Cadran>('cadrans');
+  await Hive.openBox('body_scans');
   await Hive.openBox('app_meta');
   await ProtocoleService.seedNouveautesSiNecessaire();
   await CadranService.seedNouveautesSiNecessaire();
@@ -49,8 +50,8 @@ class MyApp extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.35),
-          border: OutlineInputBorder(
+          fillColor: colorScheme.surfaceContainerHighest.wi
+          ç$çl$         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),

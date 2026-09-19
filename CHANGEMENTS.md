@@ -51,3 +51,13 @@ dans ton projet existant (ne refais pas `flutter create`).
   un vrai dessin (silhouette détaillée), il faudra repasser par un fichier SVG avec
   des zones nommées (`id="tete"`, etc.) — je peux t'accompagner sur cette étape si
   tu en obtiens un.
+
+
+## v2.2.0 — Scan du corps au pendule
+- Ajout d'un écran dédié de scan du corps.
+- 8 zones guidées : tête/cou, colonne, tronc gauche/droit, bras gauche/droit, jambes gauche/droite.
+- Enregistrement de RAS, légère orientation vers le Oui ou rotation vers le Oui.
+- Notes par zone et observations générales.
+- Historique des scans pour un patient.
+- Accès depuis le menu et directement depuis la fiche patient.
+- Stockage Hive indépendant de l'historique existant.
