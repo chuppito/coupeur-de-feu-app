@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'history_service.dart';
+import 'body_scan_service.dart';
+import 'energy_assessment_service.dart';
+import 'pendulum_care_service.dart';
 import 'protocole_service.dart';
 
 /// Gère l'export/import de sauvegarde, sous forme de fichiers JSON lisibles
@@ -33,15 +37,62 @@ class BackupService {
   /// Génère le fichier de sauvegarde de l'historique patient et ouvre le
   /// menu de partage natif (email, Drive, fichiers, etc.).
   static Future<void> exportSessionsAndShare() async {
-    final file = await _writeFile(HistoryService.exportAllToJson(), 'patients');
-    await _partager(file, 'Sauvegarde Coupeur de Feu - historique patients');
+    final history = jsonDecode(HistoryService.exportAllToJson()) as Map<String, dynamic>;
+    final scans = jsonDecode(BodyScanService.exportAllToJson()) as List<dynamic>;
+    final bilans = jsonDecode(EnergyAssessmentService.exportAllToJson()) as List<dynamic>;
+    final soins = jsonDecode(PendulumCareService.exportAllToJson()) as List<dynamic>;
+    final payload = <String, dynamic>{
+      ...history,
+      'version': 4,
+      'bodyScans': scans,
+      'energyAssessments': bilans,
+      'pendulumCares': soins,
+    };
+    final file = await _writeFile(
+      const JsonEncoder.withIndent('  ').convert(payload),
+      'patients',
+    );
+    await _partager(file, 'Sauvegarde Coupeur de Feu - patients, scans, bilans et soins au pendule');
   }
 
   /// Lit un fichier de sauvegarde JSON et réimporte les séances qu'il
   /// contient (s'ajoutent à l'existant). Renvoie le nombre importé.
   static Future<int> importSessionsFromFile(File file) async {
     final content = await file.readAsString();
-    return HistoryService.importFromJson(content);
+    final decoded = jsonDecode(content);
+    if (decoded is! Map<String, dynamic>) {
+      throw const FormatException('Format de sauvegarde patients invalide.');
+    }
+
+    // Compatibilité avec les sauvegardes historiques (sessions uniquement).
+    final sessionsPayload = <String, dynamic>{
+      'version': decoded['version'] ?? 1,
+      'exportedAt': decoded['exportedAt'],
+      'sessions': decoded['sessions'] ?? const [],
+    };
+    final nbSessions = await HistoryService.importFromJson(
+      const JsonEncoder.withIndent('  ').convert(sessionsPayload),
+    );
+
+    final scans = decoded['bodyScans'];
+    if (scans is List) {
+      await BodyScanService.importFromJson(
+        const JsonEncoder.withIndent('  ').convert(scans),
+      );
+    }
+    final soins = decoded['pendulumCares'];
+    if (soins is List) {
+      await PendulumCareService.importFromJson(
+        const JsonEncoder.withIndent('  ').convert(soins),
+      );
+    }
+    final bilans = decoded['energyAssessments'];
+    if (bilans is List) {
+      await EnergyAssessmentService.importFromJson(
+        const JsonEncoder.withIndent('  ').convert(bilans),
+      );
+    }
+    return nbSessions;
   }
 
   // ---------------------------------------------------------------------
