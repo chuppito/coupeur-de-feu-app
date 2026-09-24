@@ -6,8 +6,12 @@ import '../services/energy_assessment_service.dart';
 class EnergyAssessmentScreen extends StatefulWidget {
   final String prefillNom;
   final String prefillNomFamille;
-  const EnergyAssessmentScreen({super.key, required this.prefillNom, this.prefillNomFamille = ''});
 
+  const EnergyAssessmentScreen({
+    super.key,
+    this.prefillNom = '',
+    this.prefillNomFamille = '',
+  });
   @override
   State<EnergyAssessmentScreen> createState() => _EnergyAssessmentScreenState();
 }
