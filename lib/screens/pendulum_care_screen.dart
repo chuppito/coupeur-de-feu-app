@@ -32,6 +32,20 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
   static const _degagement = 'Je demande ici et maintenant que « {patient} » soit libéré(e) de toutes les énergies qui ne lui appartiennent pas.\nQue les pensées négatives, les projections et les influences d’autrui soient dissoutes et renvoyées à la terre pour être transformées. Je ferme son champ énergétique à ce qui n’est pas aligné avec sa paix intérieure.\nIl récupère ainsi sa pleine souveraineté, sa clarté et sa sérénité. Que seul l’amour et la bienveillance puissent franchir cet espace. Ainsi soit-il.';
   static const _protection = 'Je demande que « {patient} » soit entouré(e) d’une lumière de force et de protection.\nQue son énergie vitale soit maintenant restaurée, vibrante et alignée. Je renforce ses propres barrières naturelles pour que son espace personnel reste pur et inattaquable par les influences extérieures.\nDésormais « {patient} » est ancré(e), centré(e), et protégé(e). Que cette lumière rayonne depuis son cœur vers l’extérieur, transformant chaque obstacle en force. Il marche en toute sécurité, porté(e) par sa propre puissance intérieure.';
 
+  static const _priereFeu = '''Feu je te coupe +
+
+Feu je te bloque +
+
+Tu n'as pas lieu d'être sur le corps de.......
+
+Le feu ne brûle pas les chairs
+
+Les chairs deviennent normales
+
+La peau s'assouplit s'adoucit ne devient pas dur
+
+Mais reste telle qu'elle était avant la brûlures''';
+
   @override
   void dispose() { _zone.dispose(); _notes.dispose(); _ressenti.dispose(); super.dispose(); }
 
@@ -76,7 +90,7 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
           subtitle: i == 0 ? const Text('Formule : « Je veux retirer les énergies négatives de… »') : i == 2 ? const Text('Rappel systématique : 2 frappes après avoir levé le pendule.') : i == 3 ? const Text('Relancer dans le sens positif en gardant l’intention de soulager la zone.') : null,
         )))),
         _header('PRIÈRE ET FORMULATIONS', Colors.deepPurple.shade100),
-        _reminder('Prière contre le feu × 3', 'Réciter 3 fois ta prière habituelle contre le feu. Le texte de la prière n’était pas présent dans les éléments transmis.'),
+        _reminder('Prière contre le feu × 3', _priereFeu),
         _reminder('Formulation de dégagement', degagement),
         _reminder('Protection et renforcement', protection),
         _header('OBSERVATIONS', Colors.blueGrey.shade100),

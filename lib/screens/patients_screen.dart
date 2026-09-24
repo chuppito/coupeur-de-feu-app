@@ -581,6 +581,22 @@ class _MenuLateral extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const BodyScanScreen()));
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
+              title: const Text("Bilan énergétique au pendule"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const EnergyAssessmentScreen()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
+              title: const Text("Soin au pendule"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
+              },
+            ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.bar_chart),
