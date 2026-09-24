@@ -6,8 +6,13 @@ import '../services/pendulum_care_service.dart';
 class PendulumCareScreen extends StatefulWidget {
   final String prefillNom;
   final String prefillNomFamille;
-  const PendulumCareScreen({super.key, required this.prefillNom, this.prefillNomFamille = ''});
 
+  const PendulumCareScreen({
+    super.key,
+    this.prefillNom = '',
+    this.prefillNomFamille = '',
+  });
+  
   @override
   State<PendulumCareScreen> createState() => _PendulumCareScreenState();
 }
