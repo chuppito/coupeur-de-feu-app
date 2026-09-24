@@ -9,11 +9,9 @@ import '../services/backup_service.dart';
 import '../services/body_scan_service.dart';
 import '../services/history_service.dart';
 import '../services/energy_assessment_service.dart';
-import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
 import 'body_scan_screen.dart';
 import 'energy_assessment_screen.dart';
-import 'pendulum_care_screen.dart';
 import 'home_screen.dart';
 import 'pendule_screen.dart';
 import 'protocoles_screen.dart';
@@ -285,20 +283,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             ),
                           ),
                           ListTile(
-                            leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
-                            title: const Text("Soin au pendule"),
-                            subtitle: const Text("Suivre le protocole et consulter les soins enregistrés"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PendulumCareScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
                             leading: const Icon(Icons.accessibility_new, color: Colors.teal),
                             title: const Text("Scanner le corps au pendule"),
                             subtitle: const Text("Nouveau scan pour ce patient"),
@@ -416,9 +400,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
               await EnergyAssessmentService.renamePatient(
                 oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
               );
-              await PendulumCareService.renamePatient(
-                oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
-              );
               if (!context.mounted) return;
               Navigator.pop(context);
             },
@@ -444,7 +425,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
               final snapshot = await HistoryService.deletePatientAndSnapshot(nomComplet);
               final scansSnapshot = await BodyScanService.deletePatientScans(nomComplet);
               final bilansSnapshot = await EnergyAssessmentService.deletePatient(nomComplet);
-              final soinsSnapshot = await PendulumCareService.deletePatient(nomComplet);
               scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: Text("Historique de $nomComplet supprimé."),
@@ -454,7 +434,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       await HistoryService.restoreSnapshot(snapshot);
                       await BodyScanService.restorePatientScans(scansSnapshot);
                       await EnergyAssessmentService.restore(bilansSnapshot);
-                      await PendulumCareService.restore(soinsSnapshot);
                     },
                   ),
                   duration: const Duration(seconds: 5),

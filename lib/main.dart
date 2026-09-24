@@ -6,7 +6,6 @@ import 'models/protocole.dart';
 import 'screens/patients_screen.dart';
 import 'services/cadran_service.dart';
 import 'services/energy_assessment_service.dart';
-import 'services/pendulum_care_service.dart';
 import 'services/protocole_service.dart';
 
 void main() async {
@@ -20,7 +19,6 @@ void main() async {
   await Hive.openBox<Cadran>('cadrans');
   await Hive.openBox('body_scans');
   await Hive.openBox(EnergyAssessmentService.boxName);
-  await Hive.openBox(PendulumCareService.boxName);
   await Hive.openBox('app_meta');
   await ProtocoleService.seedNouveautesSiNecessaire();
   await CadranService.seedNouveautesSiNecessaire();

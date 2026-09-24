@@ -7,7 +7,6 @@ import 'package:share_plus/share_plus.dart';
 import 'history_service.dart';
 import 'body_scan_service.dart';
 import 'energy_assessment_service.dart';
-import 'pendulum_care_service.dart';
 import 'protocole_service.dart';
 
 /// Gère l'export/import de sauvegarde, sous forme de fichiers JSON lisibles
@@ -40,19 +39,17 @@ class BackupService {
     final history = jsonDecode(HistoryService.exportAllToJson()) as Map<String, dynamic>;
     final scans = jsonDecode(BodyScanService.exportAllToJson()) as List<dynamic>;
     final bilans = jsonDecode(EnergyAssessmentService.exportAllToJson()) as List<dynamic>;
-    final soins = jsonDecode(PendulumCareService.exportAllToJson()) as List<dynamic>;
     final payload = <String, dynamic>{
       ...history,
-      'version': 4,
+      'version': 3,
       'bodyScans': scans,
       'energyAssessments': bilans,
-      'pendulumCares': soins,
     };
     final file = await _writeFile(
       const JsonEncoder.withIndent('  ').convert(payload),
       'patients',
     );
-    await _partager(file, 'Sauvegarde Coupeur de Feu - patients, scans, bilans et soins au pendule');
+    await _partager(file, 'Sauvegarde Coupeur de Feu - patients, scans et bilans énergétiques');
   }
 
   /// Lit un fichier de sauvegarde JSON et réimporte les séances qu'il
@@ -78,12 +75,6 @@ class BackupService {
     if (scans is List) {
       await BodyScanService.importFromJson(
         const JsonEncoder.withIndent('  ').convert(scans),
-      );
-    }
-    final soins = decoded['pendulumCares'];
-    if (soins is List) {
-      await PendulumCareService.importFromJson(
-        const JsonEncoder.withIndent('  ').convert(soins),
       );
     }
     final bilans = decoded['energyAssessments'];
