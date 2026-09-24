@@ -64,7 +64,7 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
       body: SafeArea(child: ListView(padding: const EdgeInsets.all(12), children: [
         Card(child: Padding(padding: const EdgeInsets.all(14), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(nomComplet, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 4), Text("Date du bilan : ${DateFormat('dd/MM/yyyy à HH:mm').format(DateTime.now())}"),
+          const SizedBox(height: 4), Text('Date du bilan : ${DateFormat('dd/MM/yyyy à HH:mm').format(DateTime.now())}'),
           const SizedBox(height: 6), const Text('Bilan de pratique au pendule — les indications ci-dessous reprennent tes notes personnelles et ne constituent pas une évaluation médicale.', style: TextStyle(fontSize: 12, color: Colors.black54)),
         ]))),
         _sectionHeader('CONTRÔLE DES TAUX', Colors.lightBlue.shade200),
