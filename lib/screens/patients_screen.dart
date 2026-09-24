@@ -6,14 +6,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import '../models/patient_session.dart';
 import '../services/backup_service.dart';
-import '../services/body_scan_service.dart';
 import '../services/history_service.dart';
-import '../services/energy_assessment_service.dart';
-import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
 import 'body_scan_screen.dart';
-import 'energy_assessment_screen.dart';
-import 'pendulum_care_screen.dart';
 import 'home_screen.dart';
 import 'pendule_screen.dart';
 import 'protocoles_screen.dart';
@@ -196,108 +191,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                   ],
                                 ),
                               )),
-                          ValueListenableBuilder<Box>(
-                            valueListenable: BodyScanService.listenable(),
-                            builder: (context, scanBox, _) {
-                              final scans = BodyScanService.getScans(nomComplet: entry.key);
-                              return Padding(
-                                padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(Icons.accessibility_new, color: Colors.teal),
-                                        const SizedBox(width: 8),
-                                        Expanded(
-                                          child: Text(
-                                            "Scans du corps (${scans.length})",
-                                            style: const TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    if (scans.isEmpty)
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 8),
-                                        child: Text(
-                                          "Aucun scan enregistré pour ce patient.",
-                                          style: TextStyle(fontSize: 12, color: Colors.black54),
-                                        ),
-                                      )
-                                    else
-                                      ...scans.map((scan) {
-                                        final date = DateTime.tryParse((scan['date'] ?? '').toString());
-                                        final zones = (scan['zones'] as List?) ?? const [];
-                                        return Card(
-                                          margin: const EdgeInsets.only(top: 6),
-                                          child: ExpansionTile(
-                                            leading: const Icon(Icons.history, color: Colors.teal),
-                                            title: Text(
-                                              date == null
-                                                  ? "Scan enregistré"
-                                                  : DateFormat('dd/MM/yyyy à HH:mm').format(date),
-                                            ),
-                                            subtitle: Text("${zones.length} zone(s) renseignée(s)"),
-                                            children: [
-                                              ...zones.map((zoneData) {
-                                                if (zoneData is! Map) return const SizedBox.shrink();
-                                                final zoneNom = (zoneData['zone'] ?? '').toString();
-                                                final resultat = (zoneData['resultat'] ?? '').toString();
-                                                final remarque = (zoneData['observation'] ?? '').toString();
-                                                return ListTile(
-                                                  dense: true,
-                                                  title: Text(zoneNom),
-                                                  subtitle: Text(
-                                                    remarque.trim().isEmpty ? resultat : "$resultat\n$remarque",
-                                                  ),
-                                                );
-                                              }),
-                                              if ((scan['observation'] ?? '').toString().trim().isNotEmpty)
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                                                  child: Align(
-                                                    alignment: Alignment.centerLeft,
-                                                    child: Text("Notes : ${scan['observation']}"),
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                        );
-                                      }),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-                            title: const Text("Bilan énergétique au pendule"),
-                            subtitle: const Text("Créer ou consulter les bilans de ce patient"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EnergyAssessmentScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
-                            title: const Text("Soin au pendule"),
-                            subtitle: const Text("Suivre le protocole et consulter les soins enregistrés"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PendulumCareScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
                           ListTile(
                             leading: const Icon(Icons.accessibility_new, color: Colors.teal),
                             title: const Text("Scanner le corps au pendule"),
@@ -408,17 +301,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                 prenomController.text.trim(),
                 nomController.text.trim(),
               );
-              await BodyScanService.renamePatientScans(
-                oldNomComplet,
-                prenomController.text.trim(),
-                nomController.text.trim(),
-              );
-              await EnergyAssessmentService.renamePatient(
-                oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
-              );
-              await PendulumCareService.renamePatient(
-                oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
-              );
               if (!context.mounted) return;
               Navigator.pop(context);
             },
@@ -442,20 +324,12 @@ class _PatientsScreenState extends State<PatientsScreen> {
               Navigator.pop(context);
               final scaffoldMessenger = ScaffoldMessenger.of(context);
               final snapshot = await HistoryService.deletePatientAndSnapshot(nomComplet);
-              final scansSnapshot = await BodyScanService.deletePatientScans(nomComplet);
-              final bilansSnapshot = await EnergyAssessmentService.deletePatient(nomComplet);
-              final soinsSnapshot = await PendulumCareService.deletePatient(nomComplet);
               scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: Text("Historique de $nomComplet supprimé."),
                   action: SnackBarAction(
                     label: "Annuler",
-                    onPressed: () async {
-                      await HistoryService.restoreSnapshot(snapshot);
-                      await BodyScanService.restorePatientScans(scansSnapshot);
-                      await EnergyAssessmentService.restore(bilansSnapshot);
-                      await PendulumCareService.restore(soinsSnapshot);
-                    },
+                    onPressed: () => HistoryService.restoreSnapshot(snapshot),
                   ),
                   duration: const Duration(seconds: 5),
                 ),
@@ -606,7 +480,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.2.1",
+                "Coupeur de Feu · v2.2.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
