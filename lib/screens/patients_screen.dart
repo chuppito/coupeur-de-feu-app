@@ -586,7 +586,7 @@ class _MenuLateral extends StatelessWidget {
               title: const Text("Bilan énergétique au pendule"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
               },
             ),
             ListTile(
