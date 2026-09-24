@@ -64,16 +64,25 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
       body: SafeArea(child: ListView(padding: const EdgeInsets.all(12), children: [
         Card(child: Padding(padding: const EdgeInsets.all(14), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(nomComplet, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 4), Text('Date du bilan : ${DateFormat('dd/MM/yyyy à HH:mm').format(DateTime.now())}'),
+          const SizedBox(height: 4), Text("Date du bilan : ${DateFormat('dd/MM/yyyy à HH:mm').format(DateTime.now())}"),
           const SizedBox(height: 6), const Text('Bilan de pratique au pendule — les indications ci-dessous reprennent tes notes personnelles et ne constituent pas une évaluation médicale.', style: TextStyle(fontSize: 12, color: Colors.black54)),
         ]))),
         _sectionHeader('CONTRÔLE DES TAUX', Colors.lightBlue.shade200),
-        _reminder('Rappel — taux de vitalité', 'Repère du cadran : 0 à 100. Tes notes manuscrites mentionnent « 70 et + », des repères sous 70, au-dessus de 50 et de 0 à 30. Ce sont des interprétations personnelles au pendule, non validées médicalement et ne permettant pas d'établir un diagnostic.', 'assets/cadrans/bilan_taux_vitalite.png'),
-        _numberField('Taux de vitalité (0 à 100)', _vitalite, hint: 'Valeur relevée au cadran'),
+        _reminder(
+  'Rappel — taux de vitalité',
+  "Repère du cadran : 0 à 100. Tes notes manuscrites mentionnent « 70 et + », des repères sous 70, au-dessus de 50 et de 0 à 30. Ce sont des interprétations personnelles au pendule, non validées médicalement et ne permettant pas d'établir un diagnostic.",
+  'assets/cadrans/bilan_taux_vitalite.png',
+), _numberField('Taux de vitalité (0 à 100)', _vitalite, hint: 'Valeur relevée au cadran'),
         _reminder('Rappel — taux vibratoire', 'Tes notes : mesure physique (corps humain), énergétique, mentale et spirituelle. 1ʳᵉ mesure : 0 à 10 000 sur le plan physique ; 2ᵉ mesure : globale si la mesure dépasse 10 000. Note personnelle : comparer au taux de vitalité × 100.', 'assets/cadrans/bilan_taux_vibratoire.png'),
         _numberField('Taux vibratoire', _vibratoire, hint: 'Valeur relevée au cadran'),
         _sectionHeader('CONTRÔLE DES CHAKRAS', Colors.deepPurple.shade100),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 8), child: Text('Coche le résultat correspondant pour chaque chakra. Repère de tes notes : gauche = déficience ; droite = excès. G = grave, I = importante, F = faible.', style: TextStyle(fontSize: 13))),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            "Coche le résultat correspondant pour chaque chakra. Repère de tes notes : gauche = déficience ; droite = excès. G = grave, I = importante, F = faible.",
+            style: TextStyle(fontSize: 13),
+          ),
+        ),
         _reminder('Rappel — test des chakras', 'Utilise ton schéma papier des 7 chakras. Repère noté dans tes consignes : côté gauche pour la déficience, côté droit pour l’excès.', 'assets/cadrans/bilan_tests_chakras.png'),
         Card(child: Column(children: _chakraNames.map((name) => Padding(padding: const EdgeInsets.fromLTRB(12, 8, 12, 8), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(name, style: const TextStyle(fontWeight: FontWeight.w600)), const SizedBox(height: 6),
