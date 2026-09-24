@@ -1,0 +1,56 @@
+name: Build APK
+
+# Se déclenche à chaque push sur main, et manuellement depuis l'onglet
+# "Actions" de GitHub (bouton "Run workflow") si besoin.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write # nécessaire pour publier la release avec l'APK
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installation du JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Installation de Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Récupération des dépendances
+        run: flutter pub get
+
+      - name: Compilation de l'APK (release)
+        run: flutter build apk --release
+
+      # Toujours disponible dans l'onglet Actions -> ce run -> "Artifacts",
+      # même sans créer de release (utile pour les tests / builds intermédiaires).
+      - name: Publication en tant qu'artefact du run
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupeur-de-feu-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      # En plus : republie l'APK sur une release "latest" à chaque push sur
+      # main, avec un lien de téléchargement direct et stable (le plus
+      # pratique depuis un téléphone, pas besoin d'être connecté à GitHub
+      # pour télécharger un asset de release, contrairement aux artefacts).
+      - name: Publication sur la release "latest"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Dernière build (${{ github.sha }})
+          make_latest: true
+          files: build/app/outputs/flutter-apk/app-release.apk
