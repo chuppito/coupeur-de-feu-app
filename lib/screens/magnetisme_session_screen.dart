@@ -23,7 +23,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _prenom = TextEditingController();
   final _nom = TextEditingController();
   final _observations = TextEditingController();
-  final _debrief = TextEditingController();
+  final _debriefController = TextEditingController();
   final _vitalite = TextEditingController();
   final _vibratoire = TextEditingController();
   final _corps = TextEditingController();
@@ -204,7 +204,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         'notes': _bilanNotes.text.trim(),
       },
       'observations': _observations.text.trim(),
-      'debrief': _debrief.text.trim(),
+      'debrief': _debriefController.text.trim(),
     });
 
     if (!mounted) return;
@@ -586,7 +586,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         _reference('récap séance'),
       ),
       _compactText('Observations générales', _observations, minLines: 3),
-      _compactText('Débriefing', _debrief, minLines: 3),
+      _compactText('Débriefing', _debriefController, minLines: 3),
       _checkStep(_etapes.length - 1),
     ]);
   }
