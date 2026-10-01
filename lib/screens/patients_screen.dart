@@ -18,6 +18,8 @@ import 'home_screen.dart';
 import 'pendule_screen.dart';
 import 'protocoles_screen.dart';
 import 'magnetisme_screen.dart';
+import 'magnetisme_session_screen.dart';
+import '../services/magnetisme_session_service.dart';
 import 'stats_screen.dart';
 
 /// Écran d'accueil de l'app : liste des patients (recherche, création,
@@ -304,6 +306,20 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             ),
                           ),
                           ListTile(
+                            leading: const Icon(Icons.self_improvement, color: Colors.indigo),
+                            title: const Text("Nouvelle séance magnétisme V2"),
+                            subtitle: const Text("FT → protocole → bilan → résultats → historique"),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MagnetismeSessionScreen(
+                                  prefillNom: entry.value.first.nomPatient,
+                                  prefillNomFamille: entry.value.first.nomFamille,
+                                ),
+                              ),
+                            ),
+                          ),
+                          ListTile(
                             leading: const Icon(Icons.accessibility_new, color: Colors.teal),
                             title: const Text("Scanner le corps au pendule"),
                             subtitle: const Text("Nouveau scan pour ce patient"),
@@ -424,6 +440,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
               await PendulumCareService.renamePatient(
                 oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
               );
+              await MagnetismeSessionService.renamePatient(
+                oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
+              );
               if (!context.mounted) return;
               Navigator.pop(context);
             },
@@ -450,6 +469,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
               final scansSnapshot = await BodyScanService.deletePatientScans(nomComplet);
               final bilansSnapshot = await EnergyAssessmentService.deletePatient(nomComplet);
               final soinsSnapshot = await PendulumCareService.deletePatient(nomComplet);
+              final magnetismeSnapshot = await MagnetismeSessionService.deletePatient(nomComplet);
               scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: Text("Historique de $nomComplet supprimé."),
@@ -460,6 +480,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       await BodyScanService.restorePatientScans(scansSnapshot);
                       await EnergyAssessmentService.restore(bilansSnapshot);
                       await PendulumCareService.restore(soinsSnapshot);
+                      await MagnetismeSessionService.restore(magnetismeSnapshot);
                     },
                   ),
                   duration: const Duration(seconds: 5),
@@ -572,6 +593,14 @@ class _MenuLateral extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const PenduleScreen()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.self_improvement, color: Colors.indigo),
+              title: const Text("Nouvelle séance magnétisme V2"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeSessionScreen()));
               },
             ),
             ListTile(
