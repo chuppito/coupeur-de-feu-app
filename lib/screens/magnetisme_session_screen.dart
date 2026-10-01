@@ -70,7 +70,31 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen>{
     _info('Les cadrans restent ceux sur papier. L’application sert de guide et de mémoire pour noter les résultats relevés.'),
     _number('Vitalité / taux de vitalité',_vitalite),_number('Taux vibratoire',_vibratoire),_text('Corps énergétiques',_corps),
     const SizedBox(height:8),const Text('7 chakras',style:TextStyle(fontWeight:FontWeight.bold)),
-    Card(child:Column(children:_chakraNames.map((name)=>Padding(padding:const EdgeInsets.fromLTRB(12,5,12,5),child:DropdownButtonFormField<String>(value:_chakras[name],isExpanded:true,decoration:InputDecoration(labelText:name),items:_chakraChoices.map((c)=>DropdownMenuItem(value:c,child:Text(c))).toList(),onChanged:(v)=>setState(()=>_chakras[name]=v))).toList())),
+    Card(
+      child: Column(
+        children: _chakraNames.map((name) {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
+            child: DropdownButtonFormField<String>(
+              value: _chakras[name],
+              isExpanded: true,
+              decoration: InputDecoration(labelText: name),
+              items: _chakraChoices.map((choice) {
+                return DropdownMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _chakras[name] = value;
+                });
+              },
+            ),
+          );
+        }).toList(),
+      ),
+    ),
     _text('Entités',_entites),_text('Énergies négatives',_negatives),_text('Organes / zones',_organes),_text('Qualité énergétique du sang',_sang),_text('Notes du bilan',_bilanNotes,minLines:3),_doneBox(1,'Bilan énergétique réalisé')
   ]);
 
