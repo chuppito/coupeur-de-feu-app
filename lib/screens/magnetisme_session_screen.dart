@@ -534,7 +534,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       children: <Widget>[
         _helpBox(
           'Une convention à la fois. Ouvre-la, lis le rappel, réalise-la, coche-la, puis passe directement à la suivante.',
-          source,
+          _reference('14 conventions'),
         ),
         Row(
           children: <Widget>[
