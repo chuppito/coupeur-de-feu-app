@@ -34,7 +34,7 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
       ...['Vitalité / taux vibratoire','Corps énergétiques','7 chakras','Entités','Énergies négatives','Organes / zones','Qualité énergétique du sang'].map((s)=>CheckboxListTile(value:_scans[s]??false,dense:true,title:Text(s),onChanged:(v)=>setState(()=>_scans[s]=v??false))),
       TextField(controller:_notes,minLines:4,maxLines:8,decoration:const InputDecoration(labelText:'Observations / débriefing',alignLabelWithHint:true)),const SizedBox(height:10),
       FilledButton.icon(onPressed:_save,icon:const Icon(Icons.save),label:const Text('Enregistrer la séance'))
-    ]};}
+    ]);}
   Widget _library()=>ListView(padding:const EdgeInsets.all(12),children:[const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Bibliothèque des fiches fournies. Les fiches papier restent la référence détaillée.'))),..._fiches.map((f)=>Card(child:ListTile(leading:Icon(f.type=='fiche_technique'?Icons.description_outlined:Icons.menu_book),title:Text(f.titre),subtitle:Text(f.source))))]);
 }
 class _Fiche{final String id,titre,source,type,contenu;const _Fiche({required this.id,required this.titre,required this.source,required this.type,required this.contenu});factory _Fiche.fromJson(Map<String,dynamic> j)=>_Fiche(id:(j['id']??'').toString(),titre:(j['titre']??'').toString(),source:(j['source']??'').toString(),type:(j['type']??'').toString(),contenu:(j['contenu']??'').toString());}
