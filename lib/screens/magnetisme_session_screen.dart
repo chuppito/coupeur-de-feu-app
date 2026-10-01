@@ -507,7 +507,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   Widget _conventions() {
     final index = _conventionOuverte;
     final done = _conventionsFaites.contains(index);
-    final source = _reference('14 conventions');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
