@@ -887,6 +887,11 @@ class _MagnetismeDocumentScreenState extends State<_MagnetismeDocumentScreen> {
     final sourceText = _clean(widget.doc.contenu);
     final query = _search.text.trim().toLowerCase();
     final visible = query.isEmpty ? sourceText : _excerpt(sourceText, query);
+    final paragraphs = visible
+        .split(RegExp(r'\n{2,}'))
+        .map((p) => p.trim())
+        .where((p) => p.isNotEmpty)
+        .toList();
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.doc.titre)),
@@ -898,8 +903,7 @@ class _MagnetismeDocumentScreenState extends State<_MagnetismeDocumentScreen> {
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Text(
-                'Document de référence : ' + widget.doc.source + '\n'
-                'Lecture texte simplifiée pour une utilisation rapide pendant le soin.',
+                'Source : ' + widget.doc.source,
                 style: const TextStyle(fontSize: 12),
               ),
             ),
@@ -910,12 +914,28 @@ class _MagnetismeDocumentScreenState extends State<_MagnetismeDocumentScreen> {
             onChanged: (_) => setState(() {}),
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search),
-              hintText: 'Rechercher dans la fiche…',
+              hintText: 'Rechercher dans le document…',
               border: OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 12),
-          SelectableText(visible, style: const TextStyle(fontSize: 15, height: 1.45)),
+          ...paragraphs.map((paragraph) {
+            final heading = paragraph.length < 100 &&
+                (paragraph == paragraph.toUpperCase() ||
+                    RegExp(r'^\(\d+\)').hasMatch(paragraph));
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: SelectableText(
+                paragraph,
+                style: TextStyle(
+                  fontSize: heading ? 16 : 15,
+                  height: 1.45,
+                  fontWeight:
+                      heading ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            );
+          }),
         ],
       ),
     );
