@@ -8,6 +8,7 @@ import 'history_service.dart';
 import 'body_scan_service.dart';
 import 'energy_assessment_service.dart';
 import 'pendulum_care_service.dart';
+import 'magnetisme_session_service.dart';
 import 'protocole_service.dart';
 
 /// Gère l'export/import de sauvegarde, sous forme de fichiers JSON lisibles
@@ -47,6 +48,7 @@ class BackupService {
       'bodyScans': scans,
       'energyAssessments': bilans,
       'pendulumCares': soins,
+      'magnetismeSessions': jsonDecode(MagnetismeSessionService.exportAllToJson()) as List<dynamic>,
     };
     final file = await _writeFile(
       const JsonEncoder.withIndent('  ').convert(payload),
@@ -86,6 +88,13 @@ class BackupService {
         const JsonEncoder.withIndent('  ').convert(soins),
       );
     }
+    final magnetisme = decoded['magnetismeSessions'];
+    if (magnetisme is List) {
+      await MagnetismeSessionService.importFromJson(
+        const JsonEncoder.withIndent('  ').convert(magnetisme),
+      );
+    }
+
     final bilans = decoded['energyAssessments'];
     if (bilans is List) {
       await EnergyAssessmentService.importFromJson(
