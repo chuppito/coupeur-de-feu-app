@@ -96,7 +96,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   @override
   void dispose() {
     for (final controller in <TextEditingController>[
-      _prenom, _nom, _observations, _debrief, _vitalite, _vibratoire,
+      _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _corps, _entites, _negatives, _organes, _sang, _bilanNotes,
       _degagementNotes,
     ]) {
