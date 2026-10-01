@@ -32,6 +32,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _organes = TextEditingController();
   final _sang = TextEditingController();
   final _bilanNotes = TextEditingController();
+  final _traitements = TextEditingController();
   final _degagementNotes = TextEditingController();
 
   final Set<int> _etapesFaites = <int>{};
@@ -100,7 +101,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _corps, _entites, _negatives, _organes, _sang, _bilanNotes,
-      _degagementNotes,
+      _traitements, _degagementNotes,
     ]) {
       controller.dispose();
     }
@@ -223,6 +224,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         'energiesNegatives': _negatives.text.trim(),
         'organesZones': _organes.text.trim(),
         'sang': _sang.text.trim(),
+        'traitements': _traitements.text.trim(),
         'notes': _bilanNotes.text.trim(),
       },
       'observations': _observations.text.trim(),
@@ -480,6 +482,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       _resultField('Énergies négatives', _negatives, 'Contrôle au pendule'),
       _resultField('Organes / zones', _organes, 'Zones ou organes ressortant du bilan'),
       _resultField('Qualité énergétique du sang', _sang, 'Résultat du cadran'),
+      _resultField(
+        'Traitements / médicaments en cours ou récents',
+        _traitements,
+        'Laisser vide si aucun traitement',
+      ),
       ExpansionTile(
         tilePadding: EdgeInsets.zero,
         title: const Text('7 chakras', style: TextStyle(fontWeight: FontWeight.w600)),
@@ -529,12 +536,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   Widget _conventions() {
     final index = _conventionOuverte;
     final done = _conventionsFaites.contains(index);
+    final action = _conventionAction(index);
+    final fullDoc = _reference('14 conventions — version complète') ?? _reference('14 conventions');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         _helpBox(
-          'Une convention à la fois. Ouvre-la, lis le rappel, réalise-la, coche-la, puis passe directement à la suivante.',
-          _reference('14 conventions'),
+          'Une convention à la fois. Pendant la séance, seules la durée utile et l’intention sont affichées. Les explications complètes restent dans la bibliothèque.',
+          fullDoc,
         ),
         Row(
           children: <Widget>[
@@ -559,11 +569,36 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Text(
-              _extractConvention(index),
-              style: const TextStyle(fontSize: 14, height: 1.45),
+              action,
+              style: const TextStyle(fontSize: 15, height: 1.5),
             ),
           ),
         ),
+        if (index == 7 && _traitements.text.trim().isEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              'Aucun traitement signalé au bilan : cette convention peut être sautée.',
+              style: TextStyle(
+                color: Colors.orange.shade800,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        if (index == 8)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              _convention9Detail(),
+              style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+            ),
+          ),
+        if (fullDoc != null)
+          OutlinedButton.icon(
+            onPressed: () => _openReader(fullDoc),
+            icon: const Icon(Icons.menu_book_outlined),
+            label: const Text('Voir la convention complète'),
+          ),
         Row(
           children: <Widget>[
             OutlinedButton.icon(
@@ -593,42 +628,75 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     );
   }
 
-  String _extractConvention(int index) {
-    final doc = _reference('14 conventions');
-    if (doc == null) return _conventionTitles[index];
-    final text = _clean(doc.contenu);
-    final lines = text.split('\n');
-    final title = _conventionTitles[index].toUpperCase();
-    var start = -1;
-    for (var i = 0; i < lines.length; i++) {
-      final line = lines[i].trim().toUpperCase();
-      if (line == title || line.contains(title)) {
-        start = i;
-        break;
-      }
+  String _conventionAction(int index) {
+    final durations = <String>[
+      '1 minute ou plus si la personne est très tendue ou stressée.',
+      '1 minute ou plus si la personne est soumise à de nombreuses douleurs ou se sent bloquée.',
+      '1 minute. Jusqu’à 3 minutes si l’histoire de vie est compliquée ou en cas de troubles émotionnels ou de l’humeur importants.',
+      '1 minute.',
+      '1 minute.',
+      '1 minute.',
+      '1 minute.',
+      _traitements.text.trim().isEmpty
+          ? 'À sauter si la personne ne prend pas de traitement.'
+          : '1 minute.',
+      _convention9Duration(),
+      '1 minute.',
+      '1 minute.',
+      _sangBelow70() ? '2 minutes car la qualité énergétique du sang est inférieure à 70 %.' : '1 minute.',
+      '1 minute.',
+      '1 à 3 minutes.',
+    ];
+
+    final intentions = <String>[
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les tensions », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie tous les blocages énergétiques », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les mauvaises mémoires de sa vie actuelle », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les mauvaises mémoires de sa vie intra-utérine », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les mauvaises mémoires transgénérationnelles », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les mauvaises mémoires de ses vies antérieures », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie l’impact des métaux lourds », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie la chimie des médicaments que son corps peine à éliminer », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie ses 7 corps », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie et harmonise ses 7 chakras majeurs », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je recharge tous ses organes », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je nettoie toutes les toxines hydrosolubles et liposolubles », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je guéris [nom et prénom] de [nom de la maladie] », puis laissez passer l’énergie.',
+      'Vos mains sur le chakra couronne du consultant, envoyez l’intention « Je te transmets de l’énergie », puis laissez passer l’énergie sans intention supplémentaire.',
+    ];
+
+    if (index == 7 && _traitements.text.trim().isEmpty) {
+      return durations[index];
     }
-    if (start < 0) {
-      final marker = '(' + (index + 1).toString() + ')';
-      for (var i = 0; i < lines.length; i++) {
-        if (lines[i].trim().startsWith(marker)) {
-          start = i;
-          break;
-        }
-      }
+    return durations[index] + '\n\n' + intentions[index];
+  }
+
+  String _convention9Duration() {
+    final negative = (_negatives.text + ' ' + _bilanNotes.text + ' ' + _entites.text).toLowerCase();
+    if (negative.contains('magie noire') || negative.contains('magie-noire')) {
+      return '4 minutes — magie noire détectée au bilan. Couper la connexion avant la séance selon le protocole.';
     }
-    if (start < 0) return _conventionTitles[index];
-    var end = lines.length;
-    for (var i = start + 1; i < lines.length; i++) {
-      final line = lines[i].trim();
-      final upper = line.toUpperCase();
-      if (i > start + 2 &&
-          (_conventionTitles.any((item) => upper == item.toUpperCase()) ||
-           RegExp(r'^\(\d+\)').hasMatch(line))) {
-        end = i;
-        break;
-      }
+    if (negative.contains('seuil de vigilance') ||
+        negative.contains('vigilance des énergies négatives') ||
+        negative.contains('vigilance énergie négative')) {
+      return '2 minutes — seuil de vigilance des énergies négatives détecté au bilan.';
     }
-    return lines.sublist(start, end).join('\n').trim();
+    return '1 minute.';
+  }
+
+  String _convention9Detail() {
+    final negative = (_negatives.text + ' ' + _bilanNotes.text + ' ' + _entites.text).toLowerCase();
+    if (negative.contains('magie noire') || negative.contains('magie-noire')) {
+      return 'Puis, comme prévu par le protocole : équilibrer les 6 corps énergétiques (30 s) et recharger les 6 corps énergétiques (30 s). Ajouter 30 s par corps énergétique défaillant relevé au bilan.';
+    }
+    return 'La recharge globale des 6 corps énergétiques est systématique (30 s), puis ajouter 30 s par corps énergétique défaillant. L’équilibrage des 6 corps autour du corps physique prend 30 s.';
+  }
+
+  bool _sangBelow70() {
+    final value = double.tryParse(
+      _sang.text.replaceAll('%', '').replaceAll(',', '.').trim(),
+    );
+    return value != null && value < 70;
   }
 
   Widget _specific() {
