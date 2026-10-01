@@ -277,6 +277,76 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           ),
                         ],
                           ),
+                          ValueListenableBuilder<Box>(
+                            valueListenable: MagnetismeSessionService.listenable(),
+                            builder: (context, magnetismeBox, _) {
+                              final sessions = MagnetismeSessionService.getForPatient(entry.key);
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(children: [
+                                      const Icon(Icons.self_improvement, color: Colors.indigo),
+                                      const SizedBox(width: 8),
+                                      Expanded(child: Text(
+                                        "Historique magnétisme (" + sessions.length.toString() + ")",
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      )),
+                                    ]),
+                                    if (sessions.isEmpty)
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 8),
+                                        child: Text("Aucune séance de magnétisme V2 enregistrée.",
+                                            style: TextStyle(fontSize: 12, color: Colors.black54)),
+                                      )
+                                    else
+                                      ...sessions.map((s) {
+                                        final date = DateTime.tryParse((s['date'] ?? '').toString());
+                                        final bilan = s['bilan'] is Map ? Map<String,dynamic>.from(s['bilan'] as Map) : <String,dynamic>{};
+                                        final chakras = bilan['chakras'] is Map ? Map<String,dynamic>.from(bilan['chakras'] as Map) : <String,dynamic>{};
+                                        return Card(
+                                          margin: const EdgeInsets.only(top: 6),
+                                          child: ExpansionTile(
+                                            leading: const Icon(Icons.history, color: Colors.indigo),
+                                            title: Text(date == null ? "Séance" : DateFormat('dd/MM/yyyy à HH:mm').format(date)),
+                                            subtitle: Text((s['ftTitre'] ?? 'FT non renseignée').toString() + " · " + (s['mode'] ?? '').toString()),
+                                            children: [
+                                              ListTile(
+                                                dense: true,
+                                                title: const Text("Déroulé"),
+                                                subtitle: Text(((s['etapesFaites'] as List?)?.length ?? 0).toString() + "/" + ((s['etapes'] as List?)?.length ?? 0).toString() + " étapes cochées"),
+                                              ),
+                                              if ((bilan['vitalite'] ?? '').toString().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Vitalité"), subtitle: Text(bilan['vitalite'].toString())),
+                                              if ((bilan['vibratoire'] ?? '').toString().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Taux vibratoire"), subtitle: Text(bilan['vibratoire'].toString())),
+                                              if (chakras.isNotEmpty)
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: chakras.entries.where((e) => (e.value ?? '').toString().isNotEmpty).map(
+                                                      (e) => Text(e.key + " : " + e.value.toString()),
+                                                    ).toList(),
+                                                  ),
+                                                ),
+                                              for (final key in const ['corpsEnergetiques','entites','energiesNegatives','organesZones','sang','notes'])
+                                                if ((bilan[key] ?? '').toString().trim().isNotEmpty)
+                                                  ListTile(dense: true, title: Text(_libelleBilan(key)), subtitle: Text(bilan[key].toString())),
+                                              if ((s['observations'] ?? '').toString().trim().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Observations"), subtitle: Text(s['observations'].toString())),
+                                              if ((s['debrief'] ?? '').toString().trim().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Débrief"), subtitle: Text(s['debrief'].toString())),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                           ListTile(
                             leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
                             title: const Text("Bilan énergétique au pendule"),
@@ -357,6 +427,18 @@ class _PatientsScreenState extends State<PatientsScreen> {
         ),
       ),
     );
+  }
+
+  String _libelleBilan(String key) {
+    switch (key) {
+      case 'corpsEnergetiques': return 'Corps énergétiques';
+      case 'entites': return 'Entités';
+      case 'energiesNegatives': return 'Énergies négatives';
+      case 'organesZones': return 'Organes / zones';
+      case 'sang': return 'Qualité énergétique du sang';
+      case 'notes': return 'Notes du bilan';
+      default: return key;
+    }
   }
 
   String _formatIntensite(int? valeur) => valeur == null ? "non renseigné" : "$valeur/10";
@@ -616,7 +698,7 @@ class _MenuLateral extends StatelessWidget {
               title: const Text("Bilan énergétique au pendule"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const EnergyAssessmentScreen()));
               },
             ),
             ListTile(
