@@ -4,7 +4,7 @@ name: Build APK
 # "Actions" de GitHub (bouton "Run workflow") si besoin.
 on:
   push:
-    branches: [ main ]
+    branches: [ main, v2-magnetisme-guide ]
   workflow_dispatch: {}
 
 permissions:
