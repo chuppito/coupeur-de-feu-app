@@ -11,11 +11,8 @@ import '../services/history_service.dart';
 import '../services/energy_assessment_service.dart';
 import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
-import 'body_scan_screen.dart';
-import 'energy_assessment_screen.dart';
-import 'pendulum_care_screen.dart';
 import 'home_screen.dart';
-import 'pendule_screen.dart';
+import 'magnetisme_guide_screen.dart';
 import 'protocoles_screen.dart';
 import 'stats_screen.dart';
 
@@ -275,48 +272,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         ],
                           ),
                           ListTile(
-                            leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-                            title: const Text("Bilan énergétique au pendule"),
-                            subtitle: const Text("Créer ou consulter les bilans de ce patient"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EnergyAssessmentScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
-                            title: const Text("Soin au pendule"),
-                            subtitle: const Text("Suivre le protocole et consulter les soins enregistrés"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PendulumCareScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.accessibility_new, color: Colors.teal),
-                            title: const Text("Scanner le corps au pendule"),
-                            subtitle: const Text("Nouveau scan pour ce patient"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BodyScanScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
                             leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
                             title: const Text("Ajouter un nouveau soin"),
                             onTap: () => Navigator.push(
@@ -567,34 +522,11 @@ class _MenuLateral extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.explore_outlined, color: Colors.teal),
-              title: const Text("Pendule"),
+              title: const Text("Pendule & magnétisme"),
+              subtitle: const Text("Mémo de pratique + fiches techniques"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PenduleScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.accessibility_new, color: Colors.teal),
-              title: const Text("Scan du corps au pendule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const BodyScanScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-              title: const Text("Bilan énergétique au pendule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
-              title: const Text("Soin au pendule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeGuideScreen()));
               },
             ),
             const Divider(),
@@ -626,7 +558,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.2.1",
+                "Coupeur de Feu · v2.4.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
