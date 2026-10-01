@@ -624,7 +624,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       children: <Widget>[
         _helpBox(
           'Les prières sont prises dans prières.pdf. Sélectionne une ou plusieurs pathologies dans Préparer le soin : les formulations correspondantes apparaissent directement ici.',
-          null,
         ),
         if (_pathologies.isEmpty)
           const Text('Sélectionne au moins une pathologie / motif.'),
