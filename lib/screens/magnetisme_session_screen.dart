@@ -299,6 +299,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _ftCard() {
+    final pathologyNames = _fts.map((doc) => doc.titre).toList();
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(14),
@@ -308,44 +309,58 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             const Row(children: <Widget>[
               Icon(Icons.menu_book_outlined, color: Colors.indigo),
               SizedBox(width: 8),
-              Text('Fiche technique du soin', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Préparer le soin', style: TextStyle(fontWeight: FontWeight.bold)),
             ]),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _ftId,
               isExpanded: true,
               decoration: const InputDecoration(
-                labelText: 'Choisir la FT',
+                labelText: 'Fiche technique principale',
                 border: OutlineInputBorder(),
               ),
-              items: _fts.map((doc) {
-                return DropdownMenuItem<String>(value: doc.id, child: Text(doc.titre));
-              }).toList(),
+              items: _fts.map((doc) => DropdownMenuItem<String>(
+                value: doc.id,
+                child: Text(doc.titre, overflow: TextOverflow.ellipsis),
+              )).toList(),
               onChanged: (value) {
                 setState(() {
                   _ftId = value;
+                  final doc = _find(value);
+                  _pathologies.clear();
+                  if (doc != null) _pathologies.add(doc.titre);
                   _etapeOuverte = 0;
+                  _conventionOuverte = 0;
                   _etapesFaites.clear();
                   _conventionsFaites.clear();
                 });
               },
             ),
-            if (_ft != null) ...<Widget>[
-              const SizedBox(height: 8),
-              Row(children: <Widget>[
-                Expanded(
-                  child: Text(
-                    'La FT pilote le contenu spécifique du soin.',
-                    style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
-                  ),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () => _openReader(_ft!),
-                  icon: const Icon(Icons.visibility_outlined),
-                  label: const Text('Lire la FT'),
-                ),
-              ]),
-            ],
+            const SizedBox(height: 12),
+            const Text('Pathologies / motifs du soin', style: TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 4),
+            Text(
+              'Tu peux en sélectionner plusieurs : les prières et FT correspondantes seront proposées dans le déroulé.',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: pathologyNames.map((name) => FilterChip(
+                label: Text(name),
+                selected: _pathologies.contains(name),
+                onSelected: (selected) {
+                  setState(() {
+                    if (selected) {
+                      _pathologies.add(name);
+                    } else {
+                      _pathologies.remove(name);
+                    }
+                  });
+                },
+              )).toList(),
+            ),
           ],
         ),
       ),
