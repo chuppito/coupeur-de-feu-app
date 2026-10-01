@@ -46,7 +46,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             icon: const Icon(Icons.local_fire_department),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MagnetismeScreen()),
+              MaterialPageRoute(builder: (context) => const MagnetismeSessionScreen()),
             ),
           ),
         ],
@@ -355,20 +355,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => EnergyAssessmentScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.self_improvement, color: Colors.indigo),
-                            title: const Text("Nouveau soin magnétisme"),
-                            subtitle: const Text("Choisir une FT puis générer la séance complète"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MagnetismeScreen(
                                   prefillNom: entry.value.first.nomPatient,
                                   prefillNomFamille: entry.value.first.nomFamille,
                                 ),
