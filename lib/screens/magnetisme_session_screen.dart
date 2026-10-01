@@ -591,6 +591,45 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             icon: const Icon(Icons.menu_book_outlined),
             label: const Text('Voir la convention complète'),
           ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text('Les 14 conventions', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                ...List<Widget>.generate(14, (i) {
+                  final active = i == index;
+                  final doneConvention = _conventionsFaites.contains(i);
+                  return InkWell(
+                    onTap: () => setState(() => _conventionOuverte = i),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            doneConvention ? Icons.check_circle : active ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                            size: 19,
+                            color: doneConvention ? Colors.green : active ? Theme.of(context).colorScheme.primary : null,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              '${i + 1}. ${_conventionTitles[i]}',
+                              style: TextStyle(fontWeight: active ? FontWeight.bold : FontWeight.normal),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
         Row(
           children: <Widget>[
             OutlinedButton.icon(
