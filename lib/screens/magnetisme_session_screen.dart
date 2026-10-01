@@ -490,38 +490,109 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _conventions() {
+    final index = _conventionOuverte;
+    final done = _conventionsFaites.contains(index);
     final source = _reference('14 conventions');
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      _helpBox(
-        'Les 14 conventions constituent la base commune. Utilise la fiche source pour les formulations complètes ; coche chaque convention au fur et à mesure.',
-        source,
-      ),
-      ...List<Widget>.generate(_conventionNames.length, (index) {
-        return CheckboxListTile(
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          value: _conventionsFaites.contains(index),
-          controlAffinity: ListTileControlAffinity.leading,
-          title: Text((index + 1).toString() + '. ' + _conventionNames[index],
-              style: const TextStyle(fontSize: 14)),
-          onChanged: (value) {
-            setState(() {
-              if (value == true) {
-                _conventionsFaites.add(index);
-              } else {
-                _conventionsFaites.remove(index);
-              }
-            });
-          },
-        );
-      }),
-      OutlinedButton.icon(
-        onPressed: source == null ? null : () => _openReader(source),
-        icon: const Icon(Icons.menu_book_outlined),
-        label: const Text('Ouvrir les formulations complètes'),
-      ),
-      _checkStep(3),
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'Une convention à la fois. Ouvre-la, lis le rappel, réalise-la, coche-la, puis passe directement à la suivante.',
+          source,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Text(
+                'Convention ' + (index + 1).toString() + ' / 14',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Text(
+              done ? 'Réalisée' : 'À faire',
+              style: TextStyle(
+                color: done ? Colors.green : Colors.orange.shade800,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Card(
+          color: Colors.indigo.withValues(alpha: 0.05),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              _extractConvention(index),
+              style: const TextStyle(fontSize: 14, height: 1.45),
+            ),
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            OutlinedButton.icon(
+              onPressed: index == 0
+                  ? null
+                  : () => setState(() => _conventionOuverte--),
+              icon: const Icon(Icons.arrow_back),
+              label: const Text('Précédente'),
+            ),
+            const Spacer(),
+            FilledButton.icon(
+              onPressed: () {
+                setState(() {
+                  _conventionsFaites.add(index);
+                  if (index < 13) {
+                    _conventionOuverte++;
+                  }
+                });
+              },
+              icon: Icon(index == 13 ? Icons.check : Icons.arrow_forward),
+              label: Text(index == 13 ? '14 réalisée' : 'Réalisée → suivante'),
+            ),
+          ],
+        ),
+        if (_conventionsFaites.length == 14) _checkStep(3),
+      ],
+    );
+  }
+
+  String _extractConvention(int index) {
+    final doc = _reference('14 conventions');
+    if (doc == null) return _conventionTitles[index];
+    final text = _clean(doc.contenu);
+    final lines = text.split('\n');
+    final title = _conventionTitles[index].toUpperCase();
+    var start = -1;
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i].trim().toUpperCase();
+      if (line == title || line.contains(title)) {
+        start = i;
+        break;
+      }
+    }
+    if (start < 0) {
+      final marker = '(' + (index + 1).toString() + ')';
+      for (var i = 0; i < lines.length; i++) {
+        if (lines[i].trim().startsWith(marker)) {
+          start = i;
+          break;
+        }
+      }
+    }
+    if (start < 0) return _conventionTitles[index];
+    var end = lines.length;
+    for (var i = start + 1; i < lines.length; i++) {
+      final line = lines[i].trim();
+      final upper = line.toUpperCase();
+      if (i > start + 2 &&
+          (_conventionTitles.any((item) => upper == item.toUpperCase()) ||
+           RegExp(r'^\(\d+\)').hasMatch(line))) {
+        end = i;
+        break;
+      }
+    }
+    return lines.sublist(start, end).join('\n').trim();
   }
 
   Widget _specific() {
