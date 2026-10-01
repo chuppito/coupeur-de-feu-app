@@ -585,14 +585,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
               ),
             ),
           ),
-        if (index == 8)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              _convention9Detail(),
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
-            ),
-          ),
         if (fullDoc != null)
           OutlinedButton.icon(
             onPressed: () => _openReader(fullDoc),
@@ -682,14 +674,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       return '2 minutes — seuil de vigilance des énergies négatives détecté au bilan.';
     }
     return '1 minute.';
-  }
-
-  String _convention9Detail() {
-    final negative = (_negatives.text + ' ' + _bilanNotes.text + ' ' + _entites.text).toLowerCase();
-    if (negative.contains('magie noire') || negative.contains('magie-noire')) {
-      return 'Puis, comme prévu par le protocole : équilibrer les 6 corps énergétiques (30 s) et recharger les 6 corps énergétiques (30 s). Ajouter 30 s par corps énergétique défaillant relevé au bilan.';
-    }
-    return 'La recharge globale des 6 corps énergétiques est systématique (30 s), puis ajouter 30 s par corps énergétique défaillant. L’équilibrage des 6 corps autour du corps physique prend 30 s.';
   }
 
   bool _sangBelow70() {
