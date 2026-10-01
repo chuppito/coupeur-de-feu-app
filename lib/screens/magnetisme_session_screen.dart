@@ -36,6 +36,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   final Set<int> _etapesFaites = <int>{};
   final Set<int> _conventionsFaites = <int>{};
+  final Set<String> _pathologies = <String>{};
   final Map<String, String?> _chakras = <String, String?>{
     for (final name in _chakraNames) name: null,
   };
@@ -44,6 +45,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   String? _ftId;
   String _mode = 'Présentiel';
   int _etapeOuverte = 0;
+  int _conventionOuverte = 0;
   bool _loading = true;
   bool _saving = false;
   bool _degagementNecessaire = false;
@@ -68,7 +70,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     'Excès — G',
   ];
 
-  static const _conventionNames = <String>[
+  static const _conventionTitles = <String>[
     'Nettoyer les tensions présentes',
     'Nettoyer les blocages énergétiques',
     'Nettoyer les mauvaises mémoires de la vie actuelle',
@@ -140,6 +142,26 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       if (doc.id == _ftId) return doc;
     }
     return null;
+  }
+
+  _Doc? _find(String? id) {
+    if (id == null) return null;
+    for (final doc in _docs) {
+      if (doc.id == id) return doc;
+    }
+    return null;
+  }
+
+  _Doc? get _prieresDoc => _reference('prières');
+
+  String _clean(String value) {
+    return value
+        .replaceAll('\\u000c', '\\n\\n')
+        .replaceAll('\\u0000', '')
+        .replaceAll(RegExp(r'[ \\t]+'), ' ')
+        .replaceAll(RegExp(r'\\n[ \\t]+'), '\\n')
+        .replaceAll(RegExp(r'\\n{3,}'), '\\n\\n')
+        .trim();
   }
 
   _Doc? _reference(String contains) {
@@ -624,6 +646,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       children: <Widget>[
         _helpBox(
           'Les prières sont prises dans prières.pdf. Sélectionne une ou plusieurs pathologies dans Préparer le soin : les formulations correspondantes apparaissent directement ici.',
+          _prieresDoc,
         ),
         if (_pathologies.isEmpty)
           const Text('Sélectionne au moins une pathologie / motif.'),
