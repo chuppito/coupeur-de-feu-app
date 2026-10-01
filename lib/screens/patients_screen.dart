@@ -44,7 +44,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             icon: const Icon(Icons.local_fire_department),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => const MagnetismeScreen()),
             ),
           ),
         ],
@@ -547,7 +547,7 @@ class _MenuLateral extends StatelessWidget {
               title: const Text("Nouveau soin"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeScreen()));
               },
             ),
             ListTile(
@@ -627,7 +627,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.2.1",
+                "Coupeur de Feu · v2.4.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
