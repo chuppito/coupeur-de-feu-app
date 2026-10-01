@@ -28,13 +28,57 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
     DropdownButtonFormField<String>(value:_selection,isExpanded:true,decoration:const InputDecoration(labelText:'Choisir l’affection / la FT'),items:_fts.map((f)=>DropdownMenuItem(value:f.titre,child:Text(f.titre))).toList(),onChanged:(v)=>setState(()=>_selection=v)),
     const SizedBox(height:12),FilledButton.icon(onPressed:_selection==null?null:()=>setState((){_genere=true;_faites.clear();_scans.clear();}),icon:const Icon(Icons.auto_awesome),label:const Text('Générer la séance complète')),
     if(_genere)...[
-      const SizedBox(height:16),const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Trame V2 : déroulé commun présentiel ou à distance. Les détails propres à chaque FT restent liés à la fiche papier source.'))),
+      const SizedBox(height:16),
+      if (_selection != null) ...[
+        Card(child:ExpansionTile(
+          initiallyExpanded:true,
+          leading:const Icon(Icons.medical_information_outlined,color:Colors.indigo),
+          title:Text(_selection!,style:const TextStyle(fontWeight:FontWeight.bold)),
+          subtitle:const Text('Contenu complet de la fiche technique'),
+          children:[
+            Padding(
+              padding:const EdgeInsets.fromLTRB(16,0,16,16),
+              child:SingleChildScrollView(
+                child:SelectableText(_fiches.firstWhere((f)=>f.titre==_selection).contenu),
+              ),
+            ),
+          ],
+        )),
+        const SizedBox(height:10),
+      ],
+      const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Trame V2 : déroulé commun présentiel ou à distance, issue des fiches de séance fournies.'))),
       ..._steps().asMap().entries.map((e)=>CheckboxListTile(value:_faites.contains(e.key),dense:true,controlAffinity:ListTileControlAffinity.leading,title:Text((e.key+1).toString()+'. '+e.value),onChanged:(v)=>setState(()=>v==true?_faites.add(e.key):_faites.remove(e.key)))),
       const Divider(),const Text('Bilan / contrôles au pendule',style:TextStyle(fontWeight:FontWeight.bold)),
       ...['Vitalité / taux vibratoire','Corps énergétiques','7 chakras','Entités','Énergies négatives','Organes / zones','Qualité énergétique du sang'].map((s)=>CheckboxListTile(value:_scans[s]??false,dense:true,title:Text(s),onChanged:(v)=>setState(()=>_scans[s]=v??false))),
       TextField(controller:_notes,minLines:4,maxLines:8,decoration:const InputDecoration(labelText:'Observations / débriefing',alignLabelWithHint:true)),const SizedBox(height:10),
       FilledButton.icon(onPressed:_save,icon:const Icon(Icons.save),label:const Text('Enregistrer la séance'))
     ]]);}
-  Widget _library()=>ListView(padding:const EdgeInsets.all(12),children:[const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Bibliothèque des fiches fournies. Les fiches papier restent la référence détaillée.'))),..._fiches.map((f)=>Card(child:ListTile(leading:Icon(f.type=='fiche_technique'?Icons.description_outlined:Icons.menu_book),title:Text(f.titre),subtitle:Text(f.source))))]);
+  Widget _library()=>ListView(padding:const EdgeInsets.all(12),children:[
+    const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Bibliothèque complète des fiches fournies. Ouvre une fiche pour consulter son contenu et, pour une FT, l’utiliser pour un soin.'))),
+    ..._fiches.map((f)=>Card(child:ExpansionTile(
+      leading:Icon(f.type=='fiche_technique'?Icons.description_outlined:Icons.menu_book),
+      title:Text(f.titre),
+      subtitle:Text(f.source),
+      children:[
+        Padding(
+          padding:const EdgeInsets.fromLTRB(16,0,16,16),
+          child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+            SelectableText(f.contenu),
+            if(f.type=='fiche_technique') ...[
+              const SizedBox(height:12),
+              FilledButton.icon(
+                onPressed:(){
+                  setState((){_selection=f.titre;_genere=false;});
+                  DefaultTabController.of(context).animateTo(0);
+                },
+                icon:const Icon(Icons.playlist_add_check),
+                label:const Text('Utiliser cette FT pour un soin'),
+              ),
+            ],
+          ]),
+        ),
+      ],
+    ))),
+  ]);
 }
 class _Fiche{final String id,titre,source,type,contenu;const _Fiche({required this.id,required this.titre,required this.source,required this.type,required this.contenu});factory _Fiche.fromJson(Map<String,dynamic> j)=>_Fiche(id:(j['id']??'').toString(),titre:(j['titre']??'').toString(),source:(j['source']??'').toString(),type:(j['type']??'').toString(),contenu:(j['contenu']??'').toString());}
