@@ -605,13 +605,97 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _prieres() {
-    final source = _reference('prières');
-    return _stepLayout(
-      help: 'Utiliser les prières et formulations prévues par ton protocole. Le rappel est accessible depuis le document source.',
-      source: source,
-      doneIndex: 5,
-      actionLabel: 'Ouvrir prières / formulations',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'Les prières sont prises dans prières.pdf. Sélectionne une ou plusieurs pathologies dans Préparer le soin : les formulations correspondantes apparaissent directement ici.',
+          null,
+        ),
+        if (_pathologies.isEmpty)
+          const Text('Sélectionne au moins une pathologie / motif.'),
+        ..._pathologies.map((pathology) {
+          final prayer = _extractPrayer(pathology);
+          return Card(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: ExpansionTile(
+              title: Text(pathology),
+              subtitle: Text(
+                prayer.isEmpty
+                    ? 'Aucune prière dédiée trouvée dans prières.pdf'
+                    : 'Prière disponible — ouvrir',
+              ),
+              children: prayer.isEmpty
+                  ? <Widget>[]
+                  : <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+                        child: Text(
+                          prayer,
+                          style: const TextStyle(fontSize: 14, height: 1.45),
+                        ),
+                      ),
+                    ],
+            ),
+          );
+        }),
+        _checkStep(5),
+      ],
     );
+  }
+
+  String _extractPrayer(String pathology) {
+    final doc = _prieresDoc;
+    if (doc == null) return '';
+    const aliases = <String, String>{
+      'Couper le feu': 'CONTRE LE FEU',
+      'Verrue': 'VERRUES',
+      'Eczéma': 'ECZÉMA',
+      'Arthrite': 'ARTHRITE, POLYARTHRITE',
+      'Déprime': 'DÉPRESSION & ANGOISSE',
+      'Allergie': 'ALLERGIE',
+      'Hémorragie': 'HÉMORRAGIE',
+      'Coupure': 'COUPURES',
+      'Aphtes': 'APHTES',
+      'Maux de ventre': 'MAUX DE VENTRE & CONSTIPATION',
+      'Constipation': 'MAUX DE VENTRE & CONSTIPATION',
+    };
+    final alias = aliases[pathology];
+    if (alias == null) return '';
+    final lines = _clean(doc.contenu).split('\n');
+    var start = -1;
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i].trim().toUpperCase();
+      if (line == alias || line.contains(alias)) {
+        start = i;
+        break;
+      }
+    }
+    if (start < 0) return '';
+    const headings = <String>[
+      'CONTRE LE FEU',
+      'HÉMORRAGIE',
+      'VERRUES',
+      'PLAIES & ULCÈRES',
+      'ECZÉMA',
+      'COUPURES',
+      'MAUX DE DOS',
+      'CIRCULATION SANGUINE',
+      'MAUX DE VENTRE & CONSTIPATION',
+      'APHTES',
+      'ARTHRITE, POLYARTHRITE',
+      'DÉPRESSION & ANGOISSE',
+      'ALLERGIE',
+      'PRIÈRE DE DEMANDE DE GUÉRISON',
+    ];
+    var end = lines.length;
+    for (var i = start + 1; i < lines.length; i++) {
+      if (headings.contains(lines[i].trim().toUpperCase())) {
+        end = i;
+        break;
+      }
+    }
+    return lines.sublist(start, end).join('\n').trim();
   }
 
   Widget _technique(int index) {
