@@ -172,23 +172,36 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return result;
   }
 
-  List<String> get _etapes => <String>[
-        'Prise de contact',
-        'Bilan énergétique',
-        'Dégagement des entités / énergies négatives si nécessaire',
-        '14 conventions mentales',
-        'Conventions mentales supplémentaires de la fiche technique',
-        'Prières / formulations prévues par le protocole',
-        if (_mode == 'Présentiel') ...<String>[
-          'Passes et impositions selon la fiche',
-          'Circulation énergétique entre les chakras',
-          'Balayage',
-        ] else ...<String>[
-          'Travail sur photo / planches anatomiques selon la fiche',
-          'Renforcement de l’intention, notamment lors de la convention n°10',
-        ],
-        'Débriefing / observation',
+  bool get _isCouperLeFeu => _ft?.id == 'ft-couper-le-feu';
+
+  List<String> get _etapes {
+    if (_isCouperLeFeu) {
+      return <String>[
+        'Accueil et prise de contact',
+        'Prière contre le feu',
+        'Imposition des mains et intention',
+        'Balayage & débriefing',
       ];
+    }
+
+    return <String>[
+      'Prise de contact',
+      'Bilan énergétique',
+      'Dégagement des entités / énergies négatives si nécessaire',
+      '14 conventions mentales',
+      'Conventions mentales supplémentaires de la fiche technique',
+      'Prières / formulations prévues par le protocole',
+      if (_mode == 'Présentiel') ...<String>[
+        'Passes et impositions selon la fiche',
+        'Circulation énergétique entre les chakras',
+        'Balayage',
+      ] else ...<String>[
+        'Travail sur photo / planches anatomiques selon la fiche',
+        'Renforcement de l’intention, notamment lors de la convention n°10',
+      ],
+      'Débriefing / observation',
+    ];
+  }
 
   Future<void> _enregistrer() async {
     if (_saving || _patient.isEmpty || _ft == null) return;
@@ -443,6 +456,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _stepContent(int index) {
+    if (_isCouperLeFeu) return _couperLeFeuStep(index);
+
     if (index == 0) return _contactHelp();
     if (index == 1) return _bilan();
     if (index == 2) return _degagement();
@@ -451,6 +466,89 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     if (index == 5) return _prieres();
     if (index == _etapes.length - 1) return _debrief();
     return _technique(index);
+  }
+
+  Widget _couperLeFeuStep(int index) {
+    switch (index) {
+      case 0:
+        return _stepLayout(
+          help: 'Accueil et prise de contact.',
+          source: _ft,
+          doneIndex: 0,
+          actionLabel: 'Revoir le protocole',
+        );
+      case 1:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _helpBox(
+              'Faites un signe de croix sur la zone concernée et récitez la prière contre le feu à 3 reprises.',
+              _ft,
+            ),
+            Card(
+              color: Colors.indigo.withValues(alpha: 0.06),
+              child: const Padding(
+                padding: EdgeInsets.all(12),
+                child: SelectableText(
+                  '« Feu de Dieu, perds ta chaleur, comme Judas jadis perdit sa couleur, quand il trahit notre Seigneur au mont des Oliviers. J’enlève le feu avec la main, que cela redevienne froid comme avant. »',
+                  style: TextStyle(fontSize: 15, height: 1.5),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'À répéter 3 fois.',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            _checkStep(1),
+          ],
+        );
+      case 2:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _helpBox(
+              'Imposez les mains sur la zone concernée et réalisez les intentions dans l’ordre indiqué.',
+              _ft,
+            ),
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.looks_one_outlined),
+              title: Text('Guérir les terminaisons nerveuses'),
+              subtitle: Text('2 minutes'),
+            ),
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.looks_two_outlined),
+              title: Text('Stopper l’inflammation et l’échauffement'),
+            ),
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.looks_3_outlined),
+              title: Text('Visualiser la zone qui se refroidit et s’apaise'),
+            ),
+            _checkStep(2),
+          ],
+        );
+      case 3:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _helpBox(
+              'Terminer par le balayage et le débriefing.',
+              _ft,
+            ),
+            _compactText(
+              'Observations / débriefing',
+              _debriefController,
+              minLines: 3,
+            ),
+            _checkStep(3),
+          ],
+        );
+      default:
+        return const SizedBox.shrink();
+    }
   }
 
   Widget _contactHelp() {
