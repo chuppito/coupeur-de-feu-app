@@ -53,6 +53,40 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
       TextField(controller:_notes,minLines:4,maxLines:8,decoration:const InputDecoration(labelText:'Observations / débriefing',alignLabelWithHint:true)),const SizedBox(height:10),
       FilledButton.icon(onPressed:_save,icon:const Icon(Icons.save),label:const Text('Enregistrer la séance'))
     ]]);}
+  String? _referenceImage(_Fiche f){
+    if(f.id=='chakras') return 'assets/images/chakras.jpg';
+    if(f.id=='mesure chakras') return 'assets/images/mesurer_chakras.jpg';
+    return null;
+  }
+
+  Widget _referenceImageWidget(_Fiche f){
+    final path=_referenceImage(f);
+    if(path==null) return const SizedBox.shrink();
+    return Padding(
+      padding:const EdgeInsets.fromLTRB(0,0,0,16),
+      child:ClipRRect(
+        borderRadius:BorderRadius.circular(8),
+        child:Container(
+          width:double.infinity,
+          color:Theme.of(context).colorScheme.surfaceContainerHighest,
+          padding:const EdgeInsets.all(4),
+          child:InteractiveViewer(
+            minScale:0.8,
+            maxScale:4.0,
+            child:Image.asset(
+              path,
+              fit:BoxFit.contain,
+              errorBuilder:(context,error,stack)=>Padding(
+                padding:const EdgeInsets.all(16),
+                child:Text('Impossible de charger l’image : $path'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _library()=>ListView(padding:const EdgeInsets.all(12),children:[
     const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Bibliothèque complète des fiches fournies. Ouvre une fiche pour consulter son contenu et, pour une FT, l’utiliser pour un soin.'))),
     ..._fiches.map((f)=>Card(child:ExpansionTile(
@@ -63,6 +97,7 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
         Padding(
           padding:const EdgeInsets.fromLTRB(16,0,16,16),
           child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+            _referenceImageWidget(f),
             SelectableText(f.contenu),
             if(f.type=='fiche_technique') ...[
               const SizedBox(height:12),
