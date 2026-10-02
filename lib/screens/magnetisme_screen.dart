@@ -75,10 +75,20 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
             maxScale:4.0,
             child:Image.asset(
               path,
+              width:double.infinity,
               fit:BoxFit.contain,
+              cacheWidth:1200,
+              filterQuality:FilterQuality.medium,
               errorBuilder:(context,error,stack)=>Padding(
                 padding:const EdgeInsets.all(16),
-                child:Text('Impossible de charger l’image : $path'),
+                child:Column(
+                  mainAxisSize:MainAxisSize.min,
+                  children:[
+                    const Icon(Icons.broken_image_outlined,size:40),
+                    const SizedBox(height:8),
+                    Text('Impossible de charger le schéma.\\n$path',textAlign:TextAlign.center),
+                  ],
+                ),
               ),
             ),
           ),
