@@ -754,6 +754,21 @@
       ],
       "description": "Prière d'invocation à l'archange Raphaël, patron des guérisseurs. Je l'utilise pour des pathologies assez lourdes, mais Raphaël répond à toutes les demandes. Généralement, son intervention est assez brève (quelques minutes). Cette demande doit être faite au moment de l'imposition des mains sur le chakra couronne.",
       "contenu": "Archange Raphaël, j'ai besoin que tu m'assistes afin de guérir [nom et prénom] de [dire le nom de la maladie]. S'il te plaît, enveloppe-moi de ton Amour divin, aide-moi à canaliser ton énergie de guérison et inspire-nous de tes conseils afin que la guérison s'accomplisse. Merci."
+    },
+    {
+      "id": "ft-couper-le-feu",
+      "titre": "Couper le feu",
+      "source": "Protocole fourni par l'utilisateur",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "couper le feu",
+        "brûlure",
+        "brulure",
+        "insolation"
+      ],
+      "description": "Protocole « Couper le feu » pour les brûlures et l'insolation.",
+      "contenu": "PROTOCOLE : COUPER LE FEU\n\n1. Accueil et prise de contact.\n\n2. Prière contre le feu :\nFaites un signe de croix sur la zone concernée et récitez :\n« Feu de Dieu, perds ta chaleur, comme Judas jadis perdit sa couleur, quand il trahit notre Seigneur au mont des Oliviers. J'enlève le feu avec la main, que cela redevienne froid comme avant. »\nÀ répéter 3 fois.\n\n3. Imposition des mains et intention :\n- 1. Posez une première intention : guérir les terminaisons nerveuses (2 minutes).\n- 2. Posez une seconde intention : stopper l'inflammation et l'échauffement.\n- 3. Visualisez la zone qui se refroidit et s'apaise.\n\n4. Balayage & débriefing."
     }
   ]
 }
