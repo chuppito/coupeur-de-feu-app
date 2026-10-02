@@ -127,9 +127,18 @@ class _LibraryReader extends StatelessWidget {
     final type=(entry['type']??'reference').toString();
     final explanation=(entry['description']??'').toString().trim();
     final content=(entry['contenu']??'').toString().trim();
+    final illustration=(entry['illustrationAsset']??'').toString().trim();
     return Scaffold(
       appBar:AppBar(title:Text((entry['titre']??'').toString())),
       body:ListView(padding:const EdgeInsets.all(16),children:[
+        if(illustration.isNotEmpty)Card(child:Padding(
+          padding:const EdgeInsets.all(10),
+          child:ClipRRect(
+            borderRadius:BorderRadius.circular(8),
+            child:Image.asset(illustration,fit:BoxFit.contain),
+          ),
+        )),
+        if(illustration.isNotEmpty)const SizedBox(height:8),
         if(explanation.isNotEmpty)Card(color:Theme.of(context).colorScheme.primaryContainer,child:Padding(
           padding:const EdgeInsets.all(14),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
             const Text('Explication',style:TextStyle(fontWeight:FontWeight.bold)),
