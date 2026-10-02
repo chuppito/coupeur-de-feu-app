@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 import '../services/magnetisme_session_service.dart';
+import '../services/magnetisme_library_service.dart;
 
 class MagnetismeSessionScreen extends StatefulWidget {
   final String? prefillNom;
@@ -110,14 +108,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   Future<void> _load() async {
     try {
-      final raw = await rootBundle.loadString('assets/data/magnetisme_protocoles.json');
-      final data = jsonDecode(raw) as Map<String, dynamic>;
-      final fiches = data['fiches'];
-      if (fiches is! List) throw const FormatException('Fiches absentes');
-
-      final docs = fiches.whereType<Map>().map((item) {
-        return _Doc.fromJson(Map<String, dynamic>.from(item));
-      }).toList();
+      final fiches = await MagnetismeLibraryService.loadAll();
+      final docs = fiches.map((item) => _Doc.fromJson(item)).toList();
 
       if (!mounted) return;
       setState(() {
@@ -153,7 +145,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return null;
   }
 
-  _Doc? get _prieresDoc => _reference('prières');
+  _Doc? get _prieresDoc => _docs.where((d) => d.type == 'priere').isEmpty ? null : _docs.firstWhere((d) => d.type == 'priere');
 
   String _clean(String value) {
     return value
@@ -736,93 +728,60 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         _helpBox(
-          'Les prières sont prises dans prières.pdf. Sélectionne une ou plusieurs pathologies dans Préparer le soin : les formulations correspondantes apparaissent directement ici.',
+          'Les prières viennent directement de la bibliothèque. Pour chaque motif sélectionné, l’application recherche les formulations correspondantes et personnalise le nom du patient.',
           _prieresDoc,
         ),
         if (_pathologies.isEmpty)
           const Text('Sélectionne au moins une pathologie / motif.'),
-        ..._pathologies.map((pathology) {
-          final prayer = _extractPrayer(pathology);
-          return Card(
+        ..._pathologies.expand((pathology) {
+          final prayers = _findPrayers(pathology);
+          if (prayers.isEmpty) {
+            return <Widget>[Card(child:ListTile(
+              title:Text(pathology),
+              subtitle:const Text('Aucune prière correspondante dans la bibliothèque.'),
+            ))];
+          }
+          return prayers.map((prayer) => Card(
             margin: const EdgeInsets.only(bottom: 8),
             child: ExpansionTile(
-              title: Text(pathology),
-              subtitle: Text(
-                prayer.isEmpty
-                    ? 'Aucune prière dédiée trouvée dans prières.pdf'
-                    : 'Prière disponible — ouvrir',
-              ),
-              children: prayer.isEmpty
-                  ? <Widget>[]
-                  : <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
-                        child: Text(
-                          prayer,
-                          style: const TextStyle(fontSize: 14, height: 1.45),
-                        ),
-                      ),
-                    ],
+              title: Text(prayer.titre),
+              subtitle: Text('Pour $pathology — ouvrir'),
+              children: <Widget>[
+                if (prayer.description.trim().isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(14, 0, 14, 8),
+                    child: Text(prayer.description, style: const TextStyle(fontSize: 13, fontStyle: FontStyle.italic)),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+                  child: SelectableText(
+                    MagnetismeLibraryService.personalized(
+                      prayer.contenu,
+                      prenom: _prenom.text,
+                      nom: _nom.text,
+                      pathologie: pathology,
+                    ),
+                    style: const TextStyle(fontSize: 14, height: 1.45),
+                  ),
+                ),
+              ],
             ),
-          );
+          ));
         }),
         _checkStep(5),
       ],
     );
   }
 
-  String _extractPrayer(String pathology) {
-    final doc = _prieresDoc;
-    if (doc == null) return '';
-    const aliases = <String, String>{
-      'Couper le feu': 'CONTRE LE FEU',
-      'Verrue': 'VERRUES',
-      'Eczéma': 'ECZÉMA',
-      'Arthrite': 'ARTHRITE, POLYARTHRITE',
-      'Déprime': 'DÉPRESSION & ANGOISSE',
-      'Allergie': 'ALLERGIE',
-      'Hémorragie': 'HÉMORRAGIE',
-      'Coupure': 'COUPURES',
-      'Aphtes': 'APHTES',
-      'Maux de ventre': 'MAUX DE VENTRE & CONSTIPATION',
-      'Constipation': 'MAUX DE VENTRE & CONSTIPATION',
-    };
-    final alias = aliases[pathology];
-    if (alias == null) return '';
-    final lines = _clean(doc.contenu).split('\n');
-    var start = -1;
-    for (var i = 0; i < lines.length; i++) {
-      final line = lines[i].trim().toUpperCase();
-      if (line == alias || line.contains(alias)) {
-        start = i;
-        break;
-      }
-    }
-    if (start < 0) return '';
-    const headings = <String>[
-      'CONTRE LE FEU',
-      'HÉMORRAGIE',
-      'VERRUES',
-      'PLAIES & ULCÈRES',
-      'ECZÉMA',
-      'COUPURES',
-      'MAUX DE DOS',
-      'CIRCULATION SANGUINE',
-      'MAUX DE VENTRE & CONSTIPATION',
-      'APHTES',
-      'ARTHRITE, POLYARTHRITE',
-      'DÉPRESSION & ANGOISSE',
-      'ALLERGIE',
-      'PRIÈRE DE DEMANDE DE GUÉRISON',
-    ];
-    var end = lines.length;
-    for (var i = start + 1; i < lines.length; i++) {
-      if (headings.contains(lines[i].trim().toUpperCase())) {
-        end = i;
-        break;
-      }
-    }
-    return lines.sublist(start, end).join('\n').trim();
+  List<_Doc> _findPrayers(String pathology) {
+    final q = pathology.trim().toLowerCase();
+    return _docs.where((doc) {
+      if (doc.type != 'priere') return false;
+      final aliases = doc.aliases.map((x) => x.toLowerCase());
+      return doc.titre.toLowerCase().contains(q) ||
+          q.contains(doc.titre.toLowerCase()) ||
+          aliases.any((a) => q.contains(a) || a.contains(q));
+    }).toList();
   }
 
   Widget _technique(int index) {
@@ -1072,6 +1031,7 @@ class _Doc {
   final String source;
   final String type;
   final String contenu;
+  final List<String> aliases;
 
   const _Doc({
     required this.id,
@@ -1079,6 +1039,7 @@ class _Doc {
     required this.source,
     required this.type,
     required this.contenu,
+    this.aliases = const <String>[],
   });
 
   factory _Doc.fromJson(Map<String, dynamic> json) {
@@ -1088,6 +1049,7 @@ class _Doc {
       source: (json['source'] ?? '').toString(),
       type: (json['type'] ?? '').toString(),
       contenu: (json['contenu'] ?? '').toString(),
+      aliases: (json['aliases'] as List?)?.map((e) => e.toString()).toList() ?? const <String>[],
     );
   }
 }
