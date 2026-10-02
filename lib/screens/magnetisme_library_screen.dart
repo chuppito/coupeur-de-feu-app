@@ -49,6 +49,7 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
             value:type, decoration:const InputDecoration(labelText:'Type'),
             items:const[
               DropdownMenuItem(value:'fiche_technique',child:Text('Fiche technique')),
+              DropdownMenuItem(value:'technique',child:Text('Technique')),
               DropdownMenuItem(value:'priere',child:Text('Prière / formulation')),
               DropdownMenuItem(value:'reference',child:Text('Référence')),
             ],
@@ -75,7 +76,7 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
     await MagnetismeLibraryService.add({
       'id':'custom-${DateTime.now().microsecondsSinceEpoch}',
       'titre':title.text.trim(),'source':'Ajout manuel','type':type,
-      'categorie':type=='priere'?'Prières / formulations':type=='fiche_technique'?'Fiches techniques':'Références',
+      'categorie':type=='priere'?'Prières / formulations':type=='fiche_technique'?'Fiches techniques':type=='technique'?'Techniques':'Références',
       'aliases':aliasList,'description':explanation.text.trim(),'contenu':content.text.trim(),
     });
     title.dispose();explanation.dispose();content.dispose();aliases.dispose();
@@ -103,7 +104,7 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
           padding:const EdgeInsets.fromLTRB(12,4,12,24),itemCount:_visible.length,
           itemBuilder:(_,i){
             final e=_visible[i], type=(e['type']??'reference').toString();
-            final icon=type=='priere'?Icons.volunteer_activism:type=='fiche_technique'?Icons.menu_book_outlined:Icons.book_outlined;
+            final icon=type=='priere'?Icons.volunteer_activism:type=='fiche_technique'?Icons.menu_book_outlined:type=='technique'?Icons.auto_awesome:Icons.book_outlined;
             return Card(child:ListTile(
               leading:CircleAvatar(child:Icon(icon,size:20)),
               title:Text((e['titre']??'').toString(),style:const TextStyle(fontWeight:FontWeight.w600)),
