@@ -19,6 +19,7 @@ import 'pendule_screen.dart';
 import 'protocoles_screen.dart';
 import 'magnetisme_screen.dart';
 import 'magnetisme_session_screen.dart';
+import 'magnetisme_library_screen.dart';
 import '../services/magnetisme_session_service.dart';
 import 'stats_screen.dart';
 
@@ -632,6 +633,15 @@ class _MenuLateral extends StatelessWidget {
               ),
             ),
             ListTile(
+              leading: const Icon(Icons.library_books_outlined, color: Colors.indigo),
+              title: const Text("Bibliothèque magnétisme"),
+              subtitle: const Text("FT, prières et formulations"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeLibraryScreen()));
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
               title: const Text("Nouveau soin"),
               onTap: () {
@@ -665,7 +675,7 @@ class _MenuLateral extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.self_improvement, color: Colors.indigo),
-              title: const Text("Nouvelle séance magnétisme V2"),
+              title: const Text("Séance complète"),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeSessionScreen()));
