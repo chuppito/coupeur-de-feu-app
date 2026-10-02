@@ -691,7 +691,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     if (index == 7 && _traitements.text.trim().isEmpty) {
       return durations[index];
     }
-    return durations[index] + '\n\n' + intentions[index];
+    final intention = intentions[index]
+        .replaceAll('[nom et prénom]', _patient)
+        .replaceAll('[nom et prenom]', _patient)
+        .replaceAll('[prénom nom]', _patient)
+        .replaceAll('[prenom nom]', _patient)
+        .replaceAll('[nom prénom]', _nom.text.trim() + ' ' + _prenom.text.trim())
+        .replaceAll('[nom prenom]', _nom.text.trim() + ' ' + _prenom.text.trim())
+        .replaceAll('[nom de la maladie]', _ft?.titre ?? '');
+    return durations[index] + '\n\n' + intention;
   }
 
   String _convention9Duration() {
