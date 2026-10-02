@@ -13,9 +13,22 @@ class MagnetismeLibraryService {
         .whereType<Map>()
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
-    final custom = _box.values.whereType<Map>()
-        .map((e) => Map<String, dynamic>.from(e)).toList();
-    return [...base, ...custom];
+
+    final techniquesRaw =
+        await rootBundle.loadString('assets/data/magnetisme_techniques.json');
+    final techniquesData =
+        jsonDecode(techniquesRaw) as Map<String, dynamic>;
+    final techniques = (techniquesData['techniques'] as List? ?? const [])
+        .whereType<Map>()
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+
+    final custom = _box.values
+        .whereType<Map>()
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+
+    return [...base, ...techniques, ...custom];
   }
 
   static Future<void> add(Map<String, dynamic> entry) async =>
@@ -23,18 +36,29 @@ class MagnetismeLibraryService {
 
   static Future<void> delete(dynamic key) => _box.delete(key);
 
-  static String personalized(String text, {required String prenom, required String nom, String? pathologie}) {
-    final full = [prenom.trim(), nom.trim()].where((x) => x.isNotEmpty).join(' ');
-    final inverse = [nom.trim(), prenom.trim()].where((x) => x.isNotEmpty).join(' ');
+  static String personalized(
+    String text, {
+    required String prenom,
+    required String nom,
+    String? pathologie,
+  }) {
+    final full = [prenom.trim(), nom.trim()]
+        .where((x) => x.isNotEmpty)
+        .join(' ');
+    final inverse = [nom.trim(), prenom.trim()]
+        .where((x) => x.isNotEmpty)
+        .join(' ');
     var result = text;
-    result = result.replaceAll('[nom et prénom]', full)
+    result = result
+        .replaceAll('[nom et prénom]', full)
         .replaceAll('[nom et prenom]', full)
         .replaceAll('[prénom nom]', full)
         .replaceAll('[prenom nom]', full)
         .replaceAll('[nom prénom]', inverse)
         .replaceAll('[nom prenom]', inverse);
     if (pathologie != null && pathologie.trim().isNotEmpty) {
-      result = result.replaceAll('[dire le nom de la maladie]', pathologie.trim())
+      result = result
+          .replaceAll('[dire le nom de la maladie]', pathologie.trim())
           .replaceAll('[nom de la maladie]', pathologie.trim());
     }
     return result;
