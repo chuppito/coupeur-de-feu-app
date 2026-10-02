@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/magnetisme_session_service.dart';
-import '../services/magnetisme_library_service.dart;
+import '../services/magnetisme_library_service.dart';
 
 class MagnetismeSessionScreen extends StatefulWidget {
   final String? prefillNom;
@@ -1039,6 +1039,7 @@ class _Doc {
   final String source;
   final String type;
   final String contenu;
+  final String description;
   final List<String> aliases;
 
   const _Doc({
@@ -1047,6 +1048,7 @@ class _Doc {
     required this.source,
     required this.type,
     required this.contenu,
+    this.description = '',
     this.aliases = const <String>[],
   });
 
@@ -1057,6 +1059,7 @@ class _Doc {
       source: (json['source'] ?? '').toString(),
       type: (json['type'] ?? '').toString(),
       contenu: (json['contenu'] ?? '').toString(),
+      description: (json['description'] ?? '').toString(),
       aliases: (json['aliases'] as List?)?.map((e) => e.toString()).toList() ?? const <String>[],
     );
   }
