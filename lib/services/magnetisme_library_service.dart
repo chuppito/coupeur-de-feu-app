@@ -23,12 +23,21 @@ class MagnetismeLibraryService {
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
 
+    final chakrasRaw =
+        await rootBundle.loadString('assets/data/magnetisme_techniques_chakras.json');
+    final chakrasData =
+        jsonDecode(chakrasRaw) as Map<String, dynamic>;
+    final chakras = (chakrasData['techniques'] as List? ?? const [])
+        .whereType<Map>()
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+
     final custom = _box.values
         .whereType<Map>()
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
 
-    return [...base, ...techniques, ...custom];
+    return [...base, ...techniques, ...chakras, ...custom];
   }
 
   static Future<void> add(Map<String, dynamic> entry) async =>
