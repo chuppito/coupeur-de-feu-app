@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/magnetisme_library_service.dart';
 
@@ -128,6 +129,7 @@ class _LibraryReader extends StatelessWidget {
     final explanation=(entry['description']??'').toString().trim();
     final content=(entry['contenu']??'').toString().trim();
     final illustration=(entry['illustrationAsset']??'').toString().trim();
+    final illustrationBase64=(entry['illustrationBase64']??'').toString().trim();
     return Scaffold(
       appBar:AppBar(title:Text((entry['titre']??'').toString())),
       body:ListView(padding:const EdgeInsets.all(16),children:[
@@ -138,7 +140,14 @@ class _LibraryReader extends StatelessWidget {
             child:Image.asset(illustration,fit:BoxFit.contain),
           ),
         )),
-        if(illustration.isNotEmpty)const SizedBox(height:8),
+        if(illustrationBase64.isNotEmpty)Card(child:Padding(
+          padding:const EdgeInsets.all(10),
+          child:ClipRRect(
+            borderRadius:BorderRadius.circular(8),
+            child:Image.memory(base64Decode(illustrationBase64),fit:BoxFit.contain),
+          ),
+        )),
+        if(illustration.isNotEmpty || illustrationBase64.isNotEmpty)const SizedBox(height:8),
         if(explanation.isNotEmpty)Card(color:Theme.of(context).colorScheme.primaryContainer,child:Padding(
           padding:const EdgeInsets.all(14),child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
             const Text('Explication',style:TextStyle(fontWeight:FontWeight.bold)),
