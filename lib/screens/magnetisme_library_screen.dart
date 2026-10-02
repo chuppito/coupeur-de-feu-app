@@ -39,7 +39,7 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
   }
 
   Future<void> _add() async {
-    final title=TextEditingController(), explanation=TextEditingController(), content=TextEditingController();
+    final title=TextEditingController(), explanation=TextEditingController(), content=TextEditingController(), aliases=TextEditingController();
     String type='fiche_technique';
     final ok=await showDialog<bool>(context:context,builder:(ctx)=>StatefulBuilder(
       builder:(ctx,setDialog)=>AlertDialog(
@@ -59,6 +59,8 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
           const SizedBox(height:10),
           TextField(controller:explanation,minLines:2,maxLines:5,decoration:const InputDecoration(labelText:'Explication')),
           const SizedBox(height:10),
+          TextField(controller:aliases,decoration:const InputDecoration(labelText:'Mots-clés / pathologies (séparés par des virgules)')),
+          const SizedBox(height:10),
           TextField(controller:content,minLines:5,maxLines:14,decoration:const InputDecoration(labelText:'Contenu / prière')),
         ]))),
         actions:[
@@ -67,14 +69,16 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
         ],
       ),
     ));
-    if(ok!=true){title.dispose();explanation.dispose();content.dispose();return;}
+    if(ok!=true){title.dispose();explanation.dispose();content.dispose();aliases.dispose();return;}
+    final aliasList = aliases.text.split(',').map((x)=>x.trim()).where((x)=>x.isNotEmpty).toList();
+    if(!aliasList.contains(title.text.trim())) aliasList.add(title.text.trim());
     await MagnetismeLibraryService.add({
       'id':'custom-${DateTime.now().microsecondsSinceEpoch}',
       'titre':title.text.trim(),'source':'Ajout manuel','type':type,
       'categorie':type=='priere'?'Prières / formulations':type=='fiche_technique'?'Fiches techniques':'Références',
-      'aliases':[title.text.trim()],'description':explanation.text.trim(),'contenu':content.text.trim(),
+      'aliases':aliasList,'description':explanation.text.trim(),'contenu':content.text.trim(),
     });
-    title.dispose();explanation.dispose();content.dispose();
+    title.dispose();explanation.dispose();content.dispose();aliases.dispose();
     await _load();
   }
 
