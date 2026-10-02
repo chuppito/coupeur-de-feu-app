@@ -115,7 +115,9 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
             ));
           },
         )),
-      ])),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -132,7 +134,10 @@ class _LibraryReader extends StatelessWidget {
     final illustrationBase64=(entry['illustrationBase64']??'').toString().trim();
     return Scaffold(
       appBar:AppBar(title:Text((entry['titre']??'').toString())),
-      body:SafeArea(child:ListView(padding:const EdgeInsets.fromLTRB(16,16,16,32),children:[
+      body:SafeArea(
+        child:ListView(
+          padding:const EdgeInsets.fromLTRB(16,16,16,48),
+          children:[
         if(illustration.isNotEmpty)Card(child:Padding(
           padding:const EdgeInsets.all(10),
           child:ClipRRect(
