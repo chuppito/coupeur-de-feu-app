@@ -293,6 +293,19 @@ class _LibraryReader extends StatelessWidget {
         (entry['illustrationAsset'] ?? '').toString().trim();
     final illustrationBase64 =
         (entry['illustrationBase64'] ?? '').toString().trim();
+    final inlineAsset =
+        (entry['illustrationInlineAsset'] ?? '').toString().trim();
+    final inlineAfter =
+        (entry['illustrationInlineAfter'] ?? '').toString().trim();
+
+    final inlineIndex = inlineAfter.isNotEmpty
+        ? content.indexOf(inlineAfter)
+        : -1;
+    final hasInline = inlineAsset.isNotEmpty && inlineIndex >= 0;
+    final inlineBefore = hasInline ? content.substring(0, inlineIndex) : content;
+    final inlineAfterContent = hasInline
+        ? content.substring(inlineIndex)
+        : '';
 
     return Scaffold(
       appBar: AppBar(
@@ -366,9 +379,46 @@ class _LibraryReader extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     SelectableText(
-                      content,
+                      inlineBefore,
                       style: const TextStyle(fontSize: 15, height: 1.5),
                     ),
+                    if (hasInline) ...[
+                      const SizedBox(height: 18),
+                      Card(
+                        margin: EdgeInsets.zero,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: SizedBox(
+                            height: 520,
+                            child: InteractiveViewer(
+                              minScale: 1,
+                              maxScale: 4,
+                              panEnabled: true,
+                              scaleEnabled: true,
+                              child: Image.asset(
+                                inlineAsset,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16),
+                                    child: Text(
+                                      'Illustration non disponible pour le moment.',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      SelectableText(
+                        inlineAfterContent,
+                        style: const TextStyle(fontSize: 15, height: 1.5),
+                      ),
+                    ],
                   ],
                 ),
               ),
