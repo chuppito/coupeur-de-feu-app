@@ -22,8 +22,39 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
   final _entite = TextEditingController();
   final _energieNegative = TextEditingController();
   final _notes = TextEditingController();
+  final _sang = TextEditingController();
+  late final Map<String, TextEditingController> _anamnese;
+  late final Map<String, TextEditingController> _corps;
+  late final Map<String, TextEditingController> _organes;
   final Map<String, String?> _chakras = {for (final c in _chakraNames) c: null};
   bool _saving = false;
+
+  static const _anamneseNames = <String>[
+    'Comment m’avez-vous connu ?',
+    'Que puis-je faire pour vous ?',
+    'Depuis quand souffrez-vous ?',
+    'Avez-vous vu votre médecin ou spécialiste ? Quel est le diagnostic ?',
+    'Est-ce qu’un événement a eu lieu avant les maux ?',
+    'Comment se passent votre sommeil et votre digestion ?',
+    'Quel est votre environnement professionnel ? Est-ce que votre travail se passe bien ?',
+    'Avez-vous une autre source de stress ?',
+    'Éléments recueillis / observations',
+  ];
+  static const _corpsNames = <String>[
+    'Corps énergétique 2', 'Corps énergétique 3', 'Corps énergétique 4',
+    'Corps énergétique 5', 'Corps énergétique 6', 'Corps énergétique 7',
+  ];
+  static const _organeNames = <String>[
+    'Tête & cou', 'Tronc organes', 'Tronc osseux', 'Appareil uro-génital',
+    'Cerveau G et D', 'Cervelet', 'Hypophyse', 'Hypothalamus', 'Glande pinéale',
+    'Sinus frontal G et D', 'Œil G et D', 'Sinus maxillaire G et D', 'Oreille G et D',
+    'Bouche', 'Gencives', 'Dents', 'Glandes salivaires', 'Gorge', 'Thyroïde', 'Thymus',
+    'Cœur', 'Poumon G et D', 'Sein G et D', 'Foie', 'Vésicule', 'Estomac', 'Rate',
+    'Pancréas', 'Intestin grêle', 'Côlon ascendant', 'Côlon descendant', 'Côlon transverse',
+    'Vertèbres cervicales (7)', 'Vertèbres thoraciques (12)', 'Vertèbres lombaires (5)',
+    'Sacrum (5)', 'Coccyx (4 ou 5)', 'Rein G et D', 'Glande surrénale G et D',
+    'Vessie', 'Prostate', 'Utérus', 'Ovaire G et D',
+  ];
 
   static const _chakraNames = [
     'Chakra racine', 'Chakra sacré', 'Chakra plexus solaire', 'Chakra cœur',
@@ -35,9 +66,18 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _anamnese = {for (final n in _anamneseNames) n: TextEditingController()};
+    _corps = {for (final n in _corpsNames) n: TextEditingController()};
+    _organes = {for (final n in _organeNames) n: TextEditingController()};
+  }
+
+  @override
   void dispose() {
     _vitalite.dispose(); _vibratoire.dispose(); _entite.dispose();
-    _energieNegative.dispose(); _notes.dispose();
+    _energieNegative.dispose(); _notes.dispose(); _sang.dispose();
+    for (final c in [..._anamnese.values, ..._corps.values, ..._organes.values]) c.dispose();
     super.dispose();
   }
 
@@ -47,6 +87,10 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
     await EnergyAssessmentService.save({
       'nomPatient': widget.prefillNom.trim(), 'nomFamille': widget.prefillNomFamille.trim(),
       'date': DateTime.now().toIso8601String(),
+      'anamnese': {for (final e in _anamnese.entries) e.key: e.value.text.trim()},
+      'corpsEnergetiques': {for (final e in _corps.entries) e.key: e.value.text.trim()},
+      'organesZones': {for (final e in _organes.entries) e.key: e.value.text.trim()},
+      'qualiteSang': _sang.text.trim(),
       'tauxVitalite': _vitalite.text.trim(), 'tauxVibratoire': _vibratoire.text.trim(),
       'chakras': Map<String, String?>.from(_chakras),
       'entiteBasAstral': _entite.text.trim(), 'energieNegative': _energieNegative.text.trim(),
@@ -55,7 +99,8 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
     if (!mounted) return;
     setState(() => _saving = false);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bilan énergétique enregistré.')));
-    _vitalite.clear(); _vibratoire.clear(); _entite.clear(); _energieNegative.clear(); _notes.clear();
+    _vitalite.clear(); _vibratoire.clear(); _entite.clear(); _energieNegative.clear(); _notes.clear(); _sang.clear();
+    for (final controller in [..._anamnese.values, ..._corps.values, ..._organes.values]) controller.clear();
     setState(() { for (final key in _chakras.keys.toList()) { _chakras[key] = null; } });
   }
 
@@ -71,6 +116,29 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
           const SizedBox(height: 4), Text('Date du bilan : ${DateFormat('dd/MM/yyyy à HH:mm').format(DateTime.now())}'),
           const SizedBox(height: 6), const Text('Bilan de pratique au pendule — les indications ci-dessous reprennent tes notes personnelles et ne constituent pas une évaluation médicale.', style: TextStyle(fontSize: 12, color: Colors.black54)),
         ]))),
+        _sectionHeader('PRISE DE CONTACT — ANAMNÈSE', Colors.indigo.shade100),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+            child: Column(
+              children: _anamnese.entries.map((entry) {
+                final notes = entry.key == 'Éléments recueillis / observations';
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: TextField(
+                    controller: entry.value,
+                    minLines: notes ? 4 : 2,
+                    maxLines: notes ? 8 : 4,
+                    decoration: InputDecoration(
+                      labelText: entry.key,
+                      alignLabelWithHint: true,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
         _sectionHeader('CONTRÔLE DES TAUX', Colors.lightBlue.shade200),
         _reminder(
   'Rappel — taux de vitalité',
@@ -97,6 +165,19 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
         _numberField('Entités bas astral — résultat (0 à 10)', _entite, hint: 'Résultat au cadran'),
         _reminder('Rappel — énergies négatives / magie noire', 'Le cadran fourni présente une échelle de 0 à 10, avec les repères « seuil de vigilance » et « magie noire — novice à novice + ». Utilise le cadran papier pour effectuer ta mesure.', 'assets/cadrans/bilan_energie_negative.png'),
         _numberField('Énergies négatives — résultat (0 à 10)', _energieNegative, hint: 'Résultat au cadran'),
+        _sectionHeader('CORPS ÉNERGÉTIQUES', Colors.green.shade100),
+        _textMapSection(_corps, 'Résultat / observation'),
+        _sectionHeader('SCAN ÉNERGÉTIQUE DES ORGANES', Colors.orange.shade100),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 6),
+          child: Text(
+            'Scanne les 4 parties avec le pendule, puis renseigne les zones réactives et les contrôles effectués. Les cadrans restent sur papier.',
+            style: TextStyle(fontSize: 13),
+          ),
+        ),
+        _textMapSection(_organes, 'Résultat / faiblesse / vitalité'),
+        _sectionHeader('QUALITÉ ÉNERGÉTIQUE DU SANG', Colors.teal.shade100),
+        _numberField('Qualité énergétique du sang (0 à 100 %)', _sang, hint: 'Valeur relevée au cadran'),
         _sectionHeader('NOTES ET CONCLUSION', Colors.blueGrey.shade100),
         TextField(controller: _notes, minLines: 3, maxLines: 7, decoration: const InputDecoration(labelText: 'Notes / conclusion', alignLabelWithHint: true)),
         const SizedBox(height: 12),
@@ -121,6 +202,23 @@ class _EnergyAssessmentScreenState extends State<EnergyAssessmentScreen> {
           }).toList());
         }),
       ])),
+    );
+  }
+
+  Widget _textMapSection(Map<String, TextEditingController> fields, String hint) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+        child: Column(
+          children: fields.entries.map((entry) => Padding(
+            padding: const EdgeInsets.only(top: 7),
+            child: TextField(
+              controller: entry.value,
+              decoration: InputDecoration(labelText: entry.key, hintText: hint, isDense: true),
+            ),
+          )).toList(),
+        ),
+      ),
     );
   }
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 980">
+  <rect width="700" height="980" fill="white"/>
+  <g font-family="Arial, sans-serif" fill="#222">
+    <text x="350" y="42" text-anchor="middle" font-size="25" font-weight="700">FONCTIONNEMENT DES 7 CHAKRAS</text>
+    <text x="350" y="70" text-anchor="middle" font-size="15">Contrôle au pendule — axe tête-pieds</text>
+  </g>
+
+  <!-- silhouette -->
+  <g fill="none" stroke="#444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="350" cy="145" r="54"/>
+    <path d="M305 190 C302 220 290 238 258 252 C230 264 208 292 202 334 L192 500
+             C190 550 174 595 155 642 L105 790 C98 810 110 824 125 812 L188 730
+             L214 640 L235 570 L238 735 L246 875 C247 902 260 916 273 908
+             L285 785 L293 670 L350 670 L407 670 L415 785 L427 908
+             C440 916 453 902 454 875 L462 735 L462 570 L485 640 L512 730
+             L575 812 C590 824 602 810 595 790 L545 642 C526 595 510 550 508 500
+             L498 334 C492 292 470 264 442 252 C410 238 398 220 395 190"/>
+    <path d="M238 300 L178 350 L145 470 M462 300 L522 350 L555 470"/>
+    <path d="M350 199 L350 875"/>
+  </g>
+
+  <!-- chakras -->
+  <g stroke="#555" stroke-width="3">
+    <circle cx="350" cy="105" r="25" fill="#b36bd6"/>
+    <circle cx="350" cy="170" r="25" fill="#4f65d8"/>
+    <circle cx="350" cy="245" r="25" fill="#4ca88c"/>
+    <circle cx="350" cy="330" r="25" fill="#e8d35a"/>
+    <circle cx="350" cy="415" r="25" fill="#e8a447"/>
+    <circle cx="350" cy="505" r="25" fill="#d66a61"/>
+    <circle cx="350" cy="590" r="25" fill="#9a4d42"/>
+  </g>
+
+  <!-- pendulum direction / interpretation examples -->
+  <g stroke="#333" stroke-width="3" fill="none">
+    <path d="M350 82 L350 128" marker-end="url(#arrow)"/>
+    <path d="M350 147 L350 193" marker-end="url(#arrow)"/>
+    <path d="M350 222 L350 268" marker-end="url(#arrow)"/>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- labels -->
+  <g font-family="Arial, sans-serif" font-size="17" fill="#222">
+    <text x="410" y="111">7 — Couronne</text>
+    <text x="410" y="176">6 — 3e œil</text>
+    <text x="410" y="251">5 — Gorge</text>
+    <text x="410" y="336">4 — Cœur</text>
+    <text x="410" y="421">3 — Plexus</text>
+    <text x="410" y="511">2 — Sacré</text>
+    <text x="410" y="596">1 — Racine</text>
+
+    <text x="35" y="865" font-weight="700">Interprétation du pendule :</text>
+    <text x="35" y="892">• axe tête-pieds = équilibre</text>
+    <text x="35" y="917">• droite = surfonctionnement / excès</text>
+    <text x="35" y="942">• gauche = sous-fonctionnement / déficience</text>
+  </g>
+</svg>

@@ -12,11 +12,11 @@ import '../services/energy_assessment_service.dart';
 import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
 import 'body_scan_screen.dart';
-import 'energy_assessment_screen.dart';
 import 'pendulum_care_screen.dart';
-import 'home_screen.dart';
 import 'pendule_screen.dart';
-import 'protocoles_screen.dart';
+import 'magnetisme_session_screen.dart';
+import 'magnetisme_library_screen.dart';
+import '../services/magnetisme_session_service.dart';
 import 'stats_screen.dart';
 
 /// Écran d'accueil de l'app : liste des patients (recherche, création,
@@ -39,11 +39,11 @@ class _PatientsScreenState extends State<PatientsScreen> {
         title: const Text("Mes patients"),
         actions: [
           IconButton(
-            tooltip: "Nouveau soin",
+            tooltip: "Nouvelle séance",
             icon: const Icon(Icons.local_fire_department),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => const MagnetismeSessionScreen()),
             ),
           ),
         ],
@@ -85,7 +85,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             ),
                             const SizedBox(height: 4),
                             const Text(
-                              "Touchez la flamme en haut pour créer votre premier soin.",
+                              "Touchez la flamme en haut pour créer votre première séance complète.",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12, color: Colors.black54),
                             ),
@@ -274,28 +274,84 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           ),
                         ],
                           ),
-                          ListTile(
-                            leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-                            title: const Text("Bilan énergétique au pendule"),
-                            subtitle: const Text("Créer ou consulter les bilans de ce patient"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EnergyAssessmentScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
+                          ValueListenableBuilder<Box>(
+                            valueListenable: MagnetismeSessionService.listenable(),
+                            builder: (context, magnetismeBox, _) {
+                              final sessions = MagnetismeSessionService.getForPatient(entry.key);
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(children: [
+                                      const Icon(Icons.self_improvement, color: Colors.indigo),
+                                      const SizedBox(width: 8),
+                                      Expanded(child: Text(
+                                        "Historique magnétisme (" + sessions.length.toString() + ")",
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      )),
+                                    ]),
+                                    if (sessions.isEmpty)
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 8),
+                                        child: Text("Aucune séance de magnétisme V2 enregistrée.",
+                                            style: TextStyle(fontSize: 12, color: Colors.black54)),
+                                      )
+                                    else
+                                      ...sessions.map((s) {
+                                        final date = DateTime.tryParse((s['date'] ?? '').toString());
+                                        final bilan = s['bilan'] is Map ? Map<String,dynamic>.from(s['bilan'] as Map) : <String,dynamic>{};
+                                        final chakras = bilan['chakras'] is Map ? Map<String,dynamic>.from(bilan['chakras'] as Map) : <String,dynamic>{};
+                                        return Card(
+                                          margin: const EdgeInsets.only(top: 6),
+                                          child: ExpansionTile(
+                                            leading: const Icon(Icons.history, color: Colors.indigo),
+                                            title: Text(date == null ? "Séance" : DateFormat('dd/MM/yyyy à HH:mm').format(date)),
+                                            subtitle: Text((s['ftTitre'] ?? 'FT non renseignée').toString() + " · " + (s['mode'] ?? '').toString()),
+                                            children: [
+                                              ListTile(
+                                                dense: true,
+                                                title: const Text("Déroulé"),
+                                                subtitle: Text(((s['etapesFaites'] as List?)?.length ?? 0).toString() + "/" + ((s['etapes'] as List?)?.length ?? 0).toString() + " étapes cochées"),
+                                              ),
+                                              if ((bilan['vitalite'] ?? '').toString().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Vitalité"), subtitle: Text(bilan['vitalite'].toString())),
+                                              if ((bilan['vibratoire'] ?? '').toString().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Taux vibratoire"), subtitle: Text(bilan['vibratoire'].toString())),
+                                              if (chakras.isNotEmpty)
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: chakras.entries.where((e) => (e.value ?? '').toString().isNotEmpty).map(
+                                                      (e) => Text(e.key + " : " + e.value.toString()),
+                                                    ).toList(),
+                                                  ),
+                                                ),
+                                              for (final key in const ['corpsEnergetiques','entites','energiesNegatives','organesZones','sang','notes'])
+                                                if ((bilan[key] ?? '').toString().trim().isNotEmpty)
+                                                  ListTile(dense: true, title: Text(_libelleBilan(key)), subtitle: Text(bilan[key].toString())),
+                                              if ((s['observations'] ?? '').toString().trim().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Observations"), subtitle: Text(s['observations'].toString())),
+                                              if ((s['debrief'] ?? '').toString().trim().isNotEmpty)
+                                                ListTile(dense: true, title: const Text("Débrief"), subtitle: Text(s['debrief'].toString())),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                  ],
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                           ListTile(
-                            leading: const Icon(Icons.spa_outlined, color: Colors.deepOrange),
-                            title: const Text("Soin au pendule"),
-                            subtitle: const Text("Suivre le protocole et consulter les soins enregistrés"),
+                            leading: const Icon(Icons.self_improvement, color: Colors.indigo),
+                            title: const Text("Séance complète"),
+                            subtitle: const Text("FT → protocole → bilan → résultats → historique"),
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PendulumCareScreen(
+                                builder: (context) => MagnetismeSessionScreen(
                                   prefillNom: entry.value.first.nomPatient,
                                   prefillNomFamille: entry.value.first.nomFamille,
                                 ),
@@ -319,10 +375,11 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           ListTile(
                             leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
                             title: const Text("Ajouter un nouveau soin"),
+                            subtitle: const Text("Ouvrir la nouvelle séance complète"),
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomeScreen(
+                                builder: (context) => MagnetismeSessionScreen(
                                   prefillNom: entry.value.first.nomPatient,
                                   prefillNomFamille: entry.value.first.nomFamille,
                                 ),
@@ -340,6 +397,18 @@ class _PatientsScreenState extends State<PatientsScreen> {
         ),
       ),
     );
+  }
+
+  String _libelleBilan(String key) {
+    switch (key) {
+      case 'corpsEnergetiques': return 'Corps énergétiques';
+      case 'entites': return 'Entités';
+      case 'energiesNegatives': return 'Énergies négatives';
+      case 'organesZones': return 'Organes / zones';
+      case 'sang': return 'Qualité énergétique du sang';
+      case 'notes': return 'Notes du bilan';
+      default: return key;
+    }
   }
 
   String _formatIntensite(int? valeur) => valeur == null ? "non renseigné" : "$valeur/10";
@@ -423,6 +492,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
               await PendulumCareService.renamePatient(
                 oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
               );
+              await MagnetismeSessionService.renamePatient(
+                oldNomComplet, prenomController.text.trim(), nomController.text.trim(),
+              );
               if (!context.mounted) return;
               Navigator.pop(context);
             },
@@ -449,6 +521,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
               final scansSnapshot = await BodyScanService.deletePatientScans(nomComplet);
               final bilansSnapshot = await EnergyAssessmentService.deletePatient(nomComplet);
               final soinsSnapshot = await PendulumCareService.deletePatient(nomComplet);
+              final magnetismeSnapshot = await MagnetismeSessionService.deletePatient(nomComplet);
               scaffoldMessenger.showSnackBar(
                 SnackBar(
                   content: Text("Historique de $nomComplet supprimé."),
@@ -459,6 +532,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       await BodyScanService.restorePatientScans(scansSnapshot);
                       await EnergyAssessmentService.restore(bilansSnapshot);
                       await PendulumCareService.restore(soinsSnapshot);
+                      await MagnetismeSessionService.restore(magnetismeSnapshot);
                     },
                   ),
                   duration: const Duration(seconds: 5),
@@ -542,19 +616,12 @@ class _MenuLateral extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
-              title: const Text("Nouveau soin"),
+              leading: const Icon(Icons.library_books_outlined, color: Colors.indigo),
+              title: const Text("Bibliothèque magnétisme"),
+              subtitle: const Text("FT, prières et formulations"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.self_improvement, color: Colors.indigo),
-              title: const Text("Techniques de magnétisme"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProtocolesScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeLibraryScreen()));
               },
             ),
             ListTile(
@@ -574,19 +641,19 @@ class _MenuLateral extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.self_improvement, color: Colors.indigo),
+              title: const Text("Séance complète"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeSessionScreen()));
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.accessibility_new, color: Colors.teal),
               title: const Text("Scan du corps au pendule"),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const BodyScanScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-              title: const Text("Bilan énergétique au pendule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PendulumCareScreen()));
               },
             ),
             ListTile(
@@ -626,7 +693,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.2.1",
+                "Coupeur de Feu · v2.4.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
