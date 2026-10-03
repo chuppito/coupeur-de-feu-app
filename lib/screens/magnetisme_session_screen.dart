@@ -666,7 +666,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     final offset = _soinPenduleNecessaire ? 1 : 0;
     if (index == 2 + offset) return _degagement();
     if (index == 3 + offset) return _conventions();
-    final offset = _soinPenduleNecessaire ? 1 : 0;
     if (index == 4 + offset) return _specific();
     if (index == 5 + offset) return _prieres();
     if (index == _etapes.length - 1) return _debrief();
