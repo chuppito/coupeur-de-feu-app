@@ -32,6 +32,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _bilanNotes = TextEditingController();
   final _traitements = TextEditingController();
   final _degagementNotes = TextEditingController();
+  final _soinPenduleZone = TextEditingController();
+  final _soinPenduleNotes = TextEditingController();
+
+  late final Map<String, TextEditingController> _anamneseFields;
 
   late final Map<String, TextEditingController> _corpsFields;
   late final Map<String, TextEditingController> _teteCouFields;
@@ -39,6 +43,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   late final Map<String, TextEditingController> _troncOsseuxFields;
   late final Map<String, TextEditingController> _uroGenitalFields;
   late final Map<String, TextEditingController> _chakraFields;
+
+  static const _anamneseNames = <String>[
+    'Comment m’avez-vous connu ?',
+    'Que puis-je faire pour vous ?',
+    'Depuis quand souffrez-vous ?',
+    'Avez-vous vu votre médecin ou spécialiste ? Quel est le diagnostic ?',
+    'Est-ce qu’un événement a eu lieu avant les maux ?',
+    'Comment se passent votre sommeil et votre digestion ?',
+    'Quel est votre environnement professionnel ? Est-ce que votre travail se passe bien ?',
+    'Avez-vous une autre source de stress ?',
+    'Éléments recueillis / observations',
+  ];
 
   static const _corpsNames = <String>['2', '3', '4', '5', '6', '7'];
   static const _teteCouNames = <String>[
@@ -81,6 +97,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   bool _loading = true;
   bool _saving = false;
   bool _degagementNecessaire = false;
+  bool _soinPenduleNecessaire = false;
+  String _priereFeu = 'Prière contre le feu indisponible dans la bibliothèque.';
+  final List<bool> _soinPenduleEtapes = List<bool>.filled(7, false);
 
   static const _chakraNames = <String>[
     'Chakra racine',
@@ -124,6 +143,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     super.initState();
     _prenom.text = widget.prefillNom ?? '';
     _nom.text = widget.prefillNomFamille ?? '';
+    _anamneseFields = _controllersFor(_anamneseNames);
     _corpsFields = _controllersFor(_corpsNames);
     _teteCouFields = _controllersFor(_teteCouNames);
     _troncOrganesFields = _controllersFor(_troncOrganesNames);
@@ -138,7 +158,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _entites, _negatives, _sang, _bilanNotes,
-      _traitements, _degagementNotes,
+      _traitements, _degagementNotes, _soinPenduleZone, _soinPenduleNotes,
+      ..._anamneseFields.values,
       ..._corpsFields.values,
       ..._teteCouFields.values,
       ..._troncOrganesFields.values,
@@ -159,6 +180,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       if (!mounted) return;
       setState(() {
         _docs = docs;
+        _priereFeu = _findPrayer('CONTRE LE FEU') ?? _priereFeu;
         _loading = false;
       });
     } catch (_) {
@@ -309,6 +331,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   bool get _isCouperLeFeu => _ft?.id == 'ft-couper-le-feu';
 
+  String? _findPrayer(String title) {
+    for (final doc in _docs) {
+      if (doc.type == 'priere' && doc.titre.trim().toUpperCase() == title.trim().toUpperCase()) {
+        return doc.contenu.trim();
+      }
+    }
+    return null;
+  }
+
+  String get _patientOuPlaceholder => _patient.isEmpty ? '[Prénom NOM]' : _patient;
+
   List<String> get _etapes {
     if (_isCouperLeFeu) {
       return <String>[
@@ -322,6 +355,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return <String>[
       'Prise de contact',
       'Bilan énergétique',
+      if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
       'Dégagement des entités / énergies négatives si nécessaire',
       '14 conventions mentales',
       'Conventions mentales supplémentaires de la fiche technique',
@@ -351,6 +385,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       'ftId': _ft!.id,
       'ftTitre': _ft!.titre,
       'etapes': _etapes,
+      'anamnese': {for (final e in _anamneseFields.entries) e.key: e.value.text.trim()},
+      'soinPenduleNecessaire': _soinPenduleNecessaire,
+      'soinPendule': _soinPenduleNecessaire ? {
+        'zone': _soinPenduleZone.text.trim(),
+        'etapes': List<bool>.from(_soinPenduleEtapes),
+        'notes': _soinPenduleNotes.text.trim(),
+      } : null,
       'etapesFaites': _etapesFaites.toList()..sort(),
       'conventionsFaites': _conventionsFaites.toList()..sort(),
       'degagementNecessaire': _degagementNecessaire,
@@ -460,6 +501,27 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
               onSelectionChanged: (selection) {
                 setState(() => _mode = selection.first);
               },
+            ),
+            const SizedBox(height: 8),
+            CheckboxListTile(
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              value: _soinPenduleNecessaire,
+              title: const Text(
+                'Faire 1 soin au pendule pendant cette séance',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              subtitle: const Text(
+                'Ajoute automatiquement la fiche du soin au déroulé de la séance.',
+              ),
+              onChanged: (value) => setState(() {
+                _soinPenduleNecessaire = value ?? false;
+                if (!_soinPenduleNecessaire) {
+                  for (var i = 0; i < _soinPenduleEtapes.length; i++) {
+                    _soinPenduleEtapes[i] = false;
+                  }
+                }
+              }),
             ),
           ],
         ),
@@ -600,10 +662,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
     if (index == 0) return _contactHelp();
     if (index == 1) return _bilan();
-    if (index == 2) return _degagement();
-    if (index == 3) return _conventions();
-    if (index == 4) return _specific();
-    if (index == 5) return _prieres();
+    if (_soinPenduleNecessaire && index == 2) return _soinPenduleStep();
+    final offset = _soinPenduleNecessaire ? 1 : 0;
+    if (index == 2 + offset) return _degagement();
+    if (index == 3 + offset) return _conventions();
+    final offset = _soinPenduleNecessaire ? 1 : 0;
+    if (index == 4 + offset) return _specific();
+    if (index == 5 + offset) return _prieres();
     if (index == _etapes.length - 1) return _debrief();
     return _technique(index);
   }
@@ -692,10 +757,40 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _contactHelp() {
-    return _stepLayout(
-      help: 'Cerner la personne et être à son écoute. Prendre les notes utiles avant le bilan énergétique.',
-      source: _reference('récap séance'),
-      doneIndex: 0,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'La prise de contact se déroule en deux phases : d’abord l’anamnèse du consultant, puis le bilan énergétique au pendule. Le manuel recommande de réserver environ 10 minutes à cet échange et de noter les éléments utiles pour la séance.',
+          _reference('récap séance'),
+        ),
+        Card(
+          color: Colors.indigo.withValues(alpha: 0.05),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+            child: Column(
+              children: _anamneseFields.entries.map((entry) {
+                final isNotes = entry.key == 'Éléments recueillis / observations';
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: TextField(
+                    controller: entry.value,
+                    minLines: isNotes ? 4 : 2,
+                    maxLines: isNotes ? 8 : 4,
+                    decoration: InputDecoration(
+                      labelText: entry.key,
+                      alignLabelWithHint: true,
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        _checkStep(0),
+      ],
     );
   }
 
@@ -797,6 +892,72 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     } finally {
       if (mounted) setState(() => _saving = false);
     }
+  }
+
+  Widget _soinPenduleStep() {
+    final patient = _patientOuPlaceholder;
+    final degagement = 'Je demande ici et maintenant que $patient soit libéré(e) de toutes les énergies qui ne lui appartiennent pas.\nQue les pensées négatives, les projections et les influences d’autrui soient dissoutes et renvoyées à la terre pour être transformées. Je ferme son champ énergétique à ce qui n’est pas aligné avec sa paix intérieure.\nIl récupère ainsi sa pleine souveraineté, sa clarté et sa sérénité. Que seul l’amour et la bienveillance puissent franchir cet espace. Ainsi soit-il.';
+    final protection = 'Je demande que $patient soit entouré(e) d’une lumière de force et de protection.\nQue son énergie vitale soit maintenant restaurée, vibrante et alignée. Je renforce ses propres barrières naturelles pour que son espace personnel reste pur et inattaquable par les influences extérieures.\nDésormais $patient est ancré(e), centré(e), et protégé(e). Que cette lumière rayonne depuis son cœur vers l’extérieur, transformant chaque obstacle en force.';
+
+    const titles = <String>[
+      '20 passes rapides — intention de dégagement',
+      'Lever le pendule lorsque le mouvement négatif est terminé',
+      'Taper 2 fois pour retirer le négatif',
+      '15 passes lentes — intention de soulager la zone',
+      'Prière contre le feu × 3',
+      'Formulation de dégagement',
+      'Protection et dégagement',
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'Cette fiche n’est ajoutée que si tu as coché « Faire 1 soin au pendule ». La prière est récupérée depuis la bibliothèque magnétisme.',
+          _reference('récap séance'),
+        ),
+        _compactText('Zone à travailler / intention', _soinPenduleZone, minLines: 1),
+        const SizedBox(height: 8),
+        Card(
+          child: Column(
+            children: List.generate(
+              titles.length,
+              (i) => CheckboxListTile(
+                value: _soinPenduleEtapes[i],
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(titles[i]),
+                onChanged: (value) => setState(() => _soinPenduleEtapes[i] = value ?? false),
+              ),
+            ),
+          ),
+        ),
+        _helpBox('Prière récupérée de la bibliothèque : CONTRE LE FEU.', null),
+        Card(
+          color: Colors.deepOrange.withValues(alpha: 0.06),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: SelectableText(_priereFeu),
+          ),
+        ),
+        _helpBox('Formulation de dégagement', null),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: SelectableText(degagement),
+          ),
+        ),
+        _helpBox('Protection et dégagement', null),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: SelectableText(protection),
+          ),
+        ),
+        const SizedBox(height: 6),
+        _compactText('Notes du soin au pendule', _soinPenduleNotes, minLines: 3),
+        _checkStep(2),
+      ],
+    );
   }
 
   Widget _degagement() {
