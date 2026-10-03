@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import '../services/bilan_energetique_pdf_service.dart';
 
 import '../services/magnetisme_session_service.dart';
 import '../services/magnetisme_library_service.dart';
@@ -32,6 +34,43 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _bilanNotes = TextEditingController();
   final _traitements = TextEditingController();
   final _degagementNotes = TextEditingController();
+
+  late final Map<String, TextEditingController> _corpsFields;
+  late final Map<String, TextEditingController> _teteCouFields;
+  late final Map<String, TextEditingController> _troncOrganesFields;
+  late final Map<String, TextEditingController> _troncOsseuxFields;
+  late final Map<String, TextEditingController> _uroGenitalFields;
+  late final Map<String, TextEditingController> _chakraFields;
+
+  static const _corpsNames = <String>['2', '3', '4', '5', '6', '7'];
+  static const _teteCouNames = <String>[
+    'Cerveau G et D', 'Oreille G et D',
+    'Cervelet', 'Bouche',
+    'Hypophyse', 'Gencives',
+    'Hypothalamus', 'Dents',
+    'Glande pinéale', 'Glandes salivaires',
+    'Sinus frontal G et D', 'Gorge',
+    'Œil G et D', 'Thyroïde',
+    'Sinus maxillaire G et D', 'Thymus',
+  ];
+  static const _troncOrganesNames = <String>[
+    'Cœur', 'Rate',
+    'Poumon G et D', 'Pancréas',
+    'Sein G et D', 'Intestin grêle',
+    'Foie', 'Côlon ascendant',
+    'Vésicule', 'Côlon descendant',
+    'Estomac', 'Côlon transverse',
+  ];
+  static const _troncOsseuxNames = <String>[
+    'Vertèbres cervicales (7)', 'Sacrum (5)',
+    'Vertèbres thoraciques (12)', 'Coccyx (4 ou 5)',
+    'Vertèbres lombaires (5)',
+  ];
+  static const _uroGenitalNames = <String>[
+    'Rein G et D', 'Prostate',
+    'Glande surrénale G et D', 'Utérus',
+    'Vessie', 'Ovaire G et D',
+  ];
 
   final Set<int> _etapesFaites = <int>{};
   final Set<int> _conventionsFaites = <int>{};
@@ -91,6 +130,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     super.initState();
     _prenom.text = widget.prefillNom ?? '';
     _nom.text = widget.prefillNomFamille ?? '';
+    _corpsFields = _controllersFor(_corpsNames);
+    _teteCouFields = _controllersFor(_teteCouNames);
+    _troncOrganesFields = _controllersFor(_troncOrganesNames);
+    _troncOsseuxFields = _controllersFor(_troncOsseuxNames);
+    _uroGenitalFields = _controllersFor(_uroGenitalNames);
+    _chakraFields = _controllersFor(_chakraNames);
     _load();
   }
 
@@ -100,6 +145,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _corps, _entites, _negatives, _organes, _sang, _bilanNotes,
       _traitements, _degagementNotes,
+      ..._corpsFields.values,
+      ..._teteCouFields.values,
+      ..._troncOrganesFields.values,
+      ..._troncOsseuxFields.values,
+      ..._uroGenitalFields.values,
+      ..._chakraFields.values,
     ]) {
       controller.dispose();
     }
@@ -120,6 +171,96 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       if (!mounted) return;
       setState(() => _loading = false);
     }
+  }
+
+  Map<String, TextEditingController> _controllersFor(List<String> names) {
+    return <String, TextEditingController>{
+      for (final name in names) name: TextEditingController(),
+    };
+  }
+
+  String _value(Map<String, TextEditingController> fields, String key) {
+    return fields[key]?.text.trim() ?? '';
+  }
+
+  Widget _bilanResultField(
+    String label,
+    TextEditingController controller, {
+    bool paired = false,
+  }) {
+    final choices = paired
+        ? const <String>['G', 'D', 'G + D', 'Aucune faiblesse']
+        : const <String>['Oui', 'Non'];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 7),
+      child: DropdownButtonFormField<String>(
+        value: choices.contains(controller.text) ? controller.text : null,
+        isExpanded: true,
+        decoration: InputDecoration(
+          labelText: label,
+          helperText: paired ? 'Côté : G / D' : 'Faiblesse énergétique',
+          isDense: true,
+          border: const OutlineInputBorder(),
+        ),
+        items: choices.map((choice) => DropdownMenuItem<String>(
+          value: choice,
+          child: Text(choice),
+        )).toList(),
+        onChanged: (value) {
+          if (value == null) return;
+          setState(() => controller.text = value);
+        },
+      ),
+    );
+  }
+
+  Widget _bilanSection(
+    String title,
+    Map<String, TextEditingController> fields, {
+    required Color color,
+  }) {
+    final entries = fields.entries.toList();
+    return Card(
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        leading: Icon(Icons.fact_check_outlined, color: color),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(entries.where((e) => e.value.text.trim().isNotEmpty).length.toString() + ' résultat(s) renseigné(s)'),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+            child: Column(
+              children: [
+                for (var i = 0; i < entries.length; i += 2)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _bilanResultField(
+                          entries[i].key,
+                          entries[i].value,
+                          paired: entries[i].key.contains('G et D'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      if (i + 1 < entries.length)
+                        Expanded(
+                          child: _bilanResultField(
+                            entries[i + 1].key,
+                            entries[i + 1].value,
+                            paired: entries[i + 1].key.contains('G et D'),
+                          ),
+                        )
+                      else
+                        const Expanded(child: SizedBox()),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   String get _patient {
@@ -560,49 +701,103 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _bilan() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      _helpBox(
-        'Le bilan est systématique. Les mesures se font avec tes cadrans papier. Ici, tu notes uniquement les résultats.',
-        _reference('bilan énergétique'),
-      ),
-      _compactNumber('Vitalité', _vitalite),
-      _compactNumber('Taux vibratoire', _vibratoire),
-      _compactText('Corps énergétiques', _corps),
-      _resultField('Entités', _entites, 'Contrôle au pendule'),
-      _resultField('Énergies négatives', _negatives, 'Contrôle au pendule'),
-      _resultField('Organes / zones', _organes, 'Zones ou organes ressortant du bilan'),
-      _resultField('Qualité énergétique du sang', _sang, 'Résultat du cadran'),
-      _resultField(
-        'Traitements / médicaments en cours ou récents',
-        _traitements,
-        'Laisser vide si aucun traitement',
-      ),
-      ExpansionTile(
-        tilePadding: EdgeInsets.zero,
-        title: const Text('7 chakras', style: TextStyle(fontWeight: FontWeight.w600)),
-        subtitle: const Text('Développer uniquement pour renseigner les résultats'),
-        children: _chakraNames.map((name) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: DropdownButtonFormField<String>(
-              value: _chakras[name],
-              isExpanded: true,
-              decoration: InputDecoration(
-                labelText: name,
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-              items: _chakraChoices.map((choice) {
-                return DropdownMenuItem<String>(value: choice, child: Text(choice));
-              }).toList(),
-              onChanged: (value) => setState(() => _chakras[name] = value),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'Le bilan est rempli au fur et à mesure avec les résultats relevés sur tes cadrans papier. Les champs restent dans la séance et seront repris dans la fiche PDF finale.',
+          _reference('bilan énergétique'),
+        ),
+        Row(
+          children: [
+            Expanded(child: _compactNumber('Taux de vitalité', _vitalite)),
+            const SizedBox(width: 8),
+            Expanded(child: _compactNumber('Taux vibratoire', _vibratoire)),
+          ],
+        ),
+        const SizedBox(height: 4),
+        _bilanSection('6 corps énergétiques (2 à 7)', _corpsFields, color: Colors.green),
+        _bilanSection('7 chakras', _chakraFields, color: Colors.deepPurple),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(14, 8, 14, 12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: _bilanResultField('Entités bas astral', _entites, paired: false),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _bilanResultField('Magie noire', _negatives, paired: false),
+                ),
+              ],
             ),
-          );
-        }).toList(),
-      ),
-      _compactText('Notes du bilan', _bilanNotes, minLines: 2),
-      _checkStep(1),
-    ]);
+          ),
+        ),
+        _bilanSection('Tête & cou', _teteCouFields, color: Colors.cyan),
+        _bilanSection('Tronc organes', _troncOrganesFields, color: Colors.orange),
+        _bilanSection('Tronc osseux', _troncOsseuxFields, color: Colors.amber.shade700),
+        _bilanSection('Appareil uro-génital', _uroGenitalFields, color: Colors.teal),
+        _compactNumber('Qualité énergétique du sang (0 à 100 %)', _sang),
+        _compactText(
+          'Notes du bilan',
+          _bilanNotes,
+          minLines: 3,
+        ),
+        const SizedBox(height: 8),
+        FilledButton.icon(
+          onPressed: _genererBilanPdf,
+          icon: const Icon(Icons.picture_as_pdf_outlined),
+          label: const Text('Générer la fiche PDF du bilan'),
+        ),
+        const SizedBox(height: 4),
+        _checkStep(1),
+      ],
+    );
+  }
+
+  Future<void> _genererBilanPdf() async {
+    if (_saving) return;
+    setState(() => _saving = true);
+    try {
+      final file = await BilanEnergetiquePdfService.generate(
+        prenom: _prenom.text,
+        nom: _nom.text,
+        date: DateTime.now(),
+        vitalite: _vitalite.text,
+        vibratoire: _vibratoire.text,
+        corps: {for (final e in _corpsFields.entries) e.key: e.value.text},
+        chakras: {for (final e in _chakraFields.entries) e.key: e.value.text},
+        entites: _entites.text,
+        magieNoire: _negatives.text,
+        teteCou: {for (final e in _teteCouFields.entries) e.key: e.value.text},
+        troncOrganes: {for (final e in _troncOrganesFields.entries) e.key: e.value.text},
+        troncOsseux: {for (final e in _troncOsseuxFields.entries) e.key: e.value.text},
+        uroGenital: {for (final e in _uroGenitalFields.entries) e.key: e.value.text},
+        sang: _sang.text,
+        notes: _bilanNotes.text,
+      );
+      await SharePlus.instance.share(
+        ShareParams(
+          title: 'Bilan énergétique',
+          text: 'Bilan énergétique au pendule — ' + _patient,
+          files: [XFile(file.path)],
+        ),
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Fiche PDF du bilan générée.')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Impossible de générer le PDF : ' + e.toString())),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   Widget _degagement() {
