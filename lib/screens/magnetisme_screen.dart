@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:hive_flutter/hive_flutter.dart';
+import '../services/magnetisme_library_service.dart';
 
 class MagnetismeScreen extends StatefulWidget {
   final String? prefillNom, prefillNomFamille;
@@ -10,12 +11,43 @@ class MagnetismeScreen extends StatefulWidget {
 }
 class _MagnetismeScreenState extends State<MagnetismeScreen>{
   final _prenom=TextEditingController(),_nom=TextEditingController(),_notes=TextEditingController();
-  List<_Fiche> _fiches=[]; String? _selection; String _mode='Présentiel'; bool _genere=false,_loading=true;
+  List<_Fiche> _fiches=[]; List<Map<String,dynamic>> _bibliotheque=[]; String? _selection; String _mode='Présentiel'; bool _genere=false,_loading=true;
   final Set<int> _faites={}; final Map<String,bool> _scans={};
   @override void initState(){super.initState();_prenom.text=widget.prefillNom??'';_nom.text=widget.prefillNomFamille??'';_load();}
   @override void dispose(){_prenom.dispose();_nom.dispose();_notes.dispose();super.dispose();}
-  Future<void> _load()async{try{final raw=await rootBundle.loadString('assets/data/magnetisme_protocoles.json');final d=jsonDecode(raw) as Map<String,dynamic>;final l=(d['fiches'] as List).map((e)=>_Fiche.fromJson(Map<String,dynamic>.from(e))).toList();if(mounted)setState((){_fiches=l;_loading=false;});}catch(_){if(mounted)setState(()=>_loading=false);}}
+  Future<void> _load()async{try{final raw=await rootBundle.loadString('assets/data/magnetisme_protocoles.json');final d=jsonDecode(raw) as Map<String,dynamic>;final l=(d['fiches'] as List).map((e)=>_Fiche.fromJson(Map<String,dynamic>.from(e))).toList();final all=await MagnetismeLibraryService.loadAll();if(mounted)setState((){_fiches=l;_bibliotheque=all;_loading=false;});}catch(_){if(mounted)setState(()=>_loading=false);}}
   List<_Fiche> get _fts=>_fiches.where((f)=>f.type=='fiche_technique').toList()..sort((a,b)=>a.titre.compareTo(b.titre));
+
+  List<Map<String,dynamic>> _ressourcesLiees(_Fiche fiche){
+    final texte=fiche.contenu.toLowerCase();
+    final result=<Map<String,dynamic>>[];
+    final seen=<String>{fiche.id};
+    for(final e in _bibliotheque){
+      final id=(e['id']??'').toString();
+      if(id.isEmpty||seen.contains(id)) continue;
+      final titre=(e['titre']??'').toString();
+      final aliases=((e['aliases'] as List?)??const []).map((x)=>x.toString());
+      final termes=<String>[titre,...aliases]
+        .map((x)=>x.trim().toLowerCase())
+        .where((x)=>x.length>=5)
+        .toSet();
+      if(termes.any((t)=>texte.contains(t))){
+        result.add(e);
+        seen.add(id);
+      }
+    }
+    result.sort((a,b)=>(a['titre']??'').toString().compareTo((b['titre']??'').toString()));
+    return result;
+  }
+
+  String _personnalise(String texte){
+    return MagnetismeLibraryService.personalized(
+      texte,
+      prenom:_prenom.text,
+      nom:_nom.text,
+      pathologie:_selection,
+    );
+  }
   List<String> _steps(){final s=['Prise de contact','Bilan énergétique','Dégagement des entités / énergies négatives si nécessaire','14 conventions mentales','Conventions mentales supplémentaires de la fiche technique','Prières / formulations prévues par le protocole'];if(_mode=='Présentiel'){s.addAll(['Passes et impositions selon la fiche','Circulation énergétique entre les chakras','Balayage','Débriefing / observation']);}else{s.addAll(['Travail sur photo / planches anatomiques selon la fiche','Renforcement de l’intention, notamment lors de la convention n°10','Débriefing / observation']);}return s;}
   Future<void> _save()async{final b=await Hive.openBox('soins_magnetisme');await b.add({'date':DateTime.now().toIso8601String(),'nom':_prenom.text.trim(),'nomFamille':_nom.text.trim(),'pathologie':_selection??'','mode':_mode,'etapesFaites':_faites.toList(),'scans':Map<String,bool>.from(_scans),'notes':_notes.text.trim()});if(mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Séance enregistrée.')));}
   @override Widget build(BuildContext context){if(_loading)return const Scaffold(body:Center(child:CircularProgressIndicator()));return DefaultTabController(length:2,child:Scaffold(appBar:AppBar(title:const Text('Soins magnétisme'),bottom:const TabBar(tabs:[Tab(text:'Nouveau soin'),Tab(text:'Fiches techniques')])),body:TabBarView(children:[_newCare(),_library()])));}
@@ -39,13 +71,57 @@ class _MagnetismeScreenState extends State<MagnetismeScreen>{
             Padding(
               padding:const EdgeInsets.fromLTRB(16,0,16,16),
               child:SingleChildScrollView(
-                child:SelectableText(_fiches.firstWhere((f)=>f.titre==_selection).contenu),
+                child:SelectableText(
+                  _personnalise(_fiches.firstWhere((f)=>f.titre==_selection).contenu),
+                ),
               ),
             ),
           ],
         )),
         const SizedBox(height:10),
       ],
+      Builder(
+        builder:(context){
+          final fiche=_fiches.firstWhere((f)=>f.titre==_selection);
+          final ressources=_ressourcesLiees(fiche);
+          if(ressources.isEmpty) return const SizedBox.shrink();
+          return Card(
+            child:ExpansionTile(
+              initiallyExpanded:true,
+              leading:const Icon(Icons.link_outlined),
+              title:const Text('Éléments liés à cette fiche'),
+              subtitle:Text('${ressources.length} ressource(s) détectée(s) dans le protocole'),
+              children:ressources.map((e){
+                final type=(e['type']??'reference').toString();
+                final titre=(e['titre']??'').toString();
+                final contenu=_personnalise((e['contenu']??'').toString());
+                return ListTile(
+                  leading:Icon(type=='priere'?Icons.volunteer_activism:Icons.menu_book_outlined),
+                  title:Text(titre),
+                  subtitle:Text(
+                    contenu,
+                    maxLines:5,
+                    overflow:TextOverflow.ellipsis,
+                  ),
+                  onTap:()=>showDialog<void>(
+                    context:context,
+                    builder:(_)=>AlertDialog(
+                      title:Text(titre),
+                      content:SizedBox(
+                        width:600,
+                        child:SingleChildScrollView(child:SelectableText(contenu)),
+                      ),
+                      actions:[
+                        TextButton(onPressed:()=>Navigator.pop(context),child:const Text('Fermer')),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          );
+        },
+      ),
       const Card(child:Padding(padding:EdgeInsets.all(12),child:Text('Trame V2 : déroulé commun présentiel ou à distance, issue des fiches de séance fournies.'))),
       ..._steps().asMap().entries.map((e)=>CheckboxListTile(value:_faites.contains(e.key),dense:true,controlAffinity:ListTileControlAffinity.leading,title:Text((e.key+1).toString()+'. '+e.value),onChanged:(v)=>setState(()=>v==true?_faites.add(e.key):_faites.remove(e.key)))),
       const Divider(),const Text('Bilan / contrôles au pendule',style:TextStyle(fontWeight:FontWeight.bold)),
