@@ -691,11 +691,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             ),
             Card(
               color: Colors.indigo.withValues(alpha: 0.06),
-              child: const Padding(
-                padding: EdgeInsets.all(12),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
                 child: SelectableText(
-                  '« Feu de Dieu, perds ta chaleur, comme Judas jadis perdit sa couleur, quand il trahit notre Seigneur au mont des Oliviers. J’enlève le feu avec la main, que cela redevienne froid comme avant. »',
-                  style: TextStyle(fontSize: 15, height: 1.5),
+                  _priereFeu,
+                  style: const TextStyle(fontSize: 15, height: 1.5),
                 ),
               ),
             ),
