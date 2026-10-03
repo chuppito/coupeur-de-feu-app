@@ -938,6 +938,20 @@
       ],
       "description": "Protocole de scan énergétique du corps en quatre zones, puis mesure de la vitalité des organes détectés.",
       "contenu": "LE SCAN ÉNERGÉTIQUE DES ORGANES\n\nLe corps est scanné en quatre parties plutôt que de contrôler chaque organe individuellement :\n1. Tête et cou.\n2. Tronc au niveau des organes.\n3. Tronc osseux.\n4. Zone urogénitale.\n\nPOSITION\n\nLa personne est allongée sur le dos. Le pendule est placé à quelques centimètres du corps, perpendiculairement.\n\nINTERPRÉTATION GÉNÉRALE\n\n- Si le pendule reste sans rotation « Oui » jusqu'à la base du cou, aucune faiblesse n'est détectée.\n- Si le pendule commence une rotation « Non », cela valide l'absence de faiblesse ; réinitialisez le pendule et poursuivez.\n- Si le pendule commence une rotation « Oui », une faiblesse est détectée directement sous le pendule. Identifiez alors les organes concernés et notez-les sur le bilan, puis contrôlez-les individuellement.\n\n1. TÊTE ET COU\n\nCommencez au niveau du crâne, derrière la tête, puis descendez jusqu'au thymus.\n\nQuestion : « Est-ce qu'il y a une faiblesse énergétique sur la tête et le cou de [nom et prénom] ? »\n\n2. TRONC — ORGANES\n\nTravaillez d'abord du côté gauche, de l'épaule gauche jusqu'à l'aine gauche, puis du côté droit.\n\nUtilisez la même question en l'adaptant à la zone contrôlée. Identifiez les organes concernés : cœur, poumon, estomac, etc. côté gauche ; poumon droit, foie, vésicule biliaire, etc. côté droit.\n\n3. TRONC OSSEUX\n\nCommencez juste avant la première cervicale et descendez le long de la colonne jusqu'au coccyx.\n\nEn cas de réaction « Oui », identifiez la vertèbre concernée et demandez si une douleur est présente.\n\nPour le tronc osseux, il n'est pas nécessaire de mesurer le taux de vitalité.\n\n4. ZONE UROGÉNITALE\n\nContrôlez successivement :\n- rein et surrénale gauches ;\n- rein et surrénale droits ;\n- chez la femme : ovaires, utérus, vessie ;\n- chez l'homme : prostate, vessie.\n\nUtilisez la même question et la même interprétation que pour les autres zones.\n\nMESURER LE TAUX DE VITALITÉ D'UN ORGANE\n\nAprès avoir identifié un organe présentant une faiblesse :\n\n1. Placez le pendule sur le cadran du taux de vitalité, sur le petit cercle à la base de la page.\n2. Formulez la question : « Quel est le taux de vitalité de [nom de l'organe] de [nom et prénom] ? »\n3. Commencez à 50 et observez la graduation.\n4. Si le pendule se met à tourner, arrêtez-le et recommencez. Le pendule ne doit jamais tourner sur un cadran.\n5. Notez le taux obtenu.\n\nCOMPARAISON AVEC LA VITALITÉ GLOBALE\n\n- Même taux : l'organe est dans la logique énergétique globale du corps.\n- Taux supérieur : l'organe contribue à tirer le corps vers le haut.\n- Taux inférieur : l'organe affaiblit la vitalité globale ; une mesure corrective est indiquée, en particulier lorsque l'écart est de 10 points ou plus.\n\nCAS D'UN ORGANE RETIRÉ\n\nLorsqu'un organe a été retiré, aucune réaction du pendule n'est attendue, sauf si l'intervention est très récente.\n\nREMARQUE\n\nPour le tronc osseux, ne mesurez pas de taux de vitalité : contrôlez la présence éventuelle d'une douleur et prévoyez, si nécessaire, une mesure corrective."
+    },
+    {
+      "id": "priere-infection",
+      "titre": "INFECTION",
+      "type": "priere",
+      "categorie": "Prières / formulations",
+      "source": "Prière fournie par l'utilisateur",
+      "aliases": [
+        "Infection",
+        "prière infection",
+        "Saint Roch"
+      ],
+      "description": "Prière de Saint Roch pour une infection.",
+      "contenu": "Grand Saint Roch, toi qui as soigné les pestiférés et repoussé la maladie, je t'invoque pour combattre cette infection qui touche le corps de [NOM]. Que les forces de vie chassent ce qui ne doit pas y être, que le pus se résorbe, que la fièvre tombe, que la chair guérisse saine et propre. Par la force du feu qui purifie et non qui détruit, je chasse l'intrus. Ainsi soit-il."
     }
   ]
 }
