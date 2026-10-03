@@ -12,12 +12,9 @@ import '../services/energy_assessment_service.dart';
 import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
 import 'body_scan_screen.dart';
-import 'energy_assessment_screen.dart';
 import 'pendulum_care_screen.dart';
 import 'home_screen.dart';
 import 'pendule_screen.dart';
-import 'protocoles_screen.dart';
-import 'magnetisme_screen.dart';
 import 'magnetisme_session_screen.dart';
 import 'magnetisme_library_screen.dart';
 import '../services/magnetisme_session_service.dart';
@@ -43,7 +40,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
         title: const Text("Mes patients"),
         actions: [
           IconButton(
-            tooltip: "Nouveau soin",
+            tooltip: "Nouvelle séance",
             icon: const Icon(Icons.local_fire_department),
             onPressed: () => Navigator.push(
               context,
@@ -89,7 +86,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             ),
                             const SizedBox(height: 4),
                             const Text(
-                              "Touchez la flamme en haut pour créer votre premier soin.",
+                              "Touchez la flamme en haut pour créer votre première séance complète.",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12, color: Colors.black54),
                             ),
@@ -347,20 +344,6 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                 ),
                               );
                             },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-                            title: const Text("Bilan énergétique au pendule"),
-                            subtitle: const Text("Créer ou consulter les bilans de ce patient"),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EnergyAssessmentScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
-                                ),
-                              ),
-                            ),
                           ),
                           ListTile(
                             leading: const Icon(Icons.self_improvement, color: Colors.indigo),
@@ -642,22 +625,6 @@ class _MenuLateral extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
-              title: const Text("Nouveau soin"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MagnetismeScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.self_improvement, color: Colors.indigo),
-              title: const Text("Techniques de magnétisme"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProtocolesScreen()));
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.brightness_7_outlined, color: Colors.deepPurple),
               title: const Text("Les 7 chakras"),
               onTap: () {
@@ -687,14 +654,6 @@ class _MenuLateral extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const BodyScanScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.monitor_heart_outlined, color: Colors.deepPurple),
-              title: const Text("Bilan énergétique au pendule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const EnergyAssessmentScreen()));
               },
             ),
             ListTile(
