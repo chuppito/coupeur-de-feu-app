@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "description": "Bibliothèque magnétisme structurée : fiches techniques et prières issues des documents fournis, plus références existantes.",
   "fiches": [
     {
@@ -892,6 +892,15 @@
       ],
       "description": "Cette prière est recommandée pour toutes les douleurs intestinales et la constipation. Une séance entière est nécessaire pour renforcer l'effet de la prière.",
       "contenu": "Main au-dessus de la zone intestinale, en réalisant les signes de croix sur le ventre, récitez mentalement la prière suivante :\n\nPrière : « (-) De par la Sainte Mère Marie, qui daigna toujours secourir les pauvres affligés, coliques, passion qui êtes dans mon ventre, entre ma rate et mon foie, et vous aussi, sécheresse de mes entrailles, qui êtes entre mon fiel et mes reins, passez votre chemin ! Au nom du Père (+), du Fils (+) et du Saint-Esprit (-). Ainsi soit-il (-). Amen (+). »"
+    },
+    {
+      "id": "recap-14-conventions",
+      "titre": "RÉCAP' DES 14 CONVENTIONS MENTALES",
+      "source": "14 conventions.pdf",
+      "type": "reference",
+      "categorie": "Protocoles",
+      "description": "Liste récapitulative des 14 conventions mentales, à utiliser comme aide-mémoire avec la fiche complète.",
+      "contenu": "RÉCAP' DES 14 CONVENTIONS MENTALES\n\n1. NETTOYER LES TENSIONS\n2. NETTOYER LES BLOCAGES ÉNERGÉTIQUES\n3. NETTOYER LES MAUVAISES MÉMOIRES DE LA VIE ACTUELLE\n4. NETTOYER LES MAUVAISES MÉMOIRES DE LA VIE INTRA-UTÉRINE\n5. NETTOYER LES MAUVAISES MÉMOIRES TRANSGÉNÉRATIONNELLES\n6. NETTOYER LES MAUVAISES MÉMOIRES DES VIES ANTÉRIEURES\n7. NETTOYER L'IMPACT DES MÉTAUX LOURDS\n8. NETTOYER LA CHIMIE DES MÉDICAMENTS QUE LE CORPS PEINE À ÉLIMINER\n9. NETTOYER LES 7 CORPS\n10. NETTOYER ET HARMONISER LES 7 CHAKRAS\n11. RECHARGER LES ORGANES\n12. NETTOYER LES TOXINES\n13. MAGNÉTISER LA RAISON POUR LAQUELLE LA PERSONNE EST VENUE\n14. MAGNÉTISME GÉNÉRAL DE LA PERSONNE\n\nCe récapitulatif complète la fiche « 14 conventions » qui conserve le protocole détaillé de chaque convention."
     }
   ]
 }
