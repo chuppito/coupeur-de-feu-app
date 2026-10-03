@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "description": "Bibliothèque magnétisme structurée : fiches techniques et prières issues des documents fournis, plus références existantes.",
   "fiches": [
     {
@@ -968,84 +968,98 @@
       "contenu": "Saint Grat, toi qui as reçu le pouvoir de commander aux éléments et de chasser les fléaux qui perturbent la paix des hommes et de la terre ;\nNous sollicitons aujourd'hui ton intercession et ta protection spirituelle face à l'invasion des moustiques et des insectes qui nuisent à notre repos, à notre santé et à la sérénité de notre foyer.\nPar tes mérites et tes prières, demande au Seigneur d'éloigner ces créatures de notre demeure, de notre jardin et de nos proches. Que nos espaces soient préservés de leurs attaques et de leurs piqûres.\nSaint Grat, dresse une barrière de protection autour de ce lieu et accorde-nous de pouvoir jouir de la nature et de nos nuits en toute tranquillité, sous ton regard bienveillant.\nAmen."
     },
     {
-  "id": "ft-coup-de-soleil",
-  "titre": "Coup de soleil",
-  "source": "Protocole proposé à partir de « Couper le feu »",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Coup de soleil",
-    "coup de soleil"
-  ],
-  "description": "Protocole de travail pour un coup de soleil, basé sur le protocole « Couper le feu ».",
-  "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Stopper l'échauffement de la zone.\n- 2. Apaiser l'inflammation.\n- 3. Réparer énergétiquement la zone.\n\n6. Prière contre le feu, à répéter 3 fois.\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
-},
+      "id": "ft-coup-de-soleil",
+      "titre": "Coup de soleil",
+      "source": "Protocole proposé à partir de « Couper le feu »",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Coup de soleil",
+        "coup de soleil"
+      ],
+      "description": "Protocole de travail pour un coup de soleil, basé sur le protocole « Couper le feu ».",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Stopper l'échauffement de la zone.\n- 2. Apaiser l'inflammation.\n- 3. Réparer énergétiquement la zone.\n\n6. Prière contre le feu, à répéter 3 fois.\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
+    },
     {
-  "id": "ft-fievre-insolation",
-  "titre": "Fièvre / insolation",
-  "source": "Protocole proposé à partir de « FIÈVRE » et « Couper le feu »",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Fièvre / insolation",
-    "fièvre",
-    "insolation"
-  ],
-  "description": "Protocole combinant les éléments existants « FIÈVRE » et « Couper le feu ».",
-  "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Renforcer les défenses immunitaires.\n- 2. Nettoyage du sang.\n- 3. Apaiser la fièvre / l'échauffement.\n\n6. Prières :\n- Prière contre le feu, à répéter 3 fois.\n- Prière « FIÈVRE ».\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
-},
+      "id": "ft-fievre-insolation",
+      "titre": "Fièvre / insolation",
+      "source": "Protocole proposé à partir de « FIÈVRE » et « Couper le feu »",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Fièvre / insolation",
+        "fièvre",
+        "insolation"
+      ],
+      "description": "Protocole combinant les éléments existants « FIÈVRE » et « Couper le feu ».",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Renforcer les défenses immunitaires.\n- 2. Nettoyage du sang.\n- 3. Apaiser la fièvre / l'échauffement.\n\n6. Prières :\n- Prière contre le feu, à répéter 3 fois.\n- Prière « FIÈVRE ».\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
+    },
     {
-  "id": "ft-infection",
-  "titre": "Infection",
-  "source": "Protocole proposé",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Infection",
-    "infection"
-  ],
-  "description": "Protocole de travail pour une infection avec la prière dédiée à Saint Roch.",
-  "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Renforcer les défenses immunitaires.\n- 2. Nettoyage du sang.\n- 3. Nettoyer les énergies associées à l'infection.\n\n6. Prière « INFECTION ».\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
-},
+      "id": "ft-infection",
+      "titre": "Infection",
+      "source": "Protocole proposé",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Infection",
+        "infection"
+      ],
+      "description": "Protocole de travail pour une infection avec la prière dédiée à Saint Roch.",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Renforcer les défenses immunitaires.\n- 2. Nettoyage du sang.\n- 3. Nettoyer les énergies associées à l'infection.\n\n6. Prière « INFECTION ».\n\n7. Travail sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
+    },
     {
-  "id": "ft-piqure-guepe-abeille",
-  "titre": "Piqûre de guêpe ou d'abeille",
-  "source": "Protocole proposé",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Piqûre de guêpe ou d'abeille",
-    "piqûre guêpe",
-    "piqûre abeille"
-  ],
-  "description": "Protocole de travail local pour une piqûre de guêpe ou d'abeille.",
-  "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Apaiser la douleur.\n- 2. Apaiser l'échauffement.\n- 3. Nettoyer les toxines.\n\n6. Prière contre le feu, à répéter 3 fois.\n\n7. Travail local sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
-},
+      "id": "ft-piqure-guepe-abeille",
+      "titre": "Piqûre de guêpe ou d'abeille",
+      "source": "Protocole proposé",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Piqûre de guêpe ou d'abeille",
+        "piqûre guêpe",
+        "piqûre abeille"
+      ],
+      "description": "Protocole de travail local pour une piqûre de guêpe ou d'abeille.",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique.\n\n3. Si besoin, dégagement d'entité ou magie noire.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Apaiser la douleur.\n- 2. Apaiser l'échauffement.\n- 3. Nettoyer les toxines.\n\n6. Prière contre le feu, à répéter 3 fois.\n\n7. Travail local sur la zone :\n- Passes rapides.\n- Contrôle du flux.\n- Passes lentes.\n- Imposition des mains.\n\n8. Circulation énergétique entre les chakras.\n\n9. Balayage.\n\n10. Débriefing / suivi."
+    },
     {
-  "id": "ft-piqure-moustique",
-  "titre": "Piqûre de moustique",
-  "source": "Protocole proposé",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Piqûre de moustique",
-    "piqûre moustique"
-  ],
-  "description": "Protocole de travail local pour une piqûre de moustique.",
-  "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique si nécessaire.\n\n3. Travail local sur la zone.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Apaiser les démangeaisons.\n- 2. Apaiser l'échauffement.\n- 3. Nettoyer la zone.\n\n6. Si la zone est échauffée, prière contre le feu.\n\n7. Imposition des mains avec une intention d'apaisement et visualisation de la zone qui s'apaise.\n\n8. Circulation énergétique si nécessaire.\n\n9. Balayage.\n\n10. Débriefing / suivi."
-},
+      "id": "ft-piqure-moustique",
+      "titre": "Piqûre de moustique",
+      "source": "Protocole proposé",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Piqûre de moustique",
+        "piqûre moustique"
+      ],
+      "description": "Protocole de travail local pour une piqûre de moustique.",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n\n2. Bilan énergétique si nécessaire.\n\n3. Travail local sur la zone.\n\n4. Posez les 14 conventions mentales classiques.\n\n5. Posez les intentions supplémentaires :\n- 1. Apaiser les démangeaisons.\n- 2. Apaiser l'échauffement.\n- 3. Nettoyer la zone.\n\n6. Si la zone est échauffée, prière contre le feu.\n\n7. Imposition des mains avec une intention d'apaisement et visualisation de la zone qui s'apaise.\n\n8. Circulation énergétique si nécessaire.\n\n9. Balayage.\n\n10. Débriefing / suivi."
+    },
     {
-  "id": "ft-protection-moustiques",
-  "titre": "Protection contre les moustiques",
-  "source": "Protocole proposé",
-  "type": "fiche_technique",
-  "categorie": "Protocoles",
-  "aliases": [
-    "Protection contre les moustiques",
-    "protection moustiques"
-  ],
-  "description": "Protocole spirituel de protection contre les moustiques et les insectes, avec la prière dédiée à Saint Grat.",
-  "contenu": "PROTOCOLE :\n\n1. Préparation et prise de contact avec le lieu ou l'environnement concerné.\n\n2. Poser l'intention :\n« Je demande une protection contre les moustiques autour de moi et dans mon environnement. »\n\n3. Prière « PROTECTION CONTRE LES MOUSTIQUES ».\n\n4. Visualiser une protection autour de soi et/ou de l'espace concerné.\n\n5. Renforcer l'intention de protection.\n\n6. Terminer la séance et maintenir l'intention de protection."
-}
+      "id": "ft-protection-moustiques",
+      "titre": "Protection contre les moustiques",
+      "source": "Protocole proposé",
+      "type": "fiche_technique",
+      "categorie": "Protocoles",
+      "aliases": [
+        "Protection contre les moustiques",
+        "protection moustiques"
+      ],
+      "description": "Protocole spirituel de protection contre les moustiques et les insectes, avec la prière dédiée à Saint Grat.",
+      "contenu": "PROTOCOLE :\n\n1. Préparation et prise de contact avec le lieu ou l'environnement concerné.\n\n2. Poser l'intention :\n« Je demande une protection contre les moustiques autour de moi et dans mon environnement. »\n\n3. Prière « PROTECTION CONTRE LES MOUSTIQUES ».\n\n4. Visualiser une protection autour de soi et/ou de l'espace concerné.\n\n5. Renforcer l'intention de protection.\n\n6. Terminer la séance et maintenir l'intention de protection."
+    },
+    {
+      "id": "temoin_magnetisme_distance",
+      "titre": "CHOISIR, CRÉER ET VITALISER UN TÉMOIN — SÉANCE À DISTANCE",
+      "source": "la séance à distance.pdf",
+      "type": "technique",
+      "contenu": "LE TÉMOIN, BASE DU TRAVAIL\n\nLe magnétisme à distance est une technique qui fonctionne très bien, car même si le consultant n'est pas à proximité, vous pouvez tout de même intervenir avec une grande efficacité.\n\nCHOISIR UN BON TÉMOIN\n\nLe témoin est une représentation d'un objet, d'une intention ou d'un être vivant. Dans le cas du magnétisme, il s'agira donc d'une personne ou d'un animal.\n\nLe témoin le plus courant est une photo, bien que cela puisse également être une mèche de cheveux, une empreinte salivaire, une goutte de sang, etc., qui ont une réalité physique ou scientifique. Pour la radiesthésie et le magnétisme à distance, ces empreintes ADN ne sont pas vraiment nécessaires, le témoin étant avant tout une représentation vibratoire parfaite de la personne.\n\nJe travaille toujours avec une photo, garantie pour le consultant d'une démarche professionnelle, car demander une goutte de sang ou une mèche de cheveux peut donner l'impression d'une approche plus occulte.\n\nVITALISER SON TÉMOIN\n\nVitaliser un témoin, et notamment une photo, a pour but de connecter les énergies de la personne que vous allez traiter à son propre témoin (sa photo). Cet acte est très important pour avoir la certitude de travailler sur la bonne personne.\n\nQuand le témoin est bien vitalisé, toutes les intentions que vous lui enverrez se percuteront à l'original vivant sans aucune déperdition d'énergie. C'est une des bases de la réussite d'une séance à distance.\n\nLA PERSONNE VOUS L'ENVOIE PAR LA POSTE OU VOUS LA REMET EN MAIN PROPRE\n\nDans ce cas, demandez-lui d'inscrire ses nom, prénom et date de naissance au dos, au crayon de papier. C'est la meilleure option, car en écrivant ses renseignements, la personne se concentre sur elle-même et imprègne le support de ses énergies. Le témoin est automatiquement vitalisé, vous n'avez rien d'autre à faire.\n\nLA PERSONNE VOUS L'ENVOIE PAR SMS OU PAR MAIL\n\nDans ce cas, imprimez la photo et inscrivez au dos ses nom, prénom et date de naissance. Attention, il ne faut jamais réaliser une séance sur une photo simplement affichée sur un téléphone portable, car les fréquences de l'appareil peuvent parasiter votre travail.\n\nComme pour une séance en présentiel, vous allez tout d'abord prendre 10 minutes au téléphone pour découvrir le consultant. Pendant cet échange au téléphone, concentrez-vous sur la voix de votre interlocuteur et chargez l'énergie de la voix de la personne dans le témoin :\n\n• Si vous avez un pendule de Thot : pendant l'échange au téléphone, concentrez-vous sur la voix de votre interlocuteur tout en lançant votre pendule activement dans le sens des aiguilles d'une montre au-dessus du visage de la photo, et en posant comme convention mentale : « Je vitalise le témoin. » Le pendule va tourner entre 10 et 15 secondes.\n\n• Si vous n'avez pas de pendule de Thot : pendant l'échange au téléphone, concentrez-vous sur la voix de votre interlocuteur et posez votre main 5 minutes sur le visage de la photo, en posant comme convention mentale : « Je vitalise le témoin. » L'action se fera plus lentement et moins efficacement, mais suffisamment pour travailler dans de bonnes conditions.\n\nCRÉER UN TÉMOIN\n\nSi vous ne pouvez pas avoir de photo, vous pouvez créer un témoin de toute pièce :\n\n1. Découpez dans du papier buvard blanc un rectangle au format d'une photo d'identité.\n2. Notez les nom, prénom et date de naissance de la personne au dos du papier et chargez-le au pendule de Thot.\n\nLe papier buvard très cotonneux a la particularité d'absorber les énergies du consultant, amplifiées par le pendule. Ici, le pendule de Thot est nécessaire pour une vitalisation réussie. L'action via le chargement uniquement à la main sera peu efficace.\n\nET LE CONSULTANT ?\n\nLa personne n'étant pas présente, il faut qu'elle puisse se mettre en condition pour recevoir au mieux la séance. Il est donc important de l'avertir avant de commencer la séance, mais également à la fin :\n\n• Elle ne doit pas être sur son lieu de travail.\n• Elle ne doit pas être au milieu d'une foule (centre commercial, réunion ou autres).\n• Elle doit être détendue, idéalement allongée ou chez elle, sereine.\n• Elle doit poser ses chaussures, comme en présentiel.\n\n4 IMPÉRATIFS POUR LA PHOTO\n\nPour être certain de se connecter à la bonne personne, le témoin doit répondre à tous les critères suivants :\n\n1. Photo de moins de trois ans, la plus naturelle possible (peu ou pas de maquillage).\n2. Le visage suffit, vous n'avez pas besoin du corps entier.\n3. Pas de lunettes de soleil, il faut avoir accès au regard de la personne.\n4. La personne doit être seule sur la photo.\n\nBON À SAVOIR\n\nLa création d'un témoin se fait pour une personne que vous ne connaissez pas ou peu. Si vous réalisez une séance sur un membre de votre famille (parent ou enfant) ou quelqu'un de très proche, vous n'avez pas besoin de témoin, car vous avez une connexion permanente. Vous pouvez émettre des intentions simplement en visualisant la personne dans votre tête.\n\nRappel : cette fiche reprend le protocole décrit dans le manuel de pratique fourni. Les notions d'énergie, de témoin et de connexion vibratoire appartiennent au cadre de cette pratique et ne constituent pas une validation scientifique."
+    },
+    {
+      "id": "planches_anatomiques_distance",
+      "titre": "TRAVAIL SUR PLANCHES ANATOMIQUES — SÉANCE À DISTANCE",
+      "source": "la séance à distance.pdf",
+      "type": "technique",
+      "contenu": "LE TRAVAIL SUR PLANCHES ANATOMIQUES\n\nLe magnétisme à distance fonctionne uniquement par le pouvoir de l'intention. Ici, vous ne ferez pas de magnétisme par passes et impositions des mains, car l'action mécanique de la passe ne se répercutera pas à l'original vivant. Vous allez donc remplacer cette partie de la séance par le pouvoir de l'intention sur la partie du corps qui en a besoin, en vous appuyant sur des planches anatomiques.\n\nLE PRINCIPE\n\nLe travail sur planches anatomiques permet d'identifier précisément une faiblesse ou une tension énergétique, voire une inflammation, de la localiser et de la traiter. Cet acte remplace le travail par passes que vous ne pouvez pas faire à distance. Vous pouvez l'appliquer sur tous les organes, muscles, tendons, ligaments, et de manière générale sur toutes les parties du corps qui auraient besoin d'une intervention énergétique.\n\nEN PRATIQUE\n\n1. Prenez la planche correspondant à la zone douloureuse indiquée par la personne. Vous pouvez imprimer un schéma de l'organe ou utiliser une encyclopédie médicale.\n\n2. Identifiez précisément sur la planche anatomique le point de douleur à traiter au pendule. Pour cela, scannez l'organe dans le sens de la largeur, par un mouvement de va-et-vient du pendule : démarrez à gauche de l'organe et terminez à droite. Ce mouvement est assimilable au scan que vous faites sur le corps lors du bilan énergétique.\n\n• Si le pendule s'oriente ou se met à tourner dans le sens de votre Oui, vous êtes au-dessus de la faiblesse : notez l'endroit précisément.\n• Si c'est dans le sens de votre Non, remettez-le dans l'axe et continuez votre scan.\n\n3. Déchargez la zone au pendule de Thot. À distance, le manuel recommande vivement de travailler avec ce dernier. N'oubliez pas ensuite de taper votre pendule de Thot 2 fois sur une surface dure pour le décharger.\n\n4. Rechargez maintenant la zone au pendule de Thot, comme expliqué dans le manuel.\n\n5. Pour terminer, rechargez de nouveau la zone, mais cette fois avec votre main en rayon, les doigts serrés, placée à 2 cm au-dessus de la planche anatomique, sur la zone à traiter. Vous allez émettre une intention très précise qui, dans le cadre de cette pratique, est destinée à agir sur cette zone du corps chez le consultant.\n\nLe travail sur planche est terminé. Si vous n'avez pas de pendule de Thot, vous pouvez suivre la méthode en sautant les points 3 et 4 ci-dessus. Le manuel indique cependant que le cumul de l'action pendule de Thot + main sur la planche reste plus efficace.\n\nÀ NE PAS OUBLIER\n\nQuand vous travaillez sur planche anatomique, gardez toujours une main sur le témoin vitalisé, pour bien faire la connexion entre la planche et la personne. C'est comme si la planche devenait une projection réelle du corps de la personne que vous traitez.\n\nRappel : cette fiche reprend le protocole décrit dans le manuel de pratique fourni. Le travail énergétique à distance ne doit pas être présenté comme un traitement médical validé et ne remplace pas une prise en charge médicale."
+    }
   ]
 }
