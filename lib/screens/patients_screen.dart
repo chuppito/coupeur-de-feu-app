@@ -376,10 +376,11 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           ListTile(
                             leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange),
                             title: const Text("Ajouter un nouveau soin"),
+                            subtitle: const Text("Ouvrir la nouvelle séance complète"),
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomeScreen(
+                                builder: (context) => MagnetismeSessionScreen(
                                   prefillNom: entry.value.first.nomPatient,
                                   prefillNomFamille: entry.value.first.nomFamille,
                                 ),
