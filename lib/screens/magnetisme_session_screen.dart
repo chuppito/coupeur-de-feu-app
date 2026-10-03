@@ -869,6 +869,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         uroGenital: {for (final e in _uroGenitalFields.entries) e.key: e.value.text},
         sang: _sang.text,
         notes: _bilanNotes.text,
+        anamnese: {for (final e in _anamneseFields.entries) e.key: e.value.text},
       );
       await SharePlus.instance.share(
         ShareParams(
