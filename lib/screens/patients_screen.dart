@@ -13,7 +13,6 @@ import '../services/pendulum_care_service.dart';
 import 'chakras_screen.dart';
 import 'body_scan_screen.dart';
 import 'pendulum_care_screen.dart';
-import 'home_screen.dart';
 import 'pendule_screen.dart';
 import 'magnetisme_session_screen.dart';
 import 'magnetisme_library_screen.dart';
