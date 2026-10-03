@@ -974,7 +974,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       ),
       if (_degagementNecessaire)
         _compactText('Notes / formulation utilisée', _degagementNotes, minLines: 2),
-      _checkStep(2),
+      _checkStep(_soinPenduleNecessaire ? 3 : 2),
     ]);
   }
 
@@ -1099,7 +1099,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             ),
           ],
         ),
-        if (_conventionsFaites.length == 14) _checkStep(3),
+        if (_conventionsFaites.length == 14) _checkStep(_soinPenduleNecessaire ? 4 : 3),
       ],
     );
   }
@@ -1179,7 +1179,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return _stepLayout(
       help: 'Les conventions supplémentaires viennent de la FT choisie. Ne rien inventer : ouvrir la FT et suivre uniquement ce qui y est indiqué.',
       source: _ft,
-      doneIndex: 4,
+      doneIndex: _soinPenduleNecessaire ? 5 : 4,
       actionLabel: 'Ouvrir la FT',
     );
   }
@@ -1229,7 +1229,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             ),
           ));
         }),
-        _checkStep(5),
+        _checkStep(_soinPenduleNecessaire ? 6 : 5),
       ],
     );
   }
