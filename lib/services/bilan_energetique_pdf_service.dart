@@ -124,32 +124,36 @@ class BilanEnergetiquePdfService {
                 children: chakraRows.map((r) => pw.TableRow(children: r.map((v) => cell(v)).toList())).toList(),
               ),
             ),
-            pw.Table(
+            pw.Container(
               margin: const pw.EdgeInsets.only(top: 4),
-              border: pw.TableBorder.all(color: PdfColors.grey600, width: .5),
-              columnWidths: const {0: pw.FlexColumnWidth(2), 1: pw.FlexColumnWidth(1), 2: pw.FlexColumnWidth(2), 3: pw.FlexColumnWidth(1)},
-              children: [
-                pw.TableRow(children: [
-                  cell('Entités bas astral', bold: true, color: grey), cell(entites),
-                  cell('Magie noire', bold: true, color: grey), cell(magieNoire),
-                ]),
-              ],
+              child: pw.Table(
+                border: pw.TableBorder.all(color: PdfColors.grey600, width: .5),
+                columnWidths: const {0: pw.FlexColumnWidth(2), 1: pw.FlexColumnWidth(1), 2: pw.FlexColumnWidth(2), 3: pw.FlexColumnWidth(1)},
+                children: [
+                  pw.TableRow(children: [
+                    cell('Entités bas astral', bold: true, color: grey), cell(entites),
+                    cell('Magie noire', bold: true, color: grey), cell(magieNoire),
+                  ]),
+                ],
+              ),
             ),
             section('Tête & cou', blue, _pairRows(teteCou), widths: const [2.4, 1, 2.4, 1]),
             section('Tronc organes', orange, _pairRows(troncOrganes), widths: const [2.4, 1, 2.4, 1]),
             section('Tronc osseux', yellow, _pairRows(troncOsseux), widths: const [2.4, 1, 2.4, 1]),
             section('Appareil uro-génital', teal, _pairRows(uroGenital), widths: const [2.4, 1, 2.4, 1]),
-            pw.Table(
+            pw.Container(
               margin: const pw.EdgeInsets.only(top: 4),
-              border: pw.TableBorder.all(color: PdfColors.grey600, width: .5),
-              columnWidths: const {0: pw.FlexColumnWidth(2), 1: pw.FlexColumnWidth(2), 2: pw.FlexColumnWidth(1)},
-              children: [
-                pw.TableRow(children: [
-                  cell('Qualité énergétique du sang', bold: true, color: grey),
-                  cell('Mesure de 0 à 100 %'),
-                  cell(sang),
-                ]),
-              ],
+              child: pw.Table(
+                border: pw.TableBorder.all(color: PdfColors.grey600, width: .5),
+                columnWidths: const {0: pw.FlexColumnWidth(2), 1: pw.FlexColumnWidth(2), 2: pw.FlexColumnWidth(1)},
+                children: [
+                  pw.TableRow(children: [
+                    cell('Qualité énergétique du sang', bold: true, color: grey),
+                    cell('Mesure de 0 à 100 %'),
+                    cell(sang),
+                  ]),
+                ],
+              ),
             ),
             pw.Container(
               margin: const pw.EdgeInsets.only(top: 4),
