@@ -59,6 +59,7 @@ class MagnetismeLibraryService {
         .join(' ');
     var result = text;
     result = result
+        .replaceAll('[NOM]', full)
         .replaceAll('[nom et prénom]', full)
         .replaceAll('[nom et prenom]', full)
         .replaceAll('[prénom nom]', full)
