@@ -4,6 +4,7 @@ import '../services/bilan_energetique_pdf_service.dart';
 
 import '../services/magnetisme_session_service.dart';
 import '../services/magnetisme_library_service.dart';
+import '../widgets/interactive_body.dart';
 
 class MagnetismeSessionScreen extends StatefulWidget {
   final String? prefillNom;
@@ -34,6 +35,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _degagementNotes = TextEditingController();
   final _soinPenduleZone = TextEditingController();
   final _soinPenduleNotes = TextEditingController();
+  final Set<String> _soinPenduleZones = <String>{};
 
   late final Map<String, TextEditingController> _anamneseFields;
 
@@ -341,6 +343,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   String get _patientOuPlaceholder => _patient.isEmpty ? '[Prénom NOM]' : _patient;
+
+  void _onSoinPenduleZoneTap(String zone) {
+    setState(() {
+      if (_soinPenduleZones.contains(zone)) {
+        _soinPenduleZones.remove(zone);
+      } else {
+        _soinPenduleZones.add(zone);
+      }
+      _soinPenduleZone.text = _soinPenduleZones.join(', ');
+    });
+  }
+
 
   List<String> get _etapes {
     if (_isCouperLeFeu) {
@@ -917,6 +931,55 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           _reference('récap séance'),
         ),
         _compactText('Zone à travailler / intention', _soinPenduleZone, minLines: 1),
+        const SizedBox(height: 8),
+        Card(
+          color: Colors.teal.withValues(alpha: 0.05),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Row(
+                  children: <Widget>[
+                    Icon(Icons.accessibility_new, color: Colors.teal),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Aide intuitive — sélectionner la zone',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Touchez directement la zone du petit bonhomme pour la faire apparaître dans « Zone à travailler / intention ». Vous pouvez choisir une ou plusieurs zones, de face ou de dos.',
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                ),
+                const SizedBox(height: 10),
+                InteractiveBody(
+                  selectedZones: _soinPenduleZones,
+                  onZoneTap: _onSoinPenduleZoneTap,
+                ),
+                if (_soinPenduleZones.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: _soinPenduleZones
+                        .map(
+                          (zone) => Chip(
+                            label: Text(zone),
+                            onDeleted: () => _onSoinPenduleZoneTap(zone),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 8),
         Card(
           child: Column(
