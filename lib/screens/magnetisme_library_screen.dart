@@ -11,6 +11,23 @@ class MagnetismeLibraryScreen extends StatefulWidget {
 class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
   final _search = TextEditingController();
   List<Map<String, dynamic>> _items = [];
+
+  ({IconData icon, Color color}) _categoryStyle(String category) {
+    switch (category) {
+      case 'Fiches techniques':
+        return (icon: Icons.medical_information_outlined, color: Colors.blue);
+      case 'Techniques':
+        return (icon: Icons.auto_awesome, color: Colors.deepPurple);
+      case 'Prières / formulations':
+        return (icon: Icons.volunteer_activism, color: Colors.teal);
+      case 'Protocoles':
+        return (icon: Icons.route_outlined, color: Colors.orange);
+      case 'Références':
+        return (icon: Icons.menu_book_outlined, color: Colors.indigo);
+      default:
+        return (icon: Icons.apps_outlined, color: Colors.grey);
+    }
+  }
   String _category = 'Tout';
   bool _loading = true;
 
@@ -214,9 +231,19 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
             child: TextField(
               controller: _search,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search),
                 hintText: 'Rechercher une fiche, une prière, une formulation…',
+                suffixIcon: _search.text.isEmpty
+                    ? null
+                    : IconButton(
+                        tooltip: 'Effacer la recherche',
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _search.clear();
+                          setState(() {});
+                        },
+                      ),
               ),
             ),
           ),
@@ -226,11 +253,31 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               scrollDirection: Axis.horizontal,
               itemCount: cats.length,
-              itemBuilder: (_, i) => ChoiceChip(
-                label: Text(cats[i]),
-                selected: _category == cats[i],
-                onSelected: (_) => setState(() => _category = cats[i]),
-              ),
+              itemBuilder: (_, i) {
+                final category = cats[i];
+                final style = category == 'Tout'
+                    ? (icon: Icons.apps_outlined, color: Colors.grey)
+                    : _categoryStyle(category);
+                final selected = _category == category;
+
+                return ChoiceChip(
+                  avatar: Icon(
+                    style.icon,
+                    size: 18,
+                    color: selected
+                        ? style.color
+                        : style.color.withValues(alpha: 0.75),
+                  ),
+                  label: Text(category),
+                  selected: selected,
+                  backgroundColor: style.color.withValues(alpha: 0.06),
+                  selectedColor: style.color.withValues(alpha: 0.16),
+                  side: BorderSide(
+                    color: style.color.withValues(alpha: selected ? 0.45 : 0.18),
+                  ),
+                  onSelected: (_) => setState(() => _category = category),
+                );
+              },
               separatorBuilder: (_, __) => const SizedBox(width: 6),
             ),
           ),
@@ -241,17 +288,15 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
               itemBuilder: (_, i) {
                 final e = _visible[i];
                 final type = (e['type'] ?? 'reference').toString();
-                final icon = type == 'priere'
-                    ? Icons.volunteer_activism
-                    : type == 'fiche_technique'
-                        ? Icons.menu_book_outlined
-                        : type == 'technique'
-                            ? Icons.auto_awesome
-                            : Icons.book_outlined;
+                final category = (e['categorie'] ?? 'Références').toString();
+                final style = _categoryStyle(category);
 
                 return Card(
                   child: ListTile(
-                    leading: CircleAvatar(child: Icon(icon, size: 20)),
+                    leading: CircleAvatar(
+                      backgroundColor: style.color.withValues(alpha: 0.12),
+                      child: Icon(style.icon, size: 20, color: style.color),
+                    ),
                     title: Text(
                       (e['titre'] ?? '').toString(),
                       style: const TextStyle(fontWeight: FontWeight.w600),
