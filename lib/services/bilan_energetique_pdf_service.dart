@@ -20,6 +20,7 @@ class BilanEnergetiquePdfService {
     required Map<String, String> uroGenital,
     required String sang,
     required String notes,
+    required Map<String, String> anamnese,
   }) async {
     final pdf = pw.Document();
     final patient = [prenom.trim(), nom.trim()].where((e) => e.isNotEmpty).join(' ');
@@ -163,6 +164,67 @@ class BilanEnergetiquePdfService {
                 cell('Notes', bold: true, size: 7),
                 pw.Padding(padding: const pw.EdgeInsets.all(4), child: text(notes, size: 6.5)),
               ]),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        margin: const pw.EdgeInsets.fromLTRB(24, 20, 24, 20),
+        build: (_) => pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+          children: [
+            pw.Container(
+              color: blue,
+              padding: const pw.EdgeInsets.symmetric(vertical: 6),
+              child: pw.Center(
+                child: pw.Text(
+                  'PRISE DE CONTACT — ANAMNÈSE DU CONSULTANT',
+                  style: pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold),
+                ),
+              ),
+            ),
+            pw.SizedBox(height: 6),
+            pw.Table(
+              border: pw.TableBorder.all(color: PdfColors.grey600, width: .5),
+              columnWidths: const {0: pw.FlexColumnWidth(1.1), 1: pw.FlexColumnWidth(3)},
+              children: [
+                pw.TableRow(children: [cell('Nom, prénom :', bold: true, size: 7), cell(patient)]),
+                pw.TableRow(children: [cell('Date :', bold: true, size: 7), cell(d)]),
+              ],
+            ),
+            pw.SizedBox(height: 8),
+            ...anamnese.entries.map(
+              (e) => pw.Container(
+                margin: const pw.EdgeInsets.only(bottom: 5),
+                decoration: pw.BoxDecoration(
+                  border: pw.Border.all(color: PdfColors.grey500, width: .5),
+                ),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    cell(e.key, bold: true, size: 7, color: grey),
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.all(5),
+                      child: text(e.value.trim().isEmpty ? '—' : e.value.trim(), size: 7),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            pw.SizedBox(height: 4),
+            pw.Container(
+              padding: const pw.EdgeInsets.all(7),
+              decoration: pw.BoxDecoration(
+                border: pw.Border.all(color: PdfColors.grey500, width: .5),
+              ),
+              child: text(
+                'L’anamnèse précède le bilan énergétique : elle permet de recueillir les informations utiles données par le consultant avant les mesures au pendule.',
+                size: 6.5,
+              ),
             ),
           ],
         ),
