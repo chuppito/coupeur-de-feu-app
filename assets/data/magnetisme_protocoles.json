@@ -952,6 +952,20 @@
       ],
       "description": "Prière de Saint Roch pour une infection.",
       "contenu": "Grand Saint Roch, toi qui as soigné les pestiférés et repoussé la maladie, je t'invoque pour combattre cette infection qui touche le corps de [NOM]. Que les forces de vie chassent ce qui ne doit pas y être, que le pus se résorbe, que la fièvre tombe, que la chair guérisse saine et propre. Par la force du feu qui purifie et non qui détruit, je chasse l'intrus. Ainsi soit-il."
+    },
+    {
+      "id": "priere-protection-moustiques",
+      "titre": "PROTECTION CONTRE LES MOUSTIQUES",
+      "type": "priere",
+      "categorie": "Prières / formulations",
+      "source": "Prière fournie par l'utilisateur",
+      "aliases": [
+        "Protection contre les moustiques",
+        "prière moustiques",
+        "Saint Grat"
+      ],
+      "description": "Prière de protection spirituelle contre les moustiques et les insectes.",
+      "contenu": "Saint Grat, toi qui as reçu le pouvoir de commander aux éléments et de chasser les fléaux qui perturbent la paix des hommes et de la terre ;\nNous sollicitons aujourd'hui ton intercession et ta protection spirituelle face à l'invasion des moustiques et des insectes qui nuisent à notre repos, à notre santé et à la sérénité de notre foyer.\nPar tes mérites et tes prières, demande au Seigneur d'éloigner ces créatures de notre demeure, de notre jardin et de nos proches. Que nos espaces soient préservés de leurs attaques et de leurs piqûres.\nSaint Grat, dresse une barrière de protection autour de ce lieu et accorde-nous de pouvoir jouir de la nature et de nos nuits en toute tranquillité, sous ton regard bienveillant.\nAmen."
     }
   ]
 }
