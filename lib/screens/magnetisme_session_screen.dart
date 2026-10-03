@@ -26,10 +26,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _debriefController = TextEditingController();
   final _vitalite = TextEditingController();
   final _vibratoire = TextEditingController();
-  final _corps = TextEditingController();
   final _entites = TextEditingController();
   final _negatives = TextEditingController();
-  final _organes = TextEditingController();
   final _sang = TextEditingController();
   final _bilanNotes = TextEditingController();
   final _traitements = TextEditingController();
@@ -75,10 +73,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final Set<int> _etapesFaites = <int>{};
   final Set<int> _conventionsFaites = <int>{};
   final Set<String> _pathologies = <String>{};
-  final Map<String, String?> _chakras = <String, String?>{
-    for (final name in _chakraNames) name: null,
-  };
-
   List<_Doc> _docs = <_Doc>[];
   String? _ftId;
   String _mode = 'Présentiel';
@@ -143,7 +137,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   void dispose() {
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
-      _corps, _entites, _negatives, _organes, _sang, _bilanNotes,
+      _entites, _negatives, _sang, _bilanNotes,
       _traitements, _degagementNotes,
       ..._corpsFields.values,
       ..._teteCouFields.values,
@@ -364,11 +358,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       'bilan': <String, dynamic>{
         'vitalite': _vitalite.text.trim(),
         'vibratoire': _vibratoire.text.trim(),
-        'corpsEnergetiques': _corps.text.trim(),
-        'chakras': Map<String, String?>.from(_chakras),
+        'corpsEnergetiques': {for (final e in _corpsFields.entries) e.key: e.value.text},
+        'chakras': {for (final e in _chakraFields.entries) e.key: e.value.text},
         'entites': _entites.text.trim(),
         'energiesNegatives': _negatives.text.trim(),
-        'organesZones': _organes.text.trim(),
+        'organesZones': {
+          'teteCou': {for (final e in _teteCouFields.entries) e.key: e.value.text},
+          'troncOrganes': {for (final e in _troncOrganesFields.entries) e.key: e.value.text},
+          'troncOsseux': {for (final e in _troncOsseuxFields.entries) e.key: e.value.text},
+          'uroGenital': {for (final e in _uroGenitalFields.entries) e.key: e.value.text},
+        },
         'sang': _sang.text.trim(),
         'traitements': _traitements.text.trim(),
         'notes': _bilanNotes.text.trim(),
