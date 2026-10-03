@@ -7,6 +7,9 @@ import '../models/cadran.dart';
 import '../services/cadran_service.dart';
 import '../widgets/planche_eventail.dart';
 import 'cadran_fullscreen_screen.dart';
+import 'energy_assessment_screen.dart';
+import 'body_scan_screen.dart';
+import 'pendulum_care_screen.dart';
 
 /// Bibliothèque de cadrans de radiesthésie : pré-remplie par défaut (voir
 /// cadran_service.dart), et enrichissable par l'utilisateur. Deux façons
@@ -44,16 +47,77 @@ class PenduleScreen extends StatelessWidget {
             );
           }
 
-          return GridView.builder(
-            padding: const EdgeInsets.all(12),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 0.8,
-            ),
-            itemCount: cadrans.length,
-            itemBuilder: (context, index) => _TuileCadran(cadran: cadrans[index]),
+          return ListView(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 90),
+            children: [
+              Card(
+                color: Colors.teal.withValues(alpha: 0.07),
+                child: const Padding(
+                  padding: EdgeInsets.all(14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(children: [
+                        Icon(Icons.explore_outlined, color: Colors.teal),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Outils du pendule',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ]),
+                      SizedBox(height: 6),
+                      Text(
+                        'Les résultats sont relevés sur tes cadrans papier puis saisis dans les fiches correspondantes.',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              _outil(
+                context,
+                icon: Icons.monitor_heart_outlined,
+                color: Colors.blue,
+                title: 'Bilan énergétique au pendule',
+                subtitle: 'Anamnèse, taux, chakras, corps énergétiques, entités, énergies négatives, organes et sang',
+                page: const EnergyAssessmentScreen(),
+              ),
+              _outil(
+                context,
+                icon: Icons.accessibility_new,
+                color: Colors.teal,
+                title: 'Scan du corps au pendule',
+                subtitle: 'Scanner les différentes zones et conserver les observations',
+                page: const BodyScanScreen(),
+              ),
+              _outil(
+                context,
+                icon: Icons.spa_outlined,
+                color: Colors.deepOrange,
+                title: 'Soin au pendule',
+                subtitle: 'Protocole de soin, prière et formulations récupérées de la bibliothèque',
+                page: const PendulumCareScreen(),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Mes cadrans',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 6),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 0.8,
+                ),
+                itemCount: cadrans.length,
+                itemBuilder: (context, index) => _TuileCadran(cadran: cadrans[index]),
+              ),
+            ],
           );
         },
       ),
@@ -61,6 +125,32 @@ class PenduleScreen extends StatelessWidget {
         onPressed: () => _choisirTypeAjout(context),
         tooltip: "Ajouter un cadran",
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _outil(
+    BuildContext context, {
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String subtitle,
+    required Widget page,
+  }) {
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: color.withValues(alpha: 0.12),
+          foregroundColor: color,
+          child: Icon(icon),
+        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+        subtitle: Text(subtitle),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => page),
+        ),
       ),
     );
   }
