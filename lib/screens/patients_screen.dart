@@ -699,7 +699,7 @@ class _MenuLateral extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                "Coupeur de Feu · v2.4.0",
+                "Coupeur de Feu · v3.0.0",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
