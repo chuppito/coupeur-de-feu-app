@@ -467,8 +467,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Séance guidée V3'),
-            Text('Protocole construit depuis la bibliothèque', style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal)),
+            Text('Nouvelle séance magnétisme'),
           ],
         ),
       ),
