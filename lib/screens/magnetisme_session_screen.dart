@@ -36,6 +36,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   final _soinPenduleZone = TextEditingController();
   final _soinPenduleNotes = TextEditingController();
   final Set<String> _soinPenduleZones = <String>{};
+  final Set<String> _zonesSoin = <String>{};
+  bool _utiliserRaphael = false;
 
   late final Map<String, TextEditingController> _anamneseFields;
 
@@ -355,6 +357,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     });
   }
 
+  void _onZoneSoinTap(String zone) {
+    setState(() {
+      if (_zonesSoin.contains(zone)) {
+        _zonesSoin.remove(zone);
+      } else {
+        _zonesSoin.add(zone);
+      }
+    });
+  }
+
 
   List<String> get _etapes {
     if (_isCouperLeFeu) {
@@ -398,6 +410,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       'mode': _mode,
       'ftId': _ft!.id,
       'ftTitre': _ft!.titre,
+      'zonesSoin': _zonesSoin.toList(),
+      'utiliserRaphael': _utiliserRaphael,
       'etapes': _etapes,
       'anamnese': {for (final e in _anamneseFields.entries) e.key: e.value.text.trim()},
       'soinPenduleNecessaire': _soinPenduleNecessaire,
@@ -578,6 +592,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
                   _conventionOuverte = 0;
                   _etapesFaites.clear();
                   _conventionsFaites.clear();
+                  _zonesSoin.clear();
+                  _utiliserRaphael = false;
                 });
               },
             ),
@@ -606,6 +622,29 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
                 },
               )).toList(),
             ),
+            const SizedBox(height: 14),
+            const Text('Zone(s) anatomique(s) à traiter', style: TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 4),
+            const Text(
+              'Sélectionnez la ou les zones une seule fois. Elles seront mémorisées et réutilisées automatiquement pendant le travail local.',
+              style: TextStyle(fontSize: 12, color: Colors.black54),
+            ),
+            const SizedBox(height: 8),
+            InteractiveBody(
+              selectedZones: _zonesSoin,
+              onZoneTap: _onZoneSoinTap,
+            ),
+            if (_zonesSoin.isNotEmpty) ...<Widget>[
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: _zonesSoin.map((zone) => Chip(
+                  label: Text(zone),
+                  onDeleted: () => _onZoneSoinTap(zone),
+                )).toList(),
+              ),
+            ],
           ],
         ),
       ),
@@ -1239,11 +1278,33 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _specific() {
-    return _stepLayout(
-      help: 'Les conventions supplémentaires viennent de la FT choisie. Ne rien inventer : ouvrir la FT et suivre uniquement ce qui y est indiqué.',
-      source: _ft,
-      doneIndex: _soinPenduleNecessaire ? 5 : 4,
-      actionLabel: 'Ouvrir la FT',
+    final zones = _zonesSoin.toList()..sort();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _helpBox(
+          'Les conventions supplémentaires viennent de la FT choisie. Ne rien inventer : ouvrir la FT et suivre uniquement ce qui y est indiqué.',
+          _ft,
+        ),
+        if (zones.isNotEmpty)
+          Card(
+            color: Colors.teal.withValues(alpha: 0.06),
+            child: ListTile(
+              leading: const Icon(Icons.accessibility_new, color: Colors.teal),
+              title: const Text('Zone(s) à traiter — sélection initiale'),
+              subtitle: Text(zones.join(', ')),
+            ),
+          )
+        else
+          const Text('Aucune zone anatomique sélectionnée au début de la séance.'),
+        if (_ft != null)
+          OutlinedButton.icon(
+            onPressed: () => _openReader(_ft!),
+            icon: const Icon(Icons.menu_book_outlined),
+            label: const Text('Ouvrir la FT'),
+          ),
+        _checkStep(_soinPenduleNecessaire ? 5 : 4),
+      ],
     );
   }
 
@@ -1257,6 +1318,30 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         ),
         if (_pathologies.isEmpty)
           const Text('Sélectionne au moins une pathologie / motif.'),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          value: _utiliserRaphael,
+          title: const Text('Ajouter la demande de guérison — Archange Raphaël'),
+          subtitle: const Text('Complément facultatif pour une pathologie lourde, à utiliser pendant l’imposition sur le chakra couronne.'),
+          onChanged: (value) => setState(() => _utiliserRaphael = value ?? false),
+        ),
+        if (_utiliserRaphael && _findPrayer('PRIÈRE DE DEMANDE DE GUÉRISON (Archange Raphaël)') != null)
+          Card(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: SelectableText(
+                MagnetismeLibraryService.personalized(
+                  _findPrayer('PRIÈRE DE DEMANDE DE GUÉRISON (Archange Raphaël)')!,
+                  prenom: _prenom.text,
+                  nom: _nom.text,
+                  pathologie: _ft?.titre,
+                ),
+                style: const TextStyle(fontSize: 14, height: 1.45),
+              ),
+            ),
+          ),
         ..._pathologies.expand((pathology) {
           final prayers = _findPrayers(pathology);
           if (prayers.isEmpty) {
