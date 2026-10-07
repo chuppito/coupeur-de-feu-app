@@ -36,7 +36,13 @@ class _PatientsScreenState extends State<PatientsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mes patients"),
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("Magnétisme V3"),
+            Text("Patients · séances intelligentes", style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal)),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: "Nouvelle séance",
@@ -85,7 +91,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             ),
                             const SizedBox(height: 4),
                             const Text(
-                              "Touchez la flamme en haut pour créer votre première séance complète.",
+                              "Touchez la flamme en haut pour démarrer une séance guidée V3.",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12, color: Colors.black54),
                             ),
@@ -294,7 +300,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                     if (sessions.isEmpty)
                                       const Padding(
                                         padding: EdgeInsets.symmetric(vertical: 8),
-                                        child: Text("Aucune séance de magnétisme V2 enregistrée.",
+                                        child: Text("Aucune séance de magnétisme enregistrée.",
                                             style: TextStyle(fontSize: 12, color: Colors.black54)),
                                       )
                                     else
