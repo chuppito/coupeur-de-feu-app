@@ -39,7 +39,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Magnétisme V3"),
+            Text("Magnétisme"),
             Text("Patients · séances intelligentes", style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal)),
           ],
         ),
