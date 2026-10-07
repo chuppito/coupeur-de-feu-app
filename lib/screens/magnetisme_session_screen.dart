@@ -92,6 +92,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   final Set<int> _etapesFaites = <int>{};
   final Set<int> _conventionsFaites = <int>{};
+  final Set<int> _conventionsSupplementairesFaites = <int>{};
   final Set<String> _pathologies = <String>{};
   List<_Doc> _docs = <_Doc>[];
   String? _ftId;
@@ -462,7 +463,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     final faites = _etapesFaites.length;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Nouvelle séance magnétisme')),
+      appBar: AppBar(
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Séance guidée V3'),
+            Text('Protocole construit depuis la bibliothèque', style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal)),
+          ],
+        ),
+      ),
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(12, 6, 12, 10),
         child: FilledButton.icon(
@@ -592,6 +601,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
                   _conventionOuverte = 0;
                   _etapesFaites.clear();
                   _conventionsFaites.clear();
+                  _conventionsSupplementairesFaites.clear();
                   _zonesSoin.clear();
                   _utiliserRaphael = false;
                 });
@@ -662,7 +672,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                'Déroulé du soin — ' + faites.toString() + ' / ' + total.toString() + ' étapes',
+                'Parcours V3 — ' + faites.toString() + ' / ' + total.toString() + ' étapes',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -671,7 +681,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           LinearProgressIndicator(value: total == 0 ? 0 : faites / total),
           const SizedBox(height: 8),
           Text(
-            'Les cadrans restent sur papier : l’application sert de guide et de mémoire.',
+            'La V3 rassemble ici les informations utiles de la fiche pour guider la séance sans navigation inutile.',
             style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
           ),
         ]),
@@ -1277,31 +1287,88 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return value != null && value < 70;
   }
 
+  List<String> _specificConventions(_Doc? doc) {
+    if (doc == null) return const <String>[];
+    final lines = doc.contenu.split('\n');
+    final result = <String>[];
+    var inSection = false;
+    for (final raw in lines) {
+      final line = raw.trim();
+      final lower = line.toLowerCase();
+      if (RegExp(r'^5\.').hasMatch(line) &&
+          lower.contains('convention') &&
+          lower.contains('suppl')) {
+        inSection = true;
+        continue;
+      }
+      if (inSection && RegExp(r'^6\.').hasMatch(line)) break;
+      if (!inSection) continue;
+      final match = RegExp(r'^-\s*(?:\d+\.\s*)?(.+)$').firstMatch(line);
+      if (match != null && match.group(1)!.trim().isNotEmpty) {
+        result.add(match.group(1)!.trim());
+      }
+    }
+    return result;
+  }
+
+  String? _protocolSection(int number) {
+    final doc = _ft;
+    if (doc == null) return null;
+    final lines = doc.contenu.split('\n');
+    final result = <String>[];
+    var active = false;
+    for (final raw in lines) {
+      final line = raw.trimRight();
+      if (RegExp('^' + number.toString() + r'\.').hasMatch(line.trimLeft())) {
+        active = true;
+        result.add(line.trim());
+        continue;
+      }
+      if (active && RegExp(r'^\d+(?:\s*&\s*\d+)?\.').hasMatch(line.trimLeft())) break;
+      if (active && line.trim().isNotEmpty) result.add(line.trim());
+    }
+    return result.isEmpty ? null : result.join('\n');
+  }
+
   Widget _specific() {
     final zones = _zonesSoin.toList()..sort();
+    final conventions = _specificConventions(_ft);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _helpBox(
-          'Les conventions supplémentaires viennent de la FT choisie. Ne rien inventer : ouvrir la FT et suivre uniquement ce qui y est indiqué.',
-          _ft,
-        ),
+        if (conventions.isEmpty)
+          _helpBox(
+            'Cette fiche ne prévoit pas de conventions supplémentaires distinctes. Passez à l’étape suivante après les 14 conventions de base.',
+            _ft,
+          )
+        else ...<Widget>[
+          Text(
+            conventions.length.toString() + ' convention(s) spécifique(s) — ' + (_ft?.titre ?? ''),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+          const SizedBox(height: 6),
+          ...List<Widget>.generate(conventions.length, (i) => CheckboxListTile(
+            contentPadding: EdgeInsets.zero,
+            controlAffinity: ListTileControlAffinity.leading,
+            value: _conventionsSupplementairesFaites.contains(i),
+            title: Text(conventions[i]),
+            onChanged: (value) => setState(() {
+              if (value ?? false) {
+                _conventionsSupplementairesFaites.add(i);
+              } else {
+                _conventionsSupplementairesFaites.remove(i);
+              }
+            }),
+          )),
+        ],
         if (zones.isNotEmpty)
           Card(
             color: Colors.teal.withValues(alpha: 0.06),
             child: ListTile(
               leading: const Icon(Icons.accessibility_new, color: Colors.teal),
-              title: const Text('Zone(s) à traiter — sélection initiale'),
+              title: const Text('Zone(s) de travail mémorisée(s)'),
               subtitle: Text(zones.join(', ')),
             ),
-          )
-        else
-          const Text('Aucune zone anatomique sélectionnée au début de la séance.'),
-        if (_ft != null)
-          OutlinedButton.icon(
-            onPressed: () => _openReader(_ft!),
-            icon: const Icon(Icons.menu_book_outlined),
-            label: const Text('Ouvrir la FT'),
           ),
         _checkStep(_soinPenduleNecessaire ? 5 : 4),
       ],
@@ -1395,36 +1462,50 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   Widget _technique(int index) {
     final distance = _mode == 'À distance';
-    final source = _reference(distance ? 'récap séance à distance' : 'récap séance présentiel');
-    final items = distance
-        ? <String>[
-            'Travail sur photo / planches anatomiques selon la FT',
-            'Renforcement de l’intention lors de la convention n°10',
-          ]
-        : <String>[
-            'Passes et impositions selon la FT',
-            'Circulation énergétique entre les chakras',
-            'Balayage',
-          ];
+    final technique = _protocolSection(7);
+    final zones = _zonesSoin.toList()..sort();
+
+    if (distance) {
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        const Text(
+          'Travail à distance',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+        const SizedBox(height: 6),
+        const Text('Travaillez sur photo / planches anatomiques en suivant les indications de la fiche technique.'),
+        if (zones.isNotEmpty) ...<Widget>[
+          const SizedBox(height: 8),
+          Text('Zone(s) : ' + zones.join(', '), style: const TextStyle(fontWeight: FontWeight.w600)),
+        ],
+        if (technique != null) ...<Widget>[
+          const SizedBox(height: 10),
+          SelectableText(technique, style: const TextStyle(height: 1.45)),
+        ],
+        _checkStep(index),
+      ]);
+    }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      _helpBox(
-        distance
-            ? 'À distance : pas de passes ni d’impositions au-dessus de la personne. Le protocole fourni prévoit le travail sur photo / planches anatomiques et une intention renforcée, notamment à la convention n°10.'
-            : 'En présentiel : suivre les passes et impositions prévues par la FT, puis la circulation énergétique entre les chakras et le balayage selon le récapitulatif fourni.',
-        source,
-      ),
-      ...items.map((item) => ListTile(
-        contentPadding: EdgeInsets.zero,
-        leading: const Icon(Icons.check_box_outline_blank),
-        title: Text(item),
-      )),
-      if (_ft != null)
-        OutlinedButton.icon(
-          onPressed: () => _openReader(_ft!),
-          icon: const Icon(Icons.description_outlined),
-          label: const Text('Revoir la FT'),
+      if (technique != null) ...<Widget>[
+        Text(
+          'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
+        const SizedBox(height: 8),
+        SelectableText(technique, style: const TextStyle(fontSize: 14, height: 1.5)),
+      ] else
+        const Text('Aucune technique spécifique n’est décrite à cette étape dans la fiche.'),
+      if (zones.isNotEmpty) ...<Widget>[
+        const SizedBox(height: 10),
+        Card(
+          color: Colors.teal.withValues(alpha: 0.06),
+          child: ListTile(
+            leading: const Icon(Icons.accessibility_new, color: Colors.teal),
+            title: const Text('Zone(s) à traiter'),
+            subtitle: Text(zones.join(', ')),
+          ),
+        ),
+      ],
       _checkStep(index),
     ]);
   }
