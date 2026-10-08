@@ -103,6 +103,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   Timer? _timerConventions;
   int _secondesRestantes = 60;
   bool _lectureAuto = false;
+  bool _scanDetailVisible = false;
+  int _dureePersonnalisee = 0;
   int _conventionSuppAuto = 0;
   bool _phaseSupplementaire = false;
   bool _loading = true;
@@ -918,10 +920,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             ),
           ),
         ),
+        SwitchListTile(
+          title: const Text('Examiner les zones anatomiques en détail'),
+          subtitle: const Text('Facultatif : ouvrir uniquement pour approfondir le scan'),
+          value: _scanDetailVisible,
+          onChanged: (value) => setState(() => _scanDetailVisible = value),
+        ),
+        if (_scanDetailVisible) ...<Widget>[
         _bilanSection('Tête & cou', _teteCouFields, color: Colors.cyan),
         _bilanSection('Tronc organes', _troncOrganesFields, color: Colors.orange),
         _bilanSection('Tronc osseux', _troncOsseuxFields, color: Colors.amber.shade700),
         _bilanSection('Appareil uro-génital', _uroGenitalFields, color: Colors.teal),
+        ],
         _compactNumber('Qualité énergétique du sang (0 à 100 %)', _sang),
         _compactText(
           'Notes du bilan',
@@ -1133,11 +1143,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     setState(() => _lectureAuto = false);
   }
 
+  int _dureeConvention() {
+    if (_dureePersonnalisee > 0) return _dureePersonnalisee;
+    if (_phaseSupplementaire) return 60;
+    if (_conventionOuverte == 11 && _sangBelow70()) return 120;
+    return 60;
+  }
+
   void _demarrerLecture() {
     _timerConventions?.cancel();
     setState(() {
       _lectureAuto = true;
-      _secondesRestantes = 60;
+      _secondesRestantes = _dureeConvention();
     });
     _timerConventions = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) {
@@ -1149,7 +1166,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           _secondesRestantes--;
           return;
         }
-        _secondesRestantes = 60;
         if (!_phaseSupplementaire) {
           _conventionsFaites.add(_conventionOuverte);
           if (_conventionOuverte < 13) {
@@ -1166,6 +1182,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         if (_phaseSupplementaire && _conventionSuppAuto >= extra.length) {
           timer.cancel();
           _lectureAuto = false;
+        } else {
+          _secondesRestantes = _dureeConvention();
         }
       });
     });
@@ -1195,8 +1213,20 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
               '${(_secondesRestantes ~/ 60).toString().padLeft(2, '0')}:${(_secondesRestantes % 60).toString().padLeft(2, '0')}',
               style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
             )),
-            const Text('60 secondes par convention · sans son ni vibration',
+            const Text('Durée indicative · sans son ni vibration',
                 textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Wrap(spacing: 8, children: [
+              for (final seconds in [0, 60, 120, 180])
+                ChoiceChip(
+                  label: Text(seconds == 0 ? 'Durée conseillée' : '${seconds ~/ 60} min'),
+                  selected: _dureePersonnalisee == seconds,
+                  onSelected: (_) => setState(() {
+                    _dureePersonnalisee = seconds;
+                    _secondesRestantes = _dureeConvention();
+                  }),
+                ),
+            ]),
             const SizedBox(height: 12),
             FilledButton.icon(
               onPressed: _lectureAuto ? _arreterLecture : _demarrerLecture,
