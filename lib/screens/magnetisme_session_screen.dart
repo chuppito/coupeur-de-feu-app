@@ -103,6 +103,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   bool _saving = false;
   bool _degagementNecessaire = false;
   bool _soinPenduleNecessaire = false;
+  bool _scanPenduleNecessaire = false;
   String _priereFeu = 'Prière contre le feu indisponible dans la bibliothèque.';
   final List<bool> _soinPenduleEtapes = List<bool>.filled(7, false);
 
@@ -382,6 +383,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return <String>[
       'Prise de contact',
       'Bilan énergétique',
+      if (_scanPenduleNecessaire) 'Scan au pendule',
       if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
       'Dégagement des entités / énergies négatives si nécessaire',
       '14 conventions mentales',
@@ -416,6 +418,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       'etapes': _etapes,
       'anamnese': {for (final e in _anamneseFields.entries) e.key: e.value.text.trim()},
       'soinPenduleNecessaire': _soinPenduleNecessaire,
+      'scanPenduleNecessaire': _scanPenduleNecessaire,
       'soinPendule': _soinPenduleNecessaire ? {
         'zone': _soinPenduleZone.text.trim(),
         'etapes': List<bool>.from(_soinPenduleEtapes),
@@ -539,6 +542,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
               },
             ),
             const SizedBox(height: 8),
+            CheckboxListTile(
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              value: _scanPenduleNecessaire,
+              title: const Text('Réaliser un scan au pendule'),
+              subtitle: const Text('Vitalité, taux vibratoire, chakras et zones du corps.'),
+              onChanged: (value) => setState(() {
+                _scanPenduleNecessaire = value ?? false;
+                _etapesFaites.clear();
+              }),
+            ),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               controlAffinity: ListTileControlAffinity.leading,
@@ -724,8 +738,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
     if (index == 0) return _contactHelp();
     if (index == 1) return _bilan();
-    if (_soinPenduleNecessaire && index == 2) return _soinPenduleStep();
-    final offset = _soinPenduleNecessaire ? 1 : 0;
+    if (_scanPenduleNecessaire && index == 2) return _scanPenduleStep();
+    if (_soinPenduleNecessaire && index == 2 + (_scanPenduleNecessaire ? 1 : 0)) return _soinPenduleStep();
+    final offset = (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0);
     if (index == 2 + offset) return _degagement();
     if (index == 3 + offset) return _conventions();
     if (index == 4 + offset) return _specific();
@@ -956,6 +971,26 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     }
   }
 
+  Widget _scanPenduleStep() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text('Résultats du scan au pendule', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        _compactNumber('Taux de vitalité', _vitalite),
+        _compactNumber('Taux vibratoire', _vibratoire),
+        const SizedBox(height: 8),
+        const Text('Évaluation des sept chakras', style: TextStyle(fontWeight: FontWeight.w600)),
+        ..._chakraFields.entries.map((entry) => _bilanResultField(entry.key, entry.value)),
+        const SizedBox(height: 8),
+        const Text('Zones anatomiques observées', style: TextStyle(fontWeight: FontWeight.w600)),
+        InteractiveBody(selectedZones: _zonesSoin, onZoneTap: _onZoneSoinTap),
+        _compactText('Notes du scan', _bilanNotes, minLines: 3),
+        _checkStep(2),
+      ],
+    );
+  }
+
   Widget _soinPenduleStep() {
     final patient = _patientOuPlaceholder;
     final degagement = 'Je demande ici et maintenant que $patient soit libéré(e) de toutes les énergies qui ne lui appartiennent pas.\nQue les pensées négatives, les projections et les influences d’autrui soient dissoutes et renvoyées à la terre pour être transformées. Je ferme son champ énergétique à ce qui n’est pas aligné avec sa paix intérieure.\nIl récupère ainsi sa pleine souveraineté, sa clarté et sa sérénité. Que seul l’amour et la bienveillance puissent franchir cet espace. Ainsi soit-il.';
@@ -1066,7 +1101,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         ),
         const SizedBox(height: 6),
         _compactText('Notes du soin au pendule', _soinPenduleNotes, minLines: 3),
-        _checkStep(2),
+        _checkStep(2 + (_scanPenduleNecessaire ? 1 : 0)),
       ],
     );
   }
@@ -1085,7 +1120,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       ),
       if (_degagementNecessaire)
         _compactText('Notes / formulation utilisée', _degagementNotes, minLines: 2),
-      _checkStep(_soinPenduleNecessaire ? 3 : 2),
+      _checkStep(2 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
     ]);
   }
 
@@ -1369,7 +1404,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
               subtitle: Text(zones.join(', ')),
             ),
           ),
-        _checkStep(_soinPenduleNecessaire ? 5 : 4),
+        _checkStep(4 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
       ],
     );
   }
@@ -1443,7 +1478,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             ),
           ));
         }),
-        _checkStep(_soinPenduleNecessaire ? 6 : 5),
+        _checkStep(5 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
       ],
     );
   }
