@@ -103,6 +103,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   Timer? _timerConventions;
   int _secondesRestantes = 60;
   bool _lectureAuto = false;
+  bool _lectureSuspendue = false;
   bool _scanDetailVisible = false;
   int _dureePersonnalisee = 0;
   int _conventionSuppAuto = 0;
@@ -1140,7 +1141,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   void _arreterLecture() {
     _timerConventions?.cancel();
-    setState(() => _lectureAuto = false);
+    setState(() { _lectureAuto = false; _lectureSuspendue = true; });
   }
 
   int _dureeConvention() {
@@ -1154,7 +1155,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     _timerConventions?.cancel();
     setState(() {
       _lectureAuto = true;
-      _secondesRestantes = _dureeConvention();
+      if (!_lectureSuspendue) _secondesRestantes = _dureeConvention();
+      _lectureSuspendue = false;
     });
     _timerConventions = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) {
@@ -1170,6 +1172,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           _conventionsFaites.add(_conventionOuverte);
           if (_conventionOuverte < 13) {
             _conventionOuverte++;
+            _secondesRestantes = _dureeConvention();
             return;
           }
           _phaseSupplementaire = true;
@@ -1196,34 +1199,60 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         ? extra[_conventionSuppAuto.clamp(0, extra.length - 1)]
         : _conventionTitles[_conventionOuverte];
     final consigne = supplement ? titre : _conventionAction(_conventionOuverte);
+    final total = _dureeConvention();
+    final progress = total == 0 ? 0.0 : (1 - _secondesRestantes / total).clamp(0.0, 1.0);
+    final minutes = (_secondesRestantes ~/ 60).toString().padLeft(2, '0');
+    final secondes = (_secondesRestantes % 60).toString().padLeft(2, '0');
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Text('Mode silencieux · mains libres',
-                style: TextStyle(fontWeight: FontWeight.bold)),
+            Row(children: <Widget>[
+              const Expanded(child: Text('SÉANCE GUIDÉE · CONVENTIONS',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))),
+              if (_lectureAuto) const Chip(label: Text('En cours')),
+            ]),
             const SizedBox(height: 12),
-            Text(titre, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            Text(consigne, style: const TextStyle(fontSize: 16, height: 1.5)),
-            const SizedBox(height: 14),
-            Center(child: Text(
-              '${(_secondesRestantes ~/ 60).toString().padLeft(2, '0')}:${(_secondesRestantes % 60).toString().padLeft(2, '0')}',
-              style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+            Text(supplement
+                ? 'Convention supplémentaire ${_conventionSuppAuto + 1} / ${extra.length}'
+                : 'Convention ${_conventionOuverte + 1} / 14',
+                style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Text(titre, style: const TextStyle(fontSize: 15)),
+            const SizedBox(height: 20),
+            Center(child: SizedBox(
+              width: 230, height: 230,
+              child: Stack(alignment: Alignment.center, children: <Widget>[
+                SizedBox.expand(child: CircularProgressIndicator(
+                  value: progress,
+                  strokeWidth: 12,
+                  backgroundColor: Colors.black12,
+                  strokeCap: StrokeCap.round,
+                )),
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                  Text('$minutes:$secondes',
+                      style: const TextStyle(fontSize: 46, fontWeight: FontWeight.bold)),
+                  const Text('restantes'),
+                ]),
+              ]),
             )),
-            const Text('Durée indicative · sans son ni vibration',
-                textAlign: TextAlign.center),
+            const SizedBox(height: 20),
+            Text(consigne, textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 17, height: 1.5)),
+            const SizedBox(height: 14),
+            const Text('Sans son ni vibration', textAlign: TextAlign.center),
             const SizedBox(height: 8),
-            Wrap(spacing: 8, children: [
+            Wrap(spacing: 6, alignment: WrapAlignment.center, children: <Widget>[
               for (final seconds in [0, 60, 120, 180])
                 ChoiceChip(
-                  label: Text(seconds == 0 ? 'Durée conseillée' : '${seconds ~/ 60} min'),
+                  label: Text(seconds == 0 ? 'Conseillée' : '${seconds ~/ 60} min'),
                   selected: _dureePersonnalisee == seconds,
-                  onSelected: (_) => setState(() {
+                  onSelected: _lectureAuto ? null : (_) => setState(() {
                     _dureePersonnalisee = seconds;
                     _secondesRestantes = _dureeConvention();
+                    _lectureSuspendue = false;
                   }),
                 ),
             ]),
@@ -1231,7 +1260,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
             FilledButton.icon(
               onPressed: _lectureAuto ? _arreterLecture : _demarrerLecture,
               icon: Icon(_lectureAuto ? Icons.pause : Icons.play_arrow),
-              label: Text(_lectureAuto ? 'Pause' : 'Démarrer / reprendre'),
+              label: Text(_lectureAuto ? 'Pause' : (_lectureSuspendue ? 'Reprendre' : 'Démarrer')),
             ),
           ],
         ),
