@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import '../services/bilan_energetique_pdf_service.dart';
@@ -99,6 +100,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   String _mode = 'Présentiel';
   int _etapeOuverte = 0;
   int _conventionOuverte = 0;
+  Timer? _timerConventions;
+  int _secondesRestantes = 60;
+  bool _lectureAuto = false;
+  int _conventionSuppAuto = 0;
+  bool _phaseSupplementaire = false;
   bool _loading = true;
   bool _saving = false;
   bool _degagementNecessaire = false;
@@ -161,6 +167,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   @override
   void dispose() {
+    _timerConventions?.cancel();
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _entites, _negatives, _sang, _bilanNotes,
@@ -990,6 +997,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         const Text('Évaluation des sept chakras', style: TextStyle(fontWeight: FontWeight.w600)),
         ..._chakraFields.entries.map((entry) => _bilanResultField(entry.key, entry.value)),
         const SizedBox(height: 8),
+        const Text('Scan général : sélectionne uniquement les zones utiles', style: TextStyle(fontWeight: FontWeight.w600)),
+        const SizedBox(height: 8),
+        const Text('Pour un examen plus précis, utilise les planches anatomiques de la bibliothèque.'),
+        const SizedBox(height: 8),
         const Text('Zones anatomiques observées', style: TextStyle(fontWeight: FontWeight.w600)),
         InteractiveBody(selectedZones: _zonesSoin, onZoneTap: _onZoneSoinTap),
         _compactText('Notes du scan', _bilanNotes, minLines: 3),
@@ -1117,6 +1128,87 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     ]);
   }
 
+  void _arreterLecture() {
+    _timerConventions?.cancel();
+    setState(() => _lectureAuto = false);
+  }
+
+  void _demarrerLecture() {
+    _timerConventions?.cancel();
+    setState(() {
+      _lectureAuto = true;
+      _secondesRestantes = 60;
+    });
+    _timerConventions = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      setState(() {
+        if (_secondesRestantes > 1) {
+          _secondesRestantes--;
+          return;
+        }
+        _secondesRestantes = 60;
+        if (!_phaseSupplementaire) {
+          _conventionsFaites.add(_conventionOuverte);
+          if (_conventionOuverte < 13) {
+            _conventionOuverte++;
+            return;
+          }
+          _phaseSupplementaire = true;
+          _conventionSuppAuto = 0;
+        } else {
+          _conventionsSupplementairesFaites.add(_conventionSuppAuto);
+          _conventionSuppAuto++;
+        }
+        final extra = _specificConventions(_ft);
+        if (_phaseSupplementaire && _conventionSuppAuto >= extra.length) {
+          timer.cancel();
+          _lectureAuto = false;
+        }
+      });
+    });
+  }
+
+  Widget _lectureAutomatique() {
+    final extra = _specificConventions(_ft);
+    final supplement = _phaseSupplementaire && extra.isNotEmpty;
+    final titre = supplement
+        ? extra[_conventionSuppAuto.clamp(0, extra.length - 1)]
+        : _conventionTitles[_conventionOuverte];
+    final consigne = supplement ? titre : _conventionAction(_conventionOuverte);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const Text('Mode silencieux · mains libres',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 12),
+            Text(titre, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Text(consigne, style: const TextStyle(fontSize: 16, height: 1.5)),
+            const SizedBox(height: 14),
+            Center(child: Text(
+              '${(_secondesRestantes ~/ 60).toString().padLeft(2, '0')}:${(_secondesRestantes % 60).toString().padLeft(2, '0')}',
+              style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+            )),
+            const Text('60 secondes par convention · sans son ni vibration',
+                textAlign: TextAlign.center),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              onPressed: _lectureAuto ? _arreterLecture : _demarrerLecture,
+              icon: Icon(_lectureAuto ? Icons.pause : Icons.play_arrow),
+              label: Text(_lectureAuto ? 'Pause' : 'Démarrer / reprendre'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _conventions() {
     final index = _conventionOuverte;
     final done = _conventionsFaites.contains(index);
@@ -1126,6 +1218,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        _lectureAutomatique(),
         _helpBox(
           'Une convention à la fois. Pendant la séance, seules la durée utile et l’intention sont affichées. Les explications complètes restent dans la bibliothèque.',
           fullDoc,
