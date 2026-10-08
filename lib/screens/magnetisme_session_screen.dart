@@ -1003,14 +1003,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     final degagement = 'Je demande ici et maintenant que $patient soit libéré(e) de toutes les énergies qui ne lui appartiennent pas.\nQue les pensées négatives, les projections et les influences d’autrui soient dissoutes et renvoyées à la terre pour être transformées. Je ferme son champ énergétique à ce qui n’est pas aligné avec sa paix intérieure.\nIl récupère ainsi sa pleine souveraineté, sa clarté et sa sérénité. Que seul l’amour et la bienveillance puissent franchir cet espace. Ainsi soit-il.';
     final protection = 'Je demande que $patient soit entouré(e) d’une lumière de force et de protection.\nQue son énergie vitale soit maintenant restaurée, vibrante et alignée. Je renforce ses propres barrières naturelles pour que son espace personnel reste pur et inattaquable par les influences extérieures.\nDésormais $patient est ancré(e), centré(e), et protégé(e). Que cette lumière rayonne depuis son cœur vers l’extérieur, transformant chaque obstacle en force.';
 
-    const titles = <String>[
-      '20 passes rapides — intention de dégagement',
-      'Lever le pendule lorsque le mouvement négatif est terminé',
-      'Taper 2 fois pour retirer le négatif',
-      '15 passes lentes — intention de soulager la zone',
-      'Prière contre le feu × 3',
-      'Formulation de dégagement',
-      'Protection et dégagement',
+    final distance = _mode == 'À distance';
+    final steps = <({int id, String title, String? detail})>[
+      if (!distance) (id: 0, title: '20 passes rapides — intention de dégagement', detail: 'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »'),
+      if (distance) (id: 0, title: 'Intention de dégagement — rotation négative du pendule', detail: 'Formule : « Je veux retirer les énergies négatives de… »'),
+      (id: 1, title: 'Lever le pendule lorsque le mouvement négatif est terminé', detail: null),
+      (id: 2, title: 'Taper 2 fois pour retirer le négatif', detail: 'Rappel systématique : 2 frappes après avoir levé le pendule.'),
+      if (!distance) (id: 3, title: '15 passes lentes — rotation positive', detail: 'Intention de soulager la zone.'),
+      if (distance) (id: 3, title: 'Rotation positive — intention de soulager la zone', detail: 'Relancer dans le sens positif en gardant l’intention de soulager la zone.'),
+      (id: 4, title: 'Prière contre le feu × 3', detail: _priereFeu),
+      (id: 5, title: 'Formulation de dégagement', detail: degagement),
+      (id: 6, title: 'Formulation de protection et de renforcement', detail: protection),
     ];
 
     return Column(
@@ -1073,37 +1076,20 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         const SizedBox(height: 8),
         Card(
           child: Column(
-            children: List.generate(
-              titles.length,
-              (i) => CheckboxListTile(
-                value: _soinPenduleEtapes[i],
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(titles[i]),
-                onChanged: (value) => setState(() => _soinPenduleEtapes[i] = value ?? false),
+            children: steps.map((step) => CheckboxListTile(
+              value: _soinPenduleEtapes[step.id],
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text(step.title),
+              subtitle: step.detail == null
+                  ? null
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: SelectableText(step.detail!, style: const TextStyle(height: 1.4)),
+                    ),
+              onChanged: (value) => setState(
+                () => _soinPenduleEtapes[step.id] = value ?? false,
               ),
-            ),
-          ),
-        ),
-        _helpBox('Prière récupérée de la bibliothèque : CONTRE LE FEU.', null),
-        Card(
-          color: Colors.deepOrange.withValues(alpha: 0.06),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: SelectableText(_priereFeu),
-          ),
-        ),
-        _helpBox('Formulation de dégagement', null),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: SelectableText(degagement),
-          ),
-        ),
-        _helpBox('Protection et dégagement', null),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: SelectableText(protection),
+            )).toList(),
           ),
         ),
         const SizedBox(height: 6),
