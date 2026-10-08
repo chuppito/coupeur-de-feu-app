@@ -374,6 +374,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     if (_isCouperLeFeu) {
       return <String>[
         'Accueil et prise de contact',
+        if (_scanPenduleNecessaire) 'Scan au pendule',
+        if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
         'Prière contre le feu',
         'Imposition des mains et intention',
         'Balayage & débriefing',
@@ -734,7 +736,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   }
 
   Widget _stepContent(int index) {
-    if (_isCouperLeFeu) return _couperLeFeuStep(index);
+    if (_isCouperLeFeu) {
+      if (index == 0) return _couperLeFeuStep(0);
+      if (_scanPenduleNecessaire && index == 1) return _scanPenduleStep();
+      if (_soinPenduleNecessaire && index == 1 + (_scanPenduleNecessaire ? 1 : 0)) return _soinPenduleStep();
+      return _couperLeFeuStep(index - (_scanPenduleNecessaire ? 1 : 0) - (_soinPenduleNecessaire ? 1 : 0));
+    }
 
     if (index == 0) return _contactHelp();
     if (index == 1) return _bilan();
