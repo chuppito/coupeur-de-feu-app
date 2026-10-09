@@ -891,7 +891,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
                     minLines: isNotes ? 4 : 2,
                     maxLines: isNotes ? 8 : 4,
                     decoration: InputDecoration(
-                      labelText: entry.key,
+                      labelText: entry.key == 'Quel est votre environnement professionnel ? Est-ce que votre travail se passe bien ?' ? 'Environnement professionnel' : entry.key,
+                      helperText: entry.key == 'Quel est votre environnement professionnel ? Est-ce que votre travail se passe bien ?' ? 'Quel est votre environnement professionnel ? Est-ce que votre travail se passe bien ?' : null,
+                      helperMaxLines: 3,
                       alignLabelWithHint: true,
                       border: const OutlineInputBorder(),
                     ),
@@ -911,6 +913,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        _aideMemoire('Lecture des chakras au pendule', _memoChakras),
         _helpBox(
           'Le bilan est rempli au fur et à mesure avec les résultats relevés sur tes cadrans papier. Les champs restent dans la séance et seront repris dans la fiche PDF finale.',
           _reference('bilan énergétique'),
@@ -1531,6 +1534,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   Widget _specific() {
     final zones = _zonesSoin.toList()..sort();
+    final titreEtape = _etapes[index];
     final conventions = _specificConventions(_ft);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1659,6 +1663,43 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     }).toList();
   }
 
+  Widget _aideMemoire(String titre, String contenu) {
+    return Card(
+      color: Colors.indigo.withValues(alpha: 0.05),
+      child: ExpansionTile(
+        leading: const Icon(Icons.menu_book_outlined, color: Colors.indigo),
+        title: Text('Aide-mémoire : $titre'),
+        subtitle: const Text('Appuyer pour afficher la méthode'),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: SelectableText(contenu, style: const TextStyle(height: 1.5)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static const _memoBalayage =
+      'Selon le manuel : placez les mains à 10 à 15 cm au-dessus du corps. '
+      'Effectuez des passages lents, pendant environ 30 secondes à 1 minute.\n\n'
+      '1. Passage à deux mains sur le bras gauche.\n'
+      '2. Passage à deux mains sur le tronc côté gauche et centre.\n'
+      '3. Passage à deux mains sur le tronc côté droit et centre.\n'
+      '4. Passage à deux mains sur le bras droit.\n'
+      '5. Passage à deux mains sur la jambe gauche.\n'
+      '6. Passage à deux mains sur la jambe droite.\n'
+      '7. Recommencez cette série une deuxième fois pour terminer la séance.';
+
+  static const _memoChakras =
+      'Méthode de lecture au pendule décrite dans ton livre :\n\n'
+      '1. Lancez une oscillation dans l’axe tête-pieds du patient.\n'
+      '2. Si le mouvement reste dans cet axe : chakra équilibré.\n'
+      '3. S’il dévie vers la droite du patient : déficience.\n'
+      '4. S’il dévie vers la gauche du patient : excès.\n\n'
+      'Les directions sont celles du patient, et non de l’observateur. '
+      'Cette lecture relève de la pratique radiesthésique, pas d’une mesure médicale.';
+
   Widget _technique(int index) {
     final distance = _mode == 'À distance';
     final technique = _protocolSection(7);
@@ -1685,6 +1726,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
+      if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
       if (technique != null) ...<Widget>[
         Text(
           'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
