@@ -1555,7 +1555,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   Widget _specific() {
     final zones = _zonesSoin.toList()..sort();
-    final titreEtape = _etapes[index];
     final conventions = _specificConventions(_ft);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1722,6 +1721,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       'Cette lecture relève de la pratique radiesthésique, pas d’une mesure médicale.';
 
   Widget _technique(int index) {
+    final titreEtape = _etapes[index];
     final distance = _mode == 'À distance';
     final technique = _protocolSection(7);
     final zones = _zonesSoin.toList()..sort();
