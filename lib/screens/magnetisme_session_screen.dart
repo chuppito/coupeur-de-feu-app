@@ -714,17 +714,37 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     );
   }
 
+  final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
+
   Widget _stepCard(int index) {
     final title = _etapes[index];
     final open = _etapeOuverte == index;
     final done = _etapesFaites.contains(index);
 
+    final stepKey = _stepKeys.putIfAbsent(index, () => GlobalKey());
     return Card(
+      key: stepKey,
       margin: const EdgeInsets.only(bottom: 10),
       clipBehavior: Clip.antiAlias,
       child: Column(children: <Widget>[
         InkWell(
-          onTap: () => setState(() => _etapeOuverte = open ? -1 : index),
+          onTap: () {
+            setState(() => _etapeOuverte = open ? -1 : index);
+            if (!open) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!mounted) return;
+                final target = _stepKeys[index];
+                if (target?.currentContext != null) {
+                  Scrollable.ensureVisible(
+                    target!.currentContext!,
+                    duration: const Duration(milliseconds: 350),
+                    curve: Curves.easeInOut,
+                    alignment: 0.04,
+                  );
+                }
+              });
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.fromLTRB(14, 12, 8, 12),
             child: Row(children: <Widget>[
