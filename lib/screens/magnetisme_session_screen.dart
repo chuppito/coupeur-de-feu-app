@@ -246,6 +246,25 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
     );
   }
 
+  Widget _chakraEtatField(String label, TextEditingController controller) {
+    const choix = <String>['Non évalué', 'Équilibré', 'Déficient', 'En excès'];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: DropdownButtonFormField<String>(
+        value: choix.contains(controller.text) ? controller.text : 'Non évalué',
+        isExpanded: true,
+        decoration: InputDecoration(
+          labelText: label,
+          helperText: 'Axe tête-pieds : équilibré · droite du patient : déficient · gauche : excès',
+          helperMaxLines: 2,
+          border: const OutlineInputBorder(),
+        ),
+        items: choix.map((v) => DropdownMenuItem<String>(value: v, child: Text(v))).toList(),
+        onChanged: (value) => setState(() => controller.text = value == 'Non évalué' ? '' : (value ?? '')),
+      ),
+    );
+  }
+
   Widget _bilanSection(
     String title,
     Map<String, TextEditingController> fields, {
@@ -387,8 +406,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         if (_scanPenduleNecessaire) 'Scan au pendule',
         if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
         'Prière contre le feu',
-        'Imposition des mains et intention',
-        'Balayage & débriefing',
+        if (_mode == 'Présentiel') 'Imposition des mains et intention',
+        if (_mode == 'Présentiel') 'Balayage & débriefing' else 'Débriefing',
       ];
     }
 
@@ -770,7 +789,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       if (index == 0) return _couperLeFeuStep(0);
       if (_scanPenduleNecessaire && index == 1) return _scanPenduleStep();
       if (_soinPenduleNecessaire && index == 1 + (_scanPenduleNecessaire ? 1 : 0)) return _soinPenduleStep();
-      return _couperLeFeuStep(index - (_scanPenduleNecessaire ? 1 : 0) - (_soinPenduleNecessaire ? 1 : 0));
+      final baseIndex = index - (_scanPenduleNecessaire ? 1 : 0) - (_soinPenduleNecessaire ? 1 : 0);
+      if (_mode == 'À distance' && baseIndex == 2) return _couperLeFeuStep(3);
+      return _couperLeFeuStep(baseIndex);
     }
 
     if (index == 0) return _contactHelp();
@@ -853,7 +874,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _helpBox(
-              'Terminer par le balayage et le débriefing.',
+              _mode == 'À distance' ? 'Terminer par le débriefing, sans balayage ni imposition physique.' : 'Terminer par le balayage et le débriefing.',
               _ft,
             ),
             _compactText(
@@ -1029,7 +1050,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         _compactNumber('Taux vibratoire', _vibratoire),
         const SizedBox(height: 8),
         const Text('Évaluation des sept chakras', style: TextStyle(fontWeight: FontWeight.w600)),
-        ..._chakraFields.entries.map((entry) => _bilanResultField(entry.key, entry.value)),
+        ..._chakraFields.entries.map((entry) => _chakraEtatField(entry.key, entry.value)),
         const SizedBox(height: 8),
         const Text('Scan général : sélectionne uniquement les zones utiles', style: TextStyle(fontWeight: FontWeight.w600)),
         const SizedBox(height: 8),
