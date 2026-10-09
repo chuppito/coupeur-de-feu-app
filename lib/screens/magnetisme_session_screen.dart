@@ -114,7 +114,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   bool _soinPenduleNecessaire = false;
   bool _scanPenduleNecessaire = false;
   String _priereFeu = 'Prière contre le feu indisponible dans la bibliothèque.';
-  final List<bool> _soinPenduleEtapes = List<bool>.filled(7, false);
+  final List<bool> _soinPenduleEtapes = List<bool>.filled(9, false);
 
   static const _chakraNames = <String>[
     'Chakra racine',
@@ -196,7 +196,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
       if (!mounted) return;
       setState(() {
         _docs = docs;
-        _priereFeu = _findPrayer('CONTRE LE FEU') ?? _priereFeu;
+        _priereFeu = docs.where((d) => d.type == 'priere' && d.titre.trim().toUpperCase().contains('CONTRE LE FEU')).map((d) => d.contenu.trim()).where((t) => t.isNotEmpty).firstOrNull ?? _priereFeu;
         _loading = false;
       });
     } catch (_) {
@@ -1047,15 +1047,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
     final distance = _mode == 'À distance';
     final steps = <({int id, String title, String? detail})>[
-      if (!distance) (id: 0, title: '20 passes rapides — intention de dégagement', detail: 'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »'),
-      if (distance) (id: 0, title: 'Intention de dégagement — rotation négative du pendule', detail: 'Formule : « Je veux retirer les énergies négatives de… »'),
-      (id: 1, title: 'Lever le pendule lorsque le mouvement négatif est terminé', detail: null),
-      (id: 2, title: 'Taper 2 fois pour retirer le négatif', detail: 'Rappel systématique : 2 frappes après avoir levé le pendule.'),
-      if (!distance) (id: 3, title: '15 passes lentes — rotation positive', detail: 'Intention de soulager la zone.'),
-      if (distance) (id: 3, title: 'Rotation positive — intention de soulager la zone', detail: 'Relancer dans le sens positif en gardant l’intention de soulager la zone.'),
-      (id: 4, title: 'Prière contre le feu × 3', detail: _priereFeu),
-      (id: 5, title: 'Formulation de dégagement', detail: degagement),
-      (id: 6, title: 'Formulation de protection et de renforcement', detail: protection),
+      if (!distance) (id: 0, title: '20 passes rapides', detail: null),
+      (id: 1, title: 'Prendre le pendule : intention de dégagement, rotation négative', detail: 'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »'),
+      (id: 2, title: 'Lever le pendule lorsque le mouvement négatif est terminé', detail: null),
+      (id: 3, title: 'Taper 2 fois pour retirer le négatif', detail: 'Rappel systématique : 2 frappes après avoir levé le pendule.'),
+      if (!distance) (id: 4, title: '15 passes lentes', detail: null),
+      (id: 5, title: 'Rotation positive du pendule : intention de soulager la zone', detail: 'Relancer dans le sens positif en gardant l’intention de soulager la zone.'),
+      (id: 6, title: 'Prière contre le feu × 3', detail: _priereFeu),
+      (id: 7, title: 'Formulation de dégagement', detail: degagement),
+      (id: 8, title: 'Formulation de protection et de renforcement', detail: protection),
     ];
 
     return Column(
