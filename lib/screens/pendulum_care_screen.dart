@@ -94,15 +94,28 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
         TextField(controller: _zone, decoration: const InputDecoration(labelText: 'Zone à travailler / intention')),
         const SizedBox(height: 10),
         _header('PROTOCOLE AU PENDULE', Colors.deepOrange.shade100),
-        Card(child: Column(children: List.generate(_stepTitles.length, (i) => CheckboxListTile(
-          value: _steps[i], onChanged: (v) => setState(() => _steps[i] = v ?? false),
-          controlAffinity: ListTileControlAffinity.leading, title: Text(_stepTitles[i]),
-          subtitle: i == 0 ? const Text('Formule : « Je veux retirer les énergies négatives de… »') : i == 2 ? const Text('Rappel systématique : 2 frappes après avoir levé le pendule.') : i == 3 ? const Text('Relancer dans le sens positif en gardant l’intention de soulager la zone.') : null,
-        )))),
-        _header('PRIÈRE ET FORMULATIONS', Colors.deepPurple.shade100),
-        _reminder('Prière contre le feu × 3', _priereFeu),
-        _reminder('Formulation de dégagement', degagement),
-        _reminder('Protection et dégagement', protection),
+        Card(child: Column(children: List.generate(_stepTitles.length, (i) {
+          final details = <String?>[
+            'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »',
+            null,
+            'Rappel systématique : 2 frappes après avoir levé le pendule.',
+            'Relancer dans le sens positif en gardant l’intention de soulager la zone.',
+            _priereFeu,
+            degagement,
+            protection,
+          ];
+          return CheckboxListTile(
+            value: _steps[i],
+            onChanged: (v) => setState(() => _steps[i] = v ?? false),
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text(_stepTitles[i]),
+            subtitle: details[i] == null ? null : Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: SelectableText(details[i]!,
+                  style: const TextStyle(height: 1.5)),
+            ),
+          );
+        }).toList())),
         _header('OBSERVATIONS', Colors.blueGrey.shade100),
         TextField(controller: _ressenti, minLines: 2, maxLines: 4, decoration: const InputDecoration(labelText: 'Ressenti du patient (facultatif)', alignLabelWithHint: true)),
         const SizedBox(height: 8),
