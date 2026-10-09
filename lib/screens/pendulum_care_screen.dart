@@ -24,13 +24,15 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
   final _ressenti = TextEditingController();
   bool _saving = false;
   String _priereFeu = 'Prière contre le feu indisponible dans la bibliothèque.';
-  final List<bool> _steps = List<bool>.filled(7, false);
+  final List<bool> _steps = List<bool>.filled(9, false);
 
   static const _stepTitles = [
-    '20 passes rapides — intention de dégagement, rotation négative',
+    '20 passes rapides',
+    'Prendre le pendule : intention de dégagement, rotation négative',
     'Lever le pendule lorsque le mouvement négatif est terminé',
     'Taper 2 fois pour retirer le négatif',
-    '15 passes lentes — rotation positive, intention de soulager la zone',
+    '15 passes lentes',
+    'Rotation positive du pendule : intention de soulager la zone',
     'Prière contre le feu × 3',
     'Formulation de dégagement',
     'Formulation de protection et de renforcement',
@@ -44,13 +46,19 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
       final docs = await MagnetismeLibraryService.loadAll();
       final matches = docs.where((e) =>
           (e['type'] ?? '').toString() == 'priere' &&
-          (e['titre'] ?? '').toString().trim().toUpperCase() == 'CONTRE LE FEU');
+          (e['titre'] ?? '').toString().trim().toUpperCase().contains('CONTRE LE FEU'));
       if (matches.isNotEmpty && mounted) {
         setState(() => _priereFeu = (matches.first['contenu'] ?? '').toString().trim());
       }
     } catch (_) {
       // Le protocole reste utilisable même si la bibliothèque n'est pas disponible.
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _chargerPriereFeu();
   }
 
   @override
@@ -96,9 +104,11 @@ class _PendulumCareScreenState extends State<PendulumCareScreen> {
         _header('PROTOCOLE AU PENDULE', Colors.deepOrange.shade100),
         Card(child: Column(children: List.generate(_stepTitles.length, (i) {
           final details = <String?>[
+            null,
             'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »',
             null,
             'Rappel systématique : 2 frappes après avoir levé le pendule.',
+            null,
             'Relancer dans le sens positif en gardant l’intention de soulager la zone.',
             _priereFeu,
             degagement,
