@@ -948,7 +948,14 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         ),
         const SizedBox(height: 4),
         _bilanSection('6 corps énergétiques (2 à 7)', _corpsFields, color: Colors.green),
-        _bilanSection('7 chakras', _chakraFields, color: Colors.deepPurple),
+        Card(child: ExpansionTile(
+          leading: const Icon(Icons.fact_check_outlined, color: Colors.deepPurple),
+          title: const Text('7 chakras', style: TextStyle(fontWeight: FontWeight.w700)),
+          children: [Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(children: _chakraFields.entries.map((e) => _chakraEtatField(e.key, e.value)).toList()),
+          )],
+        )),
         Card(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(14, 8, 14, 12),
@@ -1487,6 +1494,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         .replaceAll('[nom prénom]', _nom.text.trim() + ' ' + _prenom.text.trim())
         .replaceAll('[nom prenom]', _nom.text.trim() + ' ' + _prenom.text.trim())
         .replaceAll('[nom de la maladie]', _ft?.titre ?? '');
+    if (_mode == 'À distance') {
+      return durations[index] + '\n\n' + intention.replaceAll('Vos mains sur le chakra couronne du consultant, ', 'Sur la photo ou la planche anatomique, ').replaceAll('laissez passer l’énergie', 'maintenez votre intention');
+    }
     return durations[index] + '\n\n' + intention;
   }
 
@@ -1738,10 +1748,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
           const SizedBox(height: 8),
           Text('Zone(s) : ' + zones.join(', '), style: const TextStyle(fontWeight: FontWeight.w600)),
         ],
-        if (technique != null) ...<Widget>[
-          const SizedBox(height: 10),
-          SelectableText(technique, style: const TextStyle(height: 1.45)),
-        ],
+        const SizedBox(height: 10),
+        const Text('Suivre les intentions et les formulations prévues par la fiche sur la photo ou les planches. Les passes rapides, passes lentes et impositions physiques ne sont pas réalisées à distance.'),
         _checkStep(index),
       ]);
     }
@@ -1827,7 +1835,20 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
         setState(() {
           if (value == true) {
             _etapesFaites.add(index);
-            if (index < _etapes.length - 1) _etapeOuverte = index + 1;
+            if (index < _etapes.length - 1) {
+              _etapeOuverte = index + 1;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!mounted) return;
+                final next = _stepKeys[index + 1]?.currentContext;
+                if (next != null) {
+                  Scrollable.ensureVisible(next,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                    alignment: 0.02,
+                  );
+                }
+              });
+            }
           } else {
             _etapesFaites.remove(index);
           }
