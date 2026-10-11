@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import '../services/bilan_energetique_pdf_service.dart';
 
 import '../services/magnetisme_session_service.dart';
@@ -21,7 +22,20 @@ class MagnetismeSessionScreen extends StatefulWidget {
   State<MagnetismeSessionScreen> createState() => _MagnetismeSessionScreenState();
 }
 
-class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
+class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with WidgetsBindingObserver {
+  void _updateScreenAwake(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      WakelockPlus.enable();
+    } else {
+      WakelockPlus.disable();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _updateScreenAwake(state);
+  }
+
   final _prenom = TextEditingController();
   final _nom = TextEditingController();
   final _observations = TextEditingController();
@@ -156,6 +170,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WakelockPlus.enable();
     _prenom.text = widget.prefillNom ?? '';
     _nom.text = widget.prefillNomFamille ?? '';
     _anamneseFields = _controllersFor(_anamneseNames);
@@ -170,6 +186,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    WakelockPlus.disable();
     _timerConventions?.cancel();
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
