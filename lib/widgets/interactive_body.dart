@@ -27,6 +27,8 @@ const List<_BodyZone> _zonesCommunes = [
   _BodyZone('Oreille droite', Rect.fromLTWH(144, 22, 18, 20), isCircle: true),
   _BodyZone('Bras gauche', Rect.fromLTWH(52, 66, 30, 116)),
   _BodyZone('Bras droit', Rect.fromLTWH(158, 66, 30, 116)),
+  _BodyZone('Coude gauche', Rect.fromLTWH(52, 132, 30, 24)),
+  _BodyZone('Coude droit', Rect.fromLTWH(158, 132, 30, 24)),
   _BodyZone('Main gauche', Rect.fromLTWH(46, 182, 30, 30), isCircle: true),
   _BodyZone('Main droite', Rect.fromLTWH(164, 182, 30, 30), isCircle: true),
   _BodyZone('Hanche gauche', Rect.fromLTWH(90, 188, 30, 18)),
@@ -45,14 +47,16 @@ const List<_BodyZone> _zonesCommunes = [
 /// dos si on les affichait toutes en même temps).
 const List<_BodyZone> _zonesFaceSeul = [
   _BodyZone('Torse', Rect.fromLTWH(84, 62, 72, 78)),
-  _BodyZone('Abdomen', Rect.fromLTWH(88, 140, 64, 48)),
+  _BodyZone('Abdomen', Rect.fromLTWH(88, 140, 64, 38)),
+  _BodyZone('Bassin', Rect.fromLTWH(94, 178, 52, 25)),
 ];
 
 /// Zones visibles uniquement de dos.
 const List<_BodyZone> _zonesDosSeul = [
   _BodyZone('Nuque', Rect.fromLTWH(98, 58, 44, 20)),
   _BodyZone('Épaules', Rect.fromLTWH(58, 76, 124, 26)),
-  _BodyZone('Dos', Rect.fromLTWH(84, 100, 72, 118)),
+  _BodyZone('Dos', Rect.fromLTWH(84, 100, 72, 78)),
+  _BodyZone('Bassin', Rect.fromLTWH(94, 178, 52, 25)),
 ];
 
 /// Schéma corporel interactif à deux vues (face / dos) permettant de
