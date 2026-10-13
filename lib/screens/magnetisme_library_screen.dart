@@ -200,6 +200,68 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
     await _load();
   }
 
+  Future<void> _edit(Map<String, dynamic> entry) async {
+    final title = TextEditingController(text: (entry['titre'] ?? '').toString());
+    final description = TextEditingController(text: (entry['description'] ?? '').toString());
+    final content = TextEditingController(text: (entry['contenu'] ?? '').toString());
+    final aliases = TextEditingController(
+      text: ((entry['aliases'] as List?) ?? const []).join(', '),
+    );
+    final id = (entry['id'] ?? '').toString();
+    final isLocal = MagnetismeLibraryService.hasLocalVersion(id);
+    final action = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Modifier la fiche sur ce téléphone'),
+        content: SizedBox(
+          width: 520,
+          child: SingleChildScrollView(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              TextField(controller: title, decoration: const InputDecoration(labelText: 'Titre')),
+              const SizedBox(height: 10),
+              TextField(controller: description, minLines: 2, maxLines: 5,
+                decoration: const InputDecoration(labelText: 'Description')),
+              const SizedBox(height: 10),
+              TextField(controller: aliases,
+                decoration: const InputDecoration(labelText: 'Mots-clés séparés par des virgules')),
+              const SizedBox(height: 10),
+              TextField(controller: content, minLines: 8, maxLines: 20,
+                decoration: const InputDecoration(labelText: 'Contenu de la fiche')),
+              const SizedBox(height: 10),
+              const Text('Enregistré uniquement sur cet appareil. Les modifications locales restent prioritaires après mise à jour de l’application.'),
+            ]),
+          ),
+        ),
+        actions: [
+          if (isLocal)
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, 'reset'),
+              child: const Text('Restaurer la version d’origine'),
+            ),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Annuler')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, 'save'), child: const Text('Enregistrer')),
+        ],
+      ),
+    );
+    if (action == 'save' && title.text.trim().isNotEmpty && content.text.trim().isNotEmpty) {
+      await MagnetismeLibraryService.saveLocal({
+        ...entry,
+        'titre': title.text.trim(),
+        'description': description.text.trim(),
+        'aliases': aliases.text.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList(),
+        'contenu': content.text.trim(),
+      });
+      await _load();
+    } else if (action == 'reset') {
+      await MagnetismeLibraryService.resetLocal(id);
+      await _load();
+    }
+    title.dispose();
+    description.dispose();
+    content.dispose();
+    aliases.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_loading) {
@@ -306,11 +368,21 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    trailing: const Icon(Icons.chevron_right),
+                    trailing: IconButton(
+                      tooltip: 'Modifier la fiche',
+                      icon: const Icon(Icons.edit_outlined),
+                      onPressed: () => _edit(e),
+                    ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => _LibraryReader(entry: e),
+                        builder: (_) => _LibraryReader(
+                          entry: e,
+                          onEdit: () {
+                            Navigator.pop(context);
+                            _edit(e);
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -326,8 +398,9 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
 
 class _LibraryReader extends StatelessWidget {
   final Map<String, dynamic> entry;
+  final VoidCallback onEdit;
 
-  const _LibraryReader({required this.entry});
+  const _LibraryReader({required this.entry, required this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -355,6 +428,11 @@ class _LibraryReader extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text((entry['titre'] ?? '').toString()),
+        actions: [IconButton(
+          tooltip: 'Modifier cette fiche',
+          icon: const Icon(Icons.edit_outlined),
+          onPressed: onEdit,
+        )],
       ),
       body: SafeArea(
         child: ListView(
