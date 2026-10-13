@@ -847,7 +847,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: SelectableText(
-                  _priereFeu,
+                  MagnetismeLibraryService.personalized(_priereFeu, prenom: _prenom.text, nom: _nom.text),
                   style: const TextStyle(fontSize: 15, height: 1.5),
                 ),
               ),
@@ -1102,7 +1102,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       (id: 3, title: 'Taper 2 fois pour retirer le négatif', detail: 'Rappel systématique : 2 frappes après avoir levé le pendule.'),
       if (!distance) (id: 4, title: '15 passes lentes', detail: null),
       (id: 5, title: 'Rotation positive du pendule : intention de soulager la zone', detail: 'Relancer dans le sens positif en gardant l’intention de soulager la zone.'),
-      (id: 6, title: 'Prière contre le feu × 3', detail: _priereFeu),
+      (id: 6, title: 'Prière contre le feu × 3', detail: MagnetismeLibraryService.personalized(_priereFeu, prenom: _prenom.text, nom: _nom.text)),
       (id: 7, title: 'Formulation de dégagement', detail: degagement),
       (id: 8, title: 'Formulation de protection et de renforcement', detail: protection),
     ];
