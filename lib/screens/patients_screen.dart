@@ -71,12 +71,19 @@ class _PatientsScreenState extends State<PatientsScreen> {
               ),
             ),
             Expanded(
-              child: ValueListenableBuilder<Box<PatientSession>>(
+              child: ValueListenableBuilder<Box>(
+                valueListenable: MagnetismeSessionService.listenable(),
+                builder: (context, magnetismeBox, _) => ValueListenableBuilder<Box<PatientSession>>(
                 valueListenable: HistoryService.listenable(),
                 builder: (context, box, _) {
                   final sessions = HistoryService.getHistory();
+                  final nomsV3 = magnetismeBox.values.whereType<Map>().map((m) {
+                    final prenom = (m['nomPatient'] ?? '').toString().trim();
+                    final nom = (m['nomFamille'] ?? '').toString().trim();
+                    return [prenom, nom].where((v) => v.isNotEmpty).join(' ');
+                  }).where((nom) => nom.isNotEmpty).toSet();
 
-                  if (sessions.isEmpty) {
+                  if (sessions.isEmpty && nomsV3.isEmpty) {
                     return Center(
                       child: Padding(
                         padding: const EdgeInsets.all(24),
@@ -105,6 +112,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   for (final s in sessions) {
                     grouped.putIfAbsent(s.nomComplet, () => []).add(s);
                   }
+                  for (final nom in nomsV3) {
+                    grouped.putIfAbsent(nom, () => <PatientSession>[]);
+                  }
 
                   var entries = grouped.entries.toList();
                   if (_recherche.isNotEmpty) {
@@ -127,7 +137,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           Expanded(child: Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold))),
                           IconButton(
                             icon: const Icon(Icons.edit, size: 18),
-                            onPressed: () => _showRenameDialog(context, entry.value.first),
+                            onPressed: () => _renamePatientByName(context, entry.key),
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete, size: 18, color: Colors.red),
@@ -398,6 +408,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   );
                 },
               ),
+              ),
             ),
           ],
         ),
@@ -457,10 +468,10 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
   }
 
-  Future<void> _showRenameDialog(BuildContext context, PatientSession reference) async {
-    final oldNomComplet = reference.nomComplet;
-    TextEditingController prenomController = TextEditingController(text: reference.nomPatient);
-    TextEditingController nomController = TextEditingController(text: reference.nomFamille);
+  Future<void> _renamePatientByName(BuildContext context, String oldNomComplet) async {
+    final parts = oldNomComplet.trim().split(RegExp(r'\s+'));
+    TextEditingController prenomController = TextEditingController(text: parts.isEmpty ? '' : parts.first);
+    TextEditingController nomController = TextEditingController(text: parts.length < 2 ? '' : parts.skip(1).join(' '));
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
