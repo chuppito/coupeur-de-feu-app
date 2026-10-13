@@ -37,13 +37,36 @@ class MagnetismeLibraryService {
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
 
-    return [...base, ...techniques, ...chakras, ...custom];
+    final overrides = <String, Map<String, dynamic>>{};
+    for (final entry in custom) {
+      final id = (entry['id'] ?? '').toString();
+      if (id.isNotEmpty) overrides[id] = entry;
+    }
+    final builtIn = [...base, ...techniques, ...chakras];
+    final merged = builtIn.map((entry) {
+      final id = (entry['id'] ?? '').toString();
+      final local = overrides.remove(id);
+      return local == null ? entry : {...entry, ...local};
+    }).toList();
+    return [...merged, ...overrides.values];
   }
 
   static Future<void> add(Map<String, dynamic> entry) async =>
       _box.add(Map<String, dynamic>.from(entry));
 
   static Future<void> delete(dynamic key) => _box.delete(key);
+
+  /// Enregistre une version locale sans modifier les ressources intégrées.
+  static Future<void> saveLocal(Map<String, dynamic> entry) async {
+    final id = (entry['id'] ?? '').toString();
+    if (id.isEmpty) throw ArgumentError('Identifiant de fiche manquant');
+    await _box.put(id, Map<String, dynamic>.from(entry));
+  }
+
+  static bool hasLocalVersion(String id) => _box.containsKey(id);
+
+  static Future<void> resetLocal(String id) => _box.delete(id);
+
 
   static String personalized(
     String text, {
