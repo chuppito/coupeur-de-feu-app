@@ -396,6 +396,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return result;
   }
 
+  List<_Doc> get _choixSoin => [
+    ..._fts,
+    ..._docs.where((doc) => doc.type == 'protocole' &&
+      (doc.id == 'ft-couper-le-feu' || doc.id == 'ft-coup-de-soleil')),
+  ];
+
   bool get _isCouperLeFeu => _ft?.id == 'ft-couper-le-feu';
 
   String? _findPrayer(String title) {
@@ -433,7 +439,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   List<_Doc> get _selectedFts {
     final selected = _fts.where((doc) => _pathologies.contains(doc.titre)).toList();
-    if (_ft != null && !selected.any((doc) => doc.id == _ft!.id)) {
+    if (_ft != null && _ft!.type == 'fiche_technique' && !selected.any((doc) => doc.id == _ft!.id)) {
       selected.insert(0, _ft!);
     }
     return selected;
@@ -698,7 +704,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 labelText: 'Fiche technique principale',
                 border: OutlineInputBorder(),
               ),
-              items: _fts.map((doc) => DropdownMenuItem<String>(
+              items: _choixSoin.map((doc) => DropdownMenuItem<String>(
                 value: doc.id,
                 child: Text(doc.titre, overflow: TextOverflow.ellipsis),
               )).toList(),
