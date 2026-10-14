@@ -20,8 +20,6 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
         return (icon: Icons.auto_awesome, color: Colors.deepPurple);
       case 'Prières / formulations':
         return (icon: Icons.volunteer_activism, color: Colors.teal);
-      case 'Protocoles':
-        return (icon: Icons.route_outlined, color: Colors.orange);
       case 'Références':
         return (icon: Icons.menu_book_outlined, color: Colors.indigo);
       default:
@@ -272,7 +270,7 @@ class _MagnetismeLibraryScreenState extends State<MagnetismeLibraryScreen> {
 
     final cats = <String>{
       'Tout',
-      ..._items.map((e) => (e['categorie'] ?? 'Références').toString()),
+      ..._items.map((e) => (e['categorie'] ?? 'Références').toString()).where((category) => category != 'Protocoles'),
     }.toList();
 
     return Scaffold(
