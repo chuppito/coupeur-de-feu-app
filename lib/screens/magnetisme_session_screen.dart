@@ -417,20 +417,38 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
 
-  bool get _ftHasFirePrayer => _ft != null &&
-      RegExp(r'prière contre le feu|priere contre le feu|signe de croix', caseSensitive: false)
-          .hasMatch(_ft!.contenu);
+  List<_Doc> get _selectedFts {
+    final selected = _fts.where((doc) => _pathologies.contains(doc.titre)).toList();
+    if (_ft != null && !selected.any((doc) => doc.id == _ft!.id)) {
+      selected.insert(0, _ft!);
+    }
+    return selected;
+  }
 
-  bool get _ftHasPasses => _ft != null &&
-      RegExp(r'passes rapides|passes lentes|imposition|apposition', caseSensitive: false)
-          .hasMatch(_ft!.contenu);
+  bool _anyFtMatches(String pattern) => _selectedFts.any(
+    (doc) => RegExp(pattern, caseSensitive: false).hasMatch(doc.contenu),
+  );
 
-  bool get _ftHasCirculation => _ft != null &&
-      RegExp(r'circulation énergétique entre les chakras', caseSensitive: false)
-          .hasMatch(_ft!.contenu);
+  List<String> get _allSpecificConventions {
+    final result = <String>[];
+    final seen = <String>{};
+    for (final doc in _selectedFts) {
+      for (final item in _specificConventions(doc)) {
+        if (seen.add(item.toLowerCase().trim())) {
+          result.add('${doc.titre} — $item');
+        }
+      }
+    }
+    return result;
+  }
 
-  bool get _ftHasBalayage => _ft != null &&
-      RegExp(r'balayage', caseSensitive: false).hasMatch(_ft!.contenu);
+  bool get _ftHasFirePrayer => _anyFtMatches(r'prière contre le feu|priere contre le feu|signe de croix');
+
+  bool get _ftHasPasses => _anyFtMatches(r'passes rapides|passes lentes|imposition|apposition');
+
+  bool get _ftHasCirculation => _anyFtMatches(r'circulation énergétique entre les chakras');
+
+  bool get _ftHasBalayage => _anyFtMatches(r'balayage');
 
   List<String> get _etapes {
     if (_isCouperLeFeu) {
@@ -705,6 +723,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                     } else {
                       _pathologies.remove(name);
                     }
+                    _conventionsSupplementairesFaites.clear();
+                    _etapesFaites.clear();
+                    _etapeOuverte = 0;
                   });
                 },
               )).toList(),
@@ -1265,7 +1286,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           _conventionsSupplementairesFaites.add(_conventionSuppAuto);
           _conventionSuppAuto++;
         }
-        final extra = _specificConventions(_ft);
+        final extra = _allSpecificConventions;
         if (_phaseSupplementaire && _conventionSuppAuto >= extra.length) {
           timer.cancel();
           _lectureAuto = false;
@@ -1277,7 +1298,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   Widget _lectureAutomatique() {
-    final extra = _specificConventions(_ft);
+    final extra = _allSpecificConventions;
     final supplement = _phaseSupplementaire && extra.isNotEmpty;
     final titre = supplement
         ? extra[_conventionSuppAuto.clamp(0, extra.length - 1)]
@@ -1577,9 +1598,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return result;
   }
 
-  String? _protocolSection(int number) {
-    final doc = _ft;
-    if (doc == null) return null;
+  String? _protocolSection(int number) => _ft == null ? null : _protocolSectionFor(_ft!, number);
+
+  String? _protocolSectionFor(_Doc doc, int number) {
     final lines = doc.contenu.split('\n');
     final result = <String>[];
     var active = false;
@@ -1598,7 +1619,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   Widget _specific() {
     final zones = _zonesSoin.toList()..sort();
-    final conventions = _specificConventions(_ft);
+    final conventions = _allSpecificConventions;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -1789,7 +1810,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   Widget _technique(int index) {
     final titreEtape = _etapes[index];
     final distance = _mode == 'À distance';
-    final technique = _protocolSection(7);
+    final techniques = _selectedFts.map((doc) {
+      final section = _protocolSectionFor(doc, 7);
+      return section == null ? null : '${doc.titre}\n$section';
+    }).whereType<String>().toList();
     final zones = _zonesSoin.toList()..sort();
 
     if (distance) {
@@ -1813,13 +1837,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
-      if (titreEtape == 'Passes et impositions selon la fiche' && technique != null) ...<Widget>[
+      if (titreEtape == 'Passes et impositions selon la fiche' && techniques.isNotEmpty) ...<Widget>[
         Text(
           'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         const SizedBox(height: 8),
-        SelectableText(technique, style: const TextStyle(fontSize: 14, height: 1.5)),
+        SelectableText(techniques.join('\n\n'), style: const TextStyle(fontSize: 14, height: 1.5)),
       ] else
         const Text('Aucune technique spécifique n’est décrite à cette étape dans la fiche.'),
       if (zones.isNotEmpty) ...<Widget>[
