@@ -52,6 +52,20 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final _soinPenduleNotes = TextEditingController();
   final Set<String> _soinPenduleZones = <String>{};
   final Set<String> _zonesSoin = <String>{};
+  final Map<String, Set<String>> _zonesParPathologie = <String, Set<String>>{};
+  String? _pathologieZoneActive;
+
+  Set<String> _zonesPour(String titre) => _zonesParPathologie.putIfAbsent(titre, () => <String>{});
+
+  void _onZonePathologieTap(String titre, String zone) {
+    setState(() {
+      final zones = _zonesPour(titre);
+      if (!zones.add(zone)) zones.remove(zone);
+      _zonesSoin.clear();
+      for (final values in _zonesParPathologie.values) { _zonesSoin.addAll(values); }
+    });
+  }
+
   bool _utiliserRaphael = false;
 
   late final Map<String, TextEditingController> _anamneseFields;
@@ -496,6 +510,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'ftId': _ft!.id,
       'ftTitre': _ft!.titre,
       'zonesSoin': _zonesSoin.toList(),
+      'zonesParPathologie': {for (final e in _zonesParPathologie.entries) e.key: e.value.toList()},
+      'ftIds': _selectedFts.map((doc) => doc.id).toList(),
       'utiliserRaphael': _utiliserRaphael,
       'etapes': _etapes,
       'anamnese': {for (final e in _anamneseFields.entries) e.key: e.value.text.trim()},
@@ -698,6 +714,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                   _conventionsFaites.clear();
                   _conventionsSupplementairesFaites.clear();
                   _zonesSoin.clear();
+                  _zonesParPathologie.clear();
+                  _pathologieZoneActive = doc?.titre;
                   _utiliserRaphael = false;
                 });
               },
@@ -723,6 +741,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                     } else {
                       _pathologies.remove(name);
                     }
+                    if (!selected) _zonesParPathologie.remove(name);
+                    _pathologieZoneActive = selected ? name : (_pathologies.isEmpty ? null : _pathologies.first);
+                    _zonesSoin.clear();
+                    for (final values in _zonesParPathologie.values) { _zonesSoin.addAll(values); }
                     _conventionsSupplementairesFaites.clear();
                     _etapesFaites.clear();
                     _etapeOuverte = 0;
@@ -731,17 +753,41 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               )).toList(),
             ),
             const SizedBox(height: 14),
-            const Text('Zone(s) anatomique(s) à traiter', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('Zones anatomiques par pathologie',
+                style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
-            const Text(
-              'Sélectionnez la ou les zones une seule fois. Elles seront mémorisées et réutilisées automatiquement pendant le travail local.',
-              style: TextStyle(fontSize: 12, color: Colors.black54),
-            ),
+            const Text('Sélectionne une pathologie, puis ses zones sur le bonhomme. Recommence pour chaque motif : les zones restent séparées.',
+                style: TextStyle(fontSize: 12, color: Colors.black54)),
             const SizedBox(height: 8),
-            InteractiveBody(
-              selectedZones: _zonesSoin,
-              onZoneTap: _onZoneSoinTap,
-            ),
+            if (_pathologies.isNotEmpty) ...<Widget>[
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: _pathologies.map((name) => ChoiceChip(
+                  label: Text('$name (${_zonesPour(name).length})'),
+                  selected: (_pathologieZoneActive ?? _pathologies.first) == name,
+                  onSelected: (_) => setState(() => _pathologieZoneActive = name),
+                )).toList(),
+              ),
+              const SizedBox(height: 8),
+              Builder(builder: (context) {
+                final active = _pathologies.contains(_pathologieZoneActive)
+                    ? _pathologieZoneActive! : _pathologies.first;
+                return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('Zones pour : $active', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  InteractiveBody(
+                    key: ValueKey(active),
+                    selectedZones: _zonesPour(active),
+                    onZoneTap: (zone) => _onZonePathologieTap(active, zone),
+                  ),
+                  if (_zonesPour(active).isNotEmpty)
+                    Wrap(spacing: 6, children: _zonesPour(active).map((zone) => Chip(
+                      label: Text(zone),
+                      onDeleted: () => _onZonePathologieTap(active, zone),
+                    )).toList()),
+                ]);
+              }),
+            ],
             if (_zonesSoin.isNotEmpty) ...<Widget>[
               const SizedBox(height: 8),
               Wrap(
