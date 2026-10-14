@@ -1826,15 +1826,15 @@
       "id": "ft-couper-le-feu",
       "titre": "Couper le feu",
       "source": "Protocole fourni par l'utilisateur",
-      "type": "protocole",
-      "categorie": "Protocoles",
+      "type": "fiche_technique",
+      "categorie": "Fiches techniques",
       "aliases": [
         "couper le feu",
         "brûlure",
         "brulure",
         "insolation"
       ],
-      "description": "Protocole « Couper le feu » pour les brûlures et l'insolation. Protocole particulier : hors des fiches techniques classiques.",
+      "description": "Protocole « Couper le feu » pour les brûlures et l'insolation. Fiche technique particulière sans conventions mentales.",
       "contenu": "PROTOCOLE : COUPER LE FEU\n\n1. Accueil et prise de contact.\n- Identifier la cause et la localisation de la sensation de brûlure.\n- Ne pas retarder les soins médicaux nécessaires.\n\n2. Bilan énergétique facultatif.\n- Identifier précisément la zone sur le schéma anatomique.\n\n3. Dégagement facultatif, uniquement si jugé nécessaire dans la pratique.\n\n4. Conventions mentales : aucune pour cette fiche.\n\n5. Préparation et intentions spécifiques :\n- Se concentrer sur la zone concernée.\n- Première intention traditionnelle : guérir les terminaisons nerveuses (2 minutes).\n- Seconde intention traditionnelle : stopper l'inflammation et l'échauffement.\n- Visualiser la zone qui se refroidit et s'apaise.\n\n6. Prière contre le feu — 3 répétitions :\nFeu je te coupe +\nFeu je te bloque +\nTu n'as pas lieu d'être sur le corps de [prénom nom]\nLe feu ne brûle pas les chairs\nLes chairs deviennent normales\nLa peau s'assouplit s'adoucit ne devient pas dur\nMais reste telle qu'elle était avant la brûlures\n\n7. Travail sur la zone sélectionnée :\n- En présentiel : imposition traditionnelle des mains à proximité, sans contact avec une brûlure.\n- À distance : travail symbolique sur photographie ou planche anatomique.\n\n8. Circulation énergétique entre les chakras : facultative, non imposée par ce protocole.\n\n9. Balayage traditionnel de clôture.\n\n10. Débriefing.\n- Recueillir les sensations, enregistrer les observations et les zones.\n- La pratique ne remplace pas une prise en charge médicale adaptée.",
       "protocoleStructure": {
         "version": 2,
@@ -2058,13 +2058,13 @@
       "id": "ft-coup-de-soleil",
       "titre": "Coup de soleil",
       "source": "Protocole proposé à partir de « Couper le feu »",
-      "type": "protocole",
-      "categorie": "Protocoles",
+      "type": "fiche_technique",
+      "categorie": "Fiches techniques",
       "aliases": [
         "Coup de soleil",
         "coup de soleil"
       ],
-      "description": "Protocole de travail pour un coup de soleil, basé sur le protocole « Couper le feu ». Protocole particulier : hors des fiches techniques classiques.",
+      "description": "Protocole de travail pour un coup de soleil, basé sur le protocole « Couper le feu ». Fiche technique particulière sans conventions mentales.",
       "contenu": "PROTOCOLE : COUP DE SOLEIL\n\n1. Accueil et prise de contact.\n- Identifier la zone concernée et les sensations rapportées.\n- En cas de brûlure étendue, cloques importantes, malaise ou fièvre, orienter vers une prise en charge médicale.\n\n2. Bilan énergétique facultatif.\n- Identifier la zone de travail sur le schéma anatomique.\n\n3. Dégagement facultatif, uniquement si jugé nécessaire dans la pratique.\n\n4. Conventions mentales : aucune pour cette fiche.\n\n5. Intentions spécifiques :\n- Apaiser symboliquement la sensation de chaleur.\n- Accompagner le confort de la peau.\n- Formuler une intention de retour au calme.\n\n6. Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n- Réciter la prière complète 3 fois en personnalisant [prénom nom].\n\n7. Travail local sur la zone sélectionnée :\n- En présentiel : travail traditionnel des mains à proximité, sans contact douloureux.\n- À distance : photographie ou planche anatomique de la zone sélectionnée.\n- Ne pas irriter la peau ; aucun geste physique sur une brûlure.\n\n8. Circulation énergétique entre les chakras : facultative.\n\n9. Balayage traditionnel de clôture, adapté au mode de séance.\n\n10. Débriefing / suivi.\n- Recueillir les sensations, noter les zones et observations.\n- Cette pratique ne remplace pas les soins d'une brûlure.",
       "protocoleStructure": {
         "version": 2,
