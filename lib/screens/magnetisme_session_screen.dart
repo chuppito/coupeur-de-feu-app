@@ -417,6 +417,21 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
 
+  bool get _ftHasFirePrayer => _ft != null &&
+      RegExp(r'prière contre le feu|priere contre le feu|signe de croix', caseSensitive: false)
+          .hasMatch(_ft!.contenu);
+
+  bool get _ftHasPasses => _ft != null &&
+      RegExp(r'passes rapides|passes lentes|imposition|apposition', caseSensitive: false)
+          .hasMatch(_ft!.contenu);
+
+  bool get _ftHasCirculation => _ft != null &&
+      RegExp(r'circulation énergétique entre les chakras', caseSensitive: false)
+          .hasMatch(_ft!.contenu);
+
+  bool get _ftHasBalayage => _ft != null &&
+      RegExp(r'balayage', caseSensitive: false).hasMatch(_ft!.contenu);
+
   List<String> get _etapes {
     if (_isCouperLeFeu) {
       return <String>[
@@ -439,12 +454,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'Conventions mentales supplémentaires de la fiche technique',
       'Prières / formulations prévues par le protocole',
       if (_mode == 'Présentiel') ...<String>[
-        'Passes et impositions selon la fiche',
-        'Circulation énergétique entre les chakras',
-        'Balayage',
+        if (_ftHasPasses) 'Passes et impositions selon la fiche',
+        if (_ftHasCirculation) 'Circulation énergétique entre les chakras',
+        if (_ftHasBalayage) 'Balayage',
       ] else ...<String>[
-        'Travail sur photo / planches anatomiques selon la fiche',
-        'Renforcement de l’intention, notamment lors de la convention n°10',
+        if (_ftHasPasses || _ftHasCirculation || _ftHasBalayage)
+          'Travail sur photo / planches anatomiques selon la fiche',
       ],
       'Débriefing / observation',
     ];
@@ -1660,8 +1675,31 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               ),
             ),
           ),
+        if (_ftHasFirePrayer)
+          Card(
+            margin: const EdgeInsets.only(bottom: 8),
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              title: const Text('Prière contre le feu — 3 fois'),
+              subtitle: Text('Demandée par la fiche : ${_ft?.titre ?? ""}'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
+                  child: SelectableText(
+                    MagnetismeLibraryService.personalized(
+                      _priereFeu,
+                      prenom: _prenom.text,
+                      nom: _nom.text,
+                    ),
+                    style: const TextStyle(fontSize: 14, height: 1.45),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ..._pathologies.expand((pathology) {
           final prayers = _findPrayers(pathology);
+          if (prayers.isEmpty && _ftHasFirePrayer) return <Widget>[];
           if (prayers.isEmpty) {
             return <Widget>[Card(child:ListTile(
               title:Text(pathology),
@@ -1775,7 +1813,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
-      if (technique != null) ...<Widget>[
+      if (titreEtape == 'Passes et impositions selon la fiche' && technique != null) ...<Widget>[
         Text(
           'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
