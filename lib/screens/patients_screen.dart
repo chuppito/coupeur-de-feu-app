@@ -128,6 +128,15 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     return const Center(child: Text("Aucun patient ne correspond à la recherche."));
                   }
 
+                  String prenomPour(String nomComplet) {
+                    final parts = nomComplet.trim().split(RegExp(r'\s+'));
+                    return parts.isEmpty ? '' : parts.first;
+                  }
+                  String famillePour(String nomComplet) {
+                    final parts = nomComplet.trim().split(RegExp(r'\s+'));
+                    return parts.length > 1 ? parts.skip(1).join(' ') : '';
+                  }
+
                   return ListView(
                     padding: const EdgeInsets.only(bottom: 24, top: 8),
                     children: entries.map((entry) => Card(
@@ -393,8 +402,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MagnetismeSessionScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
+                                  prefillNom: prenomPour(entry.key),
+                                  prefillNomFamille: famillePour(entry.key),
                                 ),
                               ),
                             ),
@@ -407,8 +416,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => BodyScanScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
+                                  prefillNom: prenomPour(entry.key),
+                                  prefillNomFamille: famillePour(entry.key),
                                 ),
                               ),
                             ),
@@ -421,8 +430,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MagnetismeSessionScreen(
-                                  prefillNom: entry.value.first.nomPatient,
-                                  prefillNomFamille: entry.value.first.nomFamille,
+                                  prefillNom: prenomPour(entry.key),
+                                  prefillNomFamille: famillePour(entry.key),
                                 ),
                               ),
                             ),
