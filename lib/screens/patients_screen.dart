@@ -116,7 +116,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     grouped.putIfAbsent(nom, () => <PatientSession>[]);
                   }
 
-                  var entries = grouped.entries.toList();
+                  var entries = grouped.entries.toList()
+                    ..sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
                   if (_recherche.isNotEmpty) {
                     entries = entries
                         .where((e) => e.key.toLowerCase().contains(_recherche))
@@ -145,6 +146,30 @@ class _PatientsScreenState extends State<PatientsScreen> {
                           ),
                         ]),
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: FilledButton.icon(
+                                icon: const Icon(Icons.add_circle_outline),
+                                label: const Text('Nouveau soin pour ce patient'),
+                                onPressed: () {
+                                  final parts = entry.key.trim().split(RegExp(r'\s+'));
+                                  final prenom = parts.isNotEmpty ? parts.first : '';
+                                  final nomFamille = parts.length > 1 ? parts.skip(1).join(' ') : '';
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => MagnetismeSessionScreen(
+                                        prefillNom: prenom,
+                                        prefillNomFamille: nomFamille,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                           ...entry.value.map((h) => Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                 child: Row(
