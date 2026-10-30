@@ -184,6 +184,7 @@ class SessionEngine {
     final nodes = <String, PlannedAction>{};
     final edges = <String, Set<String>>{};
     final shares = <String, String>{};
+    final phases = <String, SessionPhase>{};
     void edge(String before, String after) {
       if (before != after) edges.putIfAbsent(before, () => {}).add(after);
     }
@@ -234,6 +235,7 @@ class SessionEngine {
           'target': block.target,
           'condition': block.condition,
           'optional': block.optional,
+          'phase': block.phase?.name,
           'actions': block.actions.map((a) => a.semanticJson).toList(),
         });
         if (block.shareKey != null) {
@@ -279,6 +281,7 @@ class SessionEngine {
               origins: origins,
               sources: sources.values.toList(),
             );
+            if (block.phase != null) phases[id] = block.phase!;
             edges.putIfAbsent(id, () => {});
             blockNodes.putIfAbsent(block.id, () => []).add(id);
             if (previous != null) edge(previous, id);
@@ -293,6 +296,19 @@ class SessionEngine {
           }
         }
       }
+    }
+    // Explicit phases add constraints; they never remove the documented local order.
+    // A contradictory exception therefore produces an orderConflict, not a silent reorder.
+    for (final before in phases.entries) {
+      for (final after in phases.entries) {
+        if (before.value.index < after.value.index) edge(before.key, after.key);
+      }
+    }
+    if (selections.length > 1 &&
+        selections.any((s) => s.protocol.blocks.any((b) => b.phase == null))) {
+      issues.add(PlanIssue('phaseReview',
+          'Certaines fiches ne déclarent pas leurs phases : vérifier leur enchaînement global dans l’aperçu.',
+          blocking: false));
     }
     final indegree = {for (final id in nodes.keys) id: 0};
     for (final successors in edges.values) {

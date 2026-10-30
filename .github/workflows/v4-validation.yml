@@ -3,6 +3,8 @@ on:
   push:
     branches: [V4]
   workflow_dispatch:
+env:
+  FLUTTER_SUPPRESS_ANALYTICS: 'true'
 permissions:
   contents: read
 concurrency:

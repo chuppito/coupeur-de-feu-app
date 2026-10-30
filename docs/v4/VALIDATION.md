@@ -22,3 +22,11 @@ La compilation Android et les essais sur appareil ne sont pas couverts par ce po
 Les tests d’interface couvrent l’accès depuis l’accueil historique, l’orientation anatomique face/dos, le début de la nouvelle action, le compte à rebours et la pause en arrière-plan. Le lecteur utilise un adaptateur de persistance contrôlé dans ce test ; les sauvegardes Hive et leur relecture après fermeture sont vérifiées séparément. Maintien de l’écran, interruption forcée Android, absence effective de sons sur appareil et restauration de vraies données restent à vérifier sur téléphone.
 
 Le catalogue normalisé initial (quatre fiches présentielles et une trame distance) n’est pas une migration complète des 45 fiches. Les 18 constats ne sont donc pas tous clos sur l’intégralité des contenus.
+
+## Renforcement après dix nouvelles analyses vidéo
+
+46 tests locaux réussis et analyse ciblée sans anomalie. Les deux cas ajoutés vérifient l’ordre global des phases sur les quatre fiches initiales et le refus d’un conflit entre phase et ordre local. La trame distance conserve ses huit phases, dont deux repères explicitement incomplets pour les éléments par motif. La circulation est détaillée en six actions.
+
+Le premier GitHub Actions (commit 4bc7bff, exécution 41076877915) a réussi les 44 tests d’alors et compilé un APK debug. Artefact : magnetisme-v4-debug, ID 12987612652. Cela n’est pas une installation ni un essai sur téléphone. Le contrôle du dernier commit enrichi doit encore être observé avant de lui attribuer ce succès.
+
+La télémétrie des prochaines commandes Flutter est désactivée par FLUTTER_SUPPRESS_ANALYTICS=true. Dans ce SDK, ce réglage retourne NoOpAnalytics ; les tests n’utilisent pas de résolution réseau des paquets grâce à --no-pub.

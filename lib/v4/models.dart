@@ -6,6 +6,20 @@ typedef Json = Map<String, dynamic>;
 
 enum SessionMode { presentiel, distance }
 
+enum SessionPhase {
+  preparation,
+  accueil,
+  assessment,
+  clearance,
+  commonIntentions,
+  specificIntentions,
+  prayers,
+  localWork,
+  circulation,
+  sweep,
+  debrief
+}
+
 enum ReviewState { documented, needsReview, conflicting, personal }
 
 enum ActionKind {
@@ -259,6 +273,7 @@ class ActionDefinition {
 class ProtocolBlock {
   final String id;
   final String? shareKey, condition;
+  final SessionPhase? phase;
   final bool optional, repeatPerZone;
   final String target; // none, selected, or fixed (explicit zones).
   final List<BodyZone> fixedZones;
@@ -268,6 +283,7 @@ class ProtocolBlock {
     required this.id,
     required List<ActionDefinition> actions,
     this.shareKey,
+    this.phase,
     this.condition,
     this.optional = false,
     this.repeatPerZone = false,
@@ -286,6 +302,9 @@ class ProtocolBlock {
             .map((x) => ActionDefinition.fromJson(jsonMap(x)))
             .toList(),
         shareKey: j['shareKey'] as String?,
+        phase: j['phase'] == null
+            ? null
+            : SessionPhase.values.byName(j['phase'] as String),
         condition: j['condition'] as String?,
         optional: j['optional'] as bool? ?? false,
         repeatPerZone: j['repeatPerZone'] as bool? ?? false,
@@ -300,6 +319,7 @@ class ProtocolBlock {
   Json toJson() => {
         'id': id,
         'shareKey': shareKey,
+        'phase': phase?.name,
         'condition': condition,
         'optional': optional,
         'repeatPerZone': repeatPerZone,

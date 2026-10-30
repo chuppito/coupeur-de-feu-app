@@ -74,6 +74,7 @@ void main() {
           protocol: p,
           zones: const [BodyZone(id: 'poignet', label: 'Poignet')])
     ]);
+    expect(p.blocks.where((b) => b.phase != SessionPhase.preparation).map((b) => b.phase).toSet().length, 8);
     expect(plan.canStart, isTrue);
     expect(
         plan.actions.any(
@@ -130,6 +131,48 @@ void main() {
       await Hive.close();
       await restoredDir.delete(recursive: true);
     }
+  });
+  test(
+      'Séance de quatre fiches : conventions supplémentaires puis prières puis travaux locaux',
+      () async {
+    final catalog = (await V4Store.catalog())
+        .where((p) => p.modes.contains(SessionMode.presentiel));
+    final selections = [
+      for (final p in catalog)
+        ProtocolSelection(id: p.id, protocol: p, zones: const [
+          BodyZone(id: 'genou', label: 'Genou droit', side: 'droit')
+        ])
+    ];
+    final plan = SessionEngine()
+        .build(mode: SessionMode.presentiel, selections: selections);
+    expect(plan.canStart, isTrue,
+        reason: plan.issues.map((i) => i.message).join(' ; '));
+    final supplementary =
+        plan.actions.indexWhere((a) => a.definition.id == 'supplement');
+    final lastSupplementary =
+        plan.actions.lastIndexWhere((a) => a.definition.id == 'supplement');
+    final firstPrayer =
+        plan.actions.indexWhere((a) => a.definition.kind == ActionKind.prayer);
+    final lastPrayer = plan.actions
+        .lastIndexWhere((a) => a.definition.kind == ActionKind.prayer);
+    final firstLocal = plan.actions.indexWhere((a) => [
+          ActionKind.imposition,
+          ActionKind.rapidPasses
+        ].contains(a.definition.kind));
+    expect(supplementary, greaterThan(0));
+    expect(lastSupplementary, lessThan(firstPrayer));
+    expect(lastPrayer, lessThan(firstLocal));
+    expect(
+        plan.actions
+            .where((a) => a.definition.kind == ActionKind.circulation)
+            .map((a) => a.definition.gesture?.end)
+            .toList(),
+        ['troisième œil', 'gorge', 'cœur', 'plexus', 'sacré', 'racine']);
+    expect(
+        plan.actions
+            .where((a) => a.definition.kind == ActionKind.prayer)
+            .length,
+        4);
   });
   test('Import complet valide avant toute écriture', () async {
     final original = await V4Store.createPatient('Anne', 'A');

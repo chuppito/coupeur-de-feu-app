@@ -54,6 +54,38 @@ SessionPlan build(List<ProtocolSelection> picks,
         facts: facts,
         enabledOptionalBlocks: optional);
 void main() {
+  test('Une phase standard contraire à l’ordre déclaré bloque sans le réécrire',
+      () {
+    ActionDefinition action(String id) => ActionDefinition(
+            id: id,
+            title: id,
+            instruction: 'Test',
+            kind: ActionKind.intention,
+            sources: const [
+              SourceRef(id: 's', lesson: 's', url: 'https://example.org')
+            ]);
+    final p = ProtocolDefinition(
+        id: 'exception',
+        title: 'Exception à arbitrer',
+        category: 'Test',
+        blocks: [
+          ProtocolBlock(
+              id: 'local',
+              phase: SessionPhase.localWork,
+              actions: [action('local')]),
+          ProtocolBlock(
+              id: 'convention',
+              phase: SessionPhase.specificIntentions,
+              actions: [action('cm')])
+        ]);
+    final plan = SessionEngine().build(
+        mode: SessionMode.presentiel,
+        selections: [ProtocolSelection(id: 's', protocol: p)]);
+    expect(plan.canStart, isFalse);
+    expect(plan.actions.length, 2);
+    expect(plan.issues.any((i) => i.code == 'orderConflict'), isTrue);
+  });
+
   test('A10 quatre motifs partagent accueil et fin, gardent toutes les cibles',
       () {
     final ps = [

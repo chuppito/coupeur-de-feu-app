@@ -31,7 +31,8 @@
         "presentiel",
         "distance"
       ],
-      "shareKey": "accueil"
+      "shareKey": "accueil",
+      "phase": "accueil"
     },
     "bilan-presentiel": {
       "id": "bilan-presentiel",
@@ -65,7 +66,8 @@
       "modes": [
         "presentiel"
       ],
-      "shareKey": "bilan-presentiel"
+      "shareKey": "bilan-presentiel",
+      "phase": "assessment"
     },
     "degagement-presentiel": {
       "id": "degagement-presentiel",
@@ -101,7 +103,8 @@
         "presentiel"
       ],
       "optional": true,
-      "shareKey": "degagement-presentiel"
+      "shareKey": "degagement-presentiel",
+      "phase": "clearance"
     },
     "conventions-presentiel": {
       "id": "conventions-presentiel",
@@ -468,7 +471,8 @@
       "modes": [
         "presentiel"
       ],
-      "shareKey": "conventions-presentiel"
+      "shareKey": "conventions-presentiel",
+      "phase": "commonIntentions"
     },
     "debrief-presentiel": {
       "id": "debrief-presentiel",
@@ -499,7 +503,8 @@
       "modes": [
         "presentiel"
       ],
-      "shareKey": "debrief-presentiel"
+      "shareKey": "debrief-presentiel",
+      "phase": "debrief"
     },
     "bilan-distance": {
       "id": "bilan-distance",
@@ -533,7 +538,8 @@
       "modes": [
         "distance"
       ],
-      "shareKey": "bilan-distance"
+      "shareKey": "bilan-distance",
+      "phase": "assessment"
     },
     "degagement-distance": {
       "id": "degagement-distance",
@@ -569,7 +575,8 @@
         "distance"
       ],
       "optional": true,
-      "shareKey": "degagement-distance"
+      "shareKey": "degagement-distance",
+      "phase": "clearance"
     },
     "conventions-distance": {
       "id": "conventions-distance",
@@ -936,7 +943,8 @@
       "modes": [
         "distance"
       ],
-      "shareKey": "conventions-distance"
+      "shareKey": "conventions-distance",
+      "phase": "commonIntentions"
     },
     "debrief-distance": {
       "id": "debrief-distance",
@@ -967,22 +975,23 @@
       "modes": [
         "distance"
       ],
-      "shareKey": "debrief-distance"
+      "shareKey": "debrief-distance",
+      "phase": "debrief"
     },
     "circulation": {
       "id": "circulation",
       "actions": [
         {
-          "id": "circulation",
-          "title": "Circulation entre les chakras",
-          "instruction": "Distinguer cette technique du bilan : chaque trajet part de la couronne vers troisième œil, gorge, cœur, plexus, sacré puis racine. Main émettrice à la couronne, main réceptrice à la cible ; contrôle, passes rapides si nécessaire, nouveau contrôle. Aucune passe lente ni imposition dans cette séquence.",
+          "id": "circulation-0",
+          "title": "Circulation — troisième œil",
+          "instruction": "Contrôler le ressenti entre la couronne et troisième œil. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration.  Mouvement souple ; aucune passe lente ni imposition ajoutée.",
           "kind": "circulation",
           "sources": [
             {
-              "id": "09.01:protocole PDF et notes",
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
               "lesson": "09.01",
               "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
-              "locator": "protocole PDF et notes",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
               "review": "documented"
             }
           ],
@@ -995,9 +1004,149 @@
           "techniqueId": "circulation-energetique-entre-les-chakras",
           "gesture": {
             "start": "couronne",
-            "end": "six cibles successives",
-            "hands": "gauche émettrice, droite réceptrice dans le PDF",
-            "direction": "départ couronne constant"
+            "end": "troisième œil",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
+          }
+        },
+        {
+          "id": "circulation-1",
+          "title": "Circulation — gorge",
+          "instruction": "Contrôler le ressenti entre la couronne et gorge. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration.  Mouvement souple ; aucune passe lente ni imposition ajoutée.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne",
+            "end": "gorge",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
+          }
+        },
+        {
+          "id": "circulation-2",
+          "title": "Circulation — cœur",
+          "instruction": "Contrôler le ressenti entre la couronne et cœur. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration.  Mouvement souple ; aucune passe lente ni imposition ajoutée.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne",
+            "end": "cœur",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
+          }
+        },
+        {
+          "id": "circulation-3",
+          "title": "Circulation — plexus",
+          "instruction": "Contrôler le ressenti entre la couronne et plexus. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration.  Mouvement souple ; aucune passe lente ni imposition ajoutée.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne",
+            "end": "plexus",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
+          }
+        },
+        {
+          "id": "circulation-4",
+          "title": "Circulation — sacré",
+          "instruction": "Contrôler le ressenti entre la couronne et sacré. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration. Exception de portée : si l’envergure est insuffisante, départ au plexus pour cette cible ; conserver cette variante explicitement. Mouvement souple ; aucune passe lente ni imposition ajoutée.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne ; plexus seulement si portée insuffisante pour sacré/racine",
+            "end": "sacré",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
+          }
+        },
+        {
+          "id": "circulation-5",
+          "title": "Circulation — racine",
+          "instruction": "Contrôler le ressenti entre la couronne et racine. Garder la main de départ à la couronne, réception sur la cible. Deux ou trois rapides conseillées même si le ressenti est bon ; sinon séries variables puis nouveau contrôle selon la démonstration. Exception de portée : si l’envergure est insuffisante, départ au plexus pour cette cible ; conserver cette variante explicitement. Mouvement souple ; aucune passe lente ni imposition ajoutée.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:vidéo 343–486 s ; exception 491–535 s",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "vidéo 343–486 s ; exception 491–535 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne ; plexus seulement si portée insuffisante pour sacré/racine",
+            "end": "racine",
+            "hands": "droitier : gauche au départ, droite en réception ; adaptation symétrique annoncée pour gaucher",
+            "direction": "tête vers pieds"
           }
         }
       ],
@@ -1005,7 +1154,8 @@
       "modes": [
         "presentiel"
       ],
-      "shareKey": "circulation"
+      "shareKey": "circulation",
+      "phase": "circulation"
     },
     "balayage": {
       "id": "balayage",
@@ -1043,7 +1193,8 @@
       "modes": [
         "presentiel"
       ],
-      "shareKey": "balayage"
+      "shareKey": "balayage",
+      "phase": "sweep"
     },
     "ft-entorse-intention": {
       "id": "ft-entorse-intention",
@@ -1074,10 +1225,11 @@
       "target": "none",
       "modes": [
         "presentiel"
-      ]
+      ],
+      "phase": "specificIntentions"
     },
-    "ft-entorse-local": {
-      "id": "ft-entorse-local",
+    "ft-entorse-prieres": {
+      "id": "ft-entorse-prieres",
       "actions": [
         {
           "id": "priere",
@@ -1100,7 +1252,18 @@
             "precision": "inconnue"
           },
           "prayerId": "priere-contre-le-feu"
-        },
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true,
+      "phase": "prayers"
+    },
+    "ft-entorse-local": {
+      "id": "ft-entorse-local",
+      "actions": [
         {
           "id": "rapides",
           "title": "Passes rapides et contrôle",
@@ -1176,10 +1339,11 @@
       "modes": [
         "presentiel"
       ],
-      "repeatPerZone": true
+      "repeatPerZone": true,
+      "phase": "localWork"
     },
-    "ft-eczema-local": {
-      "id": "ft-eczema-local",
+    "ft-eczema-prieres": {
+      "id": "ft-eczema-prieres",
       "actions": [
         {
           "id": "priere",
@@ -1202,7 +1366,18 @@
             "precision": "inconnue"
           },
           "prayerId": "priere-eczema"
-        },
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true,
+      "phase": "prayers"
+    },
+    "ft-eczema-local": {
+      "id": "ft-eczema-local",
+      "actions": [
         {
           "id": "cutanee",
           "title": "Imposition cutanée",
@@ -1229,7 +1404,8 @@
       "modes": [
         "presentiel"
       ],
-      "repeatPerZone": true
+      "repeatPerZone": true,
+      "phase": "localWork"
     },
     "ft-eczema-abdomen": {
       "id": "ft-eczema-abdomen",
@@ -1314,7 +1490,8 @@
           "side": "non renseigné",
           "face": "antérieure"
         }
-      ]
+      ],
+      "phase": "localWork"
     },
     "ft-arthrose-intention": {
       "id": "ft-arthrose-intention",
@@ -1345,10 +1522,11 @@
       "target": "none",
       "modes": [
         "presentiel"
-      ]
+      ],
+      "phase": "specificIntentions"
     },
-    "ft-arthrose-local": {
-      "id": "ft-arthrose-local",
+    "ft-arthrose-prieres": {
+      "id": "ft-arthrose-prieres",
       "actions": [
         {
           "id": "priere",
@@ -1371,7 +1549,18 @@
             "precision": "inconnue"
           },
           "prayerId": "priere-arthrite-polyarthrite-arthrose"
-        },
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true,
+      "phase": "prayers"
+    },
+    "ft-arthrose-local": {
+      "id": "ft-arthrose-local",
+      "actions": [
         {
           "id": "rapides",
           "title": "Passes rapides et contrôle",
@@ -1447,7 +1636,8 @@
       "modes": [
         "presentiel"
       ],
-      "repeatPerZone": true
+      "repeatPerZone": true,
+      "phase": "localWork"
     },
     "ft-insuffisance-veineuse-intention": {
       "id": "ft-insuffisance-veineuse-intention",
@@ -1478,10 +1668,11 @@
       "target": "none",
       "modes": [
         "presentiel"
-      ]
+      ],
+      "phase": "specificIntentions"
     },
-    "ft-insuffisance-veineuse-local": {
-      "id": "ft-insuffisance-veineuse-local",
+    "ft-insuffisance-veineuse-prieres": {
+      "id": "ft-insuffisance-veineuse-prieres",
       "actions": [
         {
           "id": "priere",
@@ -1504,7 +1695,18 @@
             "precision": "inconnue"
           },
           "prayerId": "priere-circulation-sanguine"
-        },
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true,
+      "phase": "prayers"
+    },
+    "ft-insuffisance-veineuse-local": {
+      "id": "ft-insuffisance-veineuse-local",
+      "actions": [
         {
           "id": "rapides",
           "title": "Passes rapides et contrôle",
@@ -1580,7 +1782,8 @@
       "modes": [
         "presentiel"
       ],
-      "repeatPerZone": true
+      "repeatPerZone": true,
+      "phase": "localWork"
     },
     "temoin": {
       "id": "temoin",
@@ -1611,7 +1814,8 @@
       "modes": [
         "distance"
       ],
-      "shareKey": "temoin"
+      "shareKey": "temoin",
+      "phase": "preparation"
     },
     "support-local": {
       "id": "support-local",
@@ -1732,7 +1936,78 @@
       "modes": [
         "distance"
       ],
-      "repeatPerZone": true
+      "repeatPerZone": true,
+      "phase": "localWork"
+    },
+    "distance-intention": {
+      "id": "distance-intention",
+      "actions": [
+        {
+          "id": "convention-a-preparer",
+          "title": "5 — Conventions supplémentaires propres au motif",
+          "instruction": "Consulter la fiche adaptée au motif sélectionné et y préparer les conventions supplémentaires. Elles suivent les communes, avant la prière et le travail sur planche. Les variantes par motif ne sont pas encore normalisées dans ce prototype ; aucune formulation n’est déduite du nom du motif.",
+          "kind": "preparation",
+          "sources": [
+            {
+              "id": "14.05:vidéo 239–250 s",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "vidéo 239–250 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview",
+          "unknowns": [
+            "Formulations spécifiques à compléter depuis une fiche documentée."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "phase": "specificIntentions"
+    },
+    "distance-prieres": {
+      "id": "distance-prieres",
+      "actions": [
+        {
+          "id": "priere-a-preparer",
+          "title": "6 — Prière propre à la fiche",
+          "instruction": "Consulter la prière explicitement associée à la fiche dans votre bibliothèque personnelle. Une prière ne se choisit pas par mots-clés ou par analogie. Si la fiche n’en prévoit pas, ne pas en ajouter. Ce repère de préparation ne récite ni n’attribue automatiquement de prière.",
+          "kind": "preparation",
+          "sources": [
+            {
+              "id": "14.05:vidéo 250–324 s",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "vidéo 250–324 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview",
+          "unknowns": [
+            "Liaison à une fiche distance spécifique encore à normaliser."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "phase": "prayers"
     }
   },
   "protocols": [
@@ -1757,6 +2032,7 @@
         "degagement-presentiel",
         "conventions-presentiel",
         "ft-entorse-intention",
+        "ft-entorse-prieres",
         "ft-entorse-local",
         "circulation",
         "balayage",
@@ -1783,6 +2059,7 @@
         "bilan-presentiel",
         "degagement-presentiel",
         "conventions-presentiel",
+        "ft-eczema-prieres",
         "ft-eczema-local",
         "ft-eczema-abdomen",
         "circulation",
@@ -1811,6 +2088,7 @@
         "degagement-presentiel",
         "conventions-presentiel",
         "ft-arthrose-intention",
+        "ft-arthrose-prieres",
         "ft-arthrose-local",
         "circulation",
         "balayage",
@@ -1838,6 +2116,7 @@
         "degagement-presentiel",
         "conventions-presentiel",
         "ft-insuffisance-veineuse-intention",
+        "ft-insuffisance-veineuse-prieres",
         "ft-insuffisance-veineuse-local",
         "circulation",
         "balayage",
@@ -1865,6 +2144,8 @@
         "bilan-distance",
         "degagement-distance",
         "conventions-distance",
+        "distance-intention",
+        "distance-prieres",
         "support-local",
         "debrief-distance"
       ]
