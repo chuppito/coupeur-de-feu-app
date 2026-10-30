@@ -1,4 +1,5 @@
 import 'models.dart';
+import 'engine.dart';
 
 /// Clock-independent runner; the UI supplies monotonic foreground elapsed time.
 class SessionRunner {
@@ -10,6 +11,31 @@ class SessionRunner {
   SessionRunner(this.plan) {
     if (!plan.canStart) {
       throw ArgumentError('Plan incomplet ou contradictoire.');
+    }
+    final ids = <String>{};
+    for (final a in plan.actions) {
+      if (!ids.add(a.id) || a.id.isEmpty || a.origins.isEmpty) {
+        throw const FormatException(
+            'Identité d’action invalide dans l’instantané.');
+      }
+      final raw = a.definition.toJson();
+      raw['duration'] = a.duration.toJson();
+      final errors = ProtocolValidator().validate(ProtocolDefinition(
+          id: 'snapshot',
+          title: 'Instantané',
+          category: 'Séance',
+          modes: {
+            plan.mode
+          },
+          blocks: [
+            ProtocolBlock(
+                id: 'snapshot',
+                modes: {plan.mode},
+                actions: [ActionDefinition.fromJson(raw)])
+          ]));
+      if (errors.any((e) => e.blocking)) {
+        throw const FormatException('Action invalide dans l’instantané.');
+      }
     }
     _resetDuration();
   }

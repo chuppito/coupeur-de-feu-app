@@ -1,30 +1,47 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:coupeur_de_feu_app/main.dart';
+import 'package:coupeur_de_feu_app/models/patient_session.dart';
+import 'package:coupeur_de_feu_app/v4/store.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late Directory dir;
+  setUp(() async {
+    dir = await Directory.systemTemp.createTemp('v4-app-');
+    Hive.init(dir.path);
+    if (!Hive.isAdapterRegistered(0)) {
+      Hive.registerAdapter(PatientSessionAdapter());
+    }
+    await Hive.openBox<PatientSession>('sessions');
+    for (final n in [
+      'magnetisme_sessions',
+      'body_scans',
+      'energy_assessments',
+      'pendulum_cares',
+      'app_meta'
+    ]) {
+      await Hive.openBox(n);
+    }
+    await V4Store.open();
+  });
+  tearDown(() async {
+    await Hive.close();
+    await dir.delete(recursive: true);
+  });
+  testWidgets('Accueil réel et accès V4 sans remplacer le parcours V3',
+      (tester) async {
     await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('Magnétisme'), findsOneWidget);
+    expect(find.byTooltip('Nouvelle séance'), findsOneWidget);
+    await tester.tap(find.byTooltip('Parcours V4'));
+    await tester.pumpAndSettle();
+    expect(find.text('Magnétisme V4'), findsOneWidget);
+    expect(find.text('Nouveau patient'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
   });
 }

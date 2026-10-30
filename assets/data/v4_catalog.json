@@ -1,0 +1,1873 @@
+{
+  "schemaVersion": 4,
+  "blocks": {
+    "accueil": {
+      "id": "accueil",
+      "actions": [
+        {
+          "id": "accueil",
+          "title": "Accueil et demandes prioritaires",
+          "instruction": "Recueillir les motifs et leurs zones. Noter les propos de la personne et le diagnostic médical uniquement s’il est rapporté. Le repère de dix minutes ne doit pas prolonger artificiellement un entretien suffisant.",
+          "kind": "accueil",
+          "sources": [
+            {
+              "id": "03.01:vidéo 108–313 et 529–593 s",
+              "lesson": "03.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3960669",
+              "locator": "vidéo 108–313 et 529–593 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel",
+        "distance"
+      ],
+      "shareKey": "accueil"
+    },
+    "bilan-presentiel": {
+      "id": "bilan-presentiel",
+      "actions": [
+        {
+          "id": "bilan",
+          "title": "Bilan énergétique — observations personnelles",
+          "instruction": "Consigner vitalité, vibration physique, corps 2 à 7, chakras, rubriques spirituelles éventuelles, scan puis appréciation du sang. Ces observations ne sont pas des examens médicaux. La règle gauche/droite des chakras doit être relue dans un repère explicite ; saisir le résultat sans conversion automatique.",
+          "kind": "assessment",
+          "sources": [
+            {
+              "id": "03.02:notes et grille ; repère spatial des chakras à confirmer",
+              "lesson": "03.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3960677",
+              "locator": "notes et grille ; repère spatial des chakras à confirmer",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "Repère anatomique gauche/droite non arbitré ; aucune conversion automatique."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "shareKey": "bilan-presentiel"
+    },
+    "degagement-presentiel": {
+      "id": "degagement-presentiel",
+      "actions": [
+        {
+          "id": "degagement",
+          "title": "Dégagement facultatif",
+          "instruction": "Consulter la variante documentée choisie. La normalisation détaillée de ce rituel reste à effectuer ; aucun geste ni diagnostic spirituel n’est généré à partir des mots du bilan.",
+          "kind": "clearance",
+          "sources": [
+            {
+              "id": "13.01:canevas PDF",
+              "lesson": "13.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962324",
+              "locator": "canevas PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview",
+          "unknowns": [
+            "Sous-protocole à normaliser ; consulter sa source ou le parcours personnel V3."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "optional": true,
+      "shareKey": "degagement-presentiel"
+    },
+    "conventions-presentiel": {
+      "id": "conventions-presentiel",
+      "actions": [
+        {
+          "id": "connexion",
+          "title": "Installation et intention préalable",
+          "instruction": "Assis à la tête, mains légèrement à fleur des cheveux sans serrer ; pouces presque rapprochés. Attendre environ 10–15 s selon la méthode du cours. Donner mentalement l’intention préalable de canalisation.",
+          "kind": "preparation",
+          "sources": [
+            {
+              "id": "06.03:vidéo 1352–1481 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 1352–1481 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        },
+        {
+          "id": "cm01",
+          "title": "1 — Relâchement des tensions",
+          "instruction": "Porter mentalement le thème traditionnel : Relâchement des tensions. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm02",
+          "title": "2 — Libération des blocages ressentis",
+          "instruction": "Porter mentalement le thème traditionnel : Libération des blocages ressentis. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm03",
+          "title": "3 — Apaisement du vécu actuel",
+          "instruction": "Porter mentalement le thème traditionnel : Apaisement du vécu actuel. Il ne décrit pas un effet biologique démontré. Les compléments de 15–20 s par événement rapporté nécessitent une variante personnelle explicite et ne sont pas ajoutés automatiquement.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm04",
+          "title": "4 — Représentation des mémoires intra-utérines",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation des mémoires intra-utérines. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm05",
+          "title": "5 — Représentation du vécu transgénérationnel",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation du vécu transgénérationnel. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm06",
+          "title": "6 — Représentation des vies antérieures",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation des vies antérieures. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm07",
+          "title": "7 — Intention concernant les métaux lourds",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant les métaux lourds. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm08",
+          "title": "8 — Intention concernant des résidus de médicaments",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant des résidus de médicaments. Il ne décrit pas un effet biologique démontré. L’omission possible en l’absence de traitement rapporté se prépare par édition locale, sans arrêt de médicament.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-nettoyage",
+          "title": "9 — Nettoyage symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-equilibrage",
+          "title": "9 — Équilibrage symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 15,
+            "maxSeconds": 20,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-recharge",
+          "title": "9 — Recharge symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 15,
+            "maxSeconds": 20,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm10",
+          "title": "10 — Harmonisation symbolique des sept chakras",
+          "instruction": "Porter mentalement le thème traditionnel : Harmonisation symbolique des sept chakras. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm11",
+          "title": "11 — Recharge symbolique des organes",
+          "instruction": "Porter mentalement le thème traditionnel : Recharge symbolique des organes. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm12",
+          "title": "12 — Intention concernant les toxines",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant les toxines. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm13",
+          "title": "13 — Intention centrée sur le motif de venue",
+          "instruction": "Porter mentalement le thème traditionnel : Intention centrée sur le motif de venue. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm14",
+          "title": "14 — Transmission générale sans intention supplémentaire",
+          "instruction": "Porter mentalement le thème traditionnel : Transmission générale sans intention supplémentaire. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "shareKey": "conventions-presentiel"
+    },
+    "debrief-presentiel": {
+      "id": "debrief-presentiel",
+      "actions": [
+        {
+          "id": "debrief",
+          "title": "Débriefing et observations",
+          "instruction": "Recueillir le retour de la personne et les observations de séance. Une évolution ressentie ne prouve pas l’effet spécifique d’une technique. Prévoir un lever progressif avant retour au bureau.",
+          "kind": "debrief",
+          "sources": [
+            {
+              "id": "11.01:notes et canevas",
+              "lesson": "11.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962196",
+              "locator": "notes et canevas",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "shareKey": "debrief-presentiel"
+    },
+    "bilan-distance": {
+      "id": "bilan-distance",
+      "actions": [
+        {
+          "id": "bilan",
+          "title": "Bilan énergétique — observations personnelles",
+          "instruction": "Consigner vitalité, vibration physique, corps 2 à 7, chakras, rubriques spirituelles éventuelles, scan puis appréciation du sang. Ces observations ne sont pas des examens médicaux. Utiliser la grille et les supports distincts pour chakras et scan à distance.",
+          "kind": "assessment",
+          "sources": [
+            {
+              "id": "14.02:notes et grille ; repère spatial des chakras à confirmer",
+              "lesson": "14.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4208942",
+              "locator": "notes et grille ; repère spatial des chakras à confirmer",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "Repère anatomique gauche/droite non arbitré ; aucune conversion automatique."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "shareKey": "bilan-distance"
+    },
+    "degagement-distance": {
+      "id": "degagement-distance",
+      "actions": [
+        {
+          "id": "degagement",
+          "title": "Dégagement facultatif",
+          "instruction": "Consulter la variante documentée choisie. La normalisation détaillée de ce rituel reste à effectuer ; aucun geste ni diagnostic spirituel n’est généré à partir des mots du bilan.",
+          "kind": "clearance",
+          "sources": [
+            {
+              "id": "13.01:canevas PDF",
+              "lesson": "13.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962324",
+              "locator": "canevas PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview",
+          "unknowns": [
+            "Sous-protocole à normaliser ; consulter sa source ou le parcours personnel V3."
+          ]
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "optional": true,
+      "shareKey": "degagement-distance"
+    },
+    "conventions-distance": {
+      "id": "conventions-distance",
+      "actions": [
+        {
+          "id": "connexion",
+          "title": "Installation et intention préalable",
+          "instruction": "Préparer le support choisi, puis les intentions à distance selon le canevas. Ne pas présenter des mains posées sur un patient absent.",
+          "kind": "preparation",
+          "sources": [
+            {
+              "id": "14.05:canevas PDF",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "canevas PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        },
+        {
+          "id": "cm01",
+          "title": "1 — Relâchement des tensions",
+          "instruction": "Porter mentalement le thème traditionnel : Relâchement des tensions. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm02",
+          "title": "2 — Libération des blocages ressentis",
+          "instruction": "Porter mentalement le thème traditionnel : Libération des blocages ressentis. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm03",
+          "title": "3 — Apaisement du vécu actuel",
+          "instruction": "Porter mentalement le thème traditionnel : Apaisement du vécu actuel. Il ne décrit pas un effet biologique démontré. Les compléments de 15–20 s par événement rapporté nécessitent une variante personnelle explicite et ne sont pas ajoutés automatiquement.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm04",
+          "title": "4 — Représentation des mémoires intra-utérines",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation des mémoires intra-utérines. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm05",
+          "title": "5 — Représentation du vécu transgénérationnel",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation du vécu transgénérationnel. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm06",
+          "title": "6 — Représentation des vies antérieures",
+          "instruction": "Porter mentalement le thème traditionnel : Représentation des vies antérieures. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm07",
+          "title": "7 — Intention concernant les métaux lourds",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant les métaux lourds. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm08",
+          "title": "8 — Intention concernant des résidus de médicaments",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant des résidus de médicaments. Il ne décrit pas un effet biologique démontré. L’omission possible en l’absence de traitement rapporté se prépare par édition locale, sans arrêt de médicament.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-nettoyage",
+          "title": "9 — Nettoyage symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-equilibrage",
+          "title": "9 — Équilibrage symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 15,
+            "maxSeconds": 20,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm09-recharge",
+          "title": "9 — Recharge symbolique des corps",
+          "instruction": "Porter mentalement le thème traditionnel : Nettoyage symbolique puis équilibrage et recharge des sept corps. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 868–1002 s ; variante ordinaire",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 868–1002 s ; variante ordinaire",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 15,
+            "maxSeconds": 20,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm10",
+          "title": "10 — Harmonisation symbolique des sept chakras",
+          "instruction": "Porter mentalement le thème traditionnel : Harmonisation symbolique des sept chakras. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm11",
+          "title": "11 — Recharge symbolique des organes",
+          "instruction": "Porter mentalement le thème traditionnel : Recharge symbolique des organes. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm12",
+          "title": "12 — Intention concernant les toxines",
+          "instruction": "Porter mentalement le thème traditionnel : Intention concernant les toxines. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm13",
+          "title": "13 — Intention centrée sur le motif de venue",
+          "instruction": "Porter mentalement le thème traditionnel : Intention centrée sur le motif de venue. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "cm14",
+          "title": "14 — Transmission générale sans intention supplémentaire",
+          "instruction": "Porter mentalement le thème traditionnel : Transmission générale sans intention supplémentaire. Il ne décrit pas un effet biologique démontré.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "06.03:vidéo 288–387, 809–813 et 1103–1226 s",
+              "lesson": "06.03",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3961820",
+              "locator": "vidéo 288–387, 809–813 et 1103–1226 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": true,
+          "duration": {
+            "minSeconds": 60,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "shareKey": "conventions-distance"
+    },
+    "debrief-distance": {
+      "id": "debrief-distance",
+      "actions": [
+        {
+          "id": "debrief",
+          "title": "Débriefing et observations",
+          "instruction": "Recueillir le retour de la personne et les observations de séance. Une évolution ressentie ne prouve pas l’effet spécifique d’une technique. Reprendre contact pour le retour de séance.",
+          "kind": "debrief",
+          "sources": [
+            {
+              "id": "14.05:notes et canevas",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "notes et canevas",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "shareKey": "debrief-distance"
+    },
+    "circulation": {
+      "id": "circulation",
+      "actions": [
+        {
+          "id": "circulation",
+          "title": "Circulation entre les chakras",
+          "instruction": "Distinguer cette technique du bilan : chaque trajet part de la couronne vers troisième œil, gorge, cœur, plexus, sacré puis racine. Main émettrice à la couronne, main réceptrice à la cible ; contrôle, passes rapides si nécessaire, nouveau contrôle. Aucune passe lente ni imposition dans cette séquence.",
+          "kind": "circulation",
+          "sources": [
+            {
+              "id": "09.01:protocole PDF et notes",
+              "lesson": "09.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962107",
+              "locator": "protocole PDF et notes",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "techniqueId": "circulation-energetique-entre-les-chakras",
+          "gesture": {
+            "start": "couronne",
+            "end": "six cibles successives",
+            "hands": "gauche émettrice, droite réceptrice dans le PDF",
+            "direction": "départ couronne constant"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "shareKey": "circulation"
+    },
+    "balayage": {
+      "id": "balayage",
+      "actions": [
+        {
+          "id": "balayage",
+          "title": "Balayage final",
+          "instruction": "Passages semi-rapides à environ 10 cm, retour mains fermées. Deux passages sur tronc et membres supérieurs, deux sur membres inférieurs. Secouer les mains vers le bas reste facultatif selon le cours.",
+          "kind": "sweep",
+          "sources": [
+            {
+              "id": "10.01:notes et transcription automatique 41–121 s",
+              "lesson": "10.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962181",
+              "locator": "notes et transcription automatique 41–121 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 30,
+            "maxSeconds": 60,
+            "precision": "environ"
+          },
+          "techniqueId": "balayage",
+          "gesture": {
+            "direction": "descendante ; retour fermé",
+            "hands": "deux mains",
+            "heightCm": 10,
+            "repetitions": "deux passages par ensemble"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ],
+      "shareKey": "balayage"
+    },
+    "ft-entorse-intention": {
+      "id": "ft-entorse-intention",
+      "actions": [
+        {
+          "id": "supplement",
+          "title": "Intention supplémentaire — Entorse",
+          "instruction": "Intention traditionnelle d’apaisement du motif.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "18.06:fiche PDF",
+              "lesson": "18.06",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview"
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ]
+    },
+    "ft-entorse-local": {
+      "id": "ft-entorse-local",
+      "actions": [
+        {
+          "id": "priere",
+          "title": "Prière — Entorse",
+          "instruction": "Prière du feu trois fois selon la fiche. Utiliser la formulation personnelle conservée dans la bibliothèque.",
+          "kind": "prayer",
+          "sources": [
+            {
+              "id": "18.06:fiche PDF",
+              "lesson": "18.06",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "prayerId": "priere-contre-le-feu"
+        },
+        {
+          "id": "rapides",
+          "title": "Passes rapides et contrôle",
+          "instruction": "Repérer amont et aval de la zone. Passes rapides puis contrôle ; si nécessaire recommencer avant les lentes.",
+          "kind": "rapidPasses",
+          "sources": [
+            {
+              "id": "18.06:fiche PDF et protocole général 08.04",
+              "lesson": "18.06",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+              "locator": "fiche PDF et protocole général 08.04",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "gesture": {
+            "direction": "amont vers aval ; retour mains fermées",
+            "repetitions": "environ dix selon protocole général ; nouveau contrôle si nécessaire"
+          }
+        },
+        {
+          "id": "lentes",
+          "title": "Passes lentes",
+          "instruction": "Après contrôle satisfaisant selon le ressenti, suivre le trajet de la fiche en passes lentes.",
+          "kind": "slowPasses",
+          "sources": [
+            {
+              "id": "08.04:protocole général PDF",
+              "lesson": "08.04",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962092",
+              "locator": "protocole général PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 30,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "imposition",
+          "title": "Imposition locale",
+          "instruction": "Entourer les ligaments concernés avec les mains, visualisation de tissu intact.",
+          "kind": "imposition",
+          "sources": [
+            {
+              "id": "18.06:fiche PDF ; durée locale non précisée",
+              "lesson": "18.06",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+              "locator": "fiche PDF ; durée locale non précisée",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "La durée propre à cette fiche n’est pas définie ; progression manuelle ou choix personnel explicite."
+          ]
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true
+    },
+    "ft-eczema-local": {
+      "id": "ft-eczema-local",
+      "actions": [
+        {
+          "id": "priere",
+          "title": "Prière — Eczéma",
+          "instruction": "Prière propre à l’eczéma, avec cinq Pater et cinq Ave selon la fiche. Une croix n’ajoute pas la prière du feu.",
+          "kind": "prayer",
+          "sources": [
+            {
+              "id": "19.02:fiche PDF",
+              "lesson": "19.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "prayerId": "priere-eczema"
+        },
+        {
+          "id": "cutanee",
+          "title": "Imposition cutanée",
+          "instruction": "Imposition sur la zone cutanée choisie avec visualisation, pendant cinq minutes. Ce geste traditionnel ne démontre pas une action sur la maladie.",
+          "kind": "imposition",
+          "sources": [
+            {
+              "id": "19.02:PDF-064",
+              "lesson": "19.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+              "locator": "PDF-064",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 300,
+            "maxSeconds": 300,
+            "precision": "exacte"
+          }
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true
+    },
+    "ft-eczema-abdomen": {
+      "id": "ft-eczema-abdomen",
+      "actions": [
+        {
+          "id": "abdomen-rapides",
+          "title": "Travail abdominal — rapides et contrôle",
+          "instruction": "Après la séquence cutanée : plexus vers racine, contrôle, puis lentes et imposition sur les intestins.",
+          "kind": "rapidPasses",
+          "sources": [
+            {
+              "id": "19.02:PDF-064",
+              "lesson": "19.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+              "locator": "PDF-064",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "gesture": {
+            "start": "plexus",
+            "end": "racine",
+            "direction": "descendante"
+          }
+        },
+        {
+          "id": "abdomen-lentes",
+          "title": "Travail abdominal — lentes",
+          "instruction": "Suivre le trajet abdominal après contrôle.",
+          "kind": "slowPasses",
+          "sources": [
+            {
+              "id": "19.02:PDF-064 ; durée générale 08.04",
+              "lesson": "19.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+              "locator": "PDF-064 ; durée générale 08.04",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 30,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "abdomen-imposition",
+          "title": "Imposition abdominale",
+          "instruction": "Imposition sur la région des intestins ; durée locale non précisée dans cette fiche.",
+          "kind": "imposition",
+          "sources": [
+            {
+              "id": "19.02:PDF-064",
+              "lesson": "19.02",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+              "locator": "PDF-064",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "fixed",
+      "modes": [
+        "presentiel"
+      ],
+      "fixedZones": [
+        {
+          "id": "abdomen",
+          "label": "Abdomen",
+          "side": "non renseigné",
+          "face": "antérieure"
+        }
+      ]
+    },
+    "ft-arthrose-intention": {
+      "id": "ft-arthrose-intention",
+      "actions": [
+        {
+          "id": "supplement",
+          "title": "Intention supplémentaire — Arthrose",
+          "instruction": "Intention concernant l’ocytocine dans le cours, sans effet hormonal mesuré ou garanti.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "18.05:fiche PDF",
+              "lesson": "18.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview"
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ]
+    },
+    "ft-arthrose-local": {
+      "id": "ft-arthrose-local",
+      "actions": [
+        {
+          "id": "priere",
+          "title": "Prière — Arthrose",
+          "instruction": "Prière articulaire propre à cette fiche ; ne pas ajouter celle de l’arthrite par similitude de titre.",
+          "kind": "prayer",
+          "sources": [
+            {
+              "id": "18.05:fiche PDF",
+              "lesson": "18.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "prayerId": "priere-arthrite-polyarthrite-arthrose"
+        },
+        {
+          "id": "rapides",
+          "title": "Passes rapides et contrôle",
+          "instruction": "Repérer amont et aval de l’articulation choisie. Passes rapides puis contrôle du ressenti.",
+          "kind": "rapidPasses",
+          "sources": [
+            {
+              "id": "18.05:fiche PDF et protocole général 08.04",
+              "lesson": "18.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+              "locator": "fiche PDF et protocole général 08.04",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "gesture": {
+            "direction": "amont vers aval ; retour mains fermées",
+            "repetitions": "environ dix selon protocole général ; nouveau contrôle si nécessaire"
+          }
+        },
+        {
+          "id": "lentes",
+          "title": "Passes lentes",
+          "instruction": "Après contrôle satisfaisant selon le ressenti, suivre le trajet de la fiche en passes lentes.",
+          "kind": "slowPasses",
+          "sources": [
+            {
+              "id": "08.04:protocole général PDF",
+              "lesson": "08.04",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962092",
+              "locator": "protocole général PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 30,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "imposition",
+          "title": "Imposition locale",
+          "instruction": "Imposition sur la cible locale de la fiche.",
+          "kind": "imposition",
+          "sources": [
+            {
+              "id": "18.05:fiche PDF ; durée locale non précisée",
+              "lesson": "18.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+              "locator": "fiche PDF ; durée locale non précisée",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "La durée propre à cette fiche n’est pas définie ; progression manuelle ou choix personnel explicite."
+          ]
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true
+    },
+    "ft-insuffisance-veineuse-intention": {
+      "id": "ft-insuffisance-veineuse-intention",
+      "actions": [
+        {
+          "id": "supplement",
+          "title": "Intention supplémentaire — Insuffisance veineuse",
+          "instruction": "Intention traditionnelle concernant le retour veineux ; conserver la variante formation et la version personnelle distinctes.",
+          "kind": "intention",
+          "sources": [
+            {
+              "id": "20.08:fiche PDF",
+              "lesson": "20.08",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233562",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "review": "needsReview"
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "presentiel"
+      ]
+    },
+    "ft-insuffisance-veineuse-local": {
+      "id": "ft-insuffisance-veineuse-local",
+      "actions": [
+        {
+          "id": "priere",
+          "title": "Prière — Insuffisance veineuse",
+          "instruction": "Prière de circulation propre à la fiche.",
+          "kind": "prayer",
+          "sources": [
+            {
+              "id": "20.08:fiche PDF",
+              "lesson": "20.08",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233562",
+              "locator": "fiche PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "prayerId": "priere-circulation-sanguine"
+        },
+        {
+          "id": "rapides",
+          "title": "Passes rapides et contrôle",
+          "instruction": "Deux parcours distincts : devant, aine → genou → pied ; derrière, sacré postérieur → genou → pied. Contrôler le ressenti de chaque segment.",
+          "kind": "rapidPasses",
+          "sources": [
+            {
+              "id": "20.08:fiche PDF et protocole général 08.04",
+              "lesson": "20.08",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233562",
+              "locator": "fiche PDF et protocole général 08.04",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "gesture": {
+            "direction": "amont vers aval ; retour mains fermées",
+            "repetitions": "environ dix selon protocole général ; nouveau contrôle si nécessaire"
+          }
+        },
+        {
+          "id": "lentes",
+          "title": "Passes lentes",
+          "instruction": "Après contrôle satisfaisant selon le ressenti, suivre le trajet de la fiche en passes lentes.",
+          "kind": "slowPasses",
+          "sources": [
+            {
+              "id": "08.04:protocole général PDF",
+              "lesson": "08.04",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962092",
+              "locator": "protocole général PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": 30,
+            "maxSeconds": 60,
+            "precision": "environ"
+          }
+        },
+        {
+          "id": "imposition",
+          "title": "Imposition locale",
+          "instruction": "Imposition sur la cible locale de la fiche.",
+          "kind": "imposition",
+          "sources": [
+            {
+              "id": "20.08:fiche PDF ; durée locale non précisée",
+              "lesson": "20.08",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233562",
+              "locator": "fiche PDF ; durée locale non précisée",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "La durée propre à cette fiche n’est pas définie ; progression manuelle ou choix personnel explicite."
+          ]
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "presentiel"
+      ],
+      "repeatPerZone": true
+    },
+    "temoin": {
+      "id": "temoin",
+      "actions": [
+        {
+          "id": "temoin",
+          "title": "Préparer le témoin",
+          "instruction": "Choisir la variante de support documentée : photographie identifiée ou autre variante personnelle. Le rituel peut associer une intention pendant l’entretien téléphonique. Le cours prévoit une exception pour une personne très bien connue. Conserver la variante choisie sans prétendre mesurer une transmission d’énergie.",
+          "kind": "preparation",
+          "sources": [
+            {
+              "id": "14.01:transcription automatique 90–283 et 311–469 s",
+              "lesson": "14.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4208863",
+              "locator": "transcription automatique 90–283 et 311–469 s",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "none",
+      "modes": [
+        "distance"
+      ],
+      "shareKey": "temoin"
+    },
+    "support-local": {
+      "id": "support-local",
+      "actions": [
+        {
+          "id": "localiser",
+          "title": "Localiser sur la planche",
+          "instruction": "Choisir la planche anatomique adaptée à la zone et conserver son côté. La lecture au pendule est un ressenti personnel.",
+          "kind": "support",
+          "sources": [
+            {
+              "id": "14.05:canevas PDF",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "canevas PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        },
+        {
+          "id": "decharge",
+          "title": "Décharge au Thot sur support",
+          "instruction": "Intention de décharge ; rotation antihoraire attendue jusqu’à l’arrêt, puis retrait vertical. Le délai reste conditionné à cette séquence traditionnelle.",
+          "kind": "support",
+          "sources": [
+            {
+              "id": "12.01:notice PDF",
+              "lesson": "12.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962226",
+              "locator": "notice PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        },
+        {
+          "id": "frappes",
+          "title": "Deux frappes après la décharge",
+          "instruction": "Deux frappes douces sur une surface dure, selon la notice, avant la recharge.",
+          "kind": "support",
+          "sources": [
+            {
+              "id": "12.01:notice PDF",
+              "lesson": "12.01",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962226",
+              "locator": "notice PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "gesture": {
+            "repetitions": "deux frappes douces"
+          }
+        },
+        {
+          "id": "recharge",
+          "title": "Recharge sur support",
+          "instruction": "Rotation horaire volontaire et intention de recharge, puis retrait vertical.",
+          "kind": "support",
+          "sources": [
+            {
+              "id": "14.04:vidéo 596–618 s : environ 10 s ; notice 12.01 : environ 20 s ; variante à confirmer",
+              "lesson": "14.04",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4208971",
+              "locator": "vidéo 596–618 s : environ 10 s ; notice 12.01 : environ 20 s ; variante à confirmer",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          },
+          "unknowns": [
+            "Durées de recharge différentes selon support et démonstration : choix personnel explicite ou progression manuelle."
+          ]
+        },
+        {
+          "id": "intention-main",
+          "title": "Intention focalisée sur la planche",
+          "instruction": "Main au-dessus de la planche, intention liée au motif. Aucune passe corporelle sur le patient absent.",
+          "kind": "support",
+          "sources": [
+            {
+              "id": "14.05:canevas PDF",
+              "lesson": "14.05",
+              "url": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4209006",
+              "locator": "canevas PDF",
+              "review": "documented"
+            }
+          ],
+          "autoAdvance": false,
+          "duration": {
+            "minSeconds": null,
+            "maxSeconds": null,
+            "precision": "inconnue"
+          }
+        }
+      ],
+      "target": "selected",
+      "modes": [
+        "distance"
+      ],
+      "repeatPerZone": true
+    }
+  },
+  "protocols": [
+    {
+      "schemaVersion": 4,
+      "id": "ft-entorse",
+      "title": "Entorse",
+      "category": "Fiche présentielle en migration",
+      "version": "4.0.0-preview1",
+      "motifs": [
+        "Entorse"
+      ],
+      "modes": [
+        "presentiel"
+      ],
+      "unknowns": [
+        "Normalisation progressive : vidéo spécifique et vérification clinique non réalisées."
+      ],
+      "blocks": [
+        "accueil",
+        "bilan-presentiel",
+        "degagement-presentiel",
+        "conventions-presentiel",
+        "ft-entorse-intention",
+        "ft-entorse-local",
+        "circulation",
+        "balayage",
+        "debrief-presentiel"
+      ]
+    },
+    {
+      "schemaVersion": 4,
+      "id": "ft-eczema",
+      "title": "Eczéma",
+      "category": "Fiche présentielle en migration",
+      "version": "4.0.0-preview1",
+      "motifs": [
+        "Eczéma"
+      ],
+      "modes": [
+        "presentiel"
+      ],
+      "unknowns": [
+        "Normalisation progressive : vidéo spécifique et vérification clinique non réalisées."
+      ],
+      "blocks": [
+        "accueil",
+        "bilan-presentiel",
+        "degagement-presentiel",
+        "conventions-presentiel",
+        "ft-eczema-local",
+        "ft-eczema-abdomen",
+        "circulation",
+        "balayage",
+        "debrief-presentiel"
+      ]
+    },
+    {
+      "schemaVersion": 4,
+      "id": "ft-arthrose",
+      "title": "Arthrose",
+      "category": "Fiche présentielle en migration",
+      "version": "4.0.0-preview1",
+      "motifs": [
+        "Arthrose"
+      ],
+      "modes": [
+        "presentiel"
+      ],
+      "unknowns": [
+        "Normalisation progressive : vidéo spécifique et vérification clinique non réalisées."
+      ],
+      "blocks": [
+        "accueil",
+        "bilan-presentiel",
+        "degagement-presentiel",
+        "conventions-presentiel",
+        "ft-arthrose-intention",
+        "ft-arthrose-local",
+        "circulation",
+        "balayage",
+        "debrief-presentiel"
+      ]
+    },
+    {
+      "schemaVersion": 4,
+      "id": "ft-insuffisance-veineuse",
+      "title": "Insuffisance veineuse",
+      "category": "Fiche présentielle en migration",
+      "version": "4.0.0-preview1",
+      "motifs": [
+        "Insuffisance veineuse"
+      ],
+      "modes": [
+        "presentiel"
+      ],
+      "unknowns": [
+        "Normalisation progressive : vidéo spécifique et vérification clinique non réalisées."
+      ],
+      "blocks": [
+        "accueil",
+        "bilan-presentiel",
+        "degagement-presentiel",
+        "conventions-presentiel",
+        "ft-insuffisance-veineuse-intention",
+        "ft-insuffisance-veineuse-local",
+        "circulation",
+        "balayage",
+        "debrief-presentiel"
+      ]
+    },
+    {
+      "schemaVersion": 4,
+      "id": "distance-support",
+      "title": "Séance à distance sur support",
+      "category": "Trame distance",
+      "version": "4.0.0-preview1",
+      "motifs": [
+        "Soutien traditionnel à distance"
+      ],
+      "modes": [
+        "distance"
+      ],
+      "unknowns": [
+        "Les variantes des fiches par motif à distance restent à normaliser ; cette trame ne les remplace pas."
+      ],
+      "blocks": [
+        "temoin",
+        "accueil",
+        "bilan-distance",
+        "degagement-distance",
+        "conventions-distance",
+        "support-local",
+        "debrief-distance"
+      ]
+    }
+  ]
+}

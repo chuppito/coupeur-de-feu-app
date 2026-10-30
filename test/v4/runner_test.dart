@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:coupeur_de_feu_app/v4/models.dart';
 import 'package:coupeur_de_feu_app/v4/engine.dart';
@@ -90,6 +91,22 @@ void main() {
         () => SessionRunner.fromJson(
             {...r.toJson(), 'remainingMilliseconds': 999999}),
         throwsFormatException);
+  });
+  test(
+      'Instantané falsifié : identifiants dupliqués et geste physique à distance refusés',
+      () {
+    final snapshot =
+        jsonMap(jsonDecode(jsonEncode(SessionRunner(plan()).toJson())));
+    final p = jsonMap(snapshot['plan']);
+    final actions = p['actions'] as List;
+    actions[1]['id'] = actions[0]['id'];
+    snapshot['plan'] = p;
+    expect(() => SessionRunner.fromJson(snapshot), throwsFormatException);
+    final other =
+        jsonMap(jsonDecode(jsonEncode(SessionRunner(plan()).toJson())));
+    other['plan']['mode'] = 'distance';
+    other['plan']['actions'][0]['definition']['kind'] = 'imposition';
+    expect(() => SessionRunner.fromJson(other), throwsFormatException);
   });
   test('Une séance terminée peut être restaurée sans réexécution', () {
     final r = SessionRunner(plan());

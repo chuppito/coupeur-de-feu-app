@@ -21,6 +21,11 @@ class ProtocolValidator {
     if (p.blocks.isEmpty || p.modes.isEmpty) {
       fail('empty', 'Fiche sans parcours.');
     }
+    if (p.unknowns.isNotEmpty) {
+      errors.add(PlanIssue(
+          'protocolReview', '${p.title} : ${p.unknowns.join(' ; ')}',
+          blocking: false, relatedIds: [p.id]));
+    }
     final ids = <String>{};
     for (final b in p.blocks) {
       if (b.id.isEmpty || !ids.add(b.id)) {

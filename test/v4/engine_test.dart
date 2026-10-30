@@ -271,8 +271,11 @@ void main() {
         throwsFormatException);
   });
   test('Instantané protégé contre les mutations des cibles imbriquées', () {
-    final p = build([pick(protocol('a', [local('b')]))]);
-    expect(() => (p.selections.first['zones'] as List).clear(), throwsUnsupportedError);
+    final p = build([
+      pick(protocol('a', [local('b')]))
+    ]);
+    expect(() => (p.selections.first['zones'] as List).clear(),
+        throwsUnsupportedError);
     expect(() => p.actions.first.zones.clear(), throwsUnsupportedError);
     expect(() => p.actions.first.origins.clear(), throwsUnsupportedError);
   });

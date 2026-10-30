@@ -1,3 +1,4 @@
+import '../v4/screens.dart';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -44,6 +45,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
           ],
         ),
         actions: [
+          IconButton(tooltip: "Parcours V4", icon: const Icon(Icons.route), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const V4Workspace()))),
           IconButton(
             tooltip: "Nouvelle séance",
             icon: const Icon(Icons.local_fire_department),
@@ -179,6 +181,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               ),
                             ),
                           ),
+                          TextButton.icon(icon: const Icon(Icons.route), label: const Text('Ouvrir ce nom dans V4'), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => V4Workspace(firstName: prenomPour(entry.key), lastName: famillePour(entry.key))))),
                           ...entry.value.map((h) => Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                 child: Row(

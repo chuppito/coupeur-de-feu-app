@@ -70,11 +70,15 @@ const List<_BodyZone> _zonesDosSeul = [
 class InteractiveBody extends StatefulWidget {
   final Set<String> selectedZones;
   final ValueChanged<String> onZoneTap;
+  final bool anatomicalOrientation;
+  final ValueChanged<bool>? onViewChanged;
 
   const InteractiveBody({
     super.key,
     required this.selectedZones,
     required this.onZoneTap,
+    this.anatomicalOrientation = false,
+    this.onViewChanged,
   });
 
   @override
@@ -94,11 +98,18 @@ class _InteractiveBodyState extends State<InteractiveBody> {
       children: [
         SegmentedButton<bool>(
           segments: const [
-            ButtonSegment(value: true, label: Text('Face'), icon: Icon(Icons.person)),
-            ButtonSegment(value: false, label: Text('Dos'), icon: Icon(Icons.person_outline)),
+            ButtonSegment(
+                value: true, label: Text('Face'), icon: Icon(Icons.person)),
+            ButtonSegment(
+                value: false,
+                label: Text('Dos'),
+                icon: Icon(Icons.person_outline)),
           ],
           selected: {_vueDeFace},
-          onSelectionChanged: (s) => setState(() => _vueDeFace = s.first),
+          onSelectionChanged: (s) {
+            setState(() => _vueDeFace = s.first);
+            widget.onViewChanged?.call(_vueDeFace);
+          },
         ),
         const SizedBox(height: 12),
         LayoutBuilder(
@@ -147,27 +158,33 @@ class _InteractiveBodyState extends State<InteractiveBody> {
                             ),
                           // Repères "Gauche" / "Droite" de part et d'autre du
                           // schéma, pour lever toute ambiguïté visuelle.
-                          const Positioned(
+                          Positioned(
                             left: 0,
                             top: 118,
                             width: 46,
                             child: IgnorePointer(
                               child: Text(
-                                'GAUCHE',
+                                widget.anatomicalOrientation && _vueDeFace
+                                    ? 'DROITE'
+                                    : 'GAUCHE',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 11, color: Colors.black45),
+                                style: const TextStyle(
+                                    fontSize: 11, color: Colors.black45),
                               ),
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             right: 0,
                             top: 118,
                             width: 46,
                             child: IgnorePointer(
                               child: Text(
-                                'DROITE',
+                                widget.anatomicalOrientation && _vueDeFace
+                                    ? 'GAUCHE'
+                                    : 'DROITE',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 11, color: Colors.black45),
+                                style: const TextStyle(
+                                    fontSize: 11, color: Colors.black45),
                               ),
                             ),
                           ),
@@ -190,8 +207,9 @@ class _InteractiveBodyState extends State<InteractiveBody> {
     required Color couleur,
     required VoidCallback onTap,
   }) {
-    final couleurRemplissage =
-        selected ? couleur.withValues(alpha: 0.75) : couleur.withValues(alpha: 0.28);
+    final couleurRemplissage = selected
+        ? couleur.withValues(alpha: 0.75)
+        : couleur.withValues(alpha: 0.28);
 
     final forme = DecoratedBox(
       decoration: BoxDecoration(
@@ -205,7 +223,10 @@ class _InteractiveBodyState extends State<InteractiveBody> {
     );
 
     return Positioned.fromRect(
-      rect: z.rect,
+      rect: widget.anatomicalOrientation && _vueDeFace
+          ? Rect.fromLTWH(_canvasWidth - z.rect.right, z.rect.top, z.rect.width,
+              z.rect.height)
+          : z.rect,
       child: Material(
         color: Colors.transparent,
         shape: z.isCircle
@@ -216,7 +237,8 @@ class _InteractiveBodyState extends State<InteractiveBody> {
           child: InkWell(
             customBorder: z.isCircle
                 ? const CircleBorder()
-                : RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                : RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
             onTap: onTap,
             child: forme,
           ),

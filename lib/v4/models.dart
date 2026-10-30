@@ -390,6 +390,7 @@ class ProtocolSelection {
   Json toJson() => {
         'id': id,
         'protocolId': protocol.id,
+        'protocolUnknowns': protocol.unknowns,
         'version': protocol.version,
         'zones': zones.map((x) => x.toJson()).toList(),
       };
