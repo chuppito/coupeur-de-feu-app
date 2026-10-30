@@ -10,6 +10,7 @@ import 'models.dart';
 import 'engine.dart';
 import 'runner.dart';
 import 'store.dart';
+import 'migration.dart';
 
 const traditionalNotice =
     'Méthodes traditionnelles de bien-être. Les observations ne sont pas des diagnostics et ne remplacent pas les soins médicaux.';
@@ -113,6 +114,78 @@ class _V4WorkspaceState extends State<V4Workspace> {
     text.dispose();
   }
 
+  Future<void> _migration() async {
+    try {
+      final count =
+          await LegacyMigration.stage(LegacyMigration.captureOpenV3Boxes());
+      if (!mounted) return;
+      await showDialog<void>(
+          context: context,
+          builder: (c) => StatefulBuilder(
+              builder: (c, refresh) => AlertDialog(
+                      title: const Text('Revue des données V3'),
+                      content: SizedBox(
+                          width: 600,
+                          child: ListView(shrinkWrap: true, children: [
+                            Text(
+                                '$count original(aux) ajouté(s). Les données V3 restent intactes. Associer uniquement les éléments dont vous avez vérifié l’identité ; les fiches personnelles ne sont pas converties automatiquement en protocoles.'),
+                            for (final record in LegacyMigration.records())
+                              ExpansionTile(
+                                  title: Text(
+                                      '${record['collection']} — ${record['legacyKey']}'),
+                                  subtitle: Text(LegacyMigration.linkedPatient(
+                                              record['id'] as String) ==
+                                          null
+                                      ? 'À vérifier'
+                                      : 'Association conservée'),
+                                  children: [
+                                    SelectableText(
+                                        const JsonEncoder.withIndent('  ')
+                                            .convert(record['original'])),
+                                    DropdownButtonFormField<String>(
+                                        initialValue:
+                                            LegacyMigration.linkedPatient(
+                                                record['id'] as String),
+                                        isExpanded: true,
+                                        decoration: const InputDecoration(
+                                            labelText:
+                                                'Associer explicitement au patient'),
+                                        items: V4Store.patients()
+                                            .map((p) => DropdownMenuItem(
+                                                value: p['id'] as String,
+                                                child: Text(
+                                                    '${patientLabel(p)} (${(p['id'] as String).substring(0, 8)})')))
+                                            .toList(),
+                                        onChanged: LegacyMigration
+                                                    .linkedPatient(record['id']
+                                                        as String) !=
+                                                null
+                                            ? null
+                                            : (id) async {
+                                                if (id == null) return;
+                                                try {
+                                                  await LegacyMigration.link(
+                                                      record['id'] as String,
+                                                      id);
+                                                  if (c.mounted) refresh(() {});
+                                                } catch (e) {
+                                                  if (c.mounted) {
+                                                    showError(c, e);
+                                                  }
+                                                }
+                                              }),
+                                  ])
+                          ])),
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.pop(c),
+                            child: const Text('Fermer'))
+                      ])));
+    } catch (e) {
+      if (mounted) showError(context, e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) => FutureBuilder<void>(
       future: ready,
@@ -133,8 +206,13 @@ class _V4WorkspaceState extends State<V4Workspace> {
                   icon: Icon(library ? Icons.people : Icons.menu_book),
                   onPressed: () => setState(() => library = !library)),
               PopupMenuButton<String>(
-                  onSelected: (s) => _transfer(s == 'import'),
+                  onSelected: (s) => s == 'migration'
+                      ? _migration()
+                      : _transfer(s == 'import'),
                   itemBuilder: (_) => const [
+                        PopupMenuItem(
+                            value: 'migration',
+                            child: Text('Préparer la migration V3')),
                         PopupMenuItem(
                             value: 'export', child: Text('Exporter V4')),
                         PopupMenuItem(
