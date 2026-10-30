@@ -30,3 +30,7 @@ Le catalogue normalisé initial (quatre fiches présentielles et une trame dista
 Le premier GitHub Actions (commit 4bc7bff, exécution 41076877915) a réussi les 44 tests d’alors et compilé un APK debug. Artefact : magnetisme-v4-debug, ID 12987612652. Cela n’est pas une installation ni un essai sur téléphone. Le contrôle du dernier commit enrichi doit encore être observé avant de lui attribuer ce succès.
 
 La télémétrie des prochaines commandes Flutter est désactivée par FLUTTER_SUPPRESS_ANALYTICS=true. Dans ce SDK, ce réglage retourne NoOpAnalytics ; les tests n’utilisent pas de résolution réseau des paquets grâce à --no-pub.
+
+## Résultat final du code enrichi
+
+Le contrôle 41078836721 du commit c673ee6 est terminé avec succès : 46 tests, analyse ciblée et APK debug compilé. Voir [CI-RESULT.md](CI-RESULT.md) pour la preuve, le téléchargement et ses limites. Les mentions « en attente » ci-dessus décrivent les points de sauvegarde antérieurs.

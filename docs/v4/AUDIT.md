@@ -1,6 +1,6 @@
 # Matrice des 18 constats — état V0.4
 
-Référence V3 : a554f5e9f362b5b8da2a6500649f4be7819fb7a0. Corrections limitées au nouveau parcours. **46 tests locaux réussis**, analyse ciblée sans anomalie. Compilation Android réussie sur le premier commit CI 4bc7bff ; nouveau contrôle des phases en attente du dernier CI. Tous les contenus ne sont pas encore normalisés.
+Référence V3 : a554f5e9f362b5b8da2a6500649f4be7819fb7a0. Corrections limitées au nouveau parcours. **46 tests locaux réussis**, analyse ciblée sans anomalie. Compilation Android réussie aussi sur le dernier code c673ee6 : exécution 41078836721, 46 tests réussis. Tous les contenus ne sont pas encore normalisés.
 
 ## A01 — Minuteur
 
