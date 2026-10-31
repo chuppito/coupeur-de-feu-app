@@ -5,6 +5,7 @@ import 'engine.dart';
 class SessionRunner {
   final SessionPlan plan;
   final Set<String> _completed = <String>{};
+  final Set<String> _manualFinish = <String>{};
   int _index = 0;
   int? _remainingMilliseconds;
   bool paused = true;
@@ -42,6 +43,34 @@ class SessionRunner {
   PlannedAction? get current => finished ? null : plan.actions[_index];
   bool get finished => _index >= plan.actions.length;
   Set<String> get completed => Set.unmodifiable(_completed);
+  int get currentIndex => _index;
+  bool get canGoBack => _index > 0;
+  bool get holdingCurrent =>
+      current != null && _manualFinish.contains(current!.id);
+  bool get requiresManualCompletion =>
+      current == null ||
+      current!.duration.seconds == null ||
+      !current!.definition.autoAdvance ||
+      holdingCurrent;
+  void holdCurrent(bool hold) {
+    if (current == null) return;
+    if (hold) {
+      _manualFinish.add(current!.id);
+    } else {
+      _manualFinish.remove(current!.id);
+    }
+  }
+
+  /// Revisiting explicitly reopens the previous action, in pause, with its full
+  /// duration. Stable IDs and the prefix invariant remain valid for old saves.
+  void previous() {
+    if (!canGoBack) return;
+    _index--;
+    _completed.remove(plan.actions[_index].id);
+    _resetDuration();
+    paused = true;
+  }
+
   int? get remainingMilliseconds => _remainingMilliseconds;
   int? get remainingSeconds => _remainingMilliseconds == null
       ? null
@@ -61,7 +90,9 @@ class SessionRunner {
     if (paused || finished || _remainingMilliseconds == null) return;
     _remainingMilliseconds = (_remainingMilliseconds! - elapsed.inMilliseconds)
         .clamp(0, _remainingMilliseconds!);
-    if (_remainingMilliseconds == 0 && current!.definition.autoAdvance) {
+    if (_remainingMilliseconds == 0 &&
+        current!.definition.autoAdvance &&
+        !holdingCurrent) {
       completeCurrent();
     }
   }
@@ -80,13 +111,20 @@ class SessionRunner {
         'completedIds': _completed.toList(),
         'activeActionId': current?.id,
         'remainingMilliseconds': _remainingMilliseconds,
-        'paused': paused
+        'paused': paused,
+        'manualFinishIds': _manualFinish.toList()
       };
   factory SessionRunner.fromJson(Json j) {
     if (j['schemaVersion'] != 4) {
       throw const FormatException('Version de progression inconnue.');
     }
     final runner = SessionRunner(SessionPlan.fromJson(jsonMap(j['plan'])));
+    for (final id in strings(j['manualFinishIds'])) {
+      if (!runner.plan.actions.any((a) => a.id == id)) {
+        throw const FormatException('Intention à prolonger inconnue.');
+      }
+      runner._manualFinish.add(id);
+    }
     final ids = strings(j['completedIds']);
     final expected =
         runner.plan.actions.take(ids.length).map((a) => a.id).toList();

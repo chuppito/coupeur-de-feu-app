@@ -211,6 +211,11 @@ class ActionDefinition {
   final DurationSpec duration;
   final GestureSpec? gesture;
   final String? prayerId, techniqueId;
+  final String? formulation;
+  final String? prayerPart, prayerBaseHash;
+  final String? condition;
+  final bool? defaultCondition;
+  final int? conventionNumber;
   final bool autoAdvance;
   final ReviewState review;
   final List<SourceRef> sources;
@@ -224,6 +229,12 @@ class ActionDefinition {
     this.gesture,
     this.prayerId,
     this.techniqueId,
+    this.formulation,
+    this.prayerPart,
+    this.prayerBaseHash,
+    this.condition,
+    this.defaultCondition,
+    this.conventionNumber,
     this.autoAdvance = false,
     this.review = ReviewState.documented,
     List<SourceRef> sources = const [],
@@ -241,6 +252,12 @@ class ActionDefinition {
             : GestureSpec.fromJson(jsonMap(j['gesture'])),
         prayerId: j['prayerId'] as String?,
         techniqueId: j['techniqueId'] as String?,
+        formulation: j['formulation'] as String?,
+        prayerPart: j['prayerPart'] as String?,
+        prayerBaseHash: j['prayerBaseHash'] as String?,
+        condition: j['condition'] as String?,
+        defaultCondition: j['defaultCondition'] as bool?,
+        conventionNumber: j['conventionNumber'] as int?,
         autoAdvance: j['autoAdvance'] as bool? ?? false,
         review:
             ReviewState.values.byName(j['review'] as String? ?? 'documented'),
@@ -258,6 +275,12 @@ class ActionDefinition {
         'gesture': gesture?.toJson(),
         'prayerId': prayerId,
         'techniqueId': techniqueId,
+        'formulation': formulation,
+        'prayerPart': prayerPart,
+        'prayerBaseHash': prayerBaseHash,
+        'condition': condition,
+        'defaultCondition': defaultCondition,
+        'conventionNumber': conventionNumber,
         'autoAdvance': autoAdvance,
         'review': review.name,
         'sources': sources.map((s) => s.toJson()).toList(),
@@ -273,18 +296,28 @@ class ActionDefinition {
 class ProtocolBlock {
   final String id;
   final String? shareKey, condition;
+  final bool? defaultCondition;
   final SessionPhase? phase;
   final bool optional, repeatPerZone;
   final String target; // none, selected, or fixed (explicit zones).
   final List<BodyZone> fixedZones;
   final Set<SessionMode> modes;
   final List<ActionDefinition> actions;
+  final List<String> essentialUnknowns;
+  final Map<String, List<ActionDefinition>> zoneActions;
+  final Map<String, String> zoneGroupKeys;
+  final bool requireZoneRoute;
   ProtocolBlock({
     required this.id,
     required List<ActionDefinition> actions,
+    List<String> essentialUnknowns = const [],
+    Map<String, List<ActionDefinition>> zoneActions = const {},
+    Map<String, String> zoneGroupKeys = const {},
+    this.requireZoneRoute = false,
     this.shareKey,
     this.phase,
     this.condition,
+    this.defaultCondition,
     this.optional = false,
     this.repeatPerZone = false,
     this.target = 'none',
@@ -293,11 +326,25 @@ class ProtocolBlock {
       SessionMode.presentiel,
       SessionMode.distance,
     },
-  })  : actions = List.unmodifiable(actions),
+  })  : zoneGroupKeys = Map.unmodifiable(zoneGroupKeys),
+        zoneActions = Map.unmodifiable(zoneActions.map(
+            (k, v) => MapEntry(k, List<ActionDefinition>.unmodifiable(v)))),
+        essentialUnknowns = List.unmodifiable(essentialUnknowns),
+        actions = List.unmodifiable(actions),
         fixedZones = List.unmodifiable(fixedZones),
         modes = Set.unmodifiable(modes);
   factory ProtocolBlock.fromJson(Json j) => ProtocolBlock(
         id: j['id'] as String,
+        essentialUnknowns: strings(j['essentialUnknowns']),
+        zoneActions: (j['zoneActions'] as Map? ?? const {}).map((k, v) =>
+            MapEntry(
+                k as String,
+                (v as List)
+                    .map((x) => ActionDefinition.fromJson(jsonMap(x)))
+                    .toList())),
+        requireZoneRoute: j['requireZoneRoute'] as bool? ?? false,
+        zoneGroupKeys:
+            Map<String, String>.from(j['zoneGroupKeys'] as Map? ?? const {}),
         actions: (j['actions'] as List)
             .map((x) => ActionDefinition.fromJson(jsonMap(x)))
             .toList(),
@@ -306,6 +353,7 @@ class ProtocolBlock {
             ? null
             : SessionPhase.values.byName(j['phase'] as String),
         condition: j['condition'] as String?,
+        defaultCondition: j['defaultCondition'] as bool?,
         optional: j['optional'] as bool? ?? false,
         repeatPerZone: j['repeatPerZone'] as bool? ?? false,
         target: j['target'] as String? ?? 'none',
@@ -318,9 +366,15 @@ class ProtocolBlock {
       );
   Json toJson() => {
         'id': id,
+        'essentialUnknowns': essentialUnknowns,
+        'zoneActions': zoneActions
+            .map((k, v) => MapEntry(k, v.map((a) => a.toJson()).toList())),
+        'requireZoneRoute': requireZoneRoute,
+        'zoneGroupKeys': zoneGroupKeys,
         'shareKey': shareKey,
         'phase': phase?.name,
         'condition': condition,
+        'defaultCondition': defaultCondition,
         'optional': optional,
         'repeatPerZone': repeatPerZone,
         'target': target,
@@ -410,6 +464,7 @@ class ProtocolSelection {
   Json toJson() => {
         'id': id,
         'protocolId': protocol.id,
+        'title': protocol.title,
         'protocolUnknowns': protocol.unknowns,
         'version': protocol.version,
         'zones': zones.map((x) => x.toJson()).toList(),
@@ -436,6 +491,7 @@ class PlanIssue {
 
 class PlannedAction {
   final String id;
+  final SessionPhase? phase;
   final ActionDefinition definition;
   final List<BodyZone> zones;
   final List<String> origins;
@@ -443,6 +499,7 @@ class PlannedAction {
   final DurationSpec duration;
   PlannedAction({
     required this.id,
+    this.phase,
     required this.definition,
     required List<BodyZone> zones,
     required List<String> origins,
@@ -454,6 +511,7 @@ class PlannedAction {
         duration = duration ?? definition.duration;
   PlannedAction chooseDuration(int seconds) => PlannedAction(
         id: id,
+        phase: phase,
         definition: definition,
         zones: zones,
         origins: origins,
@@ -462,6 +520,7 @@ class PlannedAction {
       );
   Json toJson() => {
         'id': id,
+        'phase': phase?.name,
         'definition': definition.toJson(),
         'zones': zones.map((x) => x.toJson()).toList(),
         'origins': origins,
@@ -470,6 +529,9 @@ class PlannedAction {
       };
   factory PlannedAction.fromJson(Json j) => PlannedAction(
         id: j['id'] as String,
+        phase: j['phase'] == null
+            ? null
+            : SessionPhase.values.byName(j['phase'] as String),
         definition: ActionDefinition.fromJson(jsonMap(j['definition'])),
         zones: (j['zones'] as List)
             .map((x) => BodyZone.fromJson(jsonMap(x)))

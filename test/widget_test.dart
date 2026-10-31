@@ -35,10 +35,6 @@ void main() {
       (tester) async {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
-    expect(find.text('Magnétisme'), findsOneWidget);
-    expect(find.byTooltip('Nouvelle séance'), findsOneWidget);
-    await tester.tap(find.byTooltip('Parcours V4'));
-    await tester.pumpAndSettle();
     expect(find.text('Magnétisme V4'), findsOneWidget);
     expect(find.text('Nouveau patient'), findsOneWidget);
     expect(tester.takeException(), isNull);

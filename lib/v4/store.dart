@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'models.dart';
 import 'engine.dart';
 import 'runner.dart';
+import '../services/magnetisme_library_service.dart';
 
 String newId() {
   final random = Random.secure();
@@ -144,6 +145,66 @@ class V4Store {
       throw const FormatException('Catalogue V4 invalide.');
     }
     final blocks = jsonMap(data['blocks']);
+    if (!Hive.isBoxOpen(MagnetismeLibraryService.boxName)) {
+      await Hive.openBox(MagnetismeLibraryService.boxName);
+    }
+    final library = {
+      for (final e in await MagnetismeLibraryService.loadAll())
+        e['id'] as String: e
+    };
+    Json withLibraryText(Json protocol) {
+      final copy = jsonMap(jsonDecode(jsonEncode(protocol)));
+      final personalCombined = <String>{};
+      for (final b in copy['blocks'] as List) {
+        for (final a in b['actions'] as List) {
+          final id = a['prayerId'] as String?;
+          if (id != null &&
+              a['prayerPart'] != null &&
+              library[id] != null &&
+              a['prayerBaseHash'] != fingerprint(library[id]!['contenu']) &&
+              a['review'] != 'personal') {
+            personalCombined.add(id);
+          }
+        }
+      }
+      for (final rawBlock in copy['blocks'] as List) {
+        final actions = rawBlock['actions'] as List;
+        actions.removeWhere((a) =>
+            a['prayerPart'] == 'communal' &&
+            personalCombined.contains(a['prayerId']));
+        for (final action in actions) {
+          final id = action['prayerId'];
+          if (id == null) continue;
+          final entry = library[id];
+          if (entry == null ||
+              (entry['contenu'] as String? ?? '').trim().isEmpty) {
+            rawBlock['essentialUnknowns'] = [
+              ...strings(rawBlock['essentialUnknowns']),
+              'Texte de la prière $id indisponible.'
+            ];
+          } else if (personalCombined.contains(id)) {
+            // A changed free-text prayer cannot be split safely. Preserve it as
+            // one manual action for every selected zone, without duplicating
+            // the common prayers. Never rewrite the user's original library.
+            action['formulation'] = entry['contenu'];
+            action['instruction'] =
+                'Version personnelle conservée. Suivez les gestes et répétitions de votre texte pour les zones indiquées.';
+            action['unknowns'] = [
+              'Votre version personnelle est présentée intégralement une seule fois ; ses parties locales et communes ne sont pas séparées automatiquement.'
+            ];
+            rawBlock['repeatPerZone'] = false;
+          } else if (action['prayerPart'] == null &&
+              !(action['review'] == 'personal' &&
+                  (action['formulation'] as String? ?? '').isNotEmpty)) {
+            action['formulation'] = entry['contenu'];
+          }
+        }
+      }
+      (copy['blocks'] as List)
+          .removeWhere((b) => (b['actions'] as List).isEmpty);
+      return copy;
+    }
+
     final merged = <String, ProtocolDefinition>{};
     for (final raw in data['protocols'] as List) {
       final j = jsonMap(raw);
@@ -151,11 +212,11 @@ class V4Store {
           .map((id) =>
               blocks[id] ?? (throw FormatException('Bloc inconnu : $id')))
           .toList();
-      final p = ProtocolDefinition.fromJson(j);
+      final p = ProtocolDefinition.fromJson(withLibraryText(j));
       merged[p.id] = p;
     }
     for (final raw in Hive.box(customBox).values.whereType<Map>()) {
-      final p = ProtocolDefinition.fromJson(jsonMap(raw));
+      final p = ProtocolDefinition.fromJson(withLibraryText(jsonMap(raw)));
       merged[p.id] = p;
     }
     return merged.values.toList()

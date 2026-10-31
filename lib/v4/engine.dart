@@ -40,80 +40,84 @@ class ProtocolValidator {
       if (b.target == 'fixed' && b.fixedZones.isEmpty) {
         fail('target', 'Zones fixes manquantes.');
       }
-      if (b.shareKey != null && (b.target != 'none' || b.repeatPerZone)) {
+      if (b.shareKey != null &&
+          (b.target != 'none' || b.repeatPerZone || b.zoneActions.isNotEmpty)) {
         fail('unsafeShare', 'Un bloc local ne peut pas être fusionné.');
       }
       if (b.actions.isEmpty || b.modes.isEmpty) {
         fail('emptyBlock', 'Bloc sans actions ou sans mode.');
       }
-      final actionIds = <String>{};
-      for (final a in b.actions) {
-        if (a.id.isEmpty ||
-            !actionIds.add(a.id) ||
-            a.title.isEmpty ||
-            a.instruction.trim().isEmpty) {
-          fail('actionIdentity', 'Action vide ou dupliquée dans ${b.id}.');
-        }
-        final t = a.duration;
-        if ((t.minSeconds == null) != (t.maxSeconds == null) ||
-            (t.minSeconds != null &&
-                (t.minSeconds! <= 0 || t.maxSeconds! < t.minSeconds!)) ||
-            (t.chosenSeconds != null &&
-                (t.chosenSeconds! <= 0 ||
-                    (t.minSeconds != null &&
-                        t.chosenSeconds! < t.minSeconds!) ||
-                    (t.maxSeconds != null &&
-                        t.chosenSeconds! > t.maxSeconds!)))) {
-          fail('duration', 'Durée invalide pour ${a.id}.');
-        }
-        if (t.chosenSeconds != null && t.origin != 'personal') {
-          fail(
-            'durationOrigin',
-            'Le choix de durée doit porter sa provenance personnelle.',
-          );
-        }
-        if (a.sources.isEmpty) {
-          fail('source', 'Action sans référence : ${a.id}.');
-        }
-        for (final source in a.sources) {
-          if (source.id.isEmpty ||
-              source.lesson.isEmpty ||
-              Uri.tryParse(source.url)?.hasScheme != true) {
-            fail('source', 'Référence incomplète pour ${a.id}.');
+      for (final variant in [b.actions, ...b.zoneActions.values]) {
+        final actionIds = <String>{};
+        for (final a in variant) {
+          if (a.id.isEmpty ||
+              !actionIds.add(a.id) ||
+              a.title.isEmpty ||
+              a.instruction.trim().isEmpty) {
+            fail('actionIdentity', 'Action vide ou dupliquée dans ${b.id}.');
           }
-        }
-        if (a.review == ReviewState.conflicting ||
-            a.sources.any((s) => s.review == ReviewState.conflicting)) {
-          fail('contradiction', 'Source contradictoire : ${a.id}, à arbitrer.');
-        }
-        if (a.review == ReviewState.needsReview ||
-            a.unknowns.isNotEmpty ||
-            a.sources.any((s) => s.review == ReviewState.needsReview)) {
-          errors.add(
-            PlanIssue(
-              'review',
-              '${a.title} : points à vérifier conservés.',
-              blocking: false,
-              relatedIds: [p.id, a.id],
-            ),
-          );
-        }
-        if (a.kind == ActionKind.prayer &&
-            (a.prayerId == null || a.prayerId!.isEmpty)) {
-          fail('prayer', 'Prière sans identifiant explicite.');
-        }
-        if (a.kind != ActionKind.prayer && a.prayerId != null) {
-          fail(
-            'prayer',
-            'Une liaison de prière doit être une action de prière.',
-          );
-        }
-        if (b.modes.contains(SessionMode.distance) &&
-            physicalKinds.contains(a.kind)) {
-          fail(
-            'distancePhysical',
-            'Geste corporel présent dans un bloc à distance.',
-          );
+          final t = a.duration;
+          if ((t.minSeconds == null) != (t.maxSeconds == null) ||
+              (t.minSeconds != null &&
+                  (t.minSeconds! <= 0 || t.maxSeconds! < t.minSeconds!)) ||
+              (t.chosenSeconds != null &&
+                  (t.chosenSeconds! <= 0 ||
+                      (t.minSeconds != null &&
+                          t.chosenSeconds! < t.minSeconds!) ||
+                      (t.maxSeconds != null &&
+                          t.chosenSeconds! > t.maxSeconds!)))) {
+            fail('duration', 'Durée invalide pour ${a.id}.');
+          }
+          if (t.chosenSeconds != null && t.origin != 'personal') {
+            fail(
+              'durationOrigin',
+              'Le choix de durée doit porter sa provenance personnelle.',
+            );
+          }
+          if (a.sources.isEmpty) {
+            fail('source', 'Action sans référence : ${a.id}.');
+          }
+          for (final source in a.sources) {
+            if (source.id.isEmpty ||
+                source.lesson.isEmpty ||
+                Uri.tryParse(source.url)?.hasScheme != true) {
+              fail('source', 'Référence incomplète pour ${a.id}.');
+            }
+          }
+          if (a.review == ReviewState.conflicting ||
+              a.sources.any((s) => s.review == ReviewState.conflicting)) {
+            fail('contradiction',
+                'Source contradictoire : ${a.id}, à arbitrer.');
+          }
+          if (a.review == ReviewState.needsReview ||
+              a.unknowns.isNotEmpty ||
+              a.sources.any((s) => s.review == ReviewState.needsReview)) {
+            errors.add(
+              PlanIssue(
+                'review',
+                '${a.title} : points à vérifier conservés.',
+                blocking: false,
+                relatedIds: [p.id, a.id],
+              ),
+            );
+          }
+          if (a.kind == ActionKind.prayer &&
+              (a.prayerId == null || a.prayerId!.isEmpty)) {
+            fail('prayer', 'Prière sans identifiant explicite.');
+          }
+          if (a.kind != ActionKind.prayer && a.prayerId != null) {
+            fail(
+              'prayer',
+              'Une liaison de prière doit être une action de prière.',
+            );
+          }
+          if (b.modes.contains(SessionMode.distance) &&
+              physicalKinds.contains(a.kind)) {
+            fail(
+              'distancePhysical',
+              'Geste corporel présent dans un bloc à distance.',
+            );
+          }
         }
       }
     }
@@ -200,7 +204,8 @@ class SessionEngine {
           continue;
         }
         if (block.condition != null) {
-          if (!facts.containsKey(block.condition)) {
+          if (!facts.containsKey(block.condition) &&
+              block.defaultCondition == null) {
             issues.add(
               PlanIssue(
                 'missingFact',
@@ -210,7 +215,14 @@ class SessionEngine {
             );
             continue;
           }
-          if (facts[block.condition] != true) continue;
+          if ((facts[block.condition] ?? block.defaultCondition) != true) {
+            continue;
+          }
+        }
+        if (block.essentialUnknowns.isNotEmpty) {
+          issues.add(PlanIssue('essentialMissing',
+              '${selection.protocol.title} : ${block.essentialUnknowns.join(' ; ')}',
+              relatedIds: [selection.id, block.id]));
         }
         final targets = block.target == 'selected'
             ? selection.zones
@@ -227,13 +239,23 @@ class SessionEngine {
           );
           continue;
         }
+        final groupedTargets = <String, List<BodyZone>>{};
+        if (block.repeatPerZone) {
+          for (final z in targets) {
+            final key = block.zoneGroupKeys[z.id] ??
+                block.zoneGroupKeys[z.label] ??
+                z.key;
+            groupedTargets.putIfAbsent(key, () => []).add(z);
+          }
+        }
         final groups = block.repeatPerZone
-            ? targets.map((z) => [z]).toList()
+            ? groupedTargets.values.toList()
             : <List<BodyZone>>[targets];
         final signature = fingerprint({
           'mode': mode.name,
           'target': block.target,
           'condition': block.condition,
+          'defaultCondition': block.defaultCondition,
           'optional': block.optional,
           'phase': block.phase?.name,
           'actions': block.actions.map((a) => a.semanticJson).toList(),
@@ -252,7 +274,41 @@ class SessionEngine {
           shares[block.shareKey!] = signature;
         }
         for (final zones in groups) {
-          for (final action in block.actions) {
+          final route = zones.isNotEmpty
+              ? block.zoneActions[zones.first.id] ??
+                  block.zoneActions[zones.first.label]
+              : null;
+          if (zones.length > 1 && block.repeatPerZone) {
+            final variants = {
+              for (final z in zones)
+                fingerprint((block.zoneActions[z.id] ??
+                        block.zoneActions[z.label] ??
+                        block.actions)
+                    .map((a) => a.semanticJson)
+                    .toList())
+            };
+            if (variants.length > 1) {
+              issues.add(PlanIssue('zoneGroupConflict',
+                  'Des zones regroupées demandent des gestes différents ; aucun travail n’est fusionné automatiquement.',
+                  relatedIds: [selection.id, block.id]));
+            }
+          }
+          if (block.requireZoneRoute && route == null) {
+            issues.add(PlanIssue('missingRoute',
+                '${selection.protocol.title} : précisez une articulation avec un trajet documenté pour ${zones.map((z) => z.label).join(', ')}.',
+                relatedIds: [selection.id, block.id]));
+          }
+          for (final action in route ?? block.actions) {
+            if (action.condition != null) {
+              final include =
+                  facts[action.condition] ?? action.defaultCondition;
+              if (include == null) {
+                issues.add(PlanIssue('missingFact',
+                    'Condition à renseigner : ${action.condition}.',
+                    relatedIds: [selection.id, block.id, action.id]));
+              }
+              if (include != true) continue;
+            }
             final id = fingerprint(
               block.shareKey != null
                   ? ['shared', block.shareKey, signature, action.id]
@@ -276,6 +332,7 @@ class SessionEngine {
             };
             nodes[id] = PlannedAction(
               id: id,
+              phase: block.phase,
               definition: action,
               zones: zones,
               origins: origins,

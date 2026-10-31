@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'models/cadran.dart';
 import 'models/patient_session.dart';
 import 'models/protocole.dart';
-import 'screens/patients_screen.dart';
+import 'v4/screens.dart';
 import 'services/cadran_service.dart';
 import 'services/energy_assessment_service.dart';
 import 'services/pendulum_care_service.dart';
@@ -36,10 +36,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+    final colorScheme =
+        ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
 
     return MaterialApp(
-      title: "Coupeur de Feu",
+      title: "Magnétisme V4",
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: colorScheme,
@@ -54,7 +55,8 @@ class MyApp extends StatelessWidget {
         cardTheme: CardThemeData(
           elevation: 1,
           margin: const EdgeInsets.symmetric(vertical: 6),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
@@ -63,23 +65,28 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 14),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            textStyle:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           ),
         ),
         dialogTheme: DialogThemeData(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         chipTheme: ChipThemeData(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
-      home: const PatientsScreen(),
+      home: const V4Workspace(),
     );
   }
 }

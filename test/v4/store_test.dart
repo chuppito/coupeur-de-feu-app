@@ -66,15 +66,22 @@ void main() {
   test(
       'Distance : support explicite, deux frappes et absence de passes corporelles',
       () async {
-    final p =
-        (await V4Store.catalog()).firstWhere((p) => p.id == 'distance-support');
+    final p = (await V4Store.catalog()).firstWhere((p) => p.id == 'ft-entorse');
     final plan = SessionEngine().build(mode: SessionMode.distance, selections: [
       ProtocolSelection(
           id: 'd',
           protocol: p,
-          zones: const [BodyZone(id: 'poignet', label: 'Poignet')])
+          zones: const [BodyZone(id: 'poignet', label: 'Poignet droit')])
     ]);
-    expect(p.blocks.where((b) => b.phase != SessionPhase.preparation).map((b) => b.phase).toSet().length, 8);
+    expect(
+        p.blocks
+            .where((b) =>
+                b.modes.contains(SessionMode.distance) &&
+                b.phase != SessionPhase.preparation)
+            .map((b) => b.phase)
+            .toSet()
+            .length,
+        8);
     expect(plan.canStart, isTrue);
     expect(
         plan.actions.any(
@@ -172,7 +179,7 @@ void main() {
         plan.actions
             .where((a) => a.definition.kind == ActionKind.prayer)
             .length,
-        4);
+        5);
   });
   test('Import complet valide avant toute écriture', () async {
     final original = await V4Store.createPatient('Anne', 'A');

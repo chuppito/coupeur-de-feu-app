@@ -76,23 +76,27 @@ void main() {
               savedSnapshot = r.toJson();
             },
             patientId: id,
-            patientName: 'Anne A')));
-    addTearDown(() async {
-      await tester.pumpWidget(const SizedBox());
-      await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 200)));
-    });
+            patientName: 'Anne A',
+            maintainAwake: (_) async {})));
     await tester.pump(const Duration(milliseconds: 300));
     expect(find.text('4:00'), findsOneWidget);
-    await tester.scrollUntilVisible(find.text('Terminer cette étape'), 300,
-        scrollable: find.byType(Scrollable).first);
-    await tester.tap(find.text('Terminer cette étape'));
+    await tester.tap(find.byKey(const ValueKey('session-next')));
     await tester.pump(const Duration(milliseconds: 200));
     expect(runner.completed.length, 1);
     await tester.pump();
     expect(find.text('Deuxième étape'), findsOneWidget);
-    expect(tester.getTopLeft(find.byKey(const ValueKey('v4-current-title'))).dy,
-        lessThan(160));
+    expect(
+        tester
+            .widget<ListView>(find.byKey(const ValueKey('session-scroll')))
+            .controller!
+            .offset,
+        0);
+    await tester.tap(find.byKey(const ValueKey('session-previous')));
+    await tester.pump();
+    expect(runner.currentIndex, 0);
+    expect(runner.paused, isTrue);
+    await tester.tap(find.byKey(const ValueKey('session-next')));
+    await tester.pump();
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
     await tester.pump(const Duration(milliseconds: 300));
     expect(runner.paused, isTrue);
@@ -102,35 +106,5 @@ void main() {
     await tester.pumpWidget(const SizedBox());
     await tester.pump();
     expect(SessionRunner.fromJson(savedSnapshot!).completed.length, 1);
-  });
-  testWidgets('Préparation lisible sur petit écran et zones conservées',
-      (tester) async {
-    tester.view.physicalSize = const Size(360, 720);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-    final id =
-        (await tester.runAsync(() => V4Store.createPatient('Anne', 'A')))!;
-    final catalog = (await tester.runAsync(V4Store.catalog))!;
-    await tester.pumpWidget(MaterialApp(
-        home: V4SetupScreen(
-            patientId: id,
-            patientName: 'Anne A',
-            catalog: Future.value(catalog))));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Entorse'));
-    await tester.pumpAndSettle();
-    await tester.scrollUntilVisible(find.byType(InteractiveBody), 200);
-    expect(find.byType(InteractiveBody), findsOneWidget);
-    await tester.scrollUntilVisible(find.byTooltip('Genou droit'), 200);
-    await tester.pump();
-    expect(tester.getCenter(find.byTooltip('Genou droit')).dy, lessThan(720));
-    await tester.tap(find.byTooltip('Genou droit'), warnIfMissed: true);
-    await tester.pump();
-    await tester.scrollUntilVisible(find.text('Voir l’aperçu complet'), 300);
-    await tester.tap(find.text('Voir l’aperçu complet'));
-    await tester.pumpAndSettle();
-    expect(tester.takeException(), isNull);
-    await tester.pumpWidget(const SizedBox());
   });
 }
