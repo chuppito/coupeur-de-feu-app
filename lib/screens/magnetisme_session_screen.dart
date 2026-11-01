@@ -486,7 +486,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'Prise de contact',
       'Bilan énergétique',
       if (_scanPenduleNecessaire) 'Scan au pendule',
-      if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
       'Dégagement des entités / énergies négatives si nécessaire',
       '14 conventions mentales',
       'Conventions mentales supplémentaires de la fiche technique',
@@ -495,11 +494,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         if (_ftHasPasses) ...<String>[
           'Passes rapides selon la fiche',
           'Contrôle des flux',
+          if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
           'Passes lentes et impositions selon la fiche',
         ],
         if (_ftHasCirculation) 'Circulation énergétique entre les chakras',
         if (_ftHasBalayage) 'Balayage',
       ] else ...<String>[
+        if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
         if (_ftHasPasses || _ftHasCirculation || _ftHasBalayage)
           'Travail sur photo / planches anatomiques selon la fiche',
       ],
@@ -904,16 +905,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       return _couperLeFeuStep(baseIndex);
     }
 
-    if (index == 0) return _contactHelp();
-    if (index == 1) return _bilan();
-    if (_scanPenduleNecessaire && index == 2) return _scanPenduleStep();
-    if (_soinPenduleNecessaire && index == 2 + (_scanPenduleNecessaire ? 1 : 0)) return _soinPenduleStep();
-    final offset = (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0);
-    if (index == 2 + offset) return _degagement();
-    if (index == 3 + offset) return _conventions();
-    if (index == 4 + offset) return _specific();
-    if (index == 5 + offset) return _prieres();
-    if (index == _etapes.length - 1) return _debrief();
+    final title = _etapes[index];
+    if (title == 'Prise de contact') return _contactHelp();
+    if (title == 'Bilan énergétique') return _bilan();
+    if (title == 'Scan au pendule') return _scanPenduleStep();
+    if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
+    if (title.startsWith('Dégagement des entités')) return _degagement();
+    if (title == '14 conventions mentales') return _conventions();
+    if (title == 'Conventions mentales supplémentaires de la fiche technique') return _specific();
+    if (title == 'Prières / formulations prévues par le protocole') return _prieres();
+    if (title == 'Débriefing / observation') return _debrief();
     return _technique(index);
   }
 
