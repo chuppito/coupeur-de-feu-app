@@ -492,7 +492,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'Conventions mentales supplémentaires de la fiche technique',
       'Prières / formulations prévues par le protocole',
       if (_mode == 'Présentiel') ...<String>[
-        if (_ftHasPasses) 'Passes et impositions selon la fiche',
+        if (_ftHasPasses) ...<String>[
+          'Passes rapides selon la fiche',
+          'Contrôle des flux',
+          'Passes lentes et impositions selon la fiche',
+        ],
         if (_ftHasCirculation) 'Circulation énergétique entre les chakras',
         if (_ftHasBalayage) 'Balayage',
       ] else ...<String>[
@@ -1868,6 +1872,40 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }).whereType<String>().toList();
     final zones = _zonesSoin.toList()..sort();
 
+    if (titreEtape == 'Contrôle des flux') {
+      final routes = <String>[];
+      for (final zone in zones) {
+        final z = zone.toLowerCase();
+        final cote = z.contains('gauche') ? 'gauche' : z.contains('droite') ? 'droit' : null;
+        if (cote == null) continue;
+        if (z.contains('cheville')) {
+          routes.add('$zone : chakra mineur genou $cote → chakra mineur pied $cote.');
+        } else if (z.contains('poignet')) {
+          routes.add('$zone : chakra mineur coude $cote → chakra mineur main $cote.');
+        } else if (z.contains('coude')) {
+          routes.add('$zone : 1. épaule $cote → coude $cote ; 2. coude $cote → main $cote.');
+        } else if (z.contains('genou')) {
+          routes.add('$zone : 1. aine $cote → genou $cote ; 2. genou $cote → pied $cote.');
+        } else if (z.contains('épaule') || z.contains('epaule')) {
+          routes.add('$zone : 1. couronne → épaule $cote ; 2. épaule $cote → main $cote.');
+        }
+      }
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        const Text('Contrôle des flux — étape distincte après les passes rapides.',
+          style: TextStyle(fontWeight: FontWeight.w600)),
+        const SizedBox(height: 8),
+        if (routes.isEmpty)
+          const Text('Aucun trajet articulaire documenté ne correspond aux zones sélectionnées. Consulter la fiche et les pages 37–38 du manuel.')
+        else
+          ...routes.map((route) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(route),
+          )),
+        const Text('Pour les épaules, coudes et genoux, le manuel prévoit deux segments de passes rapides et un contrôle adapté à chacun.'),
+        _checkStep(index),
+      ]);
+    }
+
     if (distance) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
         const Text(
@@ -1889,7 +1927,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
-      if (titreEtape == 'Passes et impositions selon la fiche' && techniques.isNotEmpty) ...<Widget>[
+      if ((titreEtape == 'Passes rapides selon la fiche' || titreEtape == 'Passes lentes et impositions selon la fiche') && techniques.isNotEmpty) ...<Widget>[
         Text(
           'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
