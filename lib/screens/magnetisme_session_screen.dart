@@ -1884,16 +1884,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         } else if (suffixe != null && z.contains('poignet')) {
           routes.add('$zone : chakra mineur du coude $suffixe → chakra mineur de la main $cote.');
         } else if (suffixe != null && z.contains('coude')) {
-          routes.add('$zone : deux segments à contrôler séparément :\\n'
-              '1. Chakra mineur épaule $cote → chakra mineur coude $suffixe.\\n'
+          routes.add('$zone : deux segments à contrôler séparément :\n'
+              '1. Chakra mineur épaule $cote → chakra mineur coude $suffixe.\n'
               '2. Chakra mineur coude $suffixe → chakra mineur main $cote.');
         } else if (suffixe != null && z.contains('genou')) {
-          routes.add('$zone : deux segments à contrôler séparément :\\n'
-              '1. Chakra mineur aine $cote → chakra mineur genou $suffixe.\\n'
+          routes.add('$zone : deux segments à contrôler séparément :\n'
+              '1. Chakra mineur aine $cote → chakra mineur genou $suffixe.\n'
               '2. Chakra mineur genou $suffixe → chakra mineur pied $suffixe.');
         } else if (suffixe != null && (z.contains('épaule') || z.contains('epaule'))) {
-          routes.add('$zone : deux segments à contrôler séparément :\\n'
-              '1. Chakra majeur couronne → chakra mineur épaule $cote.\\n'
+          routes.add('$zone : deux segments à contrôler séparément :\n'
+              '1. Chakra majeur couronne → chakra mineur épaule $cote.\n'
               '2. Chakra mineur épaule $cote → chakra mineur main $cote.');
         } else if (z.contains('cervic') || z.contains('nuque')) {
           routes.add('$zone : chakra majeur couronne → chakra majeur cœur (derrière).');
@@ -1906,7 +1906,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
         const Text('Contrôle des flux', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         const SizedBox(height: 8),
-        const Text('Étape à valider séparément des passes rapides et des passes lentes. Repères tirés des pages 37–38 du manuel. Les trajets gauche/droite sont adaptés au côté choisi.'),
+        const Text('Après les passes rapides, vérifier le flux sur le trajet indiqué ci-dessous. Si le flux n’est pas jugé rétabli selon la méthode du cours, reprendre les passes rapides sur ce trajet puis contrôler de nouveau. Valider cette étape avant de passer au pendule de Thot facultatif et aux passes lentes. Référence : manuel, pages 37–38.'),
         const SizedBox(height: 10),
         if (routes.isEmpty)
           const Text('Pas de trajet automatique documenté pour cette sélection : consulter la fiche technique et le manuel, sans inventer de points.')
@@ -1915,7 +1915,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             padding: const EdgeInsets.only(bottom: 12),
             child: SelectableText(route),
           )),
-        const Text('Épaules, coudes, genoux : le manuel prévoit deux segments de passes rapides, avec contrôle de chacun, avant les passes lentes sur le membre.'),
+        const Text('Épaules, coudes et genoux : effectuer les passes rapides sur le premier segment et contrôler ce segment, puis recommencer sur le second segment et contrôler ce second segment. Les passes lentes couvrent ensuite le membre. Les indications sont celles de la pratique enseignée, sans valeur de diagnostic médical.'),
         const SizedBox(height: 8),
         _checkStep(index),
       ]);
