@@ -528,10 +528,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   Map<String, dynamic>? _protocolePdfPour(_Doc doc) {
     final title = _normaliserTitre(doc.titre);
+    const aliases = <String, String>{
+      'tabacarretdu': 'Arret du tabac',
+      'traitementslourdsaideaux': 'Traitements lourds',
+      'interventionchirurgicale5joursavant': 'Intervention chirurgicale avant',
+      'interventionchirurgicaleapreslintervention': 'Intervention chirurgicale apres',
+      'troublesdusommeil': 'Trouble du sommeil',
+    };
+    final canonical = _normaliserTitre(aliases[title] ?? doc.titre);
     // Ne jamais choisir une fiche différente en cas de titre ambigu.
     final matches = _protocolesPdf.entries.where((entry) {
       final key = _normaliserTitre(entry.key);
-      return title == key || (key.length >= 6 && title.contains(key));
+      return canonical == key || (key.length >= 6 && canonical.contains(key));
     }).toList();
     return matches.length == 1
         ? Map<String, dynamic>.from(matches.single.value as Map)
@@ -544,8 +552,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (fiche == null) return <String>[];
     final order = List<String>.from(fiche['order'] as List);
     final counts = <String, int>{};
-    if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
-
     return <String>[
       'Prise de contact',
       'Bilan énergétique',
@@ -626,6 +632,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         if (_mode == 'Présentiel') 'Balayage & débriefing' else 'Débriefing',
       ];
     }
+
+    if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
 
     return <String>[
       'Prise de contact',
