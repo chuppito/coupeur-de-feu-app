@@ -27,8 +27,12 @@ const List<_BodyZone> _zonesCommunes = [
   _BodyZone('Oreille droite', Rect.fromLTWH(144, 22, 18, 20), isCircle: true),
   _BodyZone('Bras gauche', Rect.fromLTWH(52, 66, 30, 116)),
   _BodyZone('Bras droit', Rect.fromLTWH(158, 66, 30, 116)),
+  _BodyZone('Épaule gauche', Rect.fromLTWH(52, 66, 30, 25)),
+  _BodyZone('Épaule droite', Rect.fromLTWH(158, 66, 30, 25)),
   _BodyZone('Coude gauche', Rect.fromLTWH(52, 132, 30, 24)),
   _BodyZone('Coude droit', Rect.fromLTWH(158, 132, 30, 24)),
+  _BodyZone('Poignet gauche', Rect.fromLTWH(52, 174, 24, 16)),
+  _BodyZone('Poignet droit', Rect.fromLTWH(164, 174, 24, 16)),
   _BodyZone('Main gauche', Rect.fromLTWH(46, 182, 30, 30), isCircle: true),
   _BodyZone('Main droite', Rect.fromLTWH(164, 182, 30, 30), isCircle: true),
   _BodyZone('Hanche gauche', Rect.fromLTWH(90, 188, 30, 18)),
@@ -39,6 +43,8 @@ const List<_BodyZone> _zonesCommunes = [
   _BodyZone('Genou droit', Rect.fromLTWH(120, 256, 30, 20)),
   _BodyZone('Tibia gauche', Rect.fromLTWH(90, 276, 30, 56)),
   _BodyZone('Tibia droit', Rect.fromLTWH(120, 276, 30, 56)),
+  _BodyZone('Cheville gauche', Rect.fromLTWH(90, 324, 30, 14)),
+  _BodyZone('Cheville droite', Rect.fromLTWH(120, 324, 30, 14)),
   _BodyZone('Pied gauche', Rect.fromLTWH(82, 332, 38, 26)),
   _BodyZone('Pied droit', Rect.fromLTWH(120, 332, 38, 26)),
 ];
@@ -54,7 +60,6 @@ const List<_BodyZone> _zonesFaceSeul = [
 /// Zones visibles uniquement de dos.
 const List<_BodyZone> _zonesDosSeul = [
   _BodyZone('Nuque', Rect.fromLTWH(98, 58, 44, 20)),
-  _BodyZone('Épaules', Rect.fromLTWH(58, 76, 124, 26)),
   _BodyZone('Dos', Rect.fromLTWH(84, 100, 72, 78)),
   _BodyZone('Bassin', Rect.fromLTWH(94, 178, 52, 25)),
 ];
