@@ -373,11 +373,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   String _clean(String value) {
     return value
-        .replaceAll('\\u000c', '\\n\\n')
+        .replaceAll('\\u000c', '\n\n')
         .replaceAll('\\u0000', '')
         .replaceAll(RegExp(r'[ \\t]+'), ' ')
-        .replaceAll(RegExp(r'\\n[ \\t]+'), '\\n')
-        .replaceAll(RegExp(r'\\n{3,}'), '\\n\\n')
+        .replaceAll(RegExp(r'\\n[ \\t]+'), '\n')
+        .replaceAll(RegExp(r'\\n{3,}'), '\n\n')
         .trim();
   }
 
@@ -910,7 +910,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (title == 'Prise de contact') return _contactHelp();
     if (title == 'Bilan énergétique') return _bilan();
     if (title == 'Scan au pendule') return _scanPenduleStep();
-    if (title == 'Soin au pendule (1 soin)' || title == '7C · Pendule de Thot (facultatif)') return _soinPenduleStep();
+    if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
+    if (title == '7C · Pendule de Thot (facultatif)') return _thotComplementStep(index);
     if (title.startsWith('Dégagement des entités')) return _degagement();
     if (title == '14 conventions mentales') return _conventions();
     if (title == 'Conventions mentales supplémentaires de la fiche technique') return _specific();
@@ -1931,13 +1932,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final isSlow = titreEtape == '7D · Passes lentes';
     final isSpecific = titreEtape == '7E · Impositions et travaux spécifiques';
     String relevantInstructions(String section) {
-      final lines = section.split('\\n');
+      final lines = section.split('\n');
       final pattern = isRapid
           ? RegExp(r'passes? rapides?|chakra en amont|chakra en aval', caseSensitive: false)
           : isSlow
               ? RegExp(r'passes? lentes?', caseSensitive: false)
               : RegExp(r'imposition|apposition|visualisation|ligament|travail complémentaire', caseSensitive: false);
-      return lines.where((line) => pattern.hasMatch(line)).join('\\n').trim();
+      return lines.where((line) => pattern.hasMatch(line)).join('\n').trim();
     }
     final instructions = (isRapid || isSlow || isSpecific)
         ? techniques.map(relevantInstructions).where((item) => item.isNotEmpty).toList()
@@ -1947,7 +1948,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
       if (isRapid || isSlow || isSpecific) ...<Widget>[
         if (instructions.isNotEmpty)
-          SelectableText(instructions.join('\\n\\n'), style: const TextStyle(fontSize: 16, height: 1.4))
+          SelectableText(instructions.join('\n\n'), style: const TextStyle(fontSize: 16, height: 1.4))
         else
           const Text('Aucune consigne spécifique identifiée pour cette sous-étape dans la fiche.'),
       ],
@@ -1962,6 +1963,21 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           ),
         ),
       ],
+      _checkStep(index),
+    ]);
+  }
+
+  Widget _thotComplementStep(int index) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      const Text('Pendule de Thot — complément facultatif',
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+      const SizedBox(height: 8),
+      const Text('1. Rotation négative du pendule sur la zone choisie.'),
+      const Text('2. Lever le pendule, puis tapoter deux fois.'),
+      const Text('3. Rotation positive du pendule sur la même zone.'),
+      const SizedBox(height: 8),
+      if (_zonesSoin.isNotEmpty)
+        Text('Zone : ${(_zonesSoin.toList()..sort()).join(', ')}'),
       _checkStep(index),
     ]);
   }
