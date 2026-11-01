@@ -492,10 +492,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'Prières / formulations prévues par le protocole',
       if (_mode == 'Présentiel') ...<String>[
         if (_ftHasPasses) ...<String>[
-          'Passes rapides selon la fiche',
-          'Contrôle des flux',
-          if (_soinPenduleNecessaire) 'Soin au pendule (1 soin)',
-          'Passes lentes et impositions selon la fiche',
+          '7A · Passes rapides',
+          '7B · Contrôle des flux',
+          if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
+          '7D · Passes lentes',
+          '7E · Impositions et travaux spécifiques',
         ],
         if (_ftHasCirculation) 'Circulation énergétique entre les chakras',
         if (_ftHasBalayage) 'Balayage',
@@ -909,7 +910,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (title == 'Prise de contact') return _contactHelp();
     if (title == 'Bilan énergétique') return _bilan();
     if (title == 'Scan au pendule') return _scanPenduleStep();
-    if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
+    if (title == 'Soin au pendule (1 soin)' || title == '7C · Pendule de Thot (facultatif)') return _soinPenduleStep();
     if (title.startsWith('Dégagement des entités')) return _degagement();
     if (title == '14 conventions mentales') return _conventions();
     if (title == 'Conventions mentales supplémentaires de la fiche technique') return _specific();
@@ -1873,7 +1874,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }).whereType<String>().toList();
     final zones = _zonesSoin.toList()..sort();
 
-    if (titreEtape == 'Contrôle des flux') {
+    if (titreEtape == '7B · Contrôle des flux') {
       final selectedZones = <String>{
         ..._zonesSoin,
         for (final values in _zonesParPathologie.values) ...values,
@@ -1926,18 +1927,30 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ]);
     }
 
+    final isRapid = titreEtape == '7A · Passes rapides';
+    final isSlow = titreEtape == '7D · Passes lentes';
+    final isSpecific = titreEtape == '7E · Impositions et travaux spécifiques';
+    String relevantInstructions(String section) {
+      final lines = section.split('\\n');
+      final pattern = isRapid
+          ? RegExp(r'passes? rapides?|chakra en amont|chakra en aval', caseSensitive: false)
+          : isSlow
+              ? RegExp(r'passes? lentes?', caseSensitive: false)
+              : RegExp(r'imposition|apposition|visualisation|ligament|travail complémentaire', caseSensitive: false);
+      return lines.where((line) => pattern.hasMatch(line)).join('\\n').trim();
+    }
+    final instructions = (isRapid || isSlow || isSpecific)
+        ? techniques.map(relevantInstructions).where((item) => item.isNotEmpty).toList()
+        : <String>[];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
-      if ((titreEtape == 'Passes rapides selon la fiche' || titreEtape == 'Passes lentes et impositions selon la fiche') && techniques.isNotEmpty) ...<Widget>[
-        Text(
-          'Technique prévue pour ' + (_ft?.titre ?? 'le soin'),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-        const SizedBox(height: 8),
-        SelectableText(techniques.join('\n\n'), style: const TextStyle(fontSize: 14, height: 1.5)),
-      ] else
-        const Text('Aucune technique spécifique n’est décrite à cette étape dans la fiche.'),
+      if (isRapid || isSlow || isSpecific) ...<Widget>[
+        if (instructions.isNotEmpty)
+          SelectableText(instructions.join('\\n\\n'), style: const TextStyle(fontSize: 16, height: 1.4))
+        else
+          const Text('Aucune consigne spécifique identifiée pour cette sous-étape dans la fiche.'),
+      ],
       if (zones.isNotEmpty) ...<Widget>[
         const SizedBox(height: 10),
         Card(
