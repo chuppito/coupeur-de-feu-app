@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import '../data/protocoles_pdf_45.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -508,6 +510,111 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     ]);
   }
 
+
+  // Les 45 fiches sont indexées sur le PDF de formation, sans créer de fiches.
+  static final Map<String, dynamic> _protocolesPdf =
+      jsonDecode(protocolesPdf45Json) as Map<String, dynamic>;
+
+  String _normaliserTitre(String value) {
+    var s = value.toLowerCase().trim();
+    const accents = <String, String>{
+      'à':'a', 'â':'a', 'ä':'a', 'é':'e', 'è':'e', 'ê':'e',
+      'ë':'e', 'î':'i', 'ï':'i', 'ô':'o', 'ö':'o',
+      'ù':'u', 'û':'u', 'ü':'u', 'ç':'c', 'œ':'oe',
+    };
+    accents.forEach((a, b) => s = s.replaceAll(a, b));
+    return s.replaceAll(RegExp(r'[^a-z0-9]'), '');
+  }
+
+  Map<String, dynamic>? _protocolePdfPour(_Doc doc) {
+    final title = _normaliserTitre(doc.titre);
+    // Ne jamais choisir une fiche différente en cas de titre ambigu.
+    final matches = _protocolesPdf.entries.where((entry) {
+      final key = _normaliserTitre(entry.key);
+      return title == key || (key.length >= 6 && title.contains(key));
+    }).toList();
+    return matches.length == 1
+        ? Map<String, dynamic>.from(matches.single.value as Map)
+        : null;
+  }
+
+  List<String> get _parcoursPdfUnique {
+    if (_selectedFts.length != 1) return <String>[];
+    final fiche = _protocolePdfPour(_selectedFts.single);
+    if (fiche == null) return <String>[];
+    final order = List<String>.from(fiche['order'] as List);
+    final counts = <String, int>{};
+    if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
+
+    return <String>[
+      'Prise de contact',
+      'Bilan énergétique',
+      if (_scanPenduleNecessaire) 'Scan au pendule',
+      'Dégagement des entités / énergies négatives si nécessaire',
+      for (final stage in order) ...<String>[
+        'PDF45 · ' + stage + ' · ' +
+            ((counts[stage] = (counts[stage] ?? 0) + 1)).toString(),
+      ],
+      if (_mode == 'Présentiel' && _ftHasCirculation)
+        'Circulation énergétique entre les chakras',
+      if (_mode == 'Présentiel' && _ftHasBalayage) 'Balayage',
+      'Débriefing / observation',
+    ];
+  }
+
+  Widget _etapePdf(int index) {
+    final stage = _etapes[index].split(' · ')[1];
+    final doc = _selectedFts.single;
+    final fiche = _protocolePdfPour(doc)!;
+    final source = fiche['source'] as String;
+    if (stage == 'c') return _conventions();
+    if (stage == 's') return _specific();
+    if (stage == 'p') {
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        _prieres(),
+        _sourcePdf(source),
+      ]);
+    }
+    final lines = source.split('\n');
+    final matches = lines.where((line) {
+      if (stage == 'i') {
+        return RegExp(r'imposition|apposition|visualis|mains au-dessus|intention',
+            caseSensitive: false).hasMatch(line);
+      }
+      return RegExp(r'passes rapides|passes lentes|travail en passe|chakra|imposition',
+          caseSensitive: false).hasMatch(line);
+    }).map((line) => line.trim()).where((line) => line.isNotEmpty).toList();
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      Text(doc.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
+      const SizedBox(height: 8),
+      if (_mode == 'À distance')
+        const Text('À distance : ne pas effectuer de passes ni d’impositions physiques.'),
+      if (matches.isEmpty)
+        const Text('Consulter le schéma de la fiche originale ci-dessous.')
+      else
+        ...matches.map((line) => Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: SelectableText(line, style: const TextStyle(fontSize: 16)),
+        )),
+      if (_zonesSoin.isNotEmpty)
+        Text('Zone(s) : ' + (_zonesSoin.toList()..sort()).join(', ')),
+      _sourcePdf(source),
+      _checkStep(index),
+    ]);
+  }
+
+  Widget _sourcePdf(String source) {
+    return ExpansionTile(
+      title: const Text('Fiche PDF originale — instructions complètes'),
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: SelectableText(source),
+        ),
+      ],
+    );
+  }
+
   List<String> get _etapes {
     if (_isCouperLeFeu) {
       return <String>[
@@ -948,6 +1055,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title.startsWith('PDF45 · ')) return _etapePdf(index);
     if (title == 'Prise de contact') return _contactHelp();
     if (title == 'Bilan énergétique') return _bilan();
     if (title == 'Scan au pendule') return _scanPenduleStep();
