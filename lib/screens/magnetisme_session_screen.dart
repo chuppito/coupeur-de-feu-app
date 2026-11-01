@@ -470,6 +470,44 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   bool get _ftHasBalayage => _anyFtMatches(r'balayage');
 
+
+  // V3.2 : séquencer les gestes de chaque fiche plutôt que les fusionner.
+  List<String> _gestes(_Doc doc) {
+    final section = _protocolSectionFor(doc, 7);
+    if (section == null) return <String>[];
+    return section.split('\n').where((line) =>
+      RegExp(r'passe|imposition|apposition|visualis|chakra|circulation|intention',
+        caseSensitive: false).hasMatch(line)).toList();
+  }
+
+  List<String> get _gestesFiches {
+    final result = <String>[];
+    for (final doc in _selectedFts) {
+      for (var i = 0; i < _gestes(doc).length; i++) {
+        result.add('Geste fiche : ' + doc.id + ' : ' + i.toString());
+      }
+    }
+    return result;
+  }
+
+  Widget _gesteFiche(int index) {
+    final parts = _etapes[index].split(' : ');
+    if (parts.length != 3) return _technique(index);
+    final docs = _selectedFts.where((d) => d.id == parts[1]).toList();
+    if (docs.isEmpty) return _technique(index);
+    final gestures = _gestes(docs.first);
+    final n = int.tryParse(parts[2]) ?? -1;
+    if (n < 0 || n >= gestures.length) return _technique(index);
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      Text(docs.first.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
+      const SizedBox(height: 8),
+      SelectableText(gestures[n], style: const TextStyle(fontSize: 17, height: 1.4)),
+      if (_zonesSoin.isNotEmpty)
+        Text('Zone(s) : ' + (_zonesSoin.toList()..sort()).join(', ')),
+      _checkStep(index),
+    ]);
+  }
+
   List<String> get _etapes {
     if (_isCouperLeFeu) {
       return <String>[
@@ -491,7 +529,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'Conventions mentales supplémentaires de la fiche technique',
       'Prières / formulations prévues par le protocole',
       if (_mode == 'Présentiel') ...<String>[
-        if (_ftHasPasses) ...<String>[
+        if (_gestesFiches.isNotEmpty) ...<String>[
+          ..._gestesFiches,
+          if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
+        ] else if (_ftHasPasses) ...<String>[
           '7A · Passes rapides',
           '7B · Contrôle des flux',
           if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
@@ -912,6 +953,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (title == 'Scan au pendule') return _scanPenduleStep();
     if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
     if (title == '7C · Pendule de Thot (facultatif)') return _thotComplementStep(index);
+    if (title.startsWith('Geste fiche : ')) return _gesteFiche(index);
     if (title.startsWith('Dégagement des entités')) return _degagement();
     if (title == '14 conventions mentales') return _conventions();
     if (title == 'Conventions mentales supplémentaires de la fiche technique') return _specific();
