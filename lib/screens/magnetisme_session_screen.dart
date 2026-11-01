@@ -1875,7 +1875,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }).whereType<String>().toList();
     final zones = _zonesSoin.toList()..sort();
 
-    if (titreEtape == '7B · Contrôle des flux') {
+    if (titreEtape == '7A · Passes rapides' || titreEtape == '7B · Contrôle des flux') {
       final selectedZones = <String>{
         ..._zonesSoin,
         for (final values in _zonesParPathologie.values) ...values,
@@ -1900,7 +1900,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       }
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
         if (routes.isEmpty)
-          const Text('Sélectionnez une articulation sur le bonhomme pour afficher son trajet.')
+          const Text('Aucun trajet articulaire identifié pour cette sélection : consulter la fiche technique.')
         else
           ...routes.map((route) => Padding(
             padding: const EdgeInsets.only(bottom: 8),
