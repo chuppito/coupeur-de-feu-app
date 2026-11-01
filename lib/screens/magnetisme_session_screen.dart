@@ -1940,9 +1940,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               : RegExp(r'imposition|apposition|visualisation|ligament|travail complémentaire', caseSensitive: false);
       return lines.where((line) => pattern.hasMatch(line)).join('\n').trim();
     }
-    final instructions = (isRapid || isSlow || isSpecific)
+    // Afficher la fiche complète : ne pas perdre les gestes ni leur ordre.
+    final instructions = (isRapid || isSlow)
         ? techniques.map(relevantInstructions).where((item) => item.isNotEmpty).toList()
-        : <String>[];
+        : isSpecific ? techniques : <String>[];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
       if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
