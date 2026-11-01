@@ -484,7 +484,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final result = <String>[];
     for (final doc in _selectedFts) {
       for (var i = 0; i < _gestes(doc).length; i++) {
-        result.add('Geste fiche : ' + doc.id + ' : ' + i.toString());
+        result.add('Geste fiche : ' + doc.id + ' : ' + i.toString() + ' · ' + _gestes(doc)[i].trim());
       }
     }
     return result;
@@ -496,7 +496,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final docs = _selectedFts.where((d) => d.id == parts[1]).toList();
     if (docs.isEmpty) return _technique(index);
     final gestures = _gestes(docs.first);
-    final n = int.tryParse(parts[2]) ?? -1;
+    final n = int.tryParse(parts[2].split(' · ').first) ?? -1;
     if (n < 0 || n >= gestures.length) return _technique(index);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       Text(docs.first.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -1928,7 +1928,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         final side = z.contains('gauche') ? 'gauche' : z.contains('droit') ? 'droit' : null;
         if (side == null) continue;
         final handSide = side == 'droit' ? 'droite' : 'gauche';
-        if (z.contains('poignet')) {
+        if (z.contains('cuisse')) {
+          routes.add('Cuisse $handSide : chakra mineur aine $handSide → chakra mineur genou $side');
+        } else if (z.contains('poignet')) {
           routes.add('Poignet $side : chakra mineur coude $side → chakra mineur main $handSide');
         } else if (z.contains('cheville')) {
           routes.add('Cheville $handSide : chakra mineur genou $side → chakra mineur pied $side');
