@@ -1876,32 +1876,46 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       final routes = <String>[];
       for (final zone in zones) {
         final z = zone.toLowerCase();
-        final cote = z.contains('gauche') ? 'gauche' : z.contains('droite') ? 'droit' : null;
-        if (cote == null) continue;
-        if (z.contains('cheville')) {
-          routes.add('$zone : chakra mineur genou $cote → chakra mineur pied $cote.');
-        } else if (z.contains('poignet')) {
-          routes.add('$zone : chakra mineur coude $cote → chakra mineur main $cote.');
-        } else if (z.contains('coude')) {
-          routes.add('$zone : 1. épaule $cote → coude $cote ; 2. coude $cote → main $cote.');
-        } else if (z.contains('genou')) {
-          routes.add('$zone : 1. aine $cote → genou $cote ; 2. genou $cote → pied $cote.');
-        } else if (z.contains('épaule') || z.contains('epaule')) {
-          routes.add('$zone : 1. couronne → épaule $cote ; 2. épaule $cote → main $cote.');
+        final cote = z.contains('gauche') ? 'gauche' : z.contains('droite') ? 'droite' : null;
+        final suffixe = cote == null ? null : (cote == 'gauche' ? 'gauche' : 'droit');
+        if (suffixe != null && z.contains('cheville')) {
+          routes.add('$zone : chakra mineur du genou $suffixe → chakra mineur du pied $suffixe.');
+        } else if (suffixe != null && z.contains('poignet')) {
+          routes.add('$zone : chakra mineur du coude $suffixe → chakra mineur de la main $cote.');
+        } else if (suffixe != null && z.contains('coude')) {
+          routes.add('$zone : deux segments à contrôler séparément :\\n'
+              '1. Chakra mineur épaule $cote → chakra mineur coude $suffixe.\\n'
+              '2. Chakra mineur coude $suffixe → chakra mineur main $cote.');
+        } else if (suffixe != null && z.contains('genou')) {
+          routes.add('$zone : deux segments à contrôler séparément :\\n'
+              '1. Chakra mineur aine $cote → chakra mineur genou $suffixe.\\n'
+              '2. Chakra mineur genou $suffixe → chakra mineur pied $suffixe.');
+        } else if (suffixe != null && (z.contains('épaule') || z.contains('epaule'))) {
+          routes.add('$zone : deux segments à contrôler séparément :\\n'
+              '1. Chakra majeur couronne → chakra mineur épaule $cote.\\n'
+              '2. Chakra mineur épaule $cote → chakra mineur main $cote.');
+        } else if (z.contains('cervic') || z.contains('nuque')) {
+          routes.add('$zone : chakra majeur couronne → chakra majeur cœur (derrière).');
+        } else if (z.contains('lomb')) {
+          routes.add('$zone : chakra majeur plexus (derrière) → chakra majeur racine.');
+        } else if (z.contains('intestin') || z.contains('abdom')) {
+          routes.add('$zone : chakra majeur plexus (devant) → chakra majeur racine.');
         }
       }
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        const Text('Contrôle des flux — étape distincte après les passes rapides.',
-          style: TextStyle(fontWeight: FontWeight.w600)),
+        const Text('Contrôle des flux', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         const SizedBox(height: 8),
+        const Text('Étape à valider séparément des passes rapides et des passes lentes. Repères tirés des pages 37–38 du manuel. Les trajets gauche/droite sont adaptés au côté choisi.'),
+        const SizedBox(height: 10),
         if (routes.isEmpty)
-          const Text('Aucun trajet articulaire documenté ne correspond aux zones sélectionnées. Consulter la fiche et les pages 37–38 du manuel.')
+          const Text('Pas de trajet automatique documenté pour cette sélection : consulter la fiche technique et le manuel, sans inventer de points.')
         else
           ...routes.map((route) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(route),
+            padding: const EdgeInsets.only(bottom: 12),
+            child: SelectableText(route),
           )),
-        const Text('Pour les épaules, coudes et genoux, le manuel prévoit deux segments de passes rapides et un contrôle adapté à chacun.'),
+        const Text('Épaules, coudes, genoux : le manuel prévoit deux segments de passes rapides, avec contrôle de chacun, avant les passes lentes sur le membre.'),
+        const SizedBox(height: 8),
         _checkStep(index),
       ]);
     }
