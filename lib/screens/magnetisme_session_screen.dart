@@ -574,6 +574,28 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final fiche = _protocolePdfPour(doc)!;
     final source = fiche['source'] as String;
     if (stage == 'c') return _conventions();
+    if (_normaliserTitre(doc.titre) == 'eczema' && stage == 'i') {
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        const Text('Imposition des mains sur l’eczéma',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+        const SizedBox(height: 8),
+        const Text('Visualiser l’eczéma qui sèche — 5 minutes.'),
+        if (_zonesSoin.isNotEmpty)
+          Text('Zone(s) sélectionnée(s) : ' + (_zonesSoin.toList()..sort()).join(', ')),
+        _checkStep(index),
+      ]);
+    }
+    if (_normaliserTitre(doc.titre) == 'eczema' && stage == 't') {
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        const Text('Travail en passe sur le ventre',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+        const SizedBox(height: 8),
+        const Text('1. Passes rapides : chakra plexus solaire → chakra racine.'),
+        const Text('2. Passes lentes sur le système intestinal.'),
+        const Text('3. Imposition des mains sur les intestins, avec l’intention décrite dans la fiche.'),
+        _checkStep(index),
+      ]);
+    }
     if (stage == 's') return _specific();
     if (stage == 'p') {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
