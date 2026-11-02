@@ -1827,6 +1827,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return Column(key:const ValueKey('classic-thot'),crossAxisAlignment:CrossAxisAlignment.start,children:[
       if(step!=null && step.target!='selection' && step.target.isNotEmpty)
         Text('Zone à travailler : ${step.target}'),
+      if(step!=null && step.target!='selection' && zones.isNotEmpty)
+        Text('Zones mémorisées pour ce motif (repères ; cible actuelle ci-dessus) : ${zones.join(', ')}'),
       if(step==null) ..._selectedFts.map((f)=>Text('${f.titre} — Zones à travailler : ${(_zonesParPathologie[f.titre]?.toList()??[]).join(', ')}'))
       else if(step.target=='selection') Text('Zones à travailler : ${zones.isEmpty?'zones mémorisées non précisées':zones.join(', ')}'),
       if(_mode=='À distance') const Text('Sur la représentation de la zone concernée, reliée au témoin. Aucun geste sur le patient.'),
