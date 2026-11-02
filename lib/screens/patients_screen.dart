@@ -395,6 +395,19 @@ class _PatientsScreenState extends State<PatientsScreen> {
                             },
                           ),
                           ListTile(
+                            leading: const Icon(Icons.event_repeat, color: Colors.indigo),
+                            title: const Text("Nouvelle séance de suivi"),
+                            subtitle: const Text("Reprendre les motifs et zones de la dernière séance"),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => MagnetismeSessionScreen(
+                                prefillNom: prenomPour(entry.key),
+                                prefillNomFamille: famillePour(entry.key),
+                                demarrerSuivi: true,
+                              )),
+                            ),
+                          ),
+                          ListTile(
                             leading: const Icon(Icons.self_improvement, color: Colors.indigo),
                             title: const Text("Séance complète"),
                             subtitle: const Text("FT → protocole → bilan → résultats → historique"),
