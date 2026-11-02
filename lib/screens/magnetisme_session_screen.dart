@@ -582,6 +582,26 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       }
       // Les intentions, prières et gestes sont regroupés par type,
       // puis par priorité, sans répéter l'accueil ni le balayage.
+      if (stage == 't' && _mode == 'Présentiel') {
+        // Tous les passages rapides, puis flux, pendule facultatif,
+        // puis tous les passages lents : priorité conservée dans chaque bloc.
+        for (final phase in <String>['r', 'l']) {
+          if (phase == 'l') {
+            stages.add('7B · Contrôle des flux');
+            if (_soinPenduleNecessaire) {
+              stages.add('7C · Pendule de Thot (facultatif)');
+            }
+          }
+          for (var docIndex = 0; docIndex < docs.length; docIndex++) {
+            final order = List<String>.from(fiches[docIndex]!['order'] as List);
+            final count = order.where((item) => item == 't').length;
+            for (var n = 1; n <= count; n++) {
+              stages.add('PDF45 · $docIndex · $phase · $n');
+            }
+          }
+        }
+        continue;
+      }
       for (var docIndex = 0; docIndex < docs.length; docIndex++) {
         final order = List<String>.from(fiches[docIndex]!['order'] as List);
         final count = order.where((item) => item == stage).length;
@@ -590,17 +610,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         }
       }
     }
-    final hasWork = fiches.any((f) =>
-        List<String>.from(f!['order'] as List).contains('t'));
     return <String>[
       'Prise de contact',
       'Bilan énergétique',
       if (_scanPenduleNecessaire) 'Scan au pendule',
       'Dégagement des entités / énergies négatives si nécessaire',
       ...stages,
-      if (_mode == 'Présentiel' && hasWork) '7B · Contrôle des flux',
-      if (_mode == 'Présentiel' && hasWork && _soinPenduleNecessaire)
-        '7C · Pendule de Thot (facultatif)',
       if (_mode == 'Présentiel' && _ftHasCirculation)
         'Circulation énergétique entre les chakras',
       if (_mode == 'Présentiel' && _ftHasBalayage) 'Balayage',
@@ -685,10 +700,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ]);
     }
     final occurrence = int.tryParse(parts.last) ?? 1;
-    final instruction = _instructionFichePour(doc, stage, occurrence);
+    final instruction = _instructionFichePour(doc, stage == 'r' || stage == 'l' ? 't' : stage, occurrence);
     final matches = instruction == null ? <String>[] : <String>[instruction];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      Text(doc.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
+      Text(doc.titre + (stage == 'r' ? ' — Passes rapides' : stage == 'l' ? ' — Passes lentes et impositions' : ''), style: const TextStyle(fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
       if (_mode == 'À distance')
         const Text('À distance : ne pas effectuer de passes ni d’impositions physiques.'),
