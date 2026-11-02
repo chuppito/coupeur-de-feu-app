@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'session/test_assets.dart';
+import 'package:coupeur_de_feu_app/widgets/interactive_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,7 +39,7 @@ void main() {
     await visible(t,chip);await t.tap(chip);await t.pumpAndSettle();
   }
   Future<void> openStep(WidgetTester t,String title) async {
-    final header=find.text(title);await visible(t,header);await t.tap(header.last);await t.pumpAndSettle();
+    final header=find.textContaining(title);await visible(t,header);await t.tap(header.last);await t.pumpAndSettle();
   }
   regressionWidget('Préparer eczéma, conserver le trajet abdominal, puis enregistrer et retrouver', (t) async {
     await start(t);await select(t,'Eczéma');
@@ -54,7 +55,28 @@ void main() {
     await t.pumpAndSettle();
     final saved=MagnetismeSessionService.getForPatient('Test V33');
     expect(saved.length,1);expect(saved.single['observations'],'Observation test conservée');
-    expect(saved.single['versionGuide'],'3.3.1');expect(saved.single['etapesIds'],isNotEmpty);
+    expect(saved.single['versionGuide'],'3.3.2');expect(saved.single['etapesIds'],isNotEmpty);
+  });
+  regressionWidget('Arthrose deux genoux : contrôle lisible, Thot trois gestes et un seul bonhomme', (t)async{
+    await start(t);await select(t,'Arthrose');
+    final body=find.byType(InteractiveBody);
+    expect(body,findsOneWidget);
+    t.widget<InteractiveBody>(body).onZoneTap('Genou droit');await t.pumpAndSettle();
+    t.widget<InteractiveBody>(body).onZoneTap('Genou gauche');await t.pumpAndSettle();
+    final option=find.text('Faire 1 soin au pendule pendant cette séance');
+    await visible(t,option);await t.tap(option);await t.pumpAndSettle();
+    await openStep(t,'Arthrose — Contrôle des flux');
+    expect(find.text('Genou droit : aine droite → genou droit → pied droit.'),findsOneWidget);
+    expect(find.text('Genou gauche : aine gauche → genou gauche → pied gauche.'),findsOneWidget);
+    await openStep(t,'Pendule de Thot — Arthrose');
+    expect(find.text('Rotation négative : dégagement.'),findsOneWidget);
+    expect(find.text('Rotation positive : rééquilibrage.'),findsOneWidget);
+    expect(find.text('20 passes rapides'),findsNothing);expect(find.text('15 passes lentes'),findsNothing);
+    expect(find.byType(InteractiveBody),findsOneWidget);
+    expect(find.widgetWithText(TextField,'Zone à travailler / intention (complément facultatif)'),findsNothing);
+    expect(find.textContaining('Zones à travailler : Genou'),findsOneWidget);
+    expect(find.text('Enregistrer la séance'),findsOneWidget);
+    expect(t.takeException(),isNull);
   });
   regressionWidget('Minuteur visible, pause/reprise et durée documentée', (t) async {
     await start(t);await select(t,'Entorse');await openStep(t,'14 conventions mentales');

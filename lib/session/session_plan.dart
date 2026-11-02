@@ -1,20 +1,20 @@
 /// Assemblage sans classement des gestes par mots-clés.
 /// Chaque fiche porte une liste d'actions explicites dans guideV33.
 class GuideAction {
-  final String id, kind, text, target, route, source, distanceText, condition;
+  final String id, kind, text, target, route, source, distanceText, condition, label;
   final int? seconds;
   final int repetitions;
   final bool standalone, documented;
   final bool selectedRoute;
   const GuideAction({required this.id, required this.kind, required this.text,
     this.target = '', this.route = '', this.source = '', this.distanceText = '', this.selectedRoute=false,
-    this.seconds, this.repetitions=1, this.condition='', this.standalone=false, this.documented=true});
+    this.seconds, this.repetitions=1, this.condition='', this.standalone=false, this.documented=true,this.label=''});
   factory GuideAction.fromJson(Map<String, dynamic> j) => GuideAction(
     id: j['id'] as String, kind: j['kind'] as String, text: j['text'] as String,
     target: j['target'] as String? ?? '', route: j['route'] as String? ?? '',
     source: j['source'] as String? ?? '', distanceText:j['distanceText'] as String? ?? '', selectedRoute:j['selectedRoute']==true,
     seconds:j['seconds'] as int?, repetitions:j['repetitions'] as int? ?? 1,
-    condition:j['condition'] as String? ?? '', standalone:j['standalone']==true, documented:j['documented']!=false);
+    condition:j['condition'] as String? ?? '', standalone:j['standalone']==true, documented:j['documented']!=false,label:j['label'] as String? ?? '');
 }
 class GuideFiche {
   final String id, title;
@@ -87,6 +87,15 @@ class SessionPlanner {
         if((a.seconds!=null&&a.seconds!<=0)||a.repetitions<1)errors.add('${f.title} : durée ou répétitions invalides pour ${a.id}.');
       }
       var prev=start;
+      var anchored=false;
+      final hasFlux=f.actions.any((a)=>a.kind=='flux');
+      final supportKeys=<String>{};
+      void addThot(GuideAction a,String anchor){
+        final id='thot:${f.id}:${a.id}';
+        node(PlanStep(id:id,title:'Pendule de Thot — ${f.title}${a.target!='selection'&&a.target.isNotEmpty?' · ${a.target}':''}',kind:'thot',
+          ficheId:f.id,target:a.target,route:a.route,zones:zones[f.title]?.toList()??[],source:'Manuel p. 48–49 ; leçon 12.01, 10:07–11:36 et 12:10–13:44 ; à distance 14.04, 10:43–12:05'));
+        link(anchor,id);prev=id;anchored=true;
+      }
       for(final a in f.actions) {
         if(distance && a.kind=='personnel') { errors.add('${f.title} : adaptation à distance de la fiche personnelle à préciser.'); continue; }
         if(shortFor(f) && !const {'priere','imposition'}.contains(a.kind)) continue;
@@ -100,14 +109,28 @@ class SessionPlanner {
           errors.add('${f.title} : adaptation sur support non documentée pour ${a.id}.');
         }
         final id='${f.id}:${a.id}';
+        // Without physical flux control at distance, the support is prepared
+        // before Thot and its intention follows. Do not add physical passes.
+        final support='${a.target}|${a.route}';
+        if(thot && distance && kind=='distance' && a.kind!='rapide' && supportKeys.add(support)){
+          addThot(a,prev);
+        }
+        const cutaneous={'ft-eczema','ft-acne','ft-herpes','ft-verrue','ft-psoriasis','ft-zona','ft-maladie-de-verneuil','ft-couper-le-feu'};
+        if(thot && !distance && ((!hasFlux&&!anchored)||cutaneous.contains(f.id)) && !supportKeys.contains(support) && const {'imposition','visualisation'}.contains(a.kind)){
+          addThot(a,prev);
+          supportKeys.add(support);
+        }
         const labels={'priere':'Prière / formulation','intentions':'Conventions supplémentaires',
           'rapide':'Passes rapides','flux':'Contrôle des flux','lente':'Passes lentes',
           'imposition':'Imposition / intention','visualisation':'Visualisation',
           'distance':'Travail sur planche anatomique','local':'Travail spécifique'};
-        node(PlanStep(id:id,title:'${f.title} — ${labels[kind] ?? 'Instruction spécifique'}',
+        final suffix=a.target!='selection' && a.target.isNotEmpty && const {'rapide','flux','lente','imposition','distance','visualisation'}.contains(kind)?' · ${a.target}':'';
+        node(PlanStep(id:id,title:'${f.title} — ${a.label.isEmpty?labels[kind] ?? 'Instruction spécifique':a.label}$suffix',
           kind:kind,text:distance && kind=='distance' ? a.distanceText : a.text,ficheId:f.id,target:a.target,route:a.route,source:a.source,selectedRoute:a.selectedRoute,
           zones: (zones[f.title]?.toList() ?? []),seconds:a.seconds,repetitions:a.repetitions,condition:a.condition));
         link(prev,id); prev=id;
+        if(thot && !distance && a.kind=='flux'){addThot(a,id);supportKeys.add(support);}
+        if(thot && distance && a.kind=='rapide' && supportKeys.add(support))addThot(a,id);
       }
       // Une fiche courte ne fait pas hériter ses conventions aux autres motifs.
       if(hasFull && (shortFor(f)||radioFor(f))) {
@@ -115,11 +138,12 @@ class SessionPlanner {
         if(first!=null) link('communes',first.id);
       }
       lastIds.add(prev);
-    }
-    if(thot) {
-      node(const PlanStep(id:'thot',title:'Pendule de Thot',kind:'thot'));
-      for(final id in lastIds) { link(id,'thot'); }
-      lastIds..clear()..add('thot');
+      if(thot&&!anchored){
+        // Keep the selected option explicit for prayer-only/manual cases,
+        // without claiming an undocumented placement among their actions.
+        final fallback=GuideAction(id:'option',kind:'thot',text:'',target:'selection');
+        addThot(fallback,prev);lastIds[lastIds.length-1]=prev;
+      }
     }
     if(!distance && hasFull) {
       node(const PlanStep(id:'circulation',title:'Circulation énergétique entre les chakras',kind:'circulation'));
@@ -137,7 +161,7 @@ class SessionPlanner {
         if(n.kind=='communes')return 4;
         if(n.kind=='intentions')return 5;
         if(n.kind=='priere')return 6;
-        if(n.kind=='thot')return 8;
+        if(n.kind=='thot')return 6;
         if(n.kind=='circulation')return 9;
         if(n.kind=='balayage')return 10;
         if(n.kind=='debrief')return 11;
@@ -146,7 +170,12 @@ class SessionPlanner {
       final available=nodes.values.where((n)=>!emitted.contains(n.id)&&deps[n.id]!.every(emitted.contains)).toList();
       // Stable priority within the available nodes. Dependencies always take precedence.
       PlanStep? ready;
-      for(final candidate in available){if(ready==null || phase(candidate)<phase(ready))ready=candidate;}
+      // A local Thot complement must be the next displayed step, not merely
+      // somewhere later in a valid topological order.
+      if(result.isNotEmpty){
+        ready=available.where((n)=>n.kind=='thot'&&deps[n.id]!.contains(result.last.id)).firstOrNull;
+      }
+      if(ready==null){for(final candidate in available){if(ready==null || phase(candidate)<phase(ready))ready=candidate;}}
       if(ready==null) { errors.add('Conflit d’ordre : impossible de respecter toutes les dépendances.');break; }
       result.add(ready);emitted.add(ready.id);
     }

@@ -19,8 +19,8 @@ android {
         applicationId = "com.tomtom.coupeurdefeu"
         // Optional CI-only test installation: never replace the existing patient database.
         if (System.getenv("MAGNETISME_TEST_INSTALL") == "true") {
-            applicationIdSuffix = ".v331test"
-            manifestPlaceholders["appLabel"] = "Magnétisme V3.3.1 test"
+            applicationIdSuffix = ".v332test"
+            manifestPlaceholders["appLabel"] = "Magnétisme V3.3.2 test"
         } else {
             manifestPlaceholders["appLabel"] = "Magnétisme"
         }

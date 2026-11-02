@@ -67,8 +67,8 @@ void main() {
     expect(plan([id],distance:true,visits:{id:'radio'}).steps.map((s)=>s.kind),['contact','temoin','priere','debrief']);
     expect(plan([id],distance:true).steps.any((s)=>s.kind=='communes'),isTrue);
   });
-  test('Pendule sélectionné conservé une fois, en présentiel et distance',(){
-    for(final distance in [true,false]) {final p=plan(['ft-entorse','ft-eczema'],thot:true,distance:distance);expect(p.steps.where((s)=>s.kind=='thot').length,1);}
+  test('Pendule sélectionné pour les trois travaux distincts, en présentiel et distance',(){
+    for(final distance in [true,false]) {final p=plan(['ft-entorse','ft-eczema'],thot:true,distance:distance);expect(p.steps.where((s)=>s.kind=='thot').length,3);}
   });
   test('Zones multiples conservées par motif',(){
     final a=plan(['ft-entorse','ft-eczema']).steps.firstWhere((s)=>s.ficheId=='ft-entorse'&&s.kind=='rapide');

@@ -42,10 +42,10 @@ void main(){
         expect(p.canStart,!blocked,reason:'${selected.map((f)=>f.id)} / $distance');
         if(!p.canStart)continue;
         expect(p.steps.map((s)=>s.id).toSet().length,p.steps.length);
-        expect(p.steps.where((s)=>s.kind=='thot').length,1);
+        expect(p.steps.any((s)=>s.kind=='thot'),isTrue);
         for(final f in selected){
           final expected=f.actions.where((a)=>!['accueil','bilan','degagement','communes','circulation','balayage','debrief'].contains(a.kind)&&!(distance&&['lente','flux'].contains(a.kind))).map((a)=>'${f.id}:${a.id}').toList();
-          expect(p.steps.where((s)=>s.ficheId==f.id).map((s)=>s.id).toList(),expected,reason:f.id);
+          expect(p.steps.where((s)=>s.ficheId==f.id&&s.kind!='thot').map((s)=>s.id).toList(),expected,reason:f.id);
         }
       }
     }}}

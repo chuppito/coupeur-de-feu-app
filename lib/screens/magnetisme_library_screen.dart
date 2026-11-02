@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../services/magnetisme_library_service.dart';
+import '../widgets/trainer_advice.dart';
 
 class MagnetismeLibraryScreen extends StatefulWidget {
   const MagnetismeLibraryScreen({super.key});
@@ -436,6 +437,7 @@ class _LibraryReader extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 48),
           children: [
+            TrainerAdvice(items:entry['conseilsFormateur'] as List? ?? const [],initiallyExpanded:true),
             if (illustration.isNotEmpty)
               Card(
                 child: Padding(

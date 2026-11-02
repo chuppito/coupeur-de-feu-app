@@ -34,9 +34,12 @@ class MagnetismeLibraryService {
         .toList();
 
     final guide = jsonDecode(await bundle.loadString('assets/data/guide_v33.json')) as Map<String,dynamic>;
+    final advice=jsonDecode(await bundle.loadString('assets/data/advice_v332.json')) as Map<String,dynamic>;
+    final legacy=jsonDecode(await bundle.loadString('assets/data/legacy_thot_v332.json')) as Map<String,dynamic>;
     for (final entry in base) {
       final actions=guide[entry['id']];
       if(actions!=null) entry['guideV33']=actions;
+      if(advice[entry['id']]!=null)entry['conseilsFormateur']=advice[entry['id']];
     }
 
     final custom = _box.values
@@ -49,7 +52,7 @@ class MagnetismeLibraryService {
       final id = (entry['id'] ?? '').toString();
       if (id.isNotEmpty) overrides[id] = entry;
     }
-    final builtIn = [...base, ...techniques, ...chakras];
+    final builtIn = [...base, ...techniques, ...chakras,legacy];
     final merged = builtIn.map((entry) {
       final id = (entry['id'] ?? '').toString();
       final local = overrides.remove(id);

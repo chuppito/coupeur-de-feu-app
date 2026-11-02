@@ -3,6 +3,8 @@ import 'dart:convert';
 import '../session/session_plan.dart';
 import '../session/convention_timing.dart';
 import '../widgets/protocol_timer.dart';
+import '../widgets/trainer_advice.dart';
+import '../session/guidance_text.dart';
 import '../data/protocoles_pdf_45.dart';
 import '../data/suivis_formation.dart';
 
@@ -63,7 +65,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final _degagementNotes = TextEditingController();
   final _soinPenduleZone = TextEditingController();
   final _soinPenduleNotes = TextEditingController();
-  final Set<String> _soinPenduleZones = <String>{};
   final Set<String> _zonesSoin = <String>{};
   final Map<String, Set<String>> _zonesParPathologie = <String, Set<String>>{};
   String? _pathologieZoneActive;
@@ -74,6 +75,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     setState(() {
       final zones = _zonesPour(titre);
       if (!zones.add(zone)) zones.remove(zone);
+      final ficheId=_selectedFts.where((f)=>f.titre==titre).firstOrNull?.id;
+      if(ficheId!=null)_thotClassique.removeWhere((key,value)=>key.startsWith('thot:$ficheId:'));
       _zonesSoin.clear();
       for (final values in _zonesParPathologie.values) { _zonesSoin.addAll(values); }
     });
@@ -162,7 +165,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   bool _soinPenduleNecessaire = false;
   bool _scanPenduleNecessaire = false;
   String _priereFeu = 'Prière contre le feu indisponible dans la bibliothèque.';
-  final List<bool> _soinPenduleEtapes = List<bool>.filled(9, false);
+  final Map<String,List<bool>> _thotClassique = {};
 
   static const _chakraNames = <String>[
     'Chakra racine',
@@ -461,28 +464,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   String get _patientOuPlaceholder => _patient.isEmpty ? '[Prénom NOM]' : _patient;
 
-  void _onSoinPenduleZoneTap(String zone) {
-    setState(() {
-      if (_soinPenduleZones.contains(zone)) {
-        _soinPenduleZones.remove(zone);
-      } else {
-        _soinPenduleZones.add(zone);
-      }
-      _soinPenduleZone.text = _soinPenduleZones.join(', ');
-    });
-  }
-
-  void _onZoneSoinTap(String zone) {
-    setState(() {
-      if (_zonesSoin.contains(zone)) {
-        _zonesSoin.remove(zone);
-      } else {
-        _zonesSoin.add(zone);
-      }
-    });
-  }
-
-
   List<_Doc> get _selectedFts {
     // L'ordre de sélection est la priorité : 1, 2 puis 3.
     final selected = <_Doc>[];
@@ -681,7 +662,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         Text(step.text,style:const TextStyle(fontWeight:FontWeight.w600)),
         const SizedBox(height:12),_conventions(),
       ]);
-      case 'thot': return _soinPenduleStep();
+      case 'thot': return _soinPenduleStep(step:step);
       case 'debrief': return _debrief();
       case 'temoin':
         final doc = _find('temoin_distance');
@@ -698,7 +679,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final position=plan.indexWhere((s)=>s.id==step.id);
     final previous=position>0 ? plan[position-1] : null;
     final newSupport = previous==null || previous.kind!='distance' || previous.ficheId!=step.ficheId || previous.target!=step.target || previous.route!=step.route;
-    var text = step.text;
+    var text = GuidanceText.clean(step.text,kind:step.kind);
     text = text.replaceAll(RegExp(r'Prière contre le feu \(voir la fiche « CONTRE LE FEU »\)',caseSensitive:false),_priereFeu);
     text = MagnetismeLibraryService.personalized(text,prenom:_prenom.text,nom:_nom.text);
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
@@ -718,11 +699,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         else const Text('Conserver le même support et la même zone pour l’intention complémentaire ci-dessous ; ne pas recommencer toute la préparation.'),
         const Divider(),
       ],
-      if(step.kind == 'flux' && step.route.isNotEmpty) Text(step.route,style:const TextStyle(fontWeight:FontWeight.bold)),
-      if(step.kind == 'flux') const Text('Contrôler chaque trajet et chaque côté séparément. Si le flux ne passe pas, reprendre les passes rapides sur le segment concerné, puis contrôler à nouveau.'),
-      if(step.selectedRoute && _mode == 'Présentiel' && const ['rapide','flux'].contains(step.kind))
-        ..._trajetsZones(step.zones).map((r)=>Padding(padding:const EdgeInsets.only(bottom:6),child:Text(r,style:const TextStyle(fontWeight:FontWeight.bold)))),
-      SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
+      if(step.kind=='flux') ...[
+        ...((step.selectedRoute && GuidanceText.selectedRoutes(step.zones).isNotEmpty)
+          ? GuidanceText.selectedRoutes(step.zones)
+          : [GuidanceText.route(step.route)]).where((s)=>s.isNotEmpty).map((r)=>Text(r,style:const TextStyle(fontWeight:FontWeight.bold))),
+        const SizedBox(height:8),const Text(GuidanceText.blockedFlux),
+      ] else ...[
+        if(step.selectedRoute && _mode=='Présentiel' && step.kind=='rapide')
+          ...GuidanceText.selectedRoutes(step.zones).map((r)=>Text(r,style:const TextStyle(fontWeight:FontWeight.bold))),
+        SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
+      ],
+      if(step.ficheId.isNotEmpty) TrainerAdvice(items:_find(step.ficheId)?.raw['conseilsFormateur'] as List? ?? const []),
       if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!,
         initialRemaining:_tempsLocaux[step.id],onChanged:(value)=>_tempsLocaux[step.id]=value),
       if(step.kind=='personnel') const Text('Contenu historique conservé. Protocole complet non vérifié dans les sources de formation ; adaptation distance et fusion non certifiées.'),
@@ -1059,7 +1046,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'typesSuivi': Map<String, String>.from(_typesSuivi),
       'zonesSuiviConfirmees': _zonesSuiviConfirmees,
       'chirurgieSuiviConfirmee': _chirurgieSuiviConfirmee,
-      'versionGuide': '3.3.1',
+      'versionGuide': '3.3.2',
+      'thotClassiqueParTravail': {for(final e in _thotClassique.entries)e.key:List<bool>.from(e.value)},
       'minuteursLocaux': Map<String,int>.from(_tempsLocaux),
       'radioConnexionConfirmee': _radioConnexionConfirmee,
       'conditionsConfirmees': _conditionsConfirmees.toList(),
@@ -1075,8 +1063,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'soinPenduleNecessaire': _soinPenduleNecessaire,
       'scanPenduleNecessaire': _scanPenduleNecessaire,
       'soinPendule': _soinPenduleNecessaire ? {
-        'zone': _soinPenduleZone.text.trim(),
-        'etapes': List<bool>.from(_soinPenduleEtapes),
+        'zone': _selectedFts.map((d)=>'${d.titre} : ${(_zonesParPathologie[d.titre]?.toList()??[]).join(', ')}').join('; '),
+        'etapes': List<bool>.generate(3,(i)=>_thotClassique.isNotEmpty&&_thotClassique.values.every((v)=>v[i])),
         'notes': _soinPenduleNotes.text.trim(),
       } : null,
       'etapesFaites': _etapesFaites.toList()..sort(),
@@ -1228,16 +1216,14 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: const Text(
-                'Conserve le soin optionnel complet au pendule de Thot, avec ses formulations personnelles.',
+                'Complément classique : rotation négative, retrait et deux tapotements, rotation positive. Les zones de préparation sont réutilisées.',
               ),
               onChanged: (value) => setState(() {
                 _timerConventions?.cancel(); _lectureAuto=false; _lectureSuspendue=false;
                 _etapesFaites.clear(); _etapeOuverte=0;
                 _soinPenduleNecessaire = value ?? false;
                 if (!_soinPenduleNecessaire) {
-                  for (var i = 0; i < _soinPenduleEtapes.length; i++) {
-                    _soinPenduleEtapes[i] = false;
-                  }
+                  _thotClassique.clear();
                 }
               }),
             ),
@@ -1365,6 +1351,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               )).toList(),
             ),
             const SizedBox(height: 14),
+            for(final d in _selectedFts) TrainerAdvice(items:d.raw['conseilsFormateur'] as List? ?? const [],title:'Conseils du formateur — ${d.titre}',initiallyExpanded:true),
             const Text('Zones anatomiques par pathologie',
                 style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
@@ -1400,17 +1387,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 ]);
               }),
             ],
-            if (_zonesSoin.isNotEmpty) ...<Widget>[
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: _zonesSoin.map((zone) => Chip(
-                  label: Text(zone),
-                  onDeleted: () => _onZoneSoinTap(zone),
-                )).toList(),
-              ),
-            ],
+            for(final d in _selectedFts)
+              if((_zonesParPathologie[d.titre]??{}).isNotEmpty)
+                Text('${d.titre} — Zones mémorisées : ${_zonesParPathologie[d.titre]!.join(', ')}'),
           ],
         ),
       ),
@@ -1827,118 +1806,40 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         const Text('Évaluation des sept chakras', style: TextStyle(fontWeight: FontWeight.w600)),
         ..._chakraFields.entries.map((entry) => _chakraEtatField(entry.key, entry.value)),
         const SizedBox(height: 8),
-        const Text('Scan général : sélectionne uniquement les zones utiles', style: TextStyle(fontWeight: FontWeight.w600)),
+        const Text('Scan général : zones mémorisées lors de la préparation', style: TextStyle(fontWeight: FontWeight.w600)),
         const SizedBox(height: 8),
         const Text('Pour un examen plus précis, utilise les planches anatomiques de la bibliothèque.'),
         const SizedBox(height: 8),
         const Text('Zones anatomiques observées', style: TextStyle(fontWeight: FontWeight.w600)),
-        InteractiveBody(selectedZones: _zonesSoin, onZoneTap: _onZoneSoinTap),
+        ..._selectedFts.map((f)=>Text('${f.titre} — Zones mémorisées : ${(_zonesParPathologie[f.titre]?.toList()??[]).join(', ')}')),
         _compactText('Notes du scan', _bilanNotes, minLines: 3),
         _checkStep(_currentStepIndex),
       ],
     );
   }
 
-  Widget _soinPenduleStep() {
-    final patient = _patientOuPlaceholder;
-    final degagement = 'Je demande ici et maintenant que $patient soit libéré(e) de toutes les énergies qui ne lui appartiennent pas.\nQue les pensées négatives, les projections et les influences d’autrui soient dissoutes et renvoyées à la terre pour être transformées. Je ferme son champ énergétique à ce qui n’est pas aligné avec sa paix intérieure.\nIl récupère ainsi sa pleine souveraineté, sa clarté et sa sérénité. Que seul l’amour et la bienveillance puissent franchir cet espace. Ainsi soit-il.';
-    final protection = 'Je demande que $patient soit entouré(e) d’une lumière de force et de protection.\nQue son énergie vitale soit maintenant restaurée, vibrante et alignée. Je renforce ses propres barrières naturelles pour que son espace personnel reste pur et inattaquable par les influences extérieures.\nDésormais $patient est ancré(e), centré(e), et protégé(e). Que cette lumière rayonne depuis son cœur vers l’extérieur, transformant chaque obstacle en force.';
-
-    final distance = _mode == 'À distance';
-    final steps = <({int id, String title, String? detail})>[
-      if (!distance) (id: 0, title: '20 passes rapides', detail: null),
-      (id: 1, title: 'Prendre le pendule : intention de dégagement, rotation négative', detail: 'Rotation négative du pendule. Formule : « Je veux retirer les énergies négatives de… »'),
-      (id: 2, title: 'Lever le pendule lorsque le mouvement négatif est terminé', detail: null),
-      (id: 3, title: 'Taper 2 fois pour retirer le négatif', detail: 'Rappel systématique : 2 frappes après avoir levé le pendule.'),
-      if (!distance) (id: 4, title: '15 passes lentes', detail: null),
-      (id: 5, title: 'Rotation positive du pendule : intention de soulager la zone', detail: 'Relancer dans le sens positif en gardant l’intention de soulager la zone.'),
-      (id: 6, title: 'Prière contre le feu × 3', detail: MagnetismeLibraryService.personalized(_priereFeu, prenom: _prenom.text, nom: _nom.text)),
-      (id: 7, title: 'Formulation de dégagement', detail: degagement),
-      (id: 8, title: 'Formulation de protection et de renforcement', detail: protection),
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _helpBox(
-          'Cette fiche n’est ajoutée que si tu as coché « Faire 1 soin au pendule ». La prière est récupérée depuis la bibliothèque magnétisme.',
-          _reference('récap séance'),
-        ),
-        if(_zonesSoin.isNotEmpty) Text('Zones déjà sélectionnées : ${(_zonesSoin.toList()..sort()).join(', ')}'),
-        _compactText('Zone à travailler / intention (complément facultatif)', _soinPenduleZone, minLines: 1),
-        const SizedBox(height: 8),
-        Card(
-          color: Colors.teal.withValues(alpha: 0.05),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Row(
-                  children: <Widget>[
-                    Icon(Icons.accessibility_new, color: Colors.teal),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Aide intuitive — sélectionner la zone',
-                        style: TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                const Text(
-                  'Touchez directement la zone du petit bonhomme pour la faire apparaître dans « Zone à travailler / intention ». Vous pouvez choisir une ou plusieurs zones, de face ou de dos.',
-                  style: TextStyle(fontSize: 12, color: Colors.black54),
-                ),
-                const SizedBox(height: 10),
-                InteractiveBody(
-                  selectedZones: _soinPenduleZones,
-                  onZoneTap: _onSoinPenduleZoneTap,
-                ),
-                if (_soinPenduleZones.isNotEmpty) ...<Widget>[
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 4,
-                    children: _soinPenduleZones
-                        .map(
-                          (zone) => Chip(
-                            label: Text(zone),
-                            onDeleted: () => _onSoinPenduleZoneTap(zone),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Card(
-          child: Column(
-            children: steps.map((step) => CheckboxListTile(
-              value: _soinPenduleEtapes[step.id],
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text(step.title),
-              subtitle: step.detail == null
-                  ? null
-                  : Padding(
-                      padding: const EdgeInsets.only(top: 6),
-                      child: SelectableText(step.detail!, style: const TextStyle(height: 1.4)),
-                    ),
-              onChanged: (value) => setState(
-                () => _soinPenduleEtapes[step.id] = value ?? false,
-              ),
-            )).toList(),
-          ),
-        ),
-        const SizedBox(height: 6),
-        _compactText('Notes du soin au pendule', _soinPenduleNotes, minLines: 3),
-        _checkStep(_currentStepIndex),
-      ],
-    );
+  Widget _soinPenduleStep({PlanStep? step}) {
+    final id=step?.id ?? 'thot-manuel';
+    final done=_thotClassique.putIfAbsent(id,()=>List<bool>.filled(3,false));
+    final zones=step?.zones ?? const <String>[];
+    return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+      if(step!=null && step.target!='selection' && step.target.isNotEmpty)
+        Text('Zone à travailler : ${step.target}'),
+      if(step==null) ..._selectedFts.map((f)=>Text('${f.titre} — Zones à travailler : ${(_zonesParPathologie[f.titre]?.toList()??[]).join(', ')}'))
+      else if(step.target=='selection') Text('Zones à travailler : ${zones.isEmpty?'zones mémorisées non précisées':zones.join(', ')}'),
+      if(_mode=='À distance') const Text('Sur la représentation de la zone concernée, reliée au témoin. Aucun geste sur le patient.'),
+      for(var n=0;n<3;n++) CheckboxListTile(
+        key:ValueKey('$id-operation-$n'),contentPadding:EdgeInsets.zero,
+        title:Text(const [
+          'Rotation négative : dégagement.',
+          'Lever le pendule et tapoter deux fois pour évacuer le négatif.',
+          'Rotation positive : rééquilibrage.',
+        ][n]),
+        value:done[n],onChanged:(v)=>setState(()=>done[n]=v??false)),
+      if(step?.source.isNotEmpty??false) ExpansionTile(title:const Text('Source'),children:[SelectableText(step!.source)]),
+      if(step!=null) TrainerAdvice(items:_find(step.ficheId)?.raw['conseilsFormateur'] as List? ?? const []),
+      _checkStep(_currentStepIndex),
+    ]);
   }
 
   Widget _degagement() {

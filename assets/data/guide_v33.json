@@ -60,7 +60,8 @@
       "distanceText": "Visualisez l'acné qui sèche (5 minutes) / Travaillez sur le support correspondant sur l'acné.",
       "selectedRoute": false,
       "seconds": 300,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée"
     },
     {
       "id": "s6-6",
@@ -1667,7 +1668,8 @@
       "distanceText": "Visualisez l'eczéma qui sèche (5 minutes).",
       "selectedRoute": false,
       "seconds": 300,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée"
     },
     {
       "id": "s6-6",
@@ -2642,7 +2644,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 1. Posez votre intention = tuer le virus (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 1/2"
     },
     {
       "id": "s6-6-t2",
@@ -2654,7 +2657,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 2. Visualisez l'herpès qui disparaît (2 minutes). Pensez au rayon avec vos doigts.",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 2/2"
     },
     {
       "id": "s7-7",
@@ -3465,7 +3469,8 @@
       "source": "Magnétisme (1).odt",
       "distanceText": "6. Travaillez sur le support correspondant sur les zones d'abcès / Visualisez les abcès qui disparaissent.",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée"
     },
     {
       "id": "s6-6",
@@ -4037,7 +4042,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 1. Par votre intention, bloquez l'accélération du renouvellement des cellules de l'épiderme (5 minutes).",
       "selectedRoute": false,
       "seconds": 300,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 1/2"
     },
     {
       "id": "s5-5-t2",
@@ -4049,7 +4055,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 2. Visualisez le psoriasis qui sèche (5 minutes).",
       "selectedRoute": false,
       "seconds": 300,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 2/2"
     },
     {
       "id": "s6-6",
@@ -5154,7 +5161,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 1. Posez votre intention : tuer le virus (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 1/2"
     },
     {
       "id": "s6-6-t2",
@@ -5166,7 +5174,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 2. Visualisez la verrue qui disparaît (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 2/2"
     },
     {
       "id": "s7-7",
@@ -5230,7 +5239,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 1. Posez une première intention : guérir les terminaisons nerveuses (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 1/3"
     },
     {
       "id": "s4-4-t2",
@@ -5242,7 +5252,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 2. Posez une seconde intention : tuer le virus (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 2/3"
     },
     {
       "id": "s4-4-t3",
@@ -5254,7 +5265,8 @@
       "distanceText": "Sur le support de la zone concernée :  - 3. Visualisez le zona qui sèche (2 minutes).",
       "selectedRoute": false,
       "seconds": 120,
-      "documented": true
+      "documented": true,
+      "label": "Imposition cutanée · intention 3/3"
     },
     {
       "id": "s5-5",
