@@ -559,6 +559,88 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   // Séance fusionnée : la première fiche sélectionnée est prioritaire.
   // Chaque famille de gestes suit l'ordre de la fiche prioritaire.
+  // Le guide suit les étapes textuelles originales de la fiche V3,
+  // sans inférer de gestes à partir d'un simple mot-clé du PDF.
+  List<String> get _parcoursFichesStructurees {
+    final docs = _selectedFts;
+    if (docs.isEmpty || docs.length > 3 ||
+        docs.any((doc) => doc.etapesGuideSource.isEmpty)) return <String>[];
+    final result = <String>[
+      'Prise de contact',
+      'Bilan énergétique',
+      if (_scanPenduleNecessaire) 'Scan au pendule',
+      'Dégagement des entités / énergies négatives si nécessaire',
+    ];
+    final shared = <String>{'accueil','bilan','degagement','communes','circulation','balayage'};
+    final main = docs.first.etapesGuideSource;
+    final lastByType = <String, int>{};
+    for (var i = 0; i < main.length; i++) {
+      final type = main[i]['type'] ?? '';
+      if (!shared.contains(type)) lastByType[type] = i;
+    }
+    final inserted = <String>{};
+    for (var i = 0; i < main.length; i++) {
+      final type = main[i]['type'] ?? '';
+      if (type == 'communes') {
+        result.add('14 conventions mentales');
+      } else if (!shared.contains(type)) {
+        result.add('SOURCE · 0 · $i');
+      }
+      if (lastByType[type] == i) {
+        for (var d = 1; d < docs.length; d++) {
+          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
+            if (docs[d].etapesGuideSource[j]['type'] == type) {
+              result.add('SOURCE · $d · $j');
+            }
+          }
+        }
+        inserted.add(type);
+      }
+    }
+    // Une fiche secondaire peut comporter un geste absent de la principale.
+    for (var d = 1; d < docs.length; d++) {
+      for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
+        final type = docs[d].etapesGuideSource[j]['type'] ?? '';
+        if (!shared.contains(type) && !inserted.contains(type)) {
+          result.add('SOURCE · $d · $j');
+        }
+      }
+    }
+    if (_mode == 'Présentiel') {
+      result.add('7B · Contrôle des flux');
+      if (_soinPenduleNecessaire) {
+        result.add('7C · Pendule de Thot (facultatif)');
+      }
+    }
+    result.addAll(<String>[
+      'Circulation énergétique entre les chakras',
+      'Balayage',
+      'Débriefing / observation',
+    ]);
+    return result;
+  }
+
+  Widget _etapeFicheSource(int index) {
+    final parts = _etapes[index].split(' · ');
+    final docIndex = int.tryParse(parts[1]) ?? 0;
+    final stepIndex = int.tryParse(parts[2]) ?? 0;
+    final doc = _selectedFts[docIndex];
+    final step = doc.etapesGuideSource[stepIndex];
+    final texte = step['texte'] ?? '';
+    final type = step['type'] ?? '';
+    final gestePhysique = type == 'travail' || type == 'imposition';
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      Text(doc.titre, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+      const SizedBox(height: 8),
+      if (_mode == 'À distance' && gestePhysique)
+        const Text('À distance : ne pas effectuer de gestes physiques.'),
+      SelectableText(texte, style: const TextStyle(fontSize: 16, height: 1.4)),
+      if (_zonesSoin.isNotEmpty)
+        Text('Zone(s) sélectionnée(s) : ' + (_zonesSoin.toList()..sort()).join(', ')),
+      _checkStep(index),
+    ]);
+  }
+
   List<String> get _parcoursPdfUnique {
     final docs = _selectedFts;
     if (docs.isEmpty || docs.length > 3) return <String>[];
@@ -745,6 +827,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ];
     }
 
+    if (_parcoursFichesStructurees.isNotEmpty) return _parcoursFichesStructurees;
     if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
 
     return <String>[
@@ -1175,6 +1258,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title.startsWith('SOURCE · ')) return _etapeFicheSource(index);
     if (title.startsWith('PDF45 · ')) return _etapePdf(index);
     if (title == 'Prise de contact') return _contactHelp();
     if (title == 'Bilan énergétique') return _bilan();
@@ -2481,6 +2565,7 @@ class _Doc {
   final String contenu;
   final String description;
   final List<String> aliases;
+  final List<Map<String, String>> etapesGuideSource;
 
   const _Doc({
     required this.id,
@@ -2490,6 +2575,7 @@ class _Doc {
     required this.contenu,
     this.description = '',
     this.aliases = const <String>[],
+    this.etapesGuideSource = const <Map<String, String>>[],
   });
 
   factory _Doc.fromJson(Map<String, dynamic> json) {
@@ -2501,6 +2587,9 @@ class _Doc {
       contenu: (json['contenu'] ?? '').toString(),
       description: (json['description'] ?? '').toString(),
       aliases: (json['aliases'] as List?)?.map((e) => e.toString()).toList() ?? const <String>[],
+      etapesGuideSource: (json['etapesGuideSource'] as List?)
+          ?.map((item) => Map<String, String>.from(item as Map))
+          .toList() ?? const <Map<String, String>>[],
     );
   }
 }
