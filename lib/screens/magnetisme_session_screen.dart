@@ -565,58 +565,82 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final docs = _selectedFts;
     if (docs.isEmpty || docs.length > 3 ||
         docs.any((doc) => doc.etapesGuideSource.isEmpty)) return <String>[];
+
     final result = <String>[
       'Prise de contact',
       'Bilan énergétique',
       if (_scanPenduleNecessaire) 'Scan au pendule',
       'Dégagement des entités / énergies négatives si nécessaire',
     ];
-    final shared = <String>{'accueil','bilan','degagement','communes','circulation','balayage'};
-    final main = docs.first.etapesGuideSource;
-    final lastByType = <String, int>{};
-    for (var i = 0; i < main.length; i++) {
-      final type = main[i]['type'] ?? '';
-      if (!shared.contains(type)) lastByType[type] = i;
+    const shared = <String>{'accueil', 'bilan', 'degagement',
+      'communes', 'circulation', 'balayage'};
+    final primary = docs.first.etapesGuideSource;
+    final emitted = <String>{};
+    final last = <String, int>{};
+    for (var i = 0; i < primary.length; i++) {
+      final type = primary[i]['type'] ?? '';
+      if (!shared.contains(type)) last[type] = i;
     }
-    final inserted = <String>{};
-    for (var i = 0; i < main.length; i++) {
-      final type = main[i]['type'] ?? '';
+
+    // Conserver l'ordre de la fiche prioritaire et insérer les gestes
+    // secondaires/tertiaires à la fin de chaque famille correspondante.
+    for (var i = 0; i < primary.length; i++) {
+      final type = primary[i]['type'] ?? '';
       if (type == 'communes') {
         result.add('14 conventions mentales');
       } else if (!shared.contains(type)) {
-        result.add('SOURCE · 0 · $i');
+        if (_mode == 'Présentiel' ||
+            (type != 'travail' && type != 'imposition')) {
+          result.add('SOURCE · 0 · $i');
+        }
       }
-      if (lastByType[type] == i) {
+      if (last[type] == i) {
         for (var d = 1; d < docs.length; d++) {
-          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
-            if (docs[d].etapesGuideSource[j]['type'] == type) {
+          final steps = docs[d].etapesGuideSource;
+          for (var j = 0; j < steps.length; j++) {
+            if (steps[j]['type'] == type &&
+                (_mode == 'Présentiel' ||
+                 (type != 'travail' && type != 'imposition'))) {
               result.add('SOURCE · $d · $j');
             }
           }
         }
-        inserted.add(type);
+        emitted.add(type);
       }
     }
-    // Une fiche secondaire peut comporter un geste absent de la principale.
+    // Les types absents de la prioritaire restent accessibles.
     for (var d = 1; d < docs.length; d++) {
-      for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
-        final type = docs[d].etapesGuideSource[j]['type'] ?? '';
-        if (!shared.contains(type) && !inserted.contains(type)) {
+      final steps = docs[d].etapesGuideSource;
+      for (var j = 0; j < steps.length; j++) {
+        final type = steps[j]['type'] ?? '';
+        if (!shared.contains(type) && !emitted.contains(type) &&
+            (_mode == 'Présentiel' ||
+             (type != 'travail' && type != 'imposition'))) {
           result.add('SOURCE · $d · $j');
         }
       }
     }
     if (_mode == 'Présentiel') {
-      result.add('7B · Contrôle des flux');
+      // Flux et Thot se placent après les passes rapides, avant les lentes.
+      final firstSlow = result.indexWhere((title) {
+        if (!title.startsWith('SOURCE · ')) return false;
+        final parts = title.split(' · ');
+        final d = int.tryParse(parts[1]) ?? 0;
+        final j = int.tryParse(parts[2]) ?? 0;
+        final text = docs[d].etapesGuideSource[j]['texte']?.toLowerCase() ?? '';
+        return text.startsWith('passes lentes') ||
+            text.contains('2. passes lentes') ||
+            text.contains('2 – passes lentes');
+      });
+      final insertAt = firstSlow >= 0 ? firstSlow : result.length;
+      result.insert(insertAt, '7B · Contrôle des flux');
       if (_soinPenduleNecessaire) {
-        result.add('7C · Pendule de Thot (facultatif)');
+        result.insert(insertAt + 1, '7C · Pendule de Thot (facultatif)');
       }
+      result.add('Circulation énergétique entre les chakras');
+      result.add('Balayage');
     }
-    result.addAll(<String>[
-      'Circulation énergétique entre les chakras',
-      'Balayage',
-      'Débriefing / observation',
-    ]);
+    result.add('Débriefing / observation');
     return result;
   }
 
