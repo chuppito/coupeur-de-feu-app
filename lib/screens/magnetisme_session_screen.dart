@@ -1198,6 +1198,27 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
 
+  String _titreEtapeVisible(String title) {
+    if (!title.startsWith('SOURCE · ')) return title;
+    final parts = title.split(' · ');
+    if (parts.length != 3) return title;
+    final docIndex = int.tryParse(parts[1]) ?? -1;
+    final stepIndex = int.tryParse(parts[2]) ?? -1;
+    final docs = _selectedFts;
+    if (docIndex < 0 || docIndex >= docs.length) return title;
+    final steps = docs[docIndex].etapesGuideSource;
+    if (stepIndex < 0 || stepIndex >= steps.length) return title;
+    const labels = <String, String>{
+      'intentions': 'Conventions supplémentaires',
+      'priere': 'Prière / formulation',
+      'travail': 'Travail en passes',
+      'imposition': 'Imposition / visualisation',
+      'autre': 'Instruction spécifique',
+    };
+    final type = steps[stepIndex]['type'] ?? 'autre';
+    return '${docs[docIndex].titre} — ${labels[type] ?? 'Instruction spécifique'}';
+  }
+
   Widget _stepCard(int index) {
     final title = _etapes[index];
     final open = _etapeOuverte == index;
@@ -1232,7 +1253,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             child: Row(children: <Widget>[
               CircleAvatar(radius: 17, child: Text((index + 1).toString())),
               const SizedBox(width: 10),
-              Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.w600))),
+              Expanded(child: Text(_titreEtapeVisible(title), style: const TextStyle(fontWeight: FontWeight.w600))),
               Icon(done ? Icons.check_circle : Icons.chevron_right,
                   color: done ? Colors.green : Colors.grey),
             ]),
