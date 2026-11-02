@@ -71,7 +71,7 @@ class SessionPlanner {
       if (scan) 'scan':'Scan au pendule',
       if (hasFull) 'degagement':'Dégagement des entités / énergies négatives si nécessaire'}.entries) {
       node(PlanStep(id: entry.key, title:entry.value,kind:entry.key));
-      if(tail!=null) link(tail!,entry.key);
+      if(tail!=null) link(tail,entry.key);
       tail=entry.key;
     }
     final start=tail!;
@@ -118,17 +118,17 @@ class SessionPlanner {
     }
     if(thot) {
       node(const PlanStep(id:'thot',title:'Pendule de Thot',kind:'thot'));
-      for(final id in lastIds) link(id,'thot');
+      for(final id in lastIds) { link(id,'thot'); }
       lastIds..clear()..add('thot');
     }
     if(!distance && hasFull) {
       node(const PlanStep(id:'circulation',title:'Circulation énergétique entre les chakras',kind:'circulation'));
-      for(final id in lastIds) link(id,'circulation');
+      for(final id in lastIds) { link(id,'circulation'); }
       node(const PlanStep(id:'balayage',title:'Balayage',kind:'balayage'));
       link('circulation','balayage');lastIds..clear()..add('balayage');
     }
     node(const PlanStep(id:'debrief',title:'Débriefing / observation',kind:'debrief'));
-    for(final id in lastIds) link(id,'debrief');
+    for(final id in lastIds) { link(id,'debrief'); }
     if(lastIds.isEmpty) link(start,'debrief');
     final result=<PlanStep>[]; final emitted=<String>{};
     while(result.length<nodes.length) {

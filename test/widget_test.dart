@@ -65,6 +65,14 @@ void main() {
     await t.tap(find.text('Reprendre'));await t.pump(const Duration(seconds:1));expect(find.text('00:57'),findsOneWidget);
     await t.pumpWidget(const SizedBox());await t.pump();
   });
+  regressionWidget('Asthme : prière conditionnelle non imposée, travail pulmonaire conservé', (t)async{
+    await start(t);await select(t,'Asthme');await openStep(t,'Asthme — Prière / formulation');
+    expect(find.text('Condition remplie pour ce travail'),findsOneWidget);
+    final skip=find.text('Condition non remplie : passer ce travail');
+    await visible(t,skip);await t.tap(skip);await t.pumpAndSettle();
+    expect(find.textContaining('Passes rapides sur les poumons : chakra couronne au chakra plexus.'),findsWidgets);
+    expect(t.takeException(),isNull);
+  });
   regressionWidget('Trois motifs admis, quatrième refusé sans limiter les prières', (t) async {
     await start(t);for(final s in ['Entorse','Eczéma','Arthrose']){await select(t,s);}
     await select(t,'Zona');

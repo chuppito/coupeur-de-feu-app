@@ -82,6 +82,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   bool _zonesSuiviConfirmees = false;
   bool _radioConnexionConfirmee = false;
   final Map<String,int> _tempsLocaux = {};
+  final Set<String> _conditionsConfirmees = {};
+  final Set<String> _etapesNonApplicables = {};
   bool _cm9Vigilance = false;
   bool _chirurgieSuiviConfirmee = false;
 
@@ -703,6 +705,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.zones.isNotEmpty) Text('${step.target=='selection'?'Zone(s)':'Zones sélectionnées (repères ; cible fixe ci-dessus)'} : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.condition.isNotEmpty) Text('Condition : ${step.condition}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.condition.isNotEmpty) CheckboxListTile(
+        title:const Text('Condition remplie pour ce travail'),
+        value:_conditionsConfirmees.contains(step.id),
+        onChanged:(v)=>setState((){if(v==true){_conditionsConfirmees.add(step.id);_etapesNonApplicables.remove(step.id);}else{_conditionsConfirmees.remove(step.id);}})),
       if(_mode == 'À distance' && step.kind == 'priere') const Padding(padding:EdgeInsets.only(bottom:8),child:Text('À distance : effectuer les signes et réciter la prière sur la photographie, sans geste sur le patient.')),
       if(step.kind == 'distance') ...[
         const Text('Travail sur support, sans passes ni imposition physique sur le patient.'),
@@ -721,7 +727,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.kind=='personnel') const Text('Contenu historique conservé. Protocole complet non vérifié dans les sources de formation ; adaptation distance et fusion non certifiées.'),
       if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
       if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
-      _checkStep(index),
+      if(step.condition.isEmpty || _conditionsConfirmees.contains(step.id)) _checkStep(index),
+      if(step.condition.isNotEmpty && !_conditionsConfirmees.contains(step.id)) TextButton(
+        onPressed:()=>setState((){
+          _etapesNonApplicables.add(step.id);
+          if(index<_etapes.length-1)_etapeOuverte=index+1;
+          WidgetsBinding.instance.addPostFrameCallback((_){
+            if(!mounted)return;
+            final target=_stepKeys[index+1]?.currentContext;
+            if(target!=null){Scrollable.ensureVisible(target,duration:const Duration(milliseconds:350),alignment:0.02);}
+          });
+        }),child:const Text('Condition non remplie : passer ce travail')),
     ]);
   }
 
@@ -1045,6 +1061,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'versionGuide': '3.3.1',
       'minuteursLocaux': Map<String,int>.from(_tempsLocaux),
       'radioConnexionConfirmee': _radioConnexionConfirmee,
+      'conditionsConfirmees': _conditionsConfirmees.toList(),
+      'etapesNonApplicables': _etapesNonApplicables.toList(),
       'cm9Vigilance': _cm9Vigilance,
       'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
       'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
