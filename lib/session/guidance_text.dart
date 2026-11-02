@@ -34,5 +34,5 @@ class GuidanceText {
     return s.trim();
   }
   static String commonCues(String text)=>text.replaceAllMapped(
-    RegExp(r'(?m)^([^:\n]+:\s*)\d{1,2}[.)]\s+'),(m)=>m.group(1)!);
+    RegExp(r'^([^:\n]+:\s*)\d{1,2}[.)]\s+',multiLine:true),(m)=>m.group(1)!);
 }

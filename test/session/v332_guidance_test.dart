@@ -40,6 +40,8 @@ void main(){
     expect(GuidanceText.route('- 1. Passes rapides du chakra couronne au chakra sacré.'),'chakra couronne → chakra sacré.');
   });
   test('Nettoyage d’affichage sur les 57 fiches : seuls les préfixes parasites disparaissent',(){
+    expect(GuidanceText.commonCues('Entorse : 4. Posez les 14 conventions\n\nEczéma : Posez les 14 conventions'),
+      'Entorse : Posez les 14 conventions\n\nEczéma : Posez les 14 conventions');
     expect(guides.length,57);
     for(final aa in guides.values){for(final a in aa as List){
       final cleaned=GuidanceText.clean(a['text'] as String,kind:a['kind'] as String);

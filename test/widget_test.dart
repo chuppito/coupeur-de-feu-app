@@ -125,12 +125,15 @@ void main() {
     expect((saved['etapesIds'] as List).contains('communes'),isFalse);
   });
   for(final scenario in [
-    (motifs:['Entorse'],distance:false),
-    (motifs:['Entorse','Eczéma','Arthrose'],distance:false),
-    (motifs:['Entorse','Eczéma'],distance:true),
-  ]) regressionWidget('Parcours entier ${scenario.motifs.join('+')} ${scenario.distance ? 'distance' : 'présentiel'} : préparation à historique', (t) async {
+    (motifs:['Entorse'],distance:false,thot:false),
+    (motifs:['Entorse','Eczéma','Arthrose'],distance:false,thot:false),
+    (motifs:['Entorse','Eczéma'],distance:true,thot:false),
+    (motifs:['Entorse','Eczéma'],distance:false,thot:true),
+    (motifs:['Entorse','Eczéma'],distance:true,thot:true),
+  ]) regressionWidget('Parcours entier ${scenario.motifs.join('+')} ${scenario.distance ? 'distance' : 'présentiel'} ${scenario.thot?'avec Thot':'sans Thot'} : préparation à historique', (t) async {
     await start(t);
     if(scenario.distance){await visible(t,find.text('À distance'));await t.tap(find.text('À distance'));await t.pumpAndSettle();}
+    if(scenario.thot){final option=find.text('Faire 1 soin au pendule pendant cette séance');await visible(t,option);await t.tap(option);await t.pumpAndSettle();}
     for(final motif in scenario.motifs){await select(t,motif);}
     // Les trois premières étapes sont accueillies, réalisées puis suivies automatiquement.
     for(var i=0;i<(scenario.distance?4:3);i++) {
@@ -145,6 +148,11 @@ void main() {
     for(var i=0;i<60;i++) {
       final debrief=find.widgetWithText(TextField,'Observations générales');
       if(debrief.evaluate().isNotEmpty) break;
+      if(find.byKey(const ValueKey('classic-thot')).evaluate().isNotEmpty){
+        for(final label in ['Rotation négative : dégagement.','Lever le pendule et tapoter deux fois pour évacuer le négatif.','Rotation positive : rééquilibrage.']){
+          final op=find.widgetWithText(CheckboxListTile,label);await visible(t,op);await t.tap(op);await t.pumpAndSettle();
+        }
+      }
       final done=find.widgetWithText(CheckboxListTile,'Étape réalisée');
       await visible(t,done);await t.tap(done);await t.pumpAndSettle();
     }
@@ -155,7 +163,12 @@ void main() {
       await Hive.box(MagnetismeSessionService.boxName).flush();
     });
     await t.pumpAndSettle();
-    expect(MagnetismeSessionService.getForPatient('Test V33').single['observations'],'Parcours terminé');
+    final saved=MagnetismeSessionService.getForPatient('Test V33').single;
+    expect(saved['observations'],'Parcours terminé');
+    if(scenario.thot){
+      final performed=saved['thotClassiqueParTravail'] as Map;expect(performed.length,3);
+      for(final operations in performed.values){expect(operations,[true,true,true]);}
+    }
     expect(t.takeException(),isNull);
   });
 
