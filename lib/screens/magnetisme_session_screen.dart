@@ -529,17 +529,22 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   Map<String, dynamic>? _protocolePdfPour(_Doc doc) {
     final title = _normaliserTitre(doc.titre);
     const aliases = <String, String>{
-      'tabacarretdu': 'Arret du tabac',
+      'tabacarretdu': 'Arrêt du tabac',
       'traitementslourdsaideaux': 'Traitements lourds',
       'interventionchirurgicale5joursavant': 'Intervention chirurgicale avant',
-      'interventionchirurgicaleapreslintervention': 'Intervention chirurgicale apres',
+      'interventionchirurgicaleapreslintervention': 'Intervention chirurgicale après',
       'troublesdusommeil': 'Trouble du sommeil',
+      'maladiedecrohn': 'Crohn',
+      'maladiedelyme': 'Lyme',
+      'spondylarthriteankylosante': 'Spondylarthrite',
     };
     final canonical = _normaliserTitre(aliases[title] ?? doc.titre);
-    // Ne jamais choisir une fiche différente en cas de titre ambigu.
-    final matches = _protocolesPdf.entries.where((entry) {
+    // Correspondance exacte prioritaire : évite Arthrite dans Spondylarthrite.
+    final exact = _protocolesPdf.entries
+        .where((entry) => _normaliserTitre(entry.key) == canonical).toList();
+    final matches = exact.isNotEmpty ? exact : _protocolesPdf.entries.where((entry) {
       final key = _normaliserTitre(entry.key);
-      return canonical == key || (key.length >= 6 && canonical.contains(key));
+      return key.length >= 6 && canonical.startsWith(key);
     }).toList();
     return matches.length == 1
         ? Map<String, dynamic>.from(matches.single.value as Map)
@@ -561,6 +566,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         'PDF45 · ' + stage + ' · ' +
             ((counts[stage] = (counts[stage] ?? 0) + 1)).toString(),
       ],
+      if (_mode == 'Présentiel' && order.contains('t'))
+        '7B · Contrôle des flux',
+      if (_mode == 'Présentiel' && order.contains('t') && _soinPenduleNecessaire)
+        '7C · Pendule de Thot (facultatif)',
       if (_mode == 'Présentiel' && _ftHasCirculation)
         'Circulation énergétique entre les chakras',
       if (_mode == 'Présentiel' && _ftHasBalayage) 'Balayage',
