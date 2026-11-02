@@ -552,24 +552,49 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         : null;
   }
 
+  // Séance fusionnée : la première fiche sélectionnée est prioritaire.
+  // Chaque famille de gestes suit l'ordre de la fiche prioritaire.
   List<String> get _parcoursPdfUnique {
-    if (_selectedFts.length != 1) return <String>[];
-    final fiche = _protocolePdfPour(_selectedFts.single);
-    if (fiche == null) return <String>[];
-    final order = List<String>.from(fiche['order'] as List);
-    final counts = <String, int>{};
+    final docs = _selectedFts;
+    if (docs.isEmpty || docs.length > 3) return <String>[];
+    final fiches = docs.map(_protocolePdfPour).toList();
+    if (fiches.any((fiche) => fiche == null)) return <String>[];
+    final primary = List<String>.from(fiches.first!['order'] as List);
+    final orderedStages = <String>[];
+    for (final stage in primary) {
+      if (!orderedStages.contains(stage)) orderedStages.add(stage);
+    }
+    for (final fiche in fiches.skip(1)) {
+      for (final stage in List<String>.from(fiche!['order'] as List)) {
+        if (!orderedStages.contains(stage)) orderedStages.add(stage);
+      }
+    }
+    final stages = <String>[];
+    for (final stage in orderedStages) {
+      if (stage == 'c') {
+        stages.add('14 conventions mentales');
+        continue;
+      }
+      // Les intentions, prières et gestes sont regroupés par type,
+      // puis par priorité, sans répéter l'accueil ni le balayage.
+      for (var docIndex = 0; docIndex < docs.length; docIndex++) {
+        final order = List<String>.from(fiches[docIndex]!['order'] as List);
+        final count = order.where((item) => item == stage).length;
+        for (var n = 1; n <= count; n++) {
+          stages.add('PDF45 · $docIndex · $stage · $n');
+        }
+      }
+    }
+    final hasWork = fiches.any((f) =>
+        List<String>.from(f!['order'] as List).contains('t'));
     return <String>[
       'Prise de contact',
       'Bilan énergétique',
       if (_scanPenduleNecessaire) 'Scan au pendule',
       'Dégagement des entités / énergies négatives si nécessaire',
-      for (final stage in order) ...<String>[
-        'PDF45 · ' + stage + ' · ' +
-            ((counts[stage] = (counts[stage] ?? 0) + 1)).toString(),
-      ],
-      if (_mode == 'Présentiel' && order.contains('t'))
-        '7B · Contrôle des flux',
-      if (_mode == 'Présentiel' && order.contains('t') && _soinPenduleNecessaire)
+      ...stages,
+      if (_mode == 'Présentiel' && hasWork) '7B · Contrôle des flux',
+      if (_mode == 'Présentiel' && hasWork && _soinPenduleNecessaire)
         '7C · Pendule de Thot (facultatif)',
       if (_mode == 'Présentiel' && _ftHasCirculation)
         'Circulation énergétique entre les chakras',
@@ -607,8 +632,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   Widget _etapePdf(int index) {
-    final stage = _etapes[index].split(' · ')[1];
-    final doc = _selectedFts.single;
+    final parts = _etapes[index].split(' · ');
+    final docIndex = int.tryParse(parts[1]) ?? 0;
+    final stage = parts[2];
+    final doc = _selectedFts[docIndex];
     final fiche = _protocolePdfPour(doc)!;
     final source = fiche['source'] as String;
     if (stage == 'c') return _conventions();
@@ -641,7 +668,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         _sourcePdf(source),
       ]);
     }
-    final occurrence = int.tryParse(_etapes[index].split(' · ').last) ?? 1;
+    final occurrence = int.tryParse(parts.last) ?? 1;
     final instruction = _instructionFichePour(doc, stage, occurrence);
     final matches = instruction == null ? <String>[] : <String>[instruction];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
