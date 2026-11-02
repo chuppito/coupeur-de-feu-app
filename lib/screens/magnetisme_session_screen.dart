@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import '../session/session_plan.dart';
 import '../session/convention_timing.dart';
+import '../widgets/protocol_timer.dart';
 import '../data/protocoles_pdf_45.dart';
 import '../data/suivis_formation.dart';
 
@@ -670,7 +671,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       case 'bilan': return _bilan();
       case 'scan': return _scanPenduleStep();
       case 'degagement': return _degagement();
-      case 'communes': return _conventions();
+      case 'communes': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+        Text(step.text,style:const TextStyle(fontWeight:FontWeight.w600)),
+        const SizedBox(height:12),_conventions(),
+      ]);
       case 'thot': return _soinPenduleStep();
       case 'debrief': return _debrief();
       case 'temoin':
@@ -689,14 +693,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final previous=position>0 ? plan[position-1] : null;
     final newSupport = previous==null || previous.kind!='distance' || previous.ficheId!=step.ficheId || previous.target!=step.target || previous.route!=step.route;
     var text = step.text;
-    if (text.contains('voir la fiche « CONTRE LE FEU »')) {
-      text += '\n\n' + _priereFeu;
-    }
+    text = text.replaceAll(RegExp(r'Prière contre le feu \(voir la fiche « CONTRE LE FEU »\)',caseSensitive:false),_priereFeu);
     text = MagnetismeLibraryService.personalized(text,prenom:_prenom.text,nom:_nom.text);
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       if(step.target != 'selection' && step.target.isNotEmpty)
         Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold)),
-      if(step.zones.isNotEmpty) Text('Zone(s) : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.zones.isNotEmpty) Text('${step.target=='selection'?'Zone(s)':'Zones sélectionnées (repères ; cible fixe ci-dessus)'} : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.condition.isNotEmpty) Text('Condition : ${step.condition}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(_mode == 'À distance' && step.kind == 'priere') const Padding(padding:EdgeInsets.only(bottom:8),child:Text('À distance : effectuer les signes et réciter la prière sur la photographie, sans geste sur le patient.')),
       if(step.kind == 'distance') ...[
         const Text('Travail sur support, sans passes ni imposition physique sur le patient.'),
@@ -709,6 +712,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.selectedRoute && _mode == 'Présentiel' && const ['rapide','flux'].contains(step.kind))
         ..._trajetsZones(step.zones).map((r)=>Padding(padding:const EdgeInsets.only(bottom:6),child:Text(r,style:const TextStyle(fontWeight:FontWeight.bold)))),
       SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
+      if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!),
+      if(step.kind=='personnel') const Text('Contenu historique conservé. Protocole complet non vérifié dans les sources de formation ; adaptation distance et fusion non certifiées.'),
       if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
       if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
       _checkStep(index),
@@ -961,6 +966,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   List<String> get _etapes {
+    if (_parcoursFichesStructurees.isNotEmpty) return _parcoursFichesStructurees;
     if (_isCouperLeFeu) {
       return <String>[
         'Accueil et prise de contact',
@@ -1031,7 +1037,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'typesSuivi': Map<String, String>.from(_typesSuivi),
       'zonesSuiviConfirmees': _zonesSuiviConfirmees,
       'chirurgieSuiviConfirmee': _chirurgieSuiviConfirmee,
-      'versionGuide': '3.3',
+      'versionGuide': '3.3.1',
       'cm9Vigilance': _cm9Vigilance,
       'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
       'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
@@ -1496,7 +1502,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   Widget _stepContent(int index) {
+    if(widget.demarrerSuivi && _pathologies.contains('Fibromyalgie') && !_zonesSuiviConfirmees) {
+      return const Text('Confirmez les zones douloureuses actuelles dans la préparation avant le guidage.');
+    }
     if (_usesPlanV33 && !_planV33.canStart) return Column(children:[..._planV33.conflicts.map((e)=>Text(e,style:const TextStyle(color:Colors.red)))]);
+    if (_etapes[index].startsWith('V33 · ')) return _plannedContent(index);
     if (_isCouperLeFeu) {
       if (index == 0) return _couperLeFeuStep(0);
       if (_scanPenduleNecessaire && index == 1) return _scanPenduleStep();

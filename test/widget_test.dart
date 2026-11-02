@@ -54,7 +54,7 @@ void main() {
     await t.pumpAndSettle();
     final saved=MagnetismeSessionService.getForPatient('Test V33');
     expect(saved.length,1);expect(saved.single['observations'],'Observation test conservée');
-    expect(saved.single['versionGuide'],'3.3');expect(saved.single['etapesIds'],isNotEmpty);
+    expect(saved.single['versionGuide'],'3.3.1');expect(saved.single['etapesIds'],isNotEmpty);
   });
   regressionWidget('Minuteur visible, pause/reprise et durée documentée', (t) async {
     await start(t);await select(t,'Entorse');await openStep(t,'14 conventions mentales');

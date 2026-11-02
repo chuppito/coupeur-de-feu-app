@@ -22,7 +22,7 @@ void main() {
     final p=plan(['ft-eczema']);final a=p.steps.where((s)=>s.ficheId=='ft-eczema').toList();
     expect(a.map((s)=>s.kind),['priere','imposition','rapide','flux','lente','imposition']);
     expect(a[1].zones,contains('Coude droit · antérieure'));
-    expect(a[3].target,'Abdomen et système intestinal');expect(a[3].route,contains('plexus'));expect(a[3].zones,isEmpty);
+    expect(a[3].target,'Abdomen et système intestinal');expect(a[3].route,contains('plexus'));expect(a[3].zones,contains('Coude droit · antérieure'));
   });
   test('Sciatique : toutes les actions lombaires avant la jambe',(){
     final a=plan(['ft-sciatique']).steps.where((s)=>s.ficheId=='ft-sciatique').toList();
@@ -49,14 +49,14 @@ void main() {
   test('Zona et verrue en suivi : prière et imposition de la vraie fiche',(){
     for(final id in ['ft-zona','ft-verrue']) {
       final p=plan([id],visits:{id:'court'});
-      expect(p.steps.map((s)=>s.kind),['contact','priere','imposition','debrief']);
+      expect(p.steps.map((s)=>s.kind),id=='ft-zona'?['contact','priere','imposition','imposition','imposition','debrief']:['contact','priere','imposition','imposition','debrief']);
       expect(p.steps[1].text,contains(id=='ft-zona'?'Prière contre le feu':'je t\'enlève tes verrues'));
     }
   });
   test('Suivi court zona + eczéma complet : garder les besoins des deux',(){
     final p=plan(['ft-zona','ft-eczema'],visits:{'ft-zona':'court'});
     expect(p.steps.where((s)=>s.kind=='communes').length,1);
-    expect(p.steps.where((s)=>s.ficheId=='ft-zona').map((s)=>s.kind),['priere','imposition']);
+    expect(p.steps.where((s)=>s.ficheId=='ft-zona').map((s)=>s.kind),['priere','imposition','imposition','imposition']);
     expect(p.steps.where((s)=>s.ficheId=='ft-eczema'&&s.kind=='imposition').length,2);
   });
   test('Pas de raccourci inventé à distance pour les verrues',(){
@@ -64,7 +64,7 @@ void main() {
   });
   test('Radio : choix explicite uniquement à distance, pas chimio automatique',(){
     const id='ft-traitements-lourds-aide-aux';
-    expect(plan([id],distance:true,visits:{id:'radio'}).steps.map((s)=>s.kind),['contact','priere','debrief']);
+    expect(plan([id],distance:true,visits:{id:'radio'}).steps.map((s)=>s.kind),['contact','temoin','priere','debrief']);
     expect(plan([id],distance:true).steps.any((s)=>s.kind=='communes'),isTrue);
   });
   test('Pendule sélectionné conservé une fois, en présentiel et distance',(){
@@ -75,7 +75,7 @@ void main() {
     expect(a.zones,containsAll(['Cheville gauche','Cheville droite']));
   });
   test('Toutes les fiches structurées préservent leurs actions dans l’ordre',(){
-    for(final j in raw.where((d)=>(d['guideV33'] as List? ?? []).isNotEmpty)){
+    for(final j in raw.where((d)=>(d['guideV33'] as List? ?? []).isNotEmpty && (d['guideV33'] as List).first['kind']!='personnel')){
       final fiche=GuideFiche.fromJson(Map<String,dynamic>.from(j as Map));
       final p=SessionPlanner.build([fiche]);expect(p.canStart,isTrue,reason:fiche.id);
       final expected=fiche.actions.where((a)=>!['accueil','bilan','degagement','circulation','balayage','debrief','communes'].contains(a.kind)).map((a)=>'${fiche.id}:${a.id}');

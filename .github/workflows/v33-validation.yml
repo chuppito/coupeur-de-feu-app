@@ -1,7 +1,7 @@
-name: V3.3 - Tests et APK
+name: V3.3.1 - Tests et APK
 on:
   push:
-    branches: [V3.3]
+    branches: [V3.3.1]
   workflow_dispatch:
 concurrency:
   group: v33-validation-${{ github.ref }}
@@ -32,6 +32,6 @@ jobs:
         run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
-          name: Magnetisme-V3.3-APK
+          name: Magnetisme-V3.3.1-APK
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error

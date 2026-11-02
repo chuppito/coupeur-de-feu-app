@@ -1,0 +1,515 @@
+[
+  {
+    "id": "ft-acne",
+    "titre": "Acné",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-angine",
+    "titre": "Angine",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-arthrite",
+    "titre": "Arthrite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-arthrose",
+    "titre": "Arthrose",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-asthme",
+    "titre": "Asthme",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-bronchite",
+    "titre": "Bronchite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-capsulite-retractile",
+    "titre": "Capsulite rétractile",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-cervicalgie",
+    "titre": "Cervicalgie",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-constipation",
+    "titre": "Constipation",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-cruralgie",
+    "titre": "Cruralgie",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-cystite",
+    "titre": "Cystite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-dechirure-musculaire",
+    "titre": "Déchirure musculaire",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-deprime",
+    "titre": "Déprime",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-eczema",
+    "titre": "Eczéma",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-endometriose",
+    "titre": "Endométriose",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-entorse",
+    "titre": "Entorse",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-fibromyalgie",
+    "titre": "Fibromyalgie",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-gastro-enterite",
+    "titre": "Gastro-entérite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-goutte",
+    "titre": "Goutte",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-grippe",
+    "titre": "Grippe",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-hemorroides",
+    "titre": "Hémorroïdes",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-herpes",
+    "titre": "Herpès",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-insuffisance-veineuse",
+    "titre": "Insuffisance veineuse",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-intervention-chirurgicale-avant",
+    "titre": "Intervention chirurgicale — 5 jours avant",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-intervention-chirurgicale-apres",
+    "titre": "Intervention chirurgicale — après l'intervention",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-lombalgie",
+    "titre": "Lombalgie",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-maladie-de-crohn",
+    "titre": "Maladie de Crohn",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-maladie-de-lyme",
+    "titre": "Maladie de Lyme",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-maladie-de-verneuil",
+    "titre": "Maladie de Verneuil",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-migraine",
+    "titre": "Migraine",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-nevralgie-d-arnold",
+    "titre": "Névralgie d'Arnold",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-otite",
+    "titre": "Otite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-papillomavirus",
+    "titre": "Papillomavirus",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-psoriasis",
+    "titre": "Psoriasis",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-rhinopharyngite",
+    "titre": "Rhinopharyngite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-sciatique",
+    "titre": "Sciatique",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-sclerose-en-plaques",
+    "titre": "Sclérose en plaques",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-spondylarthrite-ankylosante",
+    "titre": "Spondylarthrite ankylosante",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-tabac-arret-du",
+    "titre": "Tabac (arrêt du)",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-tendinite",
+    "titre": "Tendinite",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-traitements-lourds-aide-aux",
+    "titre": "Traitements lourds (aide aux)",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-troubles-du-sommeil",
+    "titre": "Troubles du sommeil",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-verrue",
+    "titre": "Verrue",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-zona",
+    "titre": "Zona",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  },
+  {
+    "id": "ft-couper-le-feu",
+    "titre": "Couper le feu",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-coup-de-soleil",
+    "titre": "Coup de soleil",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-fievre-insolation",
+    "titre": "Fièvre / insolation",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-infection",
+    "titre": "Infection",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-piqure-guepe-abeille",
+    "titre": "Piqûre de guêpe ou d'abeille",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-piqure-moustique",
+    "titre": "Piqûre de moustique",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-protection-moustiques",
+    "titre": "Protection contre les moustiques",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-aphtes",
+    "titre": "Aphtes",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-abces",
+    "titre": "Abcès",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-calculs-renaux",
+    "titre": "Calculs rénaux",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-maux-estomac",
+    "titre": "Maux d'estomac",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-allergie",
+    "titre": "Allergie",
+    "migration": "archive manuelle conservée",
+    "conformite": "non vérifiée : provenance du protocole complet manquante",
+    "limites": [
+      "Adaptation distance non documentée"
+    ]
+  },
+  {
+    "id": "ft-douleurs-intestinales-pdf",
+    "titre": "Douleurs intestinales",
+    "migration": "actions structurées",
+    "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
+    "limites": [
+      "Validation documentaire continue de tous les gestes et variantes non acquise"
+    ]
+  }
+]

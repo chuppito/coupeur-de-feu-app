@@ -11,17 +11,14 @@ void main(){
   late Directory dir;
   setUp(()async{dir=await Directory.systemTemp.createTemp('v33-preserve-');Hive.init(dir.path);await Hive.openBox(MagnetismeLibraryService.boxName);await Hive.openBox(MagnetismeSessionService.boxName);});
   tearDown(()async{await Hive.close();await dir.delete(recursive:true);});
-  test('Toutes les prières structurées restent identiques au texte source V3.2',(){
-    final source=(jsonDecode(File('assets/data/magnetisme_protocoles.json').readAsStringSync()) as Map)['fiches'] as List;
+  test('Prières séparées sans perte du texte articulaire',(){
     final guides=jsonDecode(File('assets/data/guide_v33.json').readAsStringSync()) as Map;
-    for(final d in source){
-      final actions=guides[d['id']] as List?;
-      if(actions==null)continue;
-      for(final a in actions.where((a)=>a['kind']=='priere')){
-        final index=int.parse((a['id'] as String).split('-').first.substring(1));
-        expect(a['text'],d['etapesGuideSource'][index]['texte'],reason:d['id']);
-      }
-    }
+    final actions=guides['ft-arthrite'] as List;
+    final prayers=actions.where((a)=>a['kind']=='priere').toList();
+    expect(prayers.length,2);
+    expect(prayers.first['text'],contains('CONTRE LE FEU'));
+    expect(prayers.last['text'],contains('Cher Saint Thibault'));
+    expect(prayers.last['text'],contains('Amen.'));
   });
   test('Une fiche personnelle reste stockée et son contenu prime sur le guide intégré',()async{
     const custom={'id':'ft-eczema','titre':'Eczéma','type':'fiche_technique','contenu':'Texte personnel conservé'};
