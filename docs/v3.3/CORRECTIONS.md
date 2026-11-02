@@ -33,3 +33,5 @@ Les divergences 10/15 min du suivi verrue ne sont pas transformées en minuteur 
 ## Validation
 
 Voir le workflow `V3.3 - Tests et APK` pour les résultats réellement exécutés. Tests de dépendances, de chaque fiche structurée, de plusieurs motifs, modes, durées et widgets de préparation/guidage/enregistrement. L'installation et les essais physiques sur téléphone restent à vérifier. Signature Android de la branche source conservée ; aucune désinstallation de données prescrite.
+
+Correction supplémentaire de l'acné : le guide source normalisé comportait un marqueur vide et une intention intestinale corrompue. Le schéma PDF déjà intégré précise sérotonine puis circulation. Seul le guide V3.3 est corrigé ; la source historique reste inchangée pour traçabilité.

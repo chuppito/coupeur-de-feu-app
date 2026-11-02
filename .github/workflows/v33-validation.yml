@@ -3,6 +3,9 @@ on:
   push:
     branches: [V3.3]
   workflow_dispatch:
+concurrency:
+  group: v33-validation-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -23,6 +26,7 @@ jobs:
       - name: Analyse statique (erreurs bloquantes)
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
       - name: Tests de parcours, minuteurs et sauvegarde
+        timeout-minutes: 4
         run: flutter test --reporter expanded
       - name: APK release
         run: flutter build apk --release

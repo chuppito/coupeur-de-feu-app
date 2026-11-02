@@ -35,6 +35,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (state == AppLifecycleState.resumed) {
       WakelockPlus.enable();
     } else {
+      if (_lectureAuto && mounted) _arreterLecture();
       WakelockPlus.disable();
     }
   }
@@ -689,6 +690,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.target != 'selection' && step.target.isNotEmpty)
         Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.zones.isNotEmpty) Text('Zone(s) : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(_mode == 'À distance' && step.kind == 'priere') const Padding(padding:EdgeInsets.only(bottom:8),child:Text('À distance : effectuer les signes et réciter la prière sur la photographie, sans geste sur le patient.')),
       if(step.kind == 'distance') ...[
         const Text('Travail sur support, sans passes ni imposition physique sur le patient.'),
         const SizedBox(height:8),
@@ -1794,7 +1796,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           'Cette fiche n’est ajoutée que si tu as coché « Faire 1 soin au pendule ». La prière est récupérée depuis la bibliothèque magnétisme.',
           _reference('récap séance'),
         ),
-        _compactText('Zone à travailler / intention', _soinPenduleZone, minLines: 1),
+        if(_zonesSoin.isNotEmpty) Text('Zones déjà sélectionnées : ${(_zonesSoin.toList()..sort()).join(', ')}'),
+        _compactText('Zone à travailler / intention (complément facultatif)', _soinPenduleZone, minLines: 1),
         const SizedBox(height: 8),
         Card(
           color: Colors.teal.withValues(alpha: 0.05),

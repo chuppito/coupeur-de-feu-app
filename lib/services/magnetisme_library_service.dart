@@ -56,7 +56,7 @@ class MagnetismeLibraryService {
       final mergedEntry = {...entry, ...local};
       // Une modification personnelle reste prioritaire et n'est jamais effacée.
       // Sans guide explicite propre, montrer son texte intégral plutôt que l'ancien guide intégré.
-      if(local['contenu'] != null && local['contenu'] != entry['contenu'] && local['guideV33']==null) {
+      if(local['contenu'] != null && local['contenu'] != entry['contenu'] && (local['guideV33']==null || jsonEncode(local['guideV33'])==jsonEncode(entry['guideV33']))) {
         mergedEntry['guideV33'] = [
           {'id':'personnel','kind':'personnel','text':local['contenu'].toString(),'target':'selection','source':'Fiche personnelle locale','distanceText':''}
         ];
