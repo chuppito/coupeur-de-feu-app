@@ -563,6 +563,31 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   // sans inférer de gestes à partir d'un simple mot-clé du PDF.
   // Découpe les travaux mixtes : une seule fiche peut contenir passes
   // rapides, lentes, imposition et visualisation dans un même paragraphe.
+  List<String> _trajetsZones(Iterable<String> zones) {
+    final selectedZones = zones.toSet().toList()..sort();
+      final routes = <String>[];
+      for (final zone in selectedZones) {
+        final z = zone.toLowerCase().trim();
+        final side = z.contains('gauche') ? 'gauche' : z.contains('droit') ? 'droit' : null;
+        if (side == null) continue;
+        final handSide = side == 'droit' ? 'droite' : 'gauche';
+        if (z.contains('cuisse')) {
+          routes.add('Cuisse $handSide : chakra mineur aine $handSide → chakra mineur genou $side');
+        } else if (z.contains('poignet')) {
+          routes.add('Poignet $side : chakra mineur coude $side → chakra mineur main $handSide');
+        } else if (z.contains('cheville')) {
+          routes.add('Cheville $handSide : chakra mineur genou $side → chakra mineur pied $side');
+        } else if (z.contains('coude')) {
+          routes.add('Coude $side : épaule $handSide → coude $side, puis coude $side → main $handSide');
+        } else if (z.contains('genou')) {
+          routes.add('Genou $side : aine $handSide → genou $side, puis genou $side → pied $side');
+        } else if (z.contains('épaule') || z.contains('epaule')) {
+          routes.add('Épaule $handSide : couronne → épaule $handSide, puis épaule $handSide → main $handSide');
+        }
+      }
+    return routes;
+  }
+
   List<String> _gestesDeFiche(String texte, String phase) {
     final lignes = texte.split(RegExp(r'\n|\s+/\s+'));
     final fragments = <String>[];
@@ -638,7 +663,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       // Une phase complète pour les trois motifs, dans l'ordre de priorité.
       for (final phase in <String>['rapide', 'lente', 'specifique']) {
         if (phase == 'lente') {
-          result.add('Contrôle des flux');
+          for (var d = 0; d < docs.length; d++) {
+            result.add('FLUX · $d');
+          }
           if (_soinPenduleNecessaire) {
             result.add('7C · Pendule de Thot (facultatif)');
           }
@@ -660,6 +687,24 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return result;
   }
 
+  Widget _etapeFluxParMotif(int index) {
+    final d = int.tryParse(_etapes[index].split(' · ').last) ?? 0;
+    final doc = _selectedFts[d];
+    final trajets = _trajetsZones(_zonesParPathologie[doc.titre] ?? <String>{});
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      Text(doc.titre, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+      const SizedBox(height: 8),
+      if (trajets.isEmpty)
+        const Text('Aucun trajet articulaire identifié : vérifier la zone et la fiche.')
+      else
+        ...trajets.map((t) => Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(t, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600)),
+        )),
+      _checkStep(index),
+    ]);
+  }
+
   Widget _etapeGeste(int index) {
     final parts = _etapes[index].split(' · ');
     final phase = parts[1];
@@ -669,9 +714,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final texte = doc.etapesGuideSource[j]['texte'] ?? '';
     final gestes = _gestesDeFiche(texte, phase);
     final zones = _zonesParPathologie[doc.titre] ?? <String>{};
+    final trajets = _trajetsZones(zones);
+    final trajetSelonZone = phase == 'rapide' &&
+        !RegExp(r'chakra\s+plexus|chakra\s+racine', caseSensitive: false).hasMatch(texte);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       Text(doc.titre, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
+      if (trajetSelonZone && trajets.isNotEmpty)
+        ...trajets.map((trajet) => Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(trajet, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600)),
+        )),
       ...gestes.map((geste) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: SelectableText(geste, style: const TextStyle(fontSize: 16, height: 1.4)),
@@ -1261,6 +1314,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
 
   String _titreEtapeVisible(String title) {
+    if (title.startsWith('FLUX · ')) {
+      final d = int.tryParse(title.split(' · ').last) ?? 0;
+      return '${_selectedFts[d].titre} — Contrôle des flux';
+    }
     if (title.startsWith('GESTE · ')) {
       final p = title.split(' · ');
       final d = int.tryParse(p[2]) ?? 0;
@@ -1347,6 +1404,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title.startsWith('FLUX · ')) return _etapeFluxParMotif(index);
     if (title.startsWith('GESTE · ')) return _etapeGeste(index);
     if (title.startsWith('SOURCE · ')) return _etapeFicheSource(index);
     if (title.startsWith('PDF45 · ')) return _etapePdf(index);
@@ -2320,30 +2378,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final zones = _zonesSoin.toList()..sort();
 
     if (titreEtape == '7A · Passes rapides' || titreEtape == 'Contrôle des flux') {
-      final selectedZones = <String>{
+      final routes = _trajetsZones(<String>{
         ..._zonesSoin,
         for (final values in _zonesParPathologie.values) ...values,
-      }.toList()..sort();
-      final routes = <String>[];
-      for (final zone in selectedZones) {
-        final z = zone.toLowerCase().trim();
-        final side = z.contains('gauche') ? 'gauche' : z.contains('droit') ? 'droit' : null;
-        if (side == null) continue;
-        final handSide = side == 'droit' ? 'droite' : 'gauche';
-        if (z.contains('cuisse')) {
-          routes.add('Cuisse $handSide : chakra mineur aine $handSide → chakra mineur genou $side');
-        } else if (z.contains('poignet')) {
-          routes.add('Poignet $side : chakra mineur coude $side → chakra mineur main $handSide');
-        } else if (z.contains('cheville')) {
-          routes.add('Cheville $handSide : chakra mineur genou $side → chakra mineur pied $side');
-        } else if (z.contains('coude')) {
-          routes.add('Coude $side : épaule $handSide → coude $side, puis coude $side → main $handSide');
-        } else if (z.contains('genou')) {
-          routes.add('Genou $side : aine $handSide → genou $side, puis genou $side → pied $side');
-        } else if (z.contains('épaule') || z.contains('epaule')) {
-          routes.add('Épaule $handSide : couronne → épaule $handSide, puis épaule $handSide → main $handSide');
-        }
-      }
+      });
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
         if (routes.isEmpty)
           const Text('Aucun trajet articulaire identifié pour cette sélection : consulter la fiche technique.')
