@@ -702,7 +702,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.kind=='flux') ...[
         ...((step.selectedRoute && GuidanceText.selectedRoutes(step.zones).isNotEmpty)
           ? GuidanceText.selectedRoutes(step.zones)
-          : [GuidanceText.route(step.route)]).where((s)=>s.isNotEmpty).map((r)=>Text(r,style:const TextStyle(fontWeight:FontWeight.bold))),
+          : GuidanceText.fixedRoutes(step.route,step.zones,sideAware:step.sideAware)).where((s)=>s.isNotEmpty).map((r)=>Text(r,style:const TextStyle(fontWeight:FontWeight.bold))),
         const SizedBox(height:8),const Text(GuidanceText.blockedFlux),
       ] else ...[
         if(step.selectedRoute && _mode=='Présentiel' && step.kind=='rapide')

@@ -418,10 +418,10 @@
     {
       "id": "s5-5",
       "kind": "rapide",
-      "text": "7. Travaillez en passes sur les points de douleur (ventre ou dos) :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "text": "7. Travaillez en passes sur les points de douleur :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
       "target": "selection",
       "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
-      "source": "Magnétisme (1).odt",
+      "source": "Manuel Stéphane Langlade p. 77 : travail sur les points douloureux, selon les zones sélectionnées.",
       "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous.",
       "selectedRoute": true,
       "documented": true
@@ -805,7 +805,8 @@
       "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
       "source": "Magnétisme (1).odt",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-8",
@@ -1201,7 +1202,8 @@
       "route": "- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
       "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-11",
@@ -2751,7 +2753,8 @@
       "route": "- 1. Passes rapides sur la jambe devant : du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
       "source": "Magnétisme (1).odt",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-8",
@@ -2772,7 +2775,8 @@
       "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
       "source": "Magnétisme (1).odt",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-10",
@@ -3833,7 +3837,8 @@
       "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
       "source": "Magnétisme (1).odt",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-8",
@@ -4337,7 +4342,8 @@
       "route": "- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
       "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "sideAware": true
     },
     {
       "id": "s6-11",

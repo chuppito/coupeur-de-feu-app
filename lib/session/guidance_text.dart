@@ -4,10 +4,17 @@ class GuidanceText {
   static String clean(String text,{String kind=''}) {
     final lines=text.split('\n');
     final gestures=const {'rapide','flux','lente','imposition','visualisation','distance','local'}.contains(kind);
-    return [for(var i=0;i<lines.length;i++)
+    var displayed=[for(var i=0;i<lines.length;i++)
       (kind!='personnel' && (i==0 || gestures))
         ? lines[i].replaceFirst(RegExp(r'^\s*(?:[-•]\s*)?\d{1,2}[.)]\s+'),'')
-        : lines[i]].join('\n').trim();
+        : lines[i]];
+    if(kind=='rapide' && displayed.length>1){
+      // Drop a redundant work heading, never a patient position or a side.
+      final heading=RegExp(r'^Travaillez? en passes[^:]*:\s*$',caseSensitive:false);
+      final position=RegExp(r'patient|dos|ventre|devant|derrière|antérieur|postérieur|allong|assis',caseSensitive:false);
+      displayed=displayed.where((line)=>!heading.hasMatch(line)||position.hasMatch(line)).toList();
+    }
+    return displayed.join('\n').trim();
   }
   static List<String> selectedRoutes(Iterable<String> zones) {
     final result=<String>[];
@@ -35,4 +42,19 @@ class GuidanceText {
   }
   static String commonCues(String text)=>text.replaceAllMapped(
     RegExp(r'^([^:\n]+:\s*)\d{1,2}[.)]\s+',multiLine:true),(m)=>m.group(1)!);
+  static List<String> fixedRoutes(String original,Iterable<String> zones,{bool sideAware=false}){
+    final base=route(original);
+    if(!sideAware)return [base];
+    final sides=<String>{};
+    for(final z in zones){
+      if(z.toLowerCase().contains('droit'))sides.add('droit');
+      if(z.toLowerCase().contains('gauche'))sides.add('gauche');
+    }
+    if(sides.isEmpty)return [base];
+    return [for(final side in sides)
+      'Côté $side : ${base.replaceAllMapped(RegExp(r'(aine|épaule|coude|main|genou|pied|oreille)\b',caseSensitive:false),(m){
+        final feminine=const {'aine','épaule','main','oreille'}.contains(m.group(1)!.toLowerCase());
+        return '${m.group(1)} ${side=='droit'&&feminine?'droite':side}';
+      })}'];
+  }
 }

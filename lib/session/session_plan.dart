@@ -5,16 +5,16 @@ class GuideAction {
   final int? seconds;
   final int repetitions;
   final bool standalone, documented;
-  final bool selectedRoute;
+  final bool selectedRoute, sideAware;
   const GuideAction({required this.id, required this.kind, required this.text,
     this.target = '', this.route = '', this.source = '', this.distanceText = '', this.selectedRoute=false,
-    this.seconds, this.repetitions=1, this.condition='', this.standalone=false, this.documented=true,this.label=''});
+    this.seconds, this.repetitions=1, this.condition='', this.standalone=false, this.documented=true,this.label='',this.sideAware=false});
   factory GuideAction.fromJson(Map<String, dynamic> j) => GuideAction(
     id: j['id'] as String, kind: j['kind'] as String, text: j['text'] as String,
     target: j['target'] as String? ?? '', route: j['route'] as String? ?? '',
     source: j['source'] as String? ?? '', distanceText:j['distanceText'] as String? ?? '', selectedRoute:j['selectedRoute']==true,
     seconds:j['seconds'] as int?, repetitions:j['repetitions'] as int? ?? 1,
-    condition:j['condition'] as String? ?? '', standalone:j['standalone']==true, documented:j['documented']!=false,label:j['label'] as String? ?? '');
+    condition:j['condition'] as String? ?? '', standalone:j['standalone']==true, documented:j['documented']!=false,label:j['label'] as String? ?? '',sideAware:j['sideAware']==true);
 }
 class GuideFiche {
   final String id, title;
@@ -30,11 +30,11 @@ class PlanStep {
   final int? seconds;
   final int repetitions;
   final String condition;
-  final bool selectedRoute;
+  final bool selectedRoute, sideAware;
   const PlanStep({required this.id, required this.title, required this.kind,
     this.text = '', this.ficheId = '', this.target = '', this.route = '',
     this.source = '', this.zones = const [],this.selectedRoute=false,
-    this.seconds,this.repetitions=1,this.condition=''});
+    this.seconds,this.repetitions=1,this.condition='',this.sideAware=false});
 }
 class SessionPlan {
   final List<PlanStep> steps;
@@ -127,7 +127,7 @@ class SessionPlanner {
         final suffix=a.target!='selection' && a.target.isNotEmpty && const {'rapide','flux','lente','imposition','distance','visualisation'}.contains(kind)?' · ${a.target}':'';
         node(PlanStep(id:id,title:'${f.title} — ${a.label.isEmpty?labels[kind] ?? 'Instruction spécifique':a.label}$suffix',
           kind:kind,text:distance && kind=='distance' ? a.distanceText : a.text,ficheId:f.id,target:a.target,route:a.route,source:a.source,selectedRoute:a.selectedRoute,
-          zones: (zones[f.title]?.toList() ?? []),seconds:a.seconds,repetitions:a.repetitions,condition:a.condition));
+          zones: (zones[f.title]?.toList() ?? []),seconds:a.seconds,repetitions:a.repetitions,condition:a.condition,sideAware:a.sideAware));
         link(prev,id); prev=id;
         if(thot && !distance && a.kind=='flux'){addThot(a,id);supportKeys.add(support);}
         if(thot && distance && a.kind=='rapide' && supportKeys.add(support))addThot(a,id);

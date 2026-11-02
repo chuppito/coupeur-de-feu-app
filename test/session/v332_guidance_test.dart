@@ -49,6 +49,9 @@ void main(){
       expect(RegExp(r'^\s*(?:-\s*)?\d+[.)]\s').hasMatch(cleaned),isFalse);
     }}
     expect(GuidanceText.clean('6. 14 conventions, 20 passes rapides, 15 passes lentes, 2 minutes et 3 répétitions.',kind:'rapide'),'14 conventions, 20 passes rapides, 15 passes lentes, 2 minutes et 3 répétitions.');
+    expect(GuidanceText.clean('6. Travaillez en passes sur les poumons et la trachée :\n- 1. Passes rapides du chakra couronne au chakra sacré.',kind:'rapide'),
+      'Passes rapides du chakra couronne au chakra sacré.');
+    expect(GuidanceText.clean('6. Travaillez en passes sur le dos, patient sur le ventre :\n- 1. Passes rapides.',kind:'rapide'),contains('patient sur le ventre'));
     expect(GuidanceText.clean('5. Intentions\n- 1. Première intention\n- 2. Seconde intention',kind:'intentions'),contains('- 2. Seconde intention'));
   });
   test('Tabac : deux régions et leurs deux séquences conservées et distinguées',(){
@@ -57,6 +60,13 @@ void main(){
     expect(p.steps.where((s)=>s.kind=='thot').length,2);
     final titles=p.steps.where((s)=>s.kind=='rapide').map((s)=>s.title).toList();
     expect(titles.toSet().length,2);expect(titles.first,contains('Poumons'));expect(titles.last,contains('Abdomen'));
+  });
+  test('Régions paires : latéralité explicite, sans appliquer un côté aux travaux abdominaux',(){
+    final route='Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.';
+    final paired=GuidanceText.fixedRoutes(route,['Genou droit','Genou gauche'],sideAware:true);
+    expect(paired.length,2);expect(paired.first,contains('aine droite'));expect(paired.last,contains('pied gauche'));
+    expect(GuidanceText.fixedRoutes('Couronne → plexus',['Coude droit','Coude gauche']),['Couronne → plexus']);
+    expect(f('ft-insuffisance-veineuse').actions.where((a)=>a.kind=='flux').every((a)=>a.sideAware),isTrue);
   });
   test('Conseils sourcés, sans recommandations inventées pour les onze archives',(){
     final advice=jsonDecode(File('assets/data/advice_v332.json').readAsStringSync()) as Map;
