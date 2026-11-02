@@ -699,7 +699,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             result.add('FLUX · $d');
           }
           if (_soinPenduleNecessaire) {
-            result.add('7C · Pendule de Thot (facultatif)');
+            result.add('Pendule de Thot');
           }
         }
         for (var d = 0; d < docs.length; d++) {
@@ -818,7 +818,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           if (phase == 'l') {
             stages.add('Contrôle des flux');
             if (_soinPenduleNecessaire) {
-              stages.add('7C · Pendule de Thot (facultatif)');
+              stages.add('Pendule de Thot');
             }
           }
           for (var docIndex = 0; docIndex < docs.length; docIndex++) {
@@ -977,7 +977,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (_pathologies.length == 1 && _typesSuivi[_pathologies.first] == 'court' && _mode == 'Présentiel') {
       final titre = _pathologies.first.toLowerCase();
       if (titre.contains('zona')) return <String>['SUIVI · prière', 'SUIVI · imposition', 'Débriefing / observation'];
-      if (titre.contains('verrue')) return <String>['SUIVI · prière', 'SUIVI · imposition', if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)', 'Débriefing / observation'];
+      if (titre.contains('verrue')) return <String>['SUIVI · prière', 'SUIVI · imposition', if (_soinPenduleNecessaire) 'Pendule de Thot', 'Débriefing / observation'];
     }
     if (_parcoursFichesStructurees.isNotEmpty) return _parcoursFichesStructurees;
     if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
@@ -993,11 +993,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if (_mode == 'Présentiel') ...<String>[
         if (_gestesFiches.isNotEmpty) ...<String>[
           ..._gestesFiches,
-          if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
+          if (_soinPenduleNecessaire) 'Pendule de Thot',
         ] else if (_ftHasPasses) ...<String>[
           '7A · Passes rapides',
           'Contrôle des flux',
-          if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
+          if (_soinPenduleNecessaire) 'Pendule de Thot',
           '7D · Passes lentes',
           '7E · Impositions et travaux spécifiques',
         ],
@@ -1480,7 +1480,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (title == 'Bilan énergétique') return _bilan();
     if (title == 'Scan au pendule') return _scanPenduleStep();
     if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
-    if (title == '7C · Pendule de Thot (facultatif)') return _thotComplementStep(index);
+    if (title == 'Pendule de Thot') return _thotComplementStep(index);
     if (title.startsWith('Geste fiche : ')) return _gesteFiche(index);
     if (title.startsWith('Dégagement des entités')) return _degagement();
     if (title == '14 conventions mentales') return _conventions();
