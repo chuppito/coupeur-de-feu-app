@@ -633,7 +633,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             text.contains('2 – passes lentes');
       });
       final insertAt = firstSlow >= 0 ? firstSlow : result.length;
-      result.insert(insertAt, '7B · Contrôle des flux');
+      result.insert(insertAt, 'Contrôle des flux');
       if (_soinPenduleNecessaire) {
         result.insert(insertAt + 1, '7C · Pendule de Thot (facultatif)');
       }
@@ -693,7 +693,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         // puis tous les passages lents : priorité conservée dans chaque bloc.
         for (final phase in <String>['r', 'l']) {
           if (phase == 'l') {
-            stages.add('7B · Contrôle des flux');
+            stages.add('Contrôle des flux');
             if (_soinPenduleNecessaire) {
               stages.add('7C · Pendule de Thot (facultatif)');
             }
@@ -868,7 +868,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
         ] else if (_ftHasPasses) ...<String>[
           '7A · Passes rapides',
-          '7B · Contrôle des flux',
+          'Contrôle des flux',
           if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)',
           '7D · Passes lentes',
           '7E · Impositions et travaux spécifiques',
@@ -2274,7 +2274,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }).whereType<String>().toList();
     final zones = _zonesSoin.toList()..sort();
 
-    if (titreEtape == '7A · Passes rapides' || titreEtape == '7B · Contrôle des flux') {
+    if (titreEtape == '7A · Passes rapides' || titreEtape == 'Contrôle des flux') {
       final selectedZones = <String>{
         ..._zonesSoin,
         for (final values in _zonesParPathologie.values) ...values,

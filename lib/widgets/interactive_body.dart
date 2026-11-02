@@ -25,8 +25,12 @@ const List<_BodyZone> _zonesCommunes = [
   _BodyZone('Tête', Rect.fromLTWH(92, 4, 56, 56), isCircle: true),
   _BodyZone('Oreille gauche', Rect.fromLTWH(78, 22, 18, 20), isCircle: true),
   _BodyZone('Oreille droite', Rect.fromLTWH(144, 22, 18, 20), isCircle: true),
-  _BodyZone('Bras gauche', Rect.fromLTWH(52, 66, 30, 116)),
-  _BodyZone('Bras droit', Rect.fromLTWH(158, 66, 30, 116)),
+  // Bras = segment épaule-coude ; avant-bras = segment coude-poignet.
+  // Les zones ne se chevauchent plus sur toute la longueur du membre.
+  _BodyZone('Bras gauche', Rect.fromLTWH(52, 66, 30, 66)),
+  _BodyZone('Bras droit', Rect.fromLTWH(158, 66, 30, 66)),
+  _BodyZone('Avant-bras gauche', Rect.fromLTWH(52, 156, 30, 18)),
+  _BodyZone('Avant-bras droit', Rect.fromLTWH(158, 156, 30, 18)),
   _BodyZone('Épaule gauche', Rect.fromLTWH(52, 66, 30, 25)),
   _BodyZone('Épaule droite', Rect.fromLTWH(158, 66, 30, 25)),
   _BodyZone('Coude gauche', Rect.fromLTWH(52, 132, 30, 24)),
