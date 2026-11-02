@@ -4375,6 +4375,52 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1 – Accueil du client"
+        },
+        {
+          "type": "bilan",
+          "texte": "2 – Bilan énergétique"
+        },
+        {
+          "type": "degagement",
+          "texte": "3 – Dégagement Entité ou Magie Noire si besoin"
+        },
+        {
+          "type": "communes",
+          "texte": "14 Conventions mentales classiques. Bien insister sur le nettoyage des tensions, des blocages énergétiques et des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "Convention mentale supplémentaire : Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "Imposer vos mains sur les points de douleurs + signe de Croix.\nFeu de Dieu perds ta chaleur comme Judas jadis perdit sa couleur quand il trahit notre seigneur au Mont des Oliviers. J’enlève le feu avec la main que ça redevienne froid comme avant.\nÀ faire 3 fois d’affilée."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes rapides : chakras Plexus à Racine."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur les points de douleurs."
+        },
+        {
+          "type": "circulation",
+          "texte": "Circulation énergétique entre les chakras."
+        },
+        {
+          "type": "balayage",
+          "texte": "9 – Balayage\n10 – Débriefing, à suivre en fonction de l’évolution."
+        }
       ]
     }
   ]
