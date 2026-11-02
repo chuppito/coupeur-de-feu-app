@@ -141,7 +141,7 @@ class SessionPlanner {
       if(thot&&!anchored){
         // Keep the selected option explicit for prayer-only/manual cases,
         // without claiming an undocumented placement among their actions.
-        final fallback=GuideAction(id:'option',kind:'thot',text:'',target:'selection');
+        const fallback=GuideAction(id:'option',kind:'thot',text:'',target:'selection');
         addThot(fallback,prev);lastIds[lastIds.length-1]=prev;
       }
     }

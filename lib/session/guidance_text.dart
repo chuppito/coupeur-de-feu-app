@@ -33,4 +33,6 @@ class GuidanceText {
     s=s.replaceAll('du chakra ','chakra ').replaceAll('au chakra ','→ chakra ').replaceAll('aux chakras ','→ chakras ');
     return s.trim();
   }
+  static String commonCues(String text)=>text.replaceAllMapped(
+    RegExp(r'(?m)^([^:\n]+:\s*)\d{1,2}[.)]\s+'),(m)=>m.group(1)!);
 }

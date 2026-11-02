@@ -659,7 +659,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       case 'scan': return _scanPenduleStep();
       case 'degagement': return _degagement();
       case 'communes': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-        Text(step.text,style:const TextStyle(fontWeight:FontWeight.w600)),
+        Text(GuidanceText.commonCues(step.text),style:const TextStyle(fontWeight:FontWeight.w600)),
         const SizedBox(height:12),_conventions(),
       ]);
       case 'thot': return _soinPenduleStep(step:step);
@@ -1822,12 +1822,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final id=step?.id ?? 'thot-manuel';
     final done=_thotClassique.putIfAbsent(id,()=>List<bool>.filled(3,false));
     final zones=step?.zones ?? const <String>[];
-    return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+    return Column(key:const ValueKey('classic-thot'),crossAxisAlignment:CrossAxisAlignment.start,children:[
       if(step!=null && step.target!='selection' && step.target.isNotEmpty)
         Text('Zone à travailler : ${step.target}'),
       if(step==null) ..._selectedFts.map((f)=>Text('${f.titre} — Zones à travailler : ${(_zonesParPathologie[f.titre]?.toList()??[]).join(', ')}'))
       else if(step.target=='selection') Text('Zones à travailler : ${zones.isEmpty?'zones mémorisées non précisées':zones.join(', ')}'),
       if(_mode=='À distance') const Text('Sur la représentation de la zone concernée, reliée au témoin. Aucun geste sur le patient.'),
+      if(id.endsWith(':option')) const Text('Placement spécifique de ce complément à vérifier pour ce parcours : aucun contrôle local n’est décrit.'),
       for(var n=0;n<3;n++) CheckboxListTile(
         key:ValueKey('$id-operation-$n'),contentPadding:EdgeInsets.zero,
         title:Text(const [
