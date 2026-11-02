@@ -93,4 +93,13 @@ void main() {
     expect(a.where((m)=>m.convention==8).last.intention,'Je recharge son corps éthérique');
     expect(a.firstWhere((m)=>m.convention==11).seconds,120);
   });
+  test('Conflit d’ordre détecté au lieu de réordonner silencieusement',(){
+    const fiche=GuideFiche('test','Test',[
+      GuideAction(id:'c1',kind:'communes',text:'Communes'),
+      GuideAction(id:'p',kind:'priere',text:'Prière'),
+      GuideAction(id:'c2',kind:'communes',text:'Communes'),
+    ]);
+    final p=SessionPlanner.build([fiche]);expect(p.canStart,isFalse);expect(p.conflicts.single,contains('Conflit'));
+  });
+
 }

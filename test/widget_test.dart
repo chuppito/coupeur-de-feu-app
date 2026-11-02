@@ -17,8 +17,8 @@ void main() {
     dir=await Directory.systemTemp.createTemp('v33-test-');Hive.init(dir.path);
     await Hive.openBox(MagnetismeLibraryService.boxName);
     await Hive.openBox(MagnetismeSessionService.boxName);
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      const MethodChannel('dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle'),(_ )async=>[null]);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
+      'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',(_ )async=>const StandardMessageCodec().encodeMessage([null]));
   });
   tearDown(() async {await Hive.close();await dir.delete(recursive:true);});
   Future<void> visible(WidgetTester t,Finder f) async {
@@ -26,6 +26,7 @@ void main() {
   }
   Future<void> start(WidgetTester t,{bool follow=false}) async {
     await t.pumpWidget(MaterialApp(home:MagnetismeSessionScreen(prefillNom:'Test',prefillNomFamille:'V33',demarrerSuivi:follow)));
+    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
     await t.pumpAndSettle();
   }
   Future<void> select(WidgetTester t,String title) async {
@@ -81,4 +82,31 @@ void main() {
     expect(saved['etapesFaites'],[1]);expect((saved['zonesParPathologie'] as Map)['Zona'],['Tronc droit']);
     expect((saved['etapesIds'] as List).contains('communes'),isFalse);
   });
+  regressionWidget('Parcours entier entorse : préparation, conventions, gestes et historique', (t) async {
+    await start(t);await select(t,'Entorse');
+    // Les trois premières étapes sont accueillies, réalisées puis suivies automatiquement.
+    for(var i=0;i<3;i++) {
+      final done=find.widgetWithText(CheckboxListTile,'Étape réalisée');
+      await visible(t,done);await t.tap(done);await t.pumpAndSettle();
+    }
+    // 13 conventions incluses (8 omise), plus les deux sous-intentions de CM9.
+    for(var i=0;i<15;i++) {
+      final next=find.text('Réalisée → suivante');await visible(t,next);await t.tap(next);await t.pumpAndSettle();
+    }
+    // Toutes les étapes suivantes jusqu'au débriefing conservent leur ordre.
+    for(var i=0;i<15;i++) {
+      final debrief=find.widgetWithText(TextField,'Observations générales');
+      if(debrief.evaluate().isNotEmpty) break;
+      final done=find.widgetWithText(CheckboxListTile,'Étape réalisée');
+      await visible(t,done);await t.tap(done);await t.pumpAndSettle();
+    }
+    final obs=find.widgetWithText(TextField,'Observations générales');
+    expect(obs,findsOneWidget);await visible(t,obs);await t.enterText(obs,'Parcours terminé');
+    await t.tap(find.text('Enregistrer la séance'));
+    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
+    await t.pumpAndSettle();
+    expect(MagnetismeSessionService.getForPatient('Test V33').single['observations'],'Parcours terminé');
+    expect(t.takeException(),isNull);
+  });
+
 }

@@ -77,6 +77,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   bool _utiliserRaphael = false;
   bool _zonesSuiviConfirmees = false;
+  bool _cm9Vigilance = false;
   bool _chirurgieSuiviConfirmee = false;
 
   late final Map<String, TextEditingController> _anamneseFields;
@@ -1006,6 +1007,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
     setState(() => _saving = true);
 
+    try {
     await MagnetismeSessionService.save(<String, dynamic>{
       'date': DateTime.now().toIso8601String(),
       'nomPatient': _prenom.text.trim(),
@@ -1021,6 +1023,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'zonesSuiviConfirmees': _zonesSuiviConfirmees,
       'chirurgieSuiviConfirmee': _chirurgieSuiviConfirmee,
       'versionGuide': '3.3',
+      'cm9Vigilance': _cm9Vigilance,
       'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
       'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
       'seancePrecedenteDate': _seancePrecedente?['date'],
@@ -1059,8 +1062,13 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'debrief': _debriefController.text.trim(),
     });
 
+    } catch (error) {
+      if(mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Enregistrement impossible : $error')));
+      return;
+    } finally {
+      if(mounted) setState(()=>_saving=false);
+    }
     if (!mounted) return;
-    setState(() => _saving = false);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Séance de magnétisme enregistrée.')),
     );
@@ -1255,7 +1263,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                       if (SuivisFormation.typePour(titre) == 'court' && _mode == 'Présentiel')
                         const DropdownMenuItem(value: 'court', child: Text('Suivi court documenté')),
                       if (_mode == 'À distance' && titre == 'Traitements lourds (aide aux)')
-                        const DropdownMenuItem(value: 'radio', child: Text('Radiothérapie : suivi par prière contre le feu')), 
+                        const DropdownMenuItem(value: 'radio', child: Text('Radiothérapie : suivi par prière contre le feu')),
                     ],
                     onChanged: (v) => setState(() { if (v != null) { _typesSuivi[titre] = v; _etapesFaites.clear(); _etapeOuverte=0; } }),
                   ),
@@ -1672,6 +1680,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             ),
           ),
         ),
+        CheckboxListTile(
+          title:const Text('CM9 : seuil de vigilance relevé au bilan traditionnel'),
+          subtitle:const Text('Nettoyage de 2 minutes ; 4 minutes si « Magie noire » est marqué Oui.'),
+          value:_cm9Vigilance,onChanged:(v)=>setState(()=>_cm9Vigilance=v??false)),
         SwitchListTile(
           title: const Text('Examiner les zones anatomiques en détail'),
           subtitle: const Text('Facultatif : ouvrir uniquement pour approfondir le scan'),
@@ -1894,7 +1906,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   int _momentIndex = 0;
   List<ConventionMoment> get _moments => ConventionTiming.build(
     medication:_traitements.text.trim().isNotEmpty,
-    observations:'${_negatives.text} ${_bilanNotes.text} ${_entites.text}',
+    observations:_cm9Observation,
     lowBlood:_sangBelow70(),
     weakBodies: {for(final e in _corpsFields.entries)
       if(const ['G','D','G + D','Oui'].contains(e.value.text)) e.key: const {'2':'éthérique','3':'astral','4':'mental','5':'causal','6':'bouddhique','7':'atmique'}[e.key]!},
@@ -2043,17 +2055,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return durations[index] + '\n\n' + intention;
   }
 
+  String get _cm9Observation => _negatives.text == 'Oui' ? 'magie noire' : _cm9Vigilance ? 'vigilance' : '';
   String _convention9Duration() {
-    final negative = (_negatives.text + ' ' + _bilanNotes.text + ' ' + _entites.text).toLowerCase();
-    if (negative.contains('magie noire') || negative.contains('magie-noire')) {
-      return '4 minutes — magie noire détectée au bilan. Couper la connexion avant la séance selon le protocole.';
-    }
-    if (negative.contains('seuil de vigilance') ||
-        negative.contains('vigilance des énergies négatives') ||
-        negative.contains('vigilance énergie négative')) {
-      return '2 minutes — seuil de vigilance des énergies négatives détecté au bilan.';
-    }
-    return '1 minute.';
+    final seconds=ConventionTiming.cleaningSeconds(_cm9Observation);
+    return '${seconds ~/ 60} minute(s) de nettoyage (manuel), puis équilibrage et recharge guidés séparément.';
   }
 
   bool _sangBelow70() {
