@@ -90,6 +90,52 @@
         "s",
         "i",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "Posez 1 convention mentale supplémentaire / Réduction de la synthèse des androgènes (hormones mâles responsables de la surproduction de sébum)."
+        },
+        {
+          "type": "imposition",
+          "texte": "Visualisez l'acné qui sèche (5 minutes) / Imposez vos mains sur l'acné."
+        },
+        {
+          "type": "travail",
+          "texte": "Travaillez en passes sur le ventre :\n\t\tPasses rapides du chakra plexus au chakra racine."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes sur le système intestinal."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur les intestins (2e cerveau), avec intention de doper la circulation énergétique entre les chakras."
+        },
+        {
+          "type": "autre",
+          "texte": "[Étape spécifique de la fiche]"
+        },
+        {
+          "type": "balayage",
+          "texte": "9 & 10. Balayage & débriefing / Séance à suivre 1 mois selon l'évolution."
+        }
       ]
     },
     {
@@ -901,6 +947,56 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "Prière contre le feu en imposant les mains sur le point de douleur / Faites un signe de croix et récitez :  Prière contre le feu (voir la fiche « CONTRE LE FEU »). À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "Travaillez en passes sur le muscle abîmé :\n\t\tPasses rapides du chakra en amont au chakra en aval du point de douleur."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur le muscle abîmé."
+        },
+        {
+          "type": "travail",
+          "texte": "Visualisation de reconstruction de fibres musculaires."
+        },
+        {
+          "type": "circulation",
+          "texte": "Circulation énergétique entre les chakras."
+        },
+        {
+          "type": "balayage",
+          "texte": "& 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -937,6 +1033,56 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires."
+        },
+        {
+          "type": "intentions",
+          "texte": "Posez 2 conventions mentales supplémentaires :\n\t\tDopez la fabrication de la sérotonine."
+        },
+        {
+          "type": "intentions",
+          "texte": "Diminuez la fabrication du cortisol (hormone du stress)."
+        },
+        {
+          "type": "priere",
+          "texte": "Prière contre l'angoisse et la dépression / Imposez vos mains sur la personne et récitez :\n« Saint Claude et saint Gilles, venez en aide à [nom et prénom]. Délivrez-le (ou la) de la dépression et calmez ses angoisses. Amen. »"
+        },
+        {
+          "type": "travail",
+          "texte": "Travaillez en passes sur le ventre :\n\t\tPasses rapides du chakra plexus au chakra racine."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes sur le système intestinal."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "Circulation énergétique entre les chakras."
+        },
+        {
+          "type": "balayage",
+          "texte": "& 10. Balayage & débriefing / Une deuxième séance sous 1 mois est conseillée."
+        }
       ]
     },
     {
@@ -973,6 +1119,52 @@
         "p",
         "i",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires."
+        },
+        {
+          "type": "priere",
+          "texte": "Prière contre l'eczéma : Avec le pouce, faites un signe de croix sur l'eczéma et récitez :\n« Je te panse (+), que tu ne croisses, que tu n'augmentes, pas plus que la rosée sur le pré, au lever du soleil (+). » Puis récitez 5 Je vous salue Marie et 5 Notre Père."
+        },
+        {
+          "type": "imposition",
+          "texte": "Visualisez l'eczéma qui sèche (5 minutes) / Imposez vos mains sur l'eczéma."
+        },
+        {
+          "type": "travail",
+          "texte": "Travaillez en passes sur le ventre :\n\t\tPasses rapides du chakra plexus au chakra racine."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes sur le système intestinal."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "Circulation énergétique entre les chakras."
+        },
+        {
+          "type": "balayage",
+          "texte": "& 10. Balayage & débriefing / Séance à suivre dans 1 mois selon l'évolution."
+        }
       ]
     },
     {
@@ -1167,6 +1359,60 @@
         "s",
         "s",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "Posez 2 conventions mentales supplémentaires :\n\t\tBoostez la fabrication d'ocytocine (hormone antidouleur)."
+        },
+        {
+          "type": "intentions",
+          "texte": "Boostez la fabrication de sérotonine (contre le stress)."
+        },
+        {
+          "type": "intentions",
+          "texte": "Posez 2 conventions mentales supplémentaires :\n\t\tIdentifiez et nettoyez un premier choc émotionnel intervenu pendant l'enfance ou l'adolescence (choc ou stress très virulent)."
+        },
+        {
+          "type": "intentions",
+          "texte": "Identifiez et nettoyez un second choc émotionnel intervenu dans les 6 mois précédant l'arrivée de la fibromyalgie."
+        },
+        {
+          "type": "travail",
+          "texte": "Travaillez en passes sur toutes les parties douloureuses :\n\t\tPasses rapides des chakras en amont aux chakras en aval des points de douleur."
+        },
+        {
+          "type": "travail",
+          "texte": "Passes lentes."
+        },
+        {
+          "type": "imposition",
+          "texte": "Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "Circulation énergétique entre les chakras"
+        },
+        {
+          "type": "balayage",
+          "texte": "& 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
