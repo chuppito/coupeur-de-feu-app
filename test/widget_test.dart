@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'session/test_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,13 +24,12 @@ void main() {
   tearDown(() async {await Hive.close();await dir.delete(recursive:true);});
   Future<void> visible(WidgetTester t,Finder f) async {
     if(f.evaluate().isEmpty) {
-      await t.scrollUntilVisible(f.first, 450, maxScrolls:100, scrollable:find.byType(Scrollable).first);
+      await t.scrollUntilVisible(f, 450, maxScrolls:100, scrollable:find.byType(Scrollable).first);
     }
     await t.ensureVisible(f.first);await t.pumpAndSettle();
   }
   Future<void> start(WidgetTester t,{bool follow=false}) async {
-    await t.runAsync(() => MagnetismeLibraryService.loadAll());
-    await t.pumpWidget(MaterialApp(home:MagnetismeSessionScreen(prefillNom:'Test',prefillNomFamille:'V33',demarrerSuivi:follow)));
+    await t.pumpWidget(MaterialApp(home:MagnetismeSessionScreen(prefillNom:'Test',prefillNomFamille:'V33',demarrerSuivi:follow,loadLibrary:()=>MagnetismeLibraryService.loadAll(assets:TestAssets()))));
     await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
     await t.pumpAndSettle();
   }
@@ -38,7 +38,7 @@ void main() {
     await visible(t,chip);await t.tap(chip);await t.pumpAndSettle();
   }
   Future<void> openStep(WidgetTester t,String title) async {
-    final header=find.text(title).last;await visible(t,header);await t.tap(header);await t.pumpAndSettle();
+    final header=find.text(title);await visible(t,header);await t.tap(header.last);await t.pumpAndSettle();
   }
   regressionWidget('Préparer eczéma, conserver le trajet abdominal, puis enregistrer et retrouver', (t) async {
     await start(t);await select(t,'Eczéma');
@@ -47,8 +47,10 @@ void main() {
     await openStep(t,'Débriefing / observation');
     final obs=find.widgetWithText(TextField,'Observations générales');
     await visible(t,obs);await t.enterText(obs,'Observation test conservée');
-    await t.tap(find.text('Enregistrer la séance'));
-    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
+    await t.runAsync(() async {
+      await t.tap(find.text('Enregistrer la séance'));
+      await Hive.box(MagnetismeSessionService.boxName).flush();
+    });
     await t.pumpAndSettle();
     final saved=MagnetismeSessionService.getForPatient('Test V33');
     expect(saved.length,1);expect(saved.single['observations'],'Observation test conservée');
@@ -68,8 +70,10 @@ void main() {
     await select(t,'Zona');
     expect(find.textContaining('Maximum 3 soins par séance'),findsOneWidget);
     expect((t.widget(find.widgetWithText(FilterChip,'Zona')) as FilterChip).selected,isFalse);
-    await t.tap(find.text('Enregistrer la séance'));
-    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
+    await t.runAsync(() async {
+      await t.tap(find.text('Enregistrer la séance'));
+      await Hive.box(MagnetismeSessionService.boxName).flush();
+    });
     await t.pumpAndSettle();
     expect((MagnetismeSessionService.getForPatient('Test V33').single['ftTitres'] as List).length,3);
   });
@@ -79,8 +83,10 @@ void main() {
     final check=find.widgetWithText(CheckboxListTile,'Étape réalisée');
     await visible(t,check);await t.tap(check);await t.pumpAndSettle();
     expect(find.textContaining('guérir les terminaisons nerveuses'),findsWidgets);
-    await t.tap(find.text('Enregistrer la séance'));
-    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
+    await t.runAsync(() async {
+      await t.tap(find.text('Enregistrer la séance'));
+      await Hive.box(MagnetismeSessionService.boxName).flush();
+    });
     await t.pumpAndSettle();
     final saved=MagnetismeSessionService.getForPatient('Test V33').first;
     expect(saved['etapesFaites'],[1]);expect((saved['zonesParPathologie'] as Map)['Zona'],['Tronc droit']);
@@ -106,8 +112,10 @@ void main() {
     }
     final obs=find.widgetWithText(TextField,'Observations générales');
     expect(obs,findsOneWidget);await visible(t,obs);await t.enterText(obs,'Parcours terminé');
-    await t.tap(find.text('Enregistrer la séance'));
-    await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
+    await t.runAsync(() async {
+      await t.tap(find.text('Enregistrer la séance'));
+      await Hive.box(MagnetismeSessionService.boxName).flush();
+    });
     await t.pumpAndSettle();
     expect(MagnetismeSessionService.getForPatient('Test V33').single['observations'],'Parcours terminé');
     expect(t.takeException(),isNull);

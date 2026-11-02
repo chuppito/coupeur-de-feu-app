@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'test_assets.dart';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
@@ -25,7 +26,7 @@ void main(){
   test('Une fiche personnelle reste stockée et son contenu prime sur le guide intégré',()async{
     const custom={'id':'ft-eczema','titre':'Eczéma','type':'fiche_technique','contenu':'Texte personnel conservé'};
     await MagnetismeLibraryService.saveLocal(custom);
-    final docs=await MagnetismeLibraryService.loadAll();final d=docs.firstWhere((d)=>d['id']=='ft-eczema');
+    final docs=await MagnetismeLibraryService.loadAll(assets:TestAssets());final d=docs.firstWhere((d)=>d['id']=='ft-eczema');
     expect(d['contenu'],custom['contenu']);expect((d['guideV33'] as List).first['text'],custom['contenu']);
     expect(Hive.box(MagnetismeLibraryService.boxName).get('ft-eczema')['contenu'],custom['contenu']);
     expect(SessionPlanner.build([GuideFiche.fromJson(d)],distance:true).canStart,isFalse);

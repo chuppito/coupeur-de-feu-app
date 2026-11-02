@@ -18,12 +18,14 @@ class MagnetismeSessionScreen extends StatefulWidget {
   final String? prefillNom;
   final String? prefillNomFamille;
   final bool demarrerSuivi;
+  final Future<List<Map<String,dynamic>>> Function()? loadLibrary;
 
   const MagnetismeSessionScreen({
     super.key,
     this.prefillNom,
     this.prefillNomFamille,
     this.demarrerSuivi = false,
+    this.loadLibrary,
   });
 
   @override
@@ -234,7 +236,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   Future<void> _load() async {
     try {
-      final fiches = await MagnetismeLibraryService.loadAll();
+      final fiches = await (widget.loadLibrary?.call() ?? MagnetismeLibraryService.loadAll());
       final docs = fiches.map((item) => _Doc.fromJson(item)).toList();
 
       if (!mounted) return;

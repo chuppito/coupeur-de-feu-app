@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show rootBundle, AssetBundle;
 import 'package:hive_flutter/hive_flutter.dart';
 
 class MagnetismeLibraryService {
   static const String boxName = 'magnetisme_library_custom';
   static Box get _box => Hive.box(boxName);
 
-  static Future<List<Map<String, dynamic>>> loadAll() async {
-    final raw = await rootBundle.loadString('assets/data/magnetisme_protocoles.json');
+  static Future<List<Map<String, dynamic>>> loadAll({AssetBundle? assets}) async {
+    final bundle=assets ?? rootBundle;
+    final raw = await bundle.loadString('assets/data/magnetisme_protocoles.json');
     final data = jsonDecode(raw) as Map<String, dynamic>;
     final base = (data['fiches'] as List? ?? const [])
         .whereType<Map>()
@@ -15,7 +16,7 @@ class MagnetismeLibraryService {
         .toList();
 
     final techniquesRaw =
-        await rootBundle.loadString('assets/data/magnetisme_techniques.json');
+        await bundle.loadString('assets/data/magnetisme_techniques.json');
     final techniquesData =
         jsonDecode(techniquesRaw) as Map<String, dynamic>;
     final techniques = (techniquesData['techniques'] as List? ?? const [])
@@ -24,7 +25,7 @@ class MagnetismeLibraryService {
         .toList();
 
     final chakrasRaw =
-        await rootBundle.loadString('assets/data/magnetisme_techniques_chakras.json');
+        await bundle.loadString('assets/data/magnetisme_techniques_chakras.json');
     final chakrasData =
         jsonDecode(chakrasRaw) as Map<String, dynamic>;
     final chakras = (chakrasData['techniques'] as List? ?? const [])
@@ -32,7 +33,7 @@ class MagnetismeLibraryService {
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
 
-    final guide = jsonDecode(await rootBundle.loadString('assets/data/guide_v33.json')) as Map<String,dynamic>;
+    final guide = jsonDecode(await bundle.loadString('assets/data/guide_v33.json')) as Map<String,dynamic>;
     for (final entry in base) {
       final actions=guide[entry['id']];
       if(actions!=null) entry['guideV33']=actions;
