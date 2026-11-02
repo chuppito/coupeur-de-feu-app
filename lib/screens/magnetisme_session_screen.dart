@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import '../data/protocoles_pdf_45.dart';
+import '../data/suivis_formation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -13,11 +15,13 @@ import '../widgets/interactive_body.dart';
 class MagnetismeSessionScreen extends StatefulWidget {
   final String? prefillNom;
   final String? prefillNomFamille;
+  final bool demarrerSuivi;
 
   const MagnetismeSessionScreen({
     super.key,
     this.prefillNom,
     this.prefillNomFamille,
+    this.demarrerSuivi = false,
   });
 
   @override
@@ -125,6 +129,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final Set<int> _conventionsFaites = <int>{};
   final Set<int> _conventionsSupplementairesFaites = <int>{};
   final Set<String> _pathologies = <String>{};
+  final Map<String, String> _typesSuivi = <String, String>{};
+  Map<String, dynamic>? _seancePrecedente;
   List<_Doc> _docs = <_Doc>[];
   String? _ftId;
   String _mode = 'Présentiel';
@@ -230,6 +236,32 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if (!mounted) return;
       setState(() {
         _docs = docs;
+        if (widget.demarrerSuivi) {
+          final anciennes = MagnetismeSessionService.getForPatient(_patient);
+          if (anciennes.isNotEmpty) {
+            _seancePrecedente = anciennes.first;
+            final titres = anciennes.first['ftTitres'];
+            final candidats = titres is List ? titres.map((v) => v.toString()).toList() : <String>[(anciennes.first['ftTitre'] ?? '').toString()];
+            for (final titre in candidats.take(3)) {
+              final matches = docs.where((d) => d.titre == titre && d.type == 'fiche_technique');
+              if (matches.isNotEmpty) {
+                _pathologies.add(titre);
+                _typesSuivi[titre] = SuivisFormation.typePour(titre);
+                _ftId ??= matches.first.id;
+              }
+            }
+            final anciennesZones = anciennes.first['zonesParPathologie'];
+            if (anciennesZones is Map) {
+              for (final entry in anciennesZones.entries) {
+                if (_pathologies.contains(entry.key) && entry.value is List) {
+                  _zonesParPathologie[entry.key.toString()] = (entry.value as List).map((e) => e.toString()).toSet();
+                }
+              }
+              for (final zones in _zonesParPathologie.values) { _zonesSoin.addAll(zones); }
+            }
+            _pathologieZoneActive = _pathologies.isEmpty ? null : _pathologies.first;
+          }
+        }
         _priereFeu = docs.where((d) => d.type == 'priere' && d.titre.trim().toUpperCase().contains('CONTRE LE FEU')).map((d) => d.contenu.trim()).where((t) => t.isNotEmpty).firstOrNull ?? _priereFeu;
         _loading = false;
       });
@@ -942,6 +974,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ];
     }
 
+    if (_pathologies.length == 1 && _typesSuivi[_pathologies.first] == 'court' && _mode == 'Présentiel') {
+      final titre = _pathologies.first.toLowerCase();
+      if (titre.contains('zona')) return <String>['SUIVI · prière', 'SUIVI · imposition', 'Débriefing / observation'];
+      if (titre.contains('verrue')) return <String>['SUIVI · prière', 'SUIVI · imposition', if (_soinPenduleNecessaire) '7C · Pendule de Thot (facultatif)', 'Débriefing / observation'];
+    }
     if (_parcoursFichesStructurees.isNotEmpty) return _parcoursFichesStructurees;
     if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
 
@@ -990,6 +1027,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'zonesSoin': _zonesSoin.toList(),
       'zonesParPathologie': {for (final e in _zonesParPathologie.entries) e.key: e.value.toList()},
       'ftIds': _selectedFts.map((doc) => doc.id).toList(),
+      'ftTitres': _selectedFts.map((doc) => doc.titre).toList(),
+      'typesSuivi': Map<String, String>.from(_typesSuivi),
+      'seancePrecedenteDate': _seancePrecedente?['date'],
       'utiliserRaphael': _utiliserRaphael,
       'etapes': _etapes,
       'anamnese': {for (final e in _anamneseFields.entries) e.key: e.value.text.trim()},
@@ -1199,6 +1239,30 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               },
             ),
             const SizedBox(height: 12),
+            if (widget.demarrerSuivi) ...[
+              const Text('Consultation de suivi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(_seancePrecedente == null ? 'Aucune séance précédente enregistrée : sélectionnez les motifs.' : 'Dernière séance : ${(_seancePrecedente!['date'] ?? '').toString().split('T').first}. Vérifiez les zones et les motifs avant de continuer.'),
+              const SizedBox(height: 12),
+              for (final titre in _pathologies.toList())
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(titre, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(SuivisFormation.indication(titre), style: const TextStyle(fontSize: 12)),
+                  DropdownButtonFormField<String>(
+                    value: _typesSuivi[titre] ?? 'complet',
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'Type de visite'),
+                    items: [
+                      const DropdownMenuItem(value: 'complet', child: Text('Séance complète / existante')),
+                      if (SuivisFormation.typePour(titre) == 'court' && _mode == 'Présentiel')
+                        const DropdownMenuItem(value: 'court', child: Text('Suivi court documenté')),
+                    ],
+                    onChanged: (v) => setState(() { if (v != null) _typesSuivi[titre] = v; }),
+                  ),
+                  const SizedBox(height: 12),
+                ]),
+              if (_pathologies.length > 1 && _typesSuivi.values.contains('court'))
+                const Text('Plusieurs motifs : le protocole complet est conservé pour éviter de supprimer les étapes des autres motifs.', style: TextStyle(fontSize: 12)),
+            ],
             const Text('Pathologies / motifs du soin', style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
             Text(
@@ -1314,6 +1378,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
 
   String _titreEtapeVisible(String title) {
+    if (title == 'SUIVI · prière') return '${_pathologies.first} — Prière de suivi';
+    if (title == 'SUIVI · imposition') return '${_pathologies.first} — Imposition de suivi';
     if (title.startsWith('FLUX · ')) {
       final d = int.tryParse(title.split(' · ').last) ?? 0;
       return '${_selectedFts[d].titre} — Contrôle des flux';
@@ -1404,6 +1470,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title == 'SUIVI · prière') return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(_pathologies.first.toLowerCase().contains('zona') ? _priereFeu : 'Reprendre la prière de la fiche technique « Verrue ».', style: const TextStyle(fontSize: 16)), _checkStep(index)]);
+    if (title == 'SUIVI · imposition') return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(_pathologies.first.toLowerCase().contains('zona') ? 'Reprendre uniquement l’imposition des mains décrite dans la fiche Zona.' : 'Reprendre l’imposition / rayon sur les verrues décrit dans la fiche.', style: const TextStyle(fontSize: 16)), _checkStep(index)]);
     if (title.startsWith('FLUX · ')) return _etapeFluxParMotif(index);
     if (title.startsWith('GESTE · ')) return _etapeGeste(index);
     if (title.startsWith('SOURCE · ')) return _etapeFicheSource(index);
