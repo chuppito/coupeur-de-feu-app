@@ -656,7 +656,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   );
 
   bool get _usesPlanV33 => _selectedFts.isNotEmpty &&
-      _selectedFts.every((d) => (d.raw['guideV33'] as List? ?? []).isNotEmpty);
+      _selectedFts.any((d) => (d.raw['guideV33'] as List? ?? []).isNotEmpty);
 
   List<String> get _parcoursFichesStructurees => !_usesPlanV33 ? [] :
       _planV33.steps.map((step) => 'V33 · ${step.id}').toList();
@@ -1110,12 +1110,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           _patientCard(),
           const SizedBox(height: 10),
           _ftCard(),
+          if (_ft!=null && !_usesPlanV33 && !_isCouperLeFeu) const Padding(padding:EdgeInsets.all(12),child:Text('Fiche ancienne : déroulé V3.2 conservé, non normalisé dans le guide V3.3.')),
           if (_usesPlanV33 && !_planV33.canStart) ..._planV33.conflicts.map((e)=>Text(e,style:const TextStyle(color:Colors.red))),
           if (_ft != null) ...<Widget>[
             const SizedBox(height: 10),
             _progressCard(faites, total),
             const SizedBox(height: 10),
-            ...List<Widget>.generate(_etapes.length, _stepCard),
+            // Garder les clés des étapes montées : le défilement automatique
+            // reste fiable quand l'étape précédente se replie.
+            Column(children:List<Widget>.generate(_etapes.length, _stepCard)),
           ],
         ],
       ),

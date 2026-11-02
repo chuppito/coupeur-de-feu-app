@@ -48,7 +48,8 @@ class SessionPlanner {
     bool shortFor(GuideFiche f) => !distance && visits[f.id] == 'court' &&
       const {'ft-zona','ft-verrue'}.contains(f.id);
     bool radioFor(GuideFiche f) => distance && visits[f.id] == 'radio' && f.id == 'ft-traitements-lourds-aide-aux';
-    hasFull = fiches.any((f) => !shortFor(f) && !radioFor(f));
+    bool manualFor(GuideFiche f) => f.actions.length==1 && f.actions.single.kind=='personnel';
+    hasFull = fiches.any((f) => !shortFor(f) && !radioFor(f) && !manualFor(f));
     for (final entry in <String,String>{'contact':'Prise de contact',
       if (distance && hasFull) 'temoin':'Préparer le témoin vitalisé',
       if (hasFull) 'bilan':'Bilan énergétique',
@@ -62,6 +63,7 @@ class SessionPlanner {
     if(hasFull) node(const PlanStep(id:'communes',title:'14 conventions mentales',kind:'communes'));
     final lastIds=<String>[];
     for(final f in fiches) {
+      if(manualFor(f) && fiches.length>1) errors.add('${f.title} : fiche personnelle à vérifier avant une fusion de plusieurs soins.');
       if(f.actions.isEmpty) { errors.add('${f.title} : déroulé structuré absent.'); continue; }
       var prev=start;
       for(final a in f.actions) {
