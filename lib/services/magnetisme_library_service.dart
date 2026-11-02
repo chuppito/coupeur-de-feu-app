@@ -96,7 +96,9 @@ class MagnetismeLibraryService {
     final inverse = [nom.trim(), prenom.trim()]
         .where((x) => x.isNotEmpty)
         .join(' ');
-    var result = text;
+    var result = text.replaceAll(
+      RegExp(r'\[(?:nom et prénom|nom et prenom|prénom nom|prenom nom|NOM)\]',caseSensitive:false), full);
+    result = result.replaceAll(RegExp(r'\[(?:nom prénom|nom prenom)\]',caseSensitive:false),inverse);
     result = result
         .replaceAll('[NOM]', full)
         .replaceAll('[nom et prénom]', full)

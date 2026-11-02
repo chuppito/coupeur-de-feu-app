@@ -92,10 +92,16 @@ void main() {
     expect(saved['etapesFaites'],[1]);expect((saved['zonesParPathologie'] as Map)['Zona'],['Tronc droit']);
     expect((saved['etapesIds'] as List).contains('communes'),isFalse);
   });
-  regressionWidget('Parcours entier entorse : préparation, conventions, gestes et historique', (t) async {
-    await start(t);await select(t,'Entorse');
+  for(final scenario in [
+    (motifs:['Entorse'],distance:false),
+    (motifs:['Entorse','Eczéma','Arthrose'],distance:false),
+    (motifs:['Entorse','Eczéma'],distance:true),
+  ]) regressionWidget('Parcours entier ${scenario.motifs.join('+')} ${scenario.distance ? 'distance' : 'présentiel'} : préparation à historique', (t) async {
+    await start(t);
+    if(scenario.distance){await visible(t,find.text('À distance'));await t.tap(find.text('À distance'));await t.pumpAndSettle();}
+    for(final motif in scenario.motifs){await select(t,motif);}
     // Les trois premières étapes sont accueillies, réalisées puis suivies automatiquement.
-    for(var i=0;i<3;i++) {
+    for(var i=0;i<(scenario.distance?4:3);i++) {
       final done=find.widgetWithText(CheckboxListTile,'Étape réalisée');
       await visible(t,done);await t.tap(done);await t.pumpAndSettle();
     }
@@ -104,7 +110,7 @@ void main() {
       final next=find.text('Réalisée → suivante');await visible(t,next);await t.tap(next);await t.pumpAndSettle();
     }
     // Toutes les étapes suivantes jusqu'au débriefing conservent leur ordre.
-    for(var i=0;i<15;i++) {
+    for(var i=0;i<60;i++) {
       final debrief=find.widgetWithText(TextField,'Observations générales');
       if(debrief.evaluate().isNotEmpty) break;
       final done=find.widgetWithText(CheckboxListTile,'Étape réalisée');

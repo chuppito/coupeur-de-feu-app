@@ -37,4 +37,10 @@ void main(){
     final history=MagnetismeSessionService.getForPatient('Test V33');expect(history.length,2);
     expect(history.last['zonesParPathologie'],old['zonesParPathologie']);expect(history.last['champPersonnel'],'à préserver');
   });
+  test('Personnalisation des noms sans réécrire les prières stockées',(){
+    const original='[Nom et prénom], je t’enlève tes verrues. [nom prénom]';
+    expect(MagnetismeLibraryService.personalized(original,prenom:'Test',nom:'V33'),'Test V33, je t’enlève tes verrues. V33 Test');
+    expect(original,contains('[Nom et prénom]'));
+  });
+
 }
