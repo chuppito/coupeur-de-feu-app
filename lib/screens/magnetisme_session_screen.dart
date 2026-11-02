@@ -684,6 +684,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation),_checkStep(index)]);
       case 'balayage': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(_memoBalayage),_checkStep(index)]);
     }
+    final plan=_planV33.steps;
+    final position=plan.indexWhere((s)=>s.id==step.id);
+    final previous=position>0 ? plan[position-1] : null;
+    final newSupport = previous==null || previous.kind!='distance' || previous.ficheId!=step.ficheId || previous.target!=step.target || previous.route!=step.route;
     var text = step.text;
     if (text.contains('voir la fiche « CONTRE LE FEU »')) {
       text += '\n\n' + _priereFeu;
@@ -697,7 +701,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.kind == 'distance') ...[
         const Text('Travail sur support, sans passes ni imposition physique sur le patient.'),
         const SizedBox(height:8),
-        SelectableText(_find('planches_anatomiques_distance')?.contenu ?? 'Consulter la technique sur planche anatomique dans la bibliothèque.'),
+        if(newSupport) SelectableText(_find('planches_anatomiques_distance')?.contenu ?? 'Consulter la technique sur planche anatomique dans la bibliothèque.')
+        else const Text('Conserver le même support et la même zone pour l’intention complémentaire ci-dessous ; ne pas recommencer toute la préparation.'),
         const Divider(),
       ],
       if(step.kind == 'flux' && step.route.isNotEmpty) Text(step.route,style:const TextStyle(fontWeight:FontWeight.bold)),

@@ -37,3 +37,5 @@ Voir le workflow `V3.3 - Tests et APK` pour les résultats réellement exécuté
 Correction supplémentaire de l'acné : le guide source normalisé comportait un marqueur vide et une intention intestinale corrompue. Le schéma PDF déjà intégré précise sérotonine puis circulation. Seul le guide V3.3 est corrigé ; la source historique reste inchangée pour traçabilité.
 
 Le test de séance complète a également révélé un défaut de défilement : les cartes chargées paresseusement perdaient la cible de l'étape suivante pendant le repli de la précédente. Les cartes du parcours restent maintenant montées ensemble, avec le même aspect, afin de rendre le repositionnement automatique fiable.
+
+À distance, la méthode complète sur planche est affichée au début de chaque travail/cible ; les intentions suivantes sur le même support restent distinctes, sans demander de recommencer toute la préparation et les manipulations du pendule à chaque intention.
