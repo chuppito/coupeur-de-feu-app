@@ -1,30 +1,75 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:coupeur_de_feu_app/main.dart';
+import 'package:hive/hive.dart';
+import 'package:coupeur_de_feu_app/screens/magnetisme_session_screen.dart';
+import 'package:coupeur_de_feu_app/services/magnetisme_library_service.dart';
+import 'package:coupeur_de_feu_app/services/magnetisme_session_service.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late Directory dir;
+  setUp(() async {
+    dir=await Directory.systemTemp.createTemp('v33-test-');Hive.init(dir.path);
+    await Hive.openBox(MagnetismeLibraryService.boxName);
+    await Hive.openBox(MagnetismeSessionService.boxName);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+      const MethodChannel('dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle'),(_ )async=>[null]);
+  });
+  tearDown(() async {await Hive.close();await dir.delete(recursive:true);});
+  Future<void> visible(WidgetTester t,Finder f) async {
+    await t.ensureVisible(f.first);await t.pumpAndSettle();
+  }
+  Future<void> start(WidgetTester t,{bool follow=false}) async {
+    await t.pumpWidget(MaterialApp(home:MagnetismeSessionScreen(prefillNom:'Test',prefillNomFamille:'V33',demarrerSuivi:follow)));
+    await t.pumpAndSettle();
+  }
+  Future<void> select(WidgetTester t,String title) async {
+    final chip=find.widgetWithText(FilterChip,title);
+    await visible(t,chip);await t.tap(chip);await t.pumpAndSettle();
+  }
+  Future<void> openStep(WidgetTester t,String title) async {
+    final header=find.text(title).last;await visible(t,header);await t.tap(header);await t.pumpAndSettle();
+  }
+  testWidgets('Préparer eczéma, conserver le trajet abdominal, puis enregistrer et retrouver', (t) async {
+    await start(t);await select(t,'Eczéma');
+    await openStep(t,'Eczéma — Passes rapides');
+    expect(find.textContaining('chakra plexus au chakra racine'),findsWidgets);
+    await openStep(t,'Débriefing / observation');
+    final obs=find.widgetWithText(TextField,'Observations générales');
+    await visible(t,obs);await t.enterText(obs,'Observation test conservée');
+    await t.tap(find.text('Enregistrer la séance'));await t.pumpAndSettle();
+    final saved=MagnetismeSessionService.getForPatient('Test V33');
+    expect(saved.length,1);expect(saved.single['observations'],'Observation test conservée');
+    expect(saved.single['versionGuide'],'3.3');expect(saved.single['etapesIds'],isNotEmpty);
+  });
+  testWidgets('Minuteur visible, pause/reprise et durée documentée', (t) async {
+    await start(t);await select(t,'Entorse');await openStep(t,'14 conventions mentales');
+    expect(find.text('01:00'),findsOneWidget);
+    await visible(t,find.text('Démarrer'));await t.tap(find.text('Démarrer'));await t.pump(const Duration(seconds:2));
+    expect(find.text('00:58'),findsOneWidget);
+    await t.tap(find.text('Pause'));await t.pump(const Duration(seconds:3));expect(find.text('00:58'),findsOneWidget);
+    await t.tap(find.text('Reprendre'));await t.pump(const Duration(seconds:1));expect(find.text('00:57'),findsOneWidget);
+    await t.pumpWidget(const SizedBox());await t.pump();
+  });
+  testWidgets('Trois motifs admis, quatrième refusé sans limiter les prières', (t) async {
+    await start(t);for(final s in ['Entorse','Eczéma','Arthrose']){await select(t,s);}
+    await select(t,'Zona');
+    expect(find.textContaining('Maximum 3 soins par séance'),findsOneWidget);
+    expect((t.widget(find.widgetWithText(FilterChip,'Zona')) as FilterChip).selected,isFalse);
+    await t.tap(find.text('Enregistrer la séance'));await t.pumpAndSettle();
+    expect((MagnetismeSessionService.getForPatient('Test V33').single['ftTitres'] as List).length,3);
+  });
+  testWidgets('Zona suivi court : contenu réel et validation de la bonne étape', (t) async {
+    await MagnetismeSessionService.save({'nomPatient':'Test','nomFamille':'V33','date':'2026-11-01','ftTitres':['Zona'],'ftTitre':'Zona','zonesParPathologie':{'Zona':['Tronc droit']}});
+    await start(t,follow:true);await openStep(t,'Zona — Prière / formulation');
+    final check=find.widgetWithText(CheckboxListTile,'Étape réalisée');
+    await visible(t,check);await t.tap(check);await t.pumpAndSettle();
+    expect(find.textContaining('guérir les terminaisons nerveuses'),findsWidgets);
+    await t.tap(find.text('Enregistrer la séance'));await t.pumpAndSettle();
+    final saved=MagnetismeSessionService.getForPatient('Test V33').first;
+    expect(saved['etapesFaites'],[1]);expect((saved['zonesParPathologie'] as Map)['Zona'],['Tronc droit']);
+    expect((saved['etapesIds'] as List).contains('communes'),isFalse);
   });
 }

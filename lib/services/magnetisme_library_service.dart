@@ -32,6 +32,12 @@ class MagnetismeLibraryService {
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
 
+    final guide = jsonDecode(await rootBundle.loadString('assets/data/guide_v33.json')) as Map<String,dynamic>;
+    for (final entry in base) {
+      final actions=guide[entry['id']];
+      if(actions!=null) entry['guideV33']=actions;
+    }
+
     final custom = _box.values
         .whereType<Map>()
         .map((e) => Map<String, dynamic>.from(e))
@@ -46,7 +52,16 @@ class MagnetismeLibraryService {
     final merged = builtIn.map((entry) {
       final id = (entry['id'] ?? '').toString();
       final local = overrides.remove(id);
-      return local == null ? entry : {...entry, ...local};
+      if(local==null)return entry;
+      final mergedEntry = {...entry, ...local};
+      // Une modification personnelle reste prioritaire et n'est jamais effacée.
+      // Sans guide explicite propre, montrer son texte intégral plutôt que l'ancien guide intégré.
+      if(local['contenu'] != null && local['contenu'] != entry['contenu'] && local['guideV33']==null) {
+        mergedEntry['guideV33'] = [
+          {'id':'personnel','kind':'personnel','text':local['contenu'].toString(),'target':'selection','source':'Fiche personnelle locale','distanceText':''}
+        ];
+      }
+      return mergedEntry;
     }).toList();
     return [...merged, ...overrides.values];
   }

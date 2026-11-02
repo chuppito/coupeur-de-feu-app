@@ -1,0 +1,33 @@
+name: V3.3 - Tests et APK
+on:
+  push:
+    branches: [V3.3]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter --version
+      - run: flutter pub get
+      - name: Analyse statique (erreurs bloquantes)
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - name: Tests de parcours, minuteurs et sauvegarde
+        run: flutter test --reporter expanded
+      - name: APK release
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Magnetisme-V3.3-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error

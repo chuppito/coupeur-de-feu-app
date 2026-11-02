@@ -17,7 +17,7 @@ class SuivisFormation {
     if (t.contains('déprime') || t.contains('anxiété')) return 'Séance complète renouvelée, plutôt trois semaines à un mois selon le cours.';
     if (t.contains('endométriose')) return 'Nouveau cycle : séance renouvelée ; délais contradictoires dans le cours et le manuel.';
     if (t.contains('chirurg') || t.contains('opérat')) return 'Avant et après intervention : protocoles différents ; choisir la fiche correspondante.';
-    if (t.contains('radiothér')) return 'Suivi ponctuel à distance par prière contre le feu décrit dans le cours ; ne pas étendre à la chimiothérapie.';
+    if (t.contains('radiothér') || t.contains('traitements lourds')) return 'Suivi ponctuel à distance par prière contre le feu décrit dans le cours ; ne pas étendre à la chimiothérapie.';
     if (t.contains('fibromyalgie')) return 'Retour à la demande ; réévaluer les zones douloureuses du jour.';
     if (t.contains('entorse')) return 'Retour éventuel vers quinze jours ; délai oral incertain, aucun verrou.';
     if (t.contains('sommeil')) return 'Troubles anciens : deux à trois séances mensuelles évoquées ; sinon à la demande.';

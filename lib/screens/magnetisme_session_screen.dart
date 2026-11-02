@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import '../session/session_plan.dart';
+import '../session/convention_timing.dart';
 import '../data/protocoles_pdf_45.dart';
 import '../data/suivis_formation.dart';
 
@@ -73,6 +75,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   bool _utiliserRaphael = false;
+  bool _zonesSuiviConfirmees = false;
+  bool _chirurgieSuiviConfirmee = false;
 
   late final Map<String, TextEditingController> _anamneseFields;
 
@@ -142,8 +146,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   bool _lectureSuspendue = false;
   bool _scanDetailVisible = false;
   int _dureePersonnalisee = 0;
-  int _conventionSuppAuto = 0;
-  bool _phaseSupplementaire = false;
   bool _loading = true;
   bool _saving = false;
   bool _degagementNecessaire = false;
@@ -478,7 +480,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       final matches = _fts.where((doc) => doc.titre == titre);
       if (matches.isNotEmpty) selected.add(matches.first);
     }
-    if (_ft != null && _ft!.type == 'fiche_technique' && !selected.any((doc) => doc.id == _ft!.id)) {
+    if (_pathologies.isEmpty && _ft != null && _ft!.type == 'fiche_technique' && !selected.any((doc) => doc.id == _ft!.id)) {
       selected.insert(0, _ft!);
     }
     return selected;
@@ -641,83 +643,67 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return fragments;
   }
 
-  List<String> get _parcoursFichesStructurees {
-    final docs = _selectedFts;
-    if (docs.isEmpty || docs.length > 3 ||
-        docs.any((doc) => doc.etapesGuideSource.isEmpty)) return <String>[];
-    final result = <String>[
-      'Prise de contact',
-      'Bilan énergétique',
-      if (_scanPenduleNecessaire) 'Scan au pendule',
-      'Dégagement des entités / énergies négatives si nécessaire',
-    ];
-    const shared = <String>{'accueil', 'bilan', 'degagement', 'communes',
-      'circulation', 'balayage'};
-    final primary = docs.first.etapesGuideSource;
-    final last = <String, int>{};
-    for (var i = 0; i < primary.length; i++) {
-      final type = primary[i]['type'] ?? '';
-      if (!shared.contains(type) && type != 'travail') last[type] = i;
+  SessionPlan get _planV33 => SessionPlanner.build(
+    _selectedFts.map((d) => GuideFiche.fromJson(d.raw)).toList(),
+    distance: _mode == 'À distance', scan: _scanPenduleNecessaire,
+    thot: _soinPenduleNecessaire,
+    visits: {for (final d in _selectedFts) d.id: _typesSuivi[d.titre] ?? 'complet'},
+    zones: _zonesParPathologie,
+  );
+
+  bool get _usesPlanV33 => _selectedFts.isNotEmpty &&
+      _selectedFts.every((d) => (d.raw['guideV33'] as List? ?? []).isNotEmpty);
+
+  List<String> get _parcoursFichesStructurees => !_usesPlanV33 ? [] :
+      _planV33.steps.map((step) => 'V33 · ${step.id}').toList();
+
+  PlanStep _plannedStep(String title) => _planV33.steps.firstWhere((s) => 'V33 · ${s.id}' == title);
+
+  Widget _plannedContent(int index) {
+    final step = _plannedStep(_etapes[index]);
+    switch(step.kind) {
+      case 'contact': return _contactHelp();
+      case 'bilan': return _bilan();
+      case 'scan': return _scanPenduleStep();
+      case 'degagement': return _degagement();
+      case 'communes': return _conventions();
+      case 'thot': return _soinPenduleStep();
+      case 'debrief': return _debrief();
+      case 'temoin':
+        final doc = _find('temoin_distance');
+        final source = doc ?? _docs.where((d) => d.titre.startsWith('CHOISIR, CRÉER')).firstOrNull;
+        return Column(crossAxisAlignment: CrossAxisAlignment.start,children:[
+          SelectableText(source?.contenu ?? 'Préparer et vitaliser le témoin selon la fiche de la bibliothèque.'),
+          _checkStep(index),
+        ]);
+      case 'circulation': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+        SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation),_checkStep(index)]);
+      case 'balayage': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(_memoBalayage),_checkStep(index)]);
     }
-    final emitted = <String>{};
-    for (var i = 0; i < primary.length; i++) {
-      final type = primary[i]['type'] ?? '';
-      if (type == 'communes') {
-        result.add('14 conventions mentales');
-      } else if (!shared.contains(type) && type != 'travail') {
-        if (_mode == 'Présentiel' || type != 'imposition') {
-          result.add('SOURCE · 0 · $i');
-        }
-      }
-      if (last[type] == i) {
-        for (var d = 1; d < docs.length; d++) {
-          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
-            if (docs[d].etapesGuideSource[j]['type'] == type &&
-                (_mode == 'Présentiel' || type != 'imposition')) {
-              result.add('SOURCE · $d · $j');
-            }
-          }
-        }
-        emitted.add(type);
-      }
+    var text = step.text;
+    if (text.contains('voir la fiche « CONTRE LE FEU »')) {
+      text += '\n\n' + _priereFeu;
     }
-    for (var d = 1; d < docs.length; d++) {
-      for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
-        final type = docs[d].etapesGuideSource[j]['type'] ?? '';
-        if (!shared.contains(type) && type != 'travail' &&
-            !emitted.contains(type) &&
-            (_mode == 'Présentiel' || type != 'imposition')) {
-          result.add('SOURCE · $d · $j');
-        }
-      }
-    }
-    if (_mode == 'Présentiel') {
-      // Une phase complète pour les trois motifs, dans l'ordre de priorité.
-      for (final phase in <String>['rapide', 'lente', 'specifique']) {
-        if (phase == 'lente') {
-          for (var d = 0; d < docs.length; d++) {
-            result.add('FLUX · $d');
-          }
-          if (_soinPenduleNecessaire) {
-            result.add('Pendule de Thot');
-          }
-        }
-        for (var d = 0; d < docs.length; d++) {
-          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
-            final step = docs[d].etapesGuideSource[j];
-            if (step['type'] != 'travail') continue;
-            if (_gestesDeFiche(step['texte'] ?? '', phase).isNotEmpty) {
-              result.add('GESTE · $phase · $d · $j');
-            }
-          }
-        }
-      }
-      result.add('Circulation énergétique entre les chakras');
-      result.add('Balayage');
-    }
-    result.add('Débriefing / observation');
-    return result;
+    text = MagnetismeLibraryService.personalized(text,prenom:_prenom.text,nom:_nom.text);
+    return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+      if(step.target != 'selection' && step.target.isNotEmpty)
+        Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.zones.isNotEmpty) Text('Zone(s) : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.kind == 'distance') ...[
+        const Text('Travail sur support, sans passes ni imposition physique sur le patient.'),
+        const SizedBox(height:8),
+        SelectableText(_find('planches_anatomiques_distance')?.contenu ?? 'Consulter la technique sur planche anatomique dans la bibliothèque.'),
+        const Divider(),
+      ],
+      if(step.kind == 'flux' && step.route.isNotEmpty) Text(step.route,style:const TextStyle(fontWeight:FontWeight.bold)),
+      SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
+      if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
+      if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
+      _checkStep(index),
+    ]);
   }
+
+  int get _currentStepIndex => _etapeOuverte.clamp(0,_etapes.length-1);
 
   Widget _etapeFluxParMotif(int index) {
     final d = int.tryParse(_etapes[index].split(' · ').last) ?? 0;
@@ -974,11 +960,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ];
     }
 
-    if (_pathologies.length == 1 && _typesSuivi[_pathologies.first] == 'court' && _mode == 'Présentiel') {
-      final titre = _pathologies.first.toLowerCase();
-      if (titre.contains('zona')) return <String>['SUIVI · prière', 'SUIVI · imposition', 'Débriefing / observation'];
-      if (titre.contains('verrue')) return <String>['SUIVI · prière', 'SUIVI · imposition', if (_soinPenduleNecessaire) 'Pendule de Thot', 'Débriefing / observation'];
-    }
     if (_parcoursFichesStructurees.isNotEmpty) return _parcoursFichesStructurees;
     if (_parcoursPdfUnique.isNotEmpty) return _parcoursPdfUnique;
 
@@ -1014,6 +995,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   Future<void> _enregistrer() async {
     if (_saving || _patient.isEmpty || _ft == null) return;
+    if (widget.demarrerSuivi && ((_pathologies.contains('Fibromyalgie') && !_zonesSuiviConfirmees) || (_pathologies.any((t)=>t.startsWith('Intervention chirurgicale')) && !_chirurgieSuiviConfirmee))) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Confirmez les zones du jour et la fiche de suivi avant l’enregistrement.')));return;
+    }
+    if (_selectedFts.length > 3 || (_usesPlanV33 && !_planV33.canStart)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Vérifiez les motifs et les conflits du parcours.')));return;
+    }
 
     setState(() => _saving = true);
 
@@ -1029,6 +1016,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'ftIds': _selectedFts.map((doc) => doc.id).toList(),
       'ftTitres': _selectedFts.map((doc) => doc.titre).toList(),
       'typesSuivi': Map<String, String>.from(_typesSuivi),
+      'zonesSuiviConfirmees': _zonesSuiviConfirmees,
+      'chirurgieSuiviConfirmee': _chirurgieSuiviConfirmee,
+      'versionGuide': '3.3',
+      'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
+      'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
       'seancePrecedenteDate': _seancePrecedente?['date'],
       'utiliserRaphael': _utiliserRaphael,
       'etapes': _etapes,
@@ -1104,6 +1096,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           _patientCard(),
           const SizedBox(height: 10),
           _ftCard(),
+          if (_usesPlanV33 && !_planV33.canStart) ..._planV33.conflicts.map((e)=>Text(e,style:const TextStyle(color:Colors.red))),
           if (_ft != null) ...<Widget>[
             const SizedBox(height: 10),
             _progressCard(faites, total),
@@ -1154,7 +1147,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               ],
               selected: <String>{_mode},
               onSelectionChanged: (selection) {
-                setState(() => _mode = selection.first);
+                _timerConventions?.cancel();
+                setState(() { _mode = selection.first; _lectureAuto=false; _lectureSuspendue=false; _momentIndex=0; _etapesFaites.clear(); _etapeOuverte=0; });
               },
             ),
             const SizedBox(height: 8),
@@ -1178,9 +1172,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: const Text(
-                'Ajoute automatiquement la fiche du soin au déroulé de la séance.',
+                'Conserve le soin optionnel complet au pendule de Thot, avec ses formulations personnelles.',
               ),
               onChanged: (value) => setState(() {
+                _timerConventions?.cancel(); _lectureAuto=false; _lectureSuspendue=false;
+                _etapesFaites.clear(); _etapeOuverte=0;
                 _soinPenduleNecessaire = value ?? false;
                 if (!_soinPenduleNecessaire) {
                   for (var i = 0; i < _soinPenduleEtapes.length; i++) {
@@ -1222,6 +1218,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               )).toList(),
               onChanged: (value) {
                 setState(() {
+                  _timerConventions?.cancel();_lectureAuto=false;_lectureSuspendue=false;_momentIndex=0;
                   _ftId = value;
                   final doc = _find(value);
                   _pathologies.clear();
@@ -1248,20 +1245,28 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                   Text(titre, style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text(SuivisFormation.indication(titre), style: const TextStyle(fontSize: 12)),
                   DropdownButtonFormField<String>(
-                    value: (_mode == 'Présentiel' && SuivisFormation.typePour(titre) == 'court') ? (_typesSuivi[titre] ?? 'complet') : 'complet',
+                    value: (_mode == 'Présentiel' && SuivisFormation.typePour(titre) == 'court') || (_mode == 'À distance' && titre == 'Traitements lourds (aide aux)') ? (_typesSuivi[titre] == 'radio' && _mode != 'À distance' ? 'complet' : _typesSuivi[titre] ?? 'complet') : 'complet',
                     isExpanded: true,
                     decoration: const InputDecoration(labelText: 'Type de visite'),
                     items: [
                       const DropdownMenuItem(value: 'complet', child: Text('Séance complète / existante')),
                       if (SuivisFormation.typePour(titre) == 'court' && _mode == 'Présentiel')
                         const DropdownMenuItem(value: 'court', child: Text('Suivi court documenté')),
+                      if (_mode == 'À distance' && titre == 'Traitements lourds (aide aux)')
+                        const DropdownMenuItem(value: 'radio', child: Text('Radiothérapie : suivi par prière contre le feu')), 
                     ],
-                    onChanged: (v) => setState(() { if (v != null) _typesSuivi[titre] = v; }),
+                    onChanged: (v) => setState(() { if (v != null) { _typesSuivi[titre] = v; _etapesFaites.clear(); _etapeOuverte=0; } }),
                   ),
                   const SizedBox(height: 12),
                 ]),
               if (_pathologies.length > 1 && _typesSuivi.values.contains('court'))
-                const Text('Plusieurs motifs : le protocole complet est conservé pour éviter de supprimer les étapes des autres motifs.', style: TextStyle(fontSize: 12)),
+                const Text('Chaque motif conserve son type de visite. Les étapes communes restent présentes pour les motifs en séance complète.', style: TextStyle(fontSize: 12)),
+              if (_pathologies.contains('Fibromyalgie')) CheckboxListTile(
+                title:const Text('J’ai confirmé les zones douloureuses du jour'),
+                value:_zonesSuiviConfirmees,onChanged:(v)=>setState(()=>_zonesSuiviConfirmees=v??false)),
+              if (_pathologies.any((t)=>t.startsWith('Intervention chirurgicale'))) CheckboxListTile(
+                title:const Text('J’ai choisi la fiche avant ou après intervention correspondant à cette visite'),
+                value:_chirurgieSuiviConfirmee,onChanged:(v)=>setState(()=>_chirurgieSuiviConfirmee=v??false)),
             ],
             const Text('Pathologies / motifs du soin', style: TextStyle(fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
@@ -1278,10 +1283,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 selected: _pathologies.contains(name),
                 onSelected: (selected) {
                   setState(() {
+                    _timerConventions?.cancel();_lectureAuto=false;_lectureSuspendue=false;_momentIndex=0;
                     if (selected) {
+                      if (_pathologies.length >= 3) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Maximum 3 soins par séance. Les prières ne sont pas limitées.')));return;
+                      }
                       _pathologies.add(name);
+                      _ftId ??= _fts.firstWhere((d)=>d.titre==name).id;
                     } else {
                       _pathologies.remove(name);
+                      if (_find(_ftId)?.titre == name) _ftId = _fts.where((d)=>_pathologies.contains(d.titre)).firstOrNull?.id;
                     }
                     if (!selected) _zonesParPathologie.remove(name);
                     _pathologieZoneActive = selected ? name : (_pathologies.isEmpty ? null : _pathologies.first);
@@ -1378,6 +1389,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
 
   String _titreEtapeVisible(String title) {
+    if (title.startsWith('V33 · ')) return _plannedStep(title).title;
     if (title == 'SUIVI · prière') return '${_pathologies.first} — Prière de suivi';
     if (title == 'SUIVI · imposition') return '${_pathologies.first} — Imposition de suivi';
     if (title.startsWith('FLUX · ')) {
@@ -1423,7 +1435,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       child: Column(children: <Widget>[
         InkWell(
           onTap: () {
-            setState(() => _etapeOuverte = open ? -1 : index);
+            _timerConventions?.cancel();
+            setState(() { _lectureAuto=false; _lectureSuspendue=false; _etapeOuverte = open ? -1 : index; });
             if (!open) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (!mounted) return;
@@ -1460,6 +1473,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   }
 
   Widget _stepContent(int index) {
+    if (_usesPlanV33 && !_planV33.canStart) return Column(children:[..._planV33.conflicts.map((e)=>Text(e,style:const TextStyle(color:Colors.red)))]);
     if (_isCouperLeFeu) {
       if (index == 0) return _couperLeFeuStep(0);
       if (_scanPenduleNecessaire && index == 1) return _scanPenduleStep();
@@ -1470,6 +1484,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title.startsWith('V33 · ')) return _plannedContent(index);
     if (title == 'SUIVI · prière') return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(_pathologies.first.toLowerCase().contains('zona') ? _priereFeu : 'Reprendre la prière de la fiche technique « Verrue ».', style: const TextStyle(fontSize: 16)), _checkStep(index)]);
     if (title == 'SUIVI · imposition') return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(_pathologies.first.toLowerCase().contains('zona') ? 'Reprendre uniquement l’imposition des mains décrite dans la fiche Zona.' : 'Reprendre l’imposition / rayon sur les verrues décrit dans la fiche.', style: const TextStyle(fontSize: 16)), _checkStep(index)]);
     if (title.startsWith('FLUX · ')) return _etapeFluxParMotif(index);
@@ -1480,7 +1495,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     if (title == 'Bilan énergétique') return _bilan();
     if (title == 'Scan au pendule') return _scanPenduleStep();
     if (title == 'Soin au pendule (1 soin)') return _soinPenduleStep();
-    if (title == 'Pendule de Thot') return _thotComplementStep(index);
+    if (title == 'Pendule de Thot') return _soinPenduleStep();
     if (title.startsWith('Geste fiche : ')) return _gesteFiche(index);
     if (title.startsWith('Dégagement des entités')) return _degagement();
     if (title == '14 conventions mentales') return _conventions();
@@ -1522,7 +1537,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               'À répéter 3 fois.',
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
-            _checkStep(1),
+            _checkStep(_currentStepIndex),
           ],
         );
       case 2:
@@ -1549,7 +1564,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               leading: Icon(Icons.looks_3_outlined),
               title: Text('Visualiser la zone qui se refroidit et s’apaise'),
             ),
-            _checkStep(2),
+            _checkStep(_currentStepIndex),
           ],
         );
       case 3:
@@ -1565,7 +1580,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               _debriefController,
               minLines: 3,
             ),
-            _checkStep(3),
+            _checkStep(_currentStepIndex),
           ],
         );
       default:
@@ -1608,7 +1623,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           ),
         ),
         const SizedBox(height: 8),
-        _checkStep(0),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -1680,7 +1695,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           label: const Text('Générer la fiche PDF du bilan'),
         ),
         const SizedBox(height: 4),
-        _checkStep(1),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -1749,7 +1764,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         const Text('Zones anatomiques observées', style: TextStyle(fontWeight: FontWeight.w600)),
         InteractiveBody(selectedZones: _zonesSoin, onZoneTap: _onZoneSoinTap),
         _compactText('Notes du scan', _bilanNotes, minLines: 3),
-        _checkStep(2),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -1850,7 +1865,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         ),
         const SizedBox(height: 6),
         _compactText('Notes du soin au pendule', _soinPenduleNotes, minLines: 3),
-        _checkStep(2 + (_scanPenduleNecessaire ? 1 : 0)),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -1869,264 +1884,106 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ),
       if (_degagementNecessaire)
         _compactText('Notes / formulation utilisée', _degagementNotes, minLines: 2),
-      _checkStep(2 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
+      _checkStep(_currentStepIndex),
     ]);
   }
 
+  int _momentIndex = 0;
+  List<ConventionMoment> get _moments => ConventionTiming.build(
+    medication:_traitements.text.trim().isNotEmpty,
+    observations:'${_negatives.text} ${_bilanNotes.text} ${_entites.text}',
+    lowBlood:_sangBelow70(),
+    weakBodies: {for(final e in _corpsFields.entries)
+      if(const ['G','D','G + D','Oui'].contains(e.value.text)) e.key: const {'2':'éthérique','3':'astral','4':'mental','5':'causal','6':'bouddhique','7':'atmique'}[e.key]!},
+  );
+  ConventionMoment get _moment => _moments[_momentIndex.clamp(0,_moments.length-1)];
+  int _dureeConvention() => _dureePersonnalisee > 0 ? _dureePersonnalisee : _moment.seconds;
+
   void _arreterLecture() {
     _timerConventions?.cancel();
-    setState(() { _lectureAuto = false; _lectureSuspendue = true; });
+    setState(() { _lectureAuto=false; _lectureSuspendue=true; });
   }
-
-  int _dureeConvention() {
-    if (_dureePersonnalisee > 0) return _dureePersonnalisee;
-    if (_phaseSupplementaire) return 60;
-    if (_conventionOuverte == 11 && _sangBelow70()) return 120;
-    return 60;
+  void _moveMoment(int next,{bool complete=false}) {
+    _timerConventions?.cancel();
+    if(complete && _moment.last) _conventionsFaites.add(_moment.convention);
+    _momentIndex=next.clamp(0,_moments.length-1);
+    _conventionOuverte=_moment.convention;
+    _secondesRestantes=_dureeConvention();
+    _lectureSuspendue=false; _lectureAuto=false;
   }
-
+  void _nextMoment() {
+    setState(() {
+      if(_momentIndex == _moments.length-1) {
+        _conventionsFaites.add(_moment.convention);
+        _timerConventions?.cancel();_lectureAuto=false;_lectureSuspendue=false;
+      } else { _moveMoment(_momentIndex+1,complete:true); }
+    });
+  }
   void _demarrerLecture() {
     _timerConventions?.cancel();
     setState(() {
-      _lectureAuto = true;
-      if (!_lectureSuspendue) _secondesRestantes = _dureeConvention();
-      _lectureSuspendue = false;
+      _lectureAuto=true;
+      if(!_lectureSuspendue) _secondesRestantes=_dureeConvention();
+      _lectureSuspendue=false;
     });
-    _timerConventions = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-      setState(() {
-        if (_secondesRestantes > 1) {
-          _secondesRestantes--;
-          return;
-        }
-        if (!_phaseSupplementaire) {
-          _conventionsFaites.add(_conventionOuverte);
-          if (_conventionOuverte < 13) {
-            _conventionOuverte++;
-            _secondesRestantes = _dureeConvention();
-            return;
-          }
-          _phaseSupplementaire = true;
-          _conventionSuppAuto = 0;
-        } else {
-          _conventionsSupplementairesFaites.add(_conventionSuppAuto);
-          _conventionSuppAuto++;
-        }
-        final extra = _allSpecificConventions;
-        if (_phaseSupplementaire && _conventionSuppAuto >= extra.length) {
-          timer.cancel();
-          _lectureAuto = false;
-        } else {
-          _secondesRestantes = _dureeConvention();
-        }
-      });
+    _timerConventions=Timer.periodic(const Duration(seconds:1),(timer) {
+      if(!mounted){timer.cancel();return;}
+      if(_secondesRestantes>1){setState(()=>_secondesRestantes--);return;}
+      final finished=_momentIndex==_moments.length-1;
+      _nextMoment();
+      if(!finished) _demarrerLecture();
     });
   }
-
   Widget _lectureAutomatique() {
-    final extra = _allSpecificConventions;
-    final supplement = _phaseSupplementaire && extra.isNotEmpty;
-    final titre = supplement
-        ? extra[_conventionSuppAuto.clamp(0, extra.length - 1)]
-        : _conventionTitles[_conventionOuverte];
-    final consigne = supplement ? titre : _conventionAction(_conventionOuverte);
-    final total = _dureeConvention();
-    final progress = total == 0 ? 0.0 : (1 - _secondesRestantes / total).clamp(0.0, 1.0);
-    final minutes = (_secondesRestantes ~/ 60).toString().padLeft(2, '0');
-    final secondes = (_secondesRestantes % 60).toString().padLeft(2, '0');
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Row(children: <Widget>[
-              const Expanded(child: Text('SÉANCE GUIDÉE · CONVENTIONS',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))),
-              if (_lectureAuto) const Chip(label: Text('En cours')),
-            ]),
-            const SizedBox(height: 12),
-            Text(supplement
-                ? 'Convention supplémentaire ${_conventionSuppAuto + 1} / ${extra.length}'
-                : 'Convention ${_conventionOuverte + 1} / 14',
-                style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Text(titre, style: const TextStyle(fontSize: 15)),
-            const SizedBox(height: 20),
-            Center(child: SizedBox(
-              width: 230, height: 230,
-              child: Stack(alignment: Alignment.center, children: <Widget>[
-                SizedBox.expand(child: CircularProgressIndicator(
-                  value: progress,
-                  strokeWidth: 12,
-                  backgroundColor: Colors.black12,
-                  strokeCap: StrokeCap.round,
-                )),
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                  Text('$minutes:$secondes',
-                      style: const TextStyle(fontSize: 46, fontWeight: FontWeight.bold)),
-                  const Text('restantes'),
-                ]),
-              ]),
-            )),
-            const SizedBox(height: 20),
-            Text(consigne, textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 17, height: 1.5)),
-            const SizedBox(height: 14),
-            const Text('Sans son ni vibration', textAlign: TextAlign.center),
-            const SizedBox(height: 8),
-            Wrap(spacing: 6, alignment: WrapAlignment.center, children: <Widget>[
-              for (final seconds in [0, 60, 120, 180])
-                ChoiceChip(
-                  label: Text(seconds == 0 ? 'Conseillée' : '${seconds ~/ 60} min'),
-                  selected: _dureePersonnalisee == seconds,
-                  onSelected: _lectureAuto ? null : (_) => setState(() {
-                    _dureePersonnalisee = seconds;
-                    _secondesRestantes = _dureeConvention();
-                    _lectureSuspendue = false;
-                  }),
-                ),
-            ]),
-            const SizedBox(height: 12),
-            FilledButton.icon(
-              onPressed: _lectureAuto ? _arreterLecture : _demarrerLecture,
-              icon: Icon(_lectureAuto ? Icons.pause : Icons.play_arrow),
-              label: Text(_lectureAuto ? 'Pause' : (_lectureSuspendue ? 'Reprendre' : 'Démarrer')),
-            ),
-          ],
-        ),
-      ),
-    );
+    final m=_moment;
+    final duration=_dureeConvention();
+    final remaining=(!_lectureAuto&&!_lectureSuspendue) ? duration : _secondesRestantes;
+    final progress=(1-remaining/duration).clamp(0.0,1.0);
+    final base=_conventionAction(m.convention);
+    final instruction=m.intention.isEmpty ? base :
+      '${_mode == 'À distance' ? 'Les deux mains au-dessus de la photo.' : 'Les mains sur le chakra couronne.'} Intention : « ${m.intention} ». ${m.seconds} secondes (manuel).';
+    final title=m.label.isEmpty ? _conventionTitles[m.convention] : m.label;
+    return Card(child:Padding(padding:const EdgeInsets.all(18),child:Column(
+      crossAxisAlignment:CrossAxisAlignment.stretch,children:[
+      Text('Convention ${m.convention+1} / 14',style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold)),
+      Text(title),const SizedBox(height:16),
+      Center(child:SizedBox(width:200,height:200,child:Stack(alignment:Alignment.center,children:[
+        SizedBox.expand(child:CircularProgressIndicator(value:progress,strokeWidth:10,backgroundColor:Colors.black12)),
+        Text('${(remaining~/60).toString().padLeft(2,'0')}:${(remaining%60).toString().padLeft(2,'0')}',style:const TextStyle(fontSize:42,fontWeight:FontWeight.bold)),
+      ]))),const SizedBox(height:16),
+      Text('Durée utilisée : $duration secondes${_dureePersonnalisee>0 ? ' (réglage personnel)' : ''}.'),
+      SelectableText(instruction,style:const TextStyle(fontSize:16,height:1.4)),
+      const SizedBox(height:10),
+      Wrap(spacing:6,children:[for(final seconds in [0,30,60,120,180,240]) ChoiceChip(
+        label:Text(seconds==0?'Documentée':'$seconds s'), selected:_dureePersonnalisee==seconds,
+        onSelected:_lectureAuto?null:(_)=>setState((){_dureePersonnalisee=seconds;_secondesRestantes=_dureeConvention();_lectureSuspendue=false;}),
+      )]),
+      FilledButton.icon(onPressed:_lectureAuto?_arreterLecture:_demarrerLecture,icon:Icon(_lectureAuto?Icons.pause:Icons.play_arrow),label:Text(_lectureAuto?'Pause':(_lectureSuspendue?'Reprendre':'Démarrer'))),
+      const Text('Sans son ni vibration',textAlign:TextAlign.center),
+      Row(children:[
+        OutlinedButton(onPressed:_momentIndex==0?null:()=>setState(()=>_moveMoment(_momentIndex-1)),child:const Text('Précédente')),
+        const Spacer(),
+        FilledButton(onPressed:_nextMoment,child:const Text('Réalisée → suivante')),
+      ]),
+    ])));
   }
-
   Widget _conventions() {
-    final index = _conventionOuverte;
-    final done = _conventionsFaites.contains(index);
-    final action = _conventionAction(index);
-    final fullDoc = _reference('14 conventions — version complète') ?? _reference('14 conventions');
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _lectureAutomatique(),
-        _helpBox(
-          'Une convention à la fois. Pendant la séance, seules la durée utile et l’intention sont affichées. Les explications complètes restent dans la bibliothèque.',
-          fullDoc,
+    final ids=_moments.map((m)=>m.convention).toSet();
+    final complete=ids.every(_conventionsFaites.contains);
+    final doc=_reference('14 conventions — version complète') ?? _reference('14 conventions');
+    return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+      _lectureAutomatique(),
+      if(_traitements.text.trim().isEmpty) const Text('Convention 8 omise : aucun traitement signalé au bilan.'),
+      ExpansionTile(title:const Text('Les 14 conventions et leurs sources'),children:[
+        for(var i=0;i<14;i++) ListTile(
+          title:Text('${i+1}. ${_conventionTitles[i]}'),
+          trailing:_conventionsFaites.contains(i)?const Icon(Icons.check_circle):null,
+          onTap:(){final n=_moments.indexWhere((m)=>m.convention==i);if(n>=0)setState(()=>_moveMoment(n));},
         ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                'Convention ' + (index + 1).toString() + ' / 14',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text(
-              done ? 'Réalisée' : 'À faire',
-              style: TextStyle(
-                color: done ? Colors.green : Colors.orange.shade800,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Card(
-          color: Colors.indigo.withValues(alpha: 0.05),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Text(
-              action,
-              style: const TextStyle(fontSize: 15, height: 1.5),
-            ),
-          ),
-        ),
-        if (index == 7 && _traitements.text.trim().isEmpty)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              'Aucun traitement signalé au bilan : cette convention peut être sautée.',
-              style: TextStyle(
-                color: Colors.orange.shade800,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        if (fullDoc != null)
-          OutlinedButton.icon(
-            onPressed: () => _openReader(fullDoc),
-            icon: const Icon(Icons.menu_book_outlined),
-            label: const Text('Voir la convention complète'),
-          ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text('Les 14 conventions', style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                ...List<Widget>.generate(14, (i) {
-                  final active = i == index;
-                  final doneConvention = _conventionsFaites.contains(i);
-                  return InkWell(
-                    onTap: () => setState(() => _conventionOuverte = i),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            doneConvention ? Icons.check_circle : active ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                            size: 19,
-                            color: doneConvention ? Colors.green : active ? Theme.of(context).colorScheme.primary : null,
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              '${i + 1}. ${_conventionTitles[i]}',
-                              style: TextStyle(fontWeight: active ? FontWeight.bold : FontWeight.normal),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            OutlinedButton.icon(
-              onPressed: index == 0
-                  ? null
-                  : () => setState(() => _conventionOuverte--),
-              icon: const Icon(Icons.arrow_back),
-              label: const Text('Précédente'),
-            ),
-            const Spacer(),
-            FilledButton.icon(
-              onPressed: () {
-                setState(() {
-                  _conventionsFaites.add(index);
-                  if (index < 13) {
-                    _conventionOuverte++;
-                  }
-                });
-              },
-              icon: Icon(index == 13 ? Icons.check : Icons.arrow_forward),
-              label: Text(index == 13 ? '14 réalisée' : 'Réalisée → suivante'),
-            ),
-          ],
-        ),
-        if (_conventionsFaites.length == 14) _checkStep(_soinPenduleNecessaire ? 4 : 3),
-      ],
-    );
+        if(doc!=null) OutlinedButton(onPressed:()=>_openReader(doc),child:const Text('Ouvrir le document complet')),
+      ]),
+      if(complete) _checkStep(_currentStepIndex),
+    ]);
   }
 
   String _conventionAction(int index) {
@@ -2176,9 +2033,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         .replaceAll('[prenom nom]', _patient)
         .replaceAll('[nom prénom]', _nom.text.trim() + ' ' + _prenom.text.trim())
         .replaceAll('[nom prenom]', _nom.text.trim() + ' ' + _prenom.text.trim())
-        .replaceAll('[nom de la maladie]', _ft?.titre ?? '');
+        .replaceAll('[nom de la maladie]', _selectedFts.map((d)=>d.titre).join(', '));
     if (_mode == 'À distance') {
-      return durations[index] + '\n\n' + intention.replaceAll('Vos mains sur le chakra couronne du consultant, ', 'Sur la photo ou la planche anatomique, ').replaceAll('laissez passer l’énergie', 'maintenez votre intention');
+      return durations[index] + '\n\n' + intention.replaceAll('Vos mains sur le chakra couronne du consultant, ', 'Les deux mains au-dessus de la photo, ').replaceAll('laissez passer l’énergie', 'maintenez votre intention');
     }
     return durations[index] + '\n\n' + intention;
   }
@@ -2286,7 +2143,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               subtitle: Text(zones.join(', ')),
             ),
           ),
-        _checkStep(4 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -2383,7 +2240,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             ),
           ));
         }),
-        _checkStep(5 + (_soinPenduleNecessaire ? 1 : 0) + (_scanPenduleNecessaire ? 1 : 0)),
+        _checkStep(_currentStepIndex),
       ],
     );
   }
@@ -2418,7 +2275,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   static const _memoBalayage =
       'Selon le manuel : placez les mains à 10 à 15 cm au-dessus du corps. '
-      'Effectuez des passages lents, pendant environ 30 secondes à 1 minute.\n\n'
+      'Effectuez des passages semi-rapides, pendant environ 30 secondes à 1 minute.\n\n'
       '1. Passage à deux mains sur le bras gauche.\n'
       '2. Passage à deux mains sur le tronc côté gauche et centre.\n'
       '3. Passage à deux mains sur le tronc côté droit et centre.\n'
@@ -2426,6 +2283,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       '5. Passage à deux mains sur la jambe gauche.\n'
       '6. Passage à deux mains sur la jambe droite.\n'
       '7. Recommencez cette série une deuxième fois pour terminer la séance.';
+
+  static const _memoCirculation = 'Une main au chakra couronne, l’autre au troisième œil. Contrôler par un petit va-et-vient sans contact de la main au chakra couronne. Si aucun ressenti : cinq passes rapides entre les deux chakras, puis nouveau contrôle. Recommencer depuis la couronne vers gorge, cœur, plexus, sacré puis racine. Mains inversables selon votre confort. Référence : La circulation énergétique entre les chakras.';
 
   static const _memoChakras =
       'Méthode de lecture au pendule décrite dans ton livre :\n\n'
@@ -2498,7 +2357,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         : isSpecific ? techniques : <String>[];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       if (titreEtape == 'Balayage') _aideMemoire('Le balayage', _memoBalayage),
-      if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Contrôle des chakras', _memoChakras),
+      if (titreEtape == 'Circulation énergétique entre les chakras') _aideMemoire('Circulation entre les chakras', _memoCirculation),
       if (isRapid || isSlow || isSpecific) ...<Widget>[
         if (instructions.isNotEmpty)
           SelectableText(instructions.join('\n\n'), style: const TextStyle(fontSize: 16, height: 1.4))
@@ -2561,7 +2420,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           icon: const Icon(Icons.menu_book_outlined),
           label: Text(actionLabel),
         ),
-      _checkStep(doneIndex),
+      _checkStep(_currentStepIndex),
     ]);
   }
 
@@ -2762,6 +2621,7 @@ class _Doc {
   final String description;
   final List<String> aliases;
   final List<Map<String, String>> etapesGuideSource;
+  final Map<String,dynamic> raw;
 
   const _Doc({
     required this.id,
@@ -2772,10 +2632,12 @@ class _Doc {
     this.description = '',
     this.aliases = const <String>[],
     this.etapesGuideSource = const <Map<String, String>>[],
+    this.raw = const {},
   });
 
   factory _Doc.fromJson(Map<String, dynamic> json) {
     return _Doc(
+      raw: json,
       id: (json['id'] ?? '').toString(),
       titre: (json['titre'] ?? '').toString(),
       source: (json['source'] ?? '').toString(),

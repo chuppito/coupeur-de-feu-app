@@ -1,0 +1,4267 @@
+{
+  "ft-acne": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "Posez 1 convention mentale supplémentaire / Réduction de la synthèse des androgènes (hormones mâles responsables de la surproduction de sébum).",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "imposition",
+      "text": "Visualisez l'acné qui sèche (5 minutes) / Imposez vos mains sur l'acné.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "Travaillez en passes sur le ventre :\nPasses rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-8",
+      "kind": "lente",
+      "text": "Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s8-9",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les intestins (2e cerveau), avec intention de doper la circulation énergétique entre les chakras.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la circulation énergétique entre les chakras."
+    },
+    {
+      "id": "s9-10",
+      "kind": "autre",
+      "text": "[Étape spécifique de la fiche]",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s10-11",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-angine": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur le nez et la gorge, et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la sphère ORL :\n- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la sphère ORL.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-arthrite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des bloquages et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre le feu en imposant les mains sur les points de douleur à répéter 3 fois.\n+ Prière contre le feu (voir la fiche « CONTRE LE FEU »).6. « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les points de douleur :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-9",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-arthrose": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez une convention mentale supplémentaire / Boostez la fabrication d'ocytocine (hormone antidouleur sécrétée par l'hypothalamus).\n6. « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les points de douleur (ventre ou dos) :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-9",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-asthme": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Si l'inflammation est importante, imposition des mains & prière contre le feu 3 fois.\n+ Prière contre le feu (voir la fiche « CONTRE LE FEU »).6. Travaillez en passes sur les poumons :\n - 1. Passes rapides du chakra couronne au chakra sacré.\n - 2. Passes lentes sur les poumons.\n - 3. Imposition des mains sur les poumons, avec intention de stopper l'état inflammatoire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau), avec intention de doper la sérotonine (lutte contre le stress et l'anxiété).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (lutte contre le stress et l'anxiété)."
+    },
+    {
+      "id": "s6-9",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-bronchite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n\t1. Renforcez les défenses immunitaires,\n\t2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur les bronches et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les bronches :\n- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "target": "Bronches",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Bronches",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Bronches",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les bronches.",
+      "target": "Bronches",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Bronches",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-capsulite-retractile": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaires / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur l'épaule et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur l'épaule concernée :\n- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes du chakra couronne au chakra épaule à la main.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la capsule articulaire.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-10",
+      "kind": "visualisation",
+      "text": "- 4. Visualisation de reconstruction de la capsule articulaire.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "- 4. Visualisation de reconstruction de la capsule articulaire."
+    },
+    {
+      "id": "s7-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-cervicalgie": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaires / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre le feu en imposant les mains sur les points de douleur. /  Prière contre le feu (voir la fiche « CONTRE LE FEU »). À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les cervicales (Pictogramme : patient sur le dos) :\n- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "target": "Cervicales, face postérieure",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Cervicales, face postérieure",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Cervicales, face postérieure",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "Cervicales, face postérieure",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Cervicales, face postérieure",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur derrière.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-constipation": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle, des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez une convention mentale supplémentaire / renfort énergétique du côlon",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre la constipation :\n\t+ De par la Sainte Mère Marie, qui daigna toujours secourir les pauvres affligés, coliques, passion \tqui êtes dans mon ventre, entre ma rate et mon foie, et vous aussi, sécheresse de mes entrailles, \tqui êtes entre mon fiel et mes reins, passez votre chemin ! + Au nom du Père, + du Fis, + et du \tSaint-Esprit +. Ainsi soit-il. + Amen",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "lente",
+      "text": "- 3. Passes lentes circulaire sur le système intestinal (2 min sens horaire).",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-10",
+      "kind": "imposition",
+      "text": "- 4. Imposition des mains sur les intestins.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-cruralgie": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "6. Travaillez en passes sur le bas du dos :\n- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur les lombaires.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la zone L2-L3-L4-L5.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-9",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la jambe douloureuse (sur le dos) :\n- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "target": "Jambe douloureuse, face antérieure ; patient sur le dos",
+      "route": "- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-10",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Jambe douloureuse, face antérieure ; patient sur le dos",
+      "route": "- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s6-11",
+      "kind": "lente",
+      "text": "- 2. Passes lentes devant la jambe.",
+      "target": "Jambe douloureuse, face antérieure ; patient sur le dos",
+      "route": "- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s7-12",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Jambe douloureuse, face antérieure ; patient sur le dos",
+      "route": "- 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    }
+  ],
+  "ft-cystite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines et sur le nettoyage des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Main rapprochée, faites un signe de croix sur l'appareil urinaire et réciter : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur l'appareil urinaire :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Appareil urinaire",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Appareil urinaire",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Appareil urinaire",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur l'appareil urinaire.",
+      "target": "Appareil urinaire",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Appareil urinaire",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-dechirure-musculaire": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "Prière contre le feu en imposant les mains sur le point de douleur / Faites un signe de croix et récitez :  Prière contre le feu (voir la fiche « CONTRE LE FEU »). À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "Travaillez en passes sur le muscle abîmé :\nPasses rapides du chakra en amont au chakra en aval du point de douleur.",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-8",
+      "kind": "lente",
+      "text": "Passes lentes.",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s8-9",
+      "kind": "imposition",
+      "text": "Imposition des mains sur le muscle abîmé.",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s9-10",
+      "kind": "visualisation",
+      "text": "Visualisation de reconstruction de fibres musculaires.",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Visualisation de reconstruction de fibres musculaires."
+    },
+    {
+      "id": "s10-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s11-12",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "selection",
+      "route": "Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-deprime": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "Posez 2 conventions mentales supplémentaires :\n\t\tDopez la fabrication de la sérotonine.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "intentions",
+      "text": "Diminuez la fabrication du cortisol (hormone du stress).",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "priere",
+      "text": "Prière contre l'angoisse et la dépression / Imposez vos mains sur la personne et récitez :\n« Saint Claude et saint Gilles, venez en aide à [nom et prénom]. Délivrez-le (ou la) de la dépression et calmez ses angoisses. Amen. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-7",
+      "kind": "rapide",
+      "text": "Travaillez en passes sur le ventre :\nPasses rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s7-8",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s8-9",
+      "kind": "lente",
+      "text": "Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s9-10",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s10-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s11-12",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-eczema": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "Prière contre l'eczéma : Avec le pouce, faites un signe de croix sur l'eczéma et récitez :\n« Je te panse (+), que tu ne croisses, que tu n'augmentes, pas plus que la rosée sur le pré, au lever du soleil (+). » Puis récitez 5 Je vous salue Marie et 5 Notre Père.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s5-5",
+      "kind": "imposition",
+      "text": "Visualisez l'eczéma qui sèche (5 minutes) / Imposez vos mains sur l'eczéma.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+      "distanceText": "Visualisez l'eczéma qui sèche (5 minutes)."
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "Travaillez en passes sur le ventre :\nPasses rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s7-8",
+      "kind": "lente",
+      "text": "Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s8-9",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s9-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    },
+    {
+      "id": "s10-11",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "Abdomen et système intestinal",
+      "route": "Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908"
+    }
+  ],
+  "ft-endometriose": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Bloquez la régurgitation du sang dans les trompes.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre le feu / Faites un signe de croix sur l'endomètre et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur l'endomètre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Endomètre",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Endomètre",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur l'endomètre.",
+      "target": "Endomètre",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur l'endomètre.",
+      "target": "Endomètre",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Endomètre",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-entorse": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur l'entorse et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur l'entorse :\n- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains en entourant le ou les ligaments douloureux.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-10",
+      "kind": "visualisation",
+      "text": "- 4. Visualisation de reconstruction du ou des ligaments abîmés.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+      "distanceText": "- 4. Visualisation de reconstruction du ou des ligaments abîmés."
+    },
+    {
+      "id": "s7-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662"
+    }
+  ],
+  "ft-fibromyalgie": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "Posez 2 conventions mentales supplémentaires :\n\t\tBoostez la fabrication d'ocytocine (hormone antidouleur).",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s5-5",
+      "kind": "intentions",
+      "text": "Boostez la fabrication de sérotonine (contre le stress).",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s6-6",
+      "kind": "intentions",
+      "text": "Posez 2 conventions mentales supplémentaires :\n\t\tIdentifiez et nettoyez un premier choc émotionnel intervenu pendant l'enfance ou l'adolescence (choc ou stress très virulent).",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s7-7",
+      "kind": "intentions",
+      "text": "Identifiez et nettoyez un second choc émotionnel intervenu dans les 6 mois précédant l'arrivée de la fibromyalgie.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s8-8",
+      "kind": "rapide",
+      "text": "Travaillez en passes sur toutes les parties douloureuses :\nPasses rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s8-9",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s9-10",
+      "kind": "lente",
+      "text": "Passes lentes.",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s10-11",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s11-12",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    },
+    {
+      "id": "s12-13",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "selection",
+      "route": "Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902"
+    }
+  ],
+  "ft-gastro-enterite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur le ventre et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins.",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-goutte": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre le feu en imposant les mains sur les points de douleur / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre la goutte en imposant les mains sur la personne :\n « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les points de douleur :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-grippe": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre le feu / Faites un signe de croix sur le front (contre la fièvre) et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "priere",
+      "text": "7. Prière contre les maux de tête en imposant les mains sur la tête :\n Récitez : « Vous obtiendrez, glorieux saint Pancrace, par votre méditation, à tous vos fervents dévots, la guérison du mal de tête. Que la douleur d'un si grand mal soit promptement soulagée. »\n Faites ensuite un signe de croix 3 fois sur le front et 3 fois sur chaque oreille.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-7",
+      "kind": "rapide",
+      "text": "8. Travaillez en passes sur les points de douleur :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s7-8",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-9",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s7-10",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    }
+  ],
+  "ft-hemorroides": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre le feu en imposant les mains sur la zone douloureuse / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière pour la circulation sanguine / Faites 3 signes de croix sur le front, 3 sur le plexus, et 3 sur le ventre, et récitez :\n « Que ton sang circule dans par tes veines, veinules et artères, sans que rien ne gène ou l'arrête, comme le sang de Notre Seigneur Jésus-Christ circulait sans entrave dans son corps divin. Que la volonté divine s'accomplisse. Amen. »\n Faites à nouveau 3 signes de croix sur le front.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les hémorroïdes :\n- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "target": "Zone hémorroïdaire",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Zone hémorroïdaire",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Zone hémorroïdaire",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la zone douloureuse.",
+      "target": "Zone hémorroïdaire",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Zone hémorroïdaire",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-herpes": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Main rapprochée, faites un signe de croix sur l'herpès et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "imposition",
+      "text": "7. Imposez vos mains sur l'herpès :\n - 1. Posez votre intention = tuer le virus (2 minutes).\n - 2. Visualisez l'herpès qui disparaît (2 minutes). Pensez au rayon avec vos doigts.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "- 1. Posez votre intention = tuer le virus (2 minutes).\n - 2. Visualisez l'herpès qui disparaît (2 minutes). Pensez au rayon avec vos doigts."
+    },
+    {
+      "id": "s7-7",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-insuffisance-veineuse": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des racines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Boostez le retour veineux.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière pour la circulation sanguine / Faites 3 signes de croix sur le front, 3 sur le plexus, et 3 sur le ventre, et récitez :\n « Que ton sang circule dans ton corps [nom et prénom] par tes veines, veinules et artères, sans que rien ne gène ou l'arrête, comme le sang de Notre Seigneur Jésus-Christ circulait sans entrave dans son corps divin. Que la volonté divine s'accomplisse. Amen. »\n Faites à nouveau 3 signes de croix sur le front.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les jambes :\n- 1. Passes rapides sur la jambe devant : du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "target": "selection",
+      "route": "- 1. Passes rapides sur la jambe devant : du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides sur la jambe devant : du chakra aine au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les jambes :\n- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "target": "selection",
+      "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-9",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-10",
+      "kind": "lente",
+      "text": "- 3. Passes lentes sur les 2 côtés.",
+      "target": "selection",
+      "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-11",
+      "kind": "imposition",
+      "text": "- 4. Imposition des mains sur les points de douleur et de gêne.",
+      "target": "selection",
+      "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-12",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-intervention-chirurgicale-avant": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Diminuez la fabrication du cortisol.\n - 2. Renforcez les défenses immunitaires contre les maladies nosocomiales.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "6. Travaillez en passes sur la zone qui va être opérée :\n- 1. Passes rapides du chakra en amont au chakra en aval de la zone.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains avec intention de renfort énergétique.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Intention : de renfort énergétique."
+    },
+    {
+      "id": "s6-9",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-10",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s6-11",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s6-12",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s7-13",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    }
+  ],
+  "ft-intervention-chirurgicale-apres": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Boostez le foie pour mieux éliminer les produits anesthésiants.\n - 2. Renforcez les défenses immunitaires contre les maladies nosocomiales.\n - 3. Réparez les corps énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s5-5",
+      "kind": "autre",
+      "text": "6. Dites 3 fois sur la plaie, sans la toucher :\n - (+) Le Christ est né.\n - (+) Le Christ est mort.\n - (+) Le Christ est ressuscité.\n C'est Dieu lui-même qui commande : plaies, soyez fermées, douleurs cuisantes, passez ; mauvais sang, soit arrêté ; et qu'elles n'entrent en matière, ni senteur. Comme ont fait les cinq plaies de Notre Seigneur. Ainsi soit-il.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la zone opérée :\n- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains avec intention de renfort énergétique et de reconstruction.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "distanceText": "Intention : de renfort énergétique et de reconstruction."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258"
+    }
+  ],
+  "ft-lombalgie": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Imposez vos mains sur les lombaires et récitez :\n « (+) Dos cassé, échine courbée, dos meurtri, redresse-toi sans plus tarder. Fais, Seigneur, que [nom et prénom] marche droit, fer comme l'était notre Seigneur Jésus-Christ de sa mission d'amour sur la terre. Tu avances ainsi, guéri de toutes blessures, cassures ou courbatures, car notre Seigneur est près de toi et te soutient. Amen. (+) »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le bas du dos :\n- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "target": "Lombaires",
+      "route": "- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Lombaires",
+      "route": "- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur les lombaires.",
+      "target": "Lombaires",
+      "route": "- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la zone L1-L5.",
+      "target": "Lombaires",
+      "route": "- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Lombaires",
+      "route": "- 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-maladie-de-crohn": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Rééquilibrez la flore intestinale.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur les points de douleur et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-maladie-de-lyme": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "autre",
+      "text": "6. Posez à nouveau 1 convention mentale / Neutralisez la bactérie Borrelia responsable.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les points douloureux :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-maladie-de-verneuil": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre les abcès :\n « Cher saint Cloud, je te demande d'intervenir afin que cet abcès guérisse rapidement, merci. Abcès, je t'ordonne de mûrir, d'éclater, de sécher, puis de guérir, afin que [nom et prénom] ne souffre plus. Qu'il en soit ainsi. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "imposition",
+      "text": "6. Imposez vos mains sur les zones d'abcès / Visualisez les abcès qui disparaissent.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins, avec intention de doper la sérotonine (contre la déprime).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre la déprime)."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-migraine": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre le feu / Faites un signe de croix sur la tête, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre les maux de tête / Imposez vos mains sur la tête et récitez :\n « Vous obtiendrez, glorieux saint Pancrace, par votre méditation, à tous vos fervents dévots, la guérison du mal de tête. Que la douleur d'un si grand mal, soit promptement soulagée. »\n Faites ensuite un signe de croix 3 fois sur le front et 3 fois sur chaque oreille.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-nevralgie-d-arnold": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur l'arrière du crâne et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes derrière la tête :\n- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "target": "Cou et arrière du crâne",
+      "route": "- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Cou et arrière du crâne",
+      "route": "- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Cou et arrière du crâne",
+      "route": "- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur le cou et l'arrière du crâne.",
+      "target": "Cou et arrière du crâne",
+      "route": "- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Cou et arrière du crâne",
+      "route": "- 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-otite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre le feu / Faites un signe de croix sur la ou les oreilles touchés :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la sphère ORL (sur la ou les oreilles) :\n- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "target": "Oreille(s) concernée(s)",
+      "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Oreille(s) concernée(s)",
+      "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Oreille(s) concernée(s)",
+      "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains la ou les oreilles.",
+      "target": "Oreille(s) concernée(s)",
+      "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Oreille(s) concernée(s)",
+      "route": "- 1. Passes rapides du chakra couronne au chakra oreille.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-papillomavirus": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires et des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n - 3. Neutralisez le virus HPV.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre les verrues si présence de verrues génitales (condylomes) :\n Avec l'index, faites un X au-dessus de chaque verrue dans l'idée de les supprimer, puis récitez :\n « [Nom et prénom], je t'enlève tes verrues de toutes à une et de une à rien. Qu'il en soit ainsi. (+) Au nom du Père, du Fils et du Saint-Esprit. »\n À répéter 3 fois de suite. La troisième fois, faites 3 fois le signe de croix.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la zone de l'utérus :\n- 1. Passes rapides du chakra sacré au chakra racine.",
+      "target": "Utérus",
+      "route": "- 1. Passes rapides du chakra sacré au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Utérus",
+      "route": "- 1. Passes rapides du chakra sacré au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur la zone de l'utérus.",
+      "target": "Utérus",
+      "route": "- 1. Passes rapides du chakra sacré au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur l'utérus.",
+      "target": "Utérus",
+      "route": "- 1. Passes rapides du chakra sacré au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Utérus",
+      "route": "- 1. Passes rapides du chakra sacré au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-psoriasis": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcer le moral.\n - 2. Détente du consultant, souvent complexé.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "imposition",
+      "text": "6. Imposez vos mains sur le psoriasis :\n - 1. Par votre intention, bloquez l'accélération du renouvellement des cellules de l'épiderme (5 minutes).\n - 2. Visualisez le psoriasis qui sèche (5 minutes).",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "- 1. Par votre intention, bloquez l'accélération du renouvellement des cellules de l'épiderme (5 minutes).\n - 2. Visualisez le psoriasis qui sèche (5 minutes)."
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-rhinopharyngite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la sphère ORL :\n- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la sphère ORL.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-sciatique": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "6. Travaillez en passes sur le bas du dos :\n- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur les lombaires et le sacrum.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la zone L4-L5 et S1-S2-S3.",
+      "target": "Bas du dos",
+      "route": "- 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-9",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la jambe douloureuse :\n- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "target": "Jambe douloureuse, face postérieure",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-10",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Jambe douloureuse, face postérieure",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s6-11",
+      "kind": "lente",
+      "text": "- 2. Passes lentes derrière la jambe.",
+      "target": "Jambe douloureuse, face postérieure",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    },
+    {
+      "id": "s7-12",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Jambe douloureuse, face postérieure",
+      "route": "- 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494"
+    }
+  ],
+  "ft-sclerose-en-plaques": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "priere",
+      "text": "4. Prière de demande de guérison en imposant les mains sur le crâne :\n « Archange Raphaël, j'ai besoin que tu m'assistes afin de guérir [nom et prénom] de la sclérose en plaques. Aide-moi à canaliser ton énergie de guérison afin que celle-ci s'accomplisse. Merci. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "communes",
+      "text": "5. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques, des mauvaises mémoires de la vie actuelle et transgénérationnelles.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "intentions",
+      "text": "6. Posez 1 convention mentale supplémentaire / Protection des gaines de myéline, avec visualisation d'une énergie protectrice autour.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les parties les plus touchées :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les parties fragilisées.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-spondylarthrite-ankylosante": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "priere",
+      "text": "5. Prière contre le feu / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre l'arthrite en imposant les mains sur la personne :\n « Cher Saint Thibault, cher Saint Caprais, cher Saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son cœur et dans son âme. Amen. »",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur toute la colonne vertébrale :\n- 1. Passes rapides du chakra couronne au chakra racine.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes du chakra couronne au chakra racine.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points les plus douloureux.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-tabac-arret-du": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Déprogrammez les geôles mentales.\n - 2. Renforcez le moral pour mieux lutter.\n - 3. Boostez la fabrication naturelle de dopamine.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "rapide",
+      "text": "6. Travaillez en passes sur les poumons et la trachée :\n- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "target": "Poumons et trachée",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s5-6",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Poumons et trachée",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-7",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Poumons et trachée",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-8",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la trachée et les poumons, avec intention de nettoyage.",
+      "target": "Poumons et trachée",
+      "route": "- 1. Passes rapides du chakra couronne au chakra sacré.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de nettoyage."
+    },
+    {
+      "id": "s6-9",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-10",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-11",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-12",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s7-13",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-tendinite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur la tendinite et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la tendinite :\n- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains en entourant le tendon douloureux et sa gaine.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-10",
+      "kind": "visualisation",
+      "text": "- 4. Visualisation de reconstruction du tendon et de la gaine abîmés.",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "- 4. Visualisation de reconstruction du tendon et de la gaine abîmés."
+    },
+    {
+      "id": "s7-11",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-traitements-lourds-aide-aux": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si radiothérapie : prière contre le feu. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Dopez la fabrication de la sérotonine.\n - 2. Diminuez la fabrication du cortisol.\n - 3. Nettoyez la chimio du traitement que le corps peine à éliminer.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Faites un signe de croix sur les points de douleur et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur les points de douleur :\n- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les points de douleur.",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979"
+    }
+  ],
+  "ft-troubles-du-sommeil": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des différentes mémoires.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Dopez la fabrication de la sérotonine.\n - 2. Diminuez la fabrication du cortisol.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s5-5",
+      "kind": "imposition",
+      "text": "6. Imposez vos mains au niveau de la glande pinéale / Rechargez la glande pinéale pour booster la fabrication de la mélatonine le moment venu.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur le ventre :\n- 1. Passes rapides du chakra plexus au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress).",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Intention : de doper la sérotonine (contre le stress)."
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "Abdomen et système intestinal",
+      "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
+      "source": "Magnétisme (1).odt"
+    }
+  ],
+  "ft-verrue": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Prière contre les verrues :\n Avec l'index, faites un X sur chaque verrue dans l'idée de les supprimer, puis récitez :\n « [Nom et prénom], je t'enlève tes verrues de toutes à une et de une à rien. Qu'il en soit ainsi. (+) Au nom du Père, du Fils et du Saint-Esprit. »\n À répéter 3 fois de suite. La troisième fois, faites 3 fois le signe de croix.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    },
+    {
+      "id": "s6-6",
+      "kind": "imposition",
+      "text": "7. Imposez vos mains sur la verrue :\n - 1. Posez votre intention : tuer le virus (2 minutes).\n - 2. Visualisez la verrue qui disparaît (2 minutes).\n - Pensez au rayon avec vos doigts.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883",
+      "distanceText": "7. Intentions propres aux verrues :\n - 1. Posez votre intention : tuer le virus (2 minutes).\n - 2. Visualisez la verrue qui disparaît (2 minutes).\n - Pensez au rayon avec vos doigts."
+    },
+    {
+      "id": "s7-7",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883"
+    }
+  ],
+  "ft-zona": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s3-3",
+      "kind": "priere",
+      "text": "4. Prière contre le feu :\n Faites un signe de croix sur le zona et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À répéter 3 fois.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s4-4",
+      "kind": "imposition",
+      "text": "5. Imposez vos mains sur le zona :\n - 1. Posez une première intention : guérir les terminaisons nerveuses (2 minutes).\n - 2. Posez une seconde intention : tuer le virus (2 minutes).\n - 3. Visualisez le zona qui sèche (2 minutes).",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918",
+      "distanceText": "5. Intentions propres au zona :\n - 1. Posez une première intention : guérir les terminaisons nerveuses (2 minutes).\n - 2. Posez une seconde intention : tuer le virus (2 minutes).\n - 3. Visualisez le zona qui sèche (2 minutes)."
+    },
+    {
+      "id": "s5-5",
+      "kind": "communes",
+      "text": "6. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle et des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s6-6",
+      "kind": "intentions",
+      "text": "7. Posez 3 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n - 3. Boostez le moral.",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    },
+    {
+      "id": "s7-7",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "",
+      "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918"
+    }
+  ],
+  "ft-douleurs-intestinales-pdf": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1 – Accueil du client",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2 – Bilan énergétique",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3 – Dégagement Entité ou Magie Noire si besoin",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "14 Conventions mentales classiques. Bien insister sur le nettoyage des tensions, des blocages énergétiques et des mauvaises mémoires de la vie actuelle.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "Convention mentale supplémentaire : Arrêt de la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "Imposer vos mains sur les points de douleurs + signe de Croix.\nFeu de Dieu perds ta chaleur comme Judas jadis perdit sa couleur quand il trahit notre seigneur au Mont des Oliviers. J’enlève le feu avec la main que ça redevienne froid comme avant.\nÀ faire 3 fois d’affilée.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "\nPasses rapides : chakras Plexus à Racine.",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous."
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s7-8",
+      "kind": "lente",
+      "text": "Passes lentes.",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s8-9",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les points de douleurs.",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche."
+    },
+    {
+      "id": "s9-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    },
+    {
+      "id": "s10-11",
+      "kind": "balayage",
+      "text": "balayage",
+      "target": "selection",
+      "route": "Passes rapides : chakras Plexus à Racine.",
+      "source": "Magnetisme-protocoles-45-fiches-sans-couper-le-feu.pdf, page 14"
+    }
+  ]
+}
