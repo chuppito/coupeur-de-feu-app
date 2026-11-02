@@ -18,4 +18,4 @@ Points à vérifier : placement des compléments dans les combinaisons non démo
 
 Les minuteries silencieuses, les conventions, l’historique et les boîtes Hive sont conservés. Trois soins maximum ; aucune limite de trois prières. L’APK parallèle utilise `com.tomtom.coupeurdefeu.v332test` et des données indépendantes. Ne pas désinstaller l’application actuelle pour ces essais.
 
-Les résultats de la validation finale seront consignés après le workflow. Les essais physiques Android restent à réaliser par l’utilisateur avant fusion.
+Validation finale : 165 tests Flutter réussis, analyse sans erreur bloquante (115 avertissements/informations restants), deux APK release compilés. Workflow vérifié : https://github.com/chuppito/coupeur-de-feu-app/actions/runs/41485424164 . Voir [le rapport final](RAPPORT-FINAL.md). Les essais physiques Android restent à réaliser par l’utilisateur avant fusion.
