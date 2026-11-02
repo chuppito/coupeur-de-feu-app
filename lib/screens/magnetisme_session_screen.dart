@@ -1248,7 +1248,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                   Text(titre, style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text(SuivisFormation.indication(titre), style: const TextStyle(fontSize: 12)),
                   DropdownButtonFormField<String>(
-                    value: _typesSuivi[titre] ?? 'complet',
+                    value: (_mode == 'Présentiel' && SuivisFormation.typePour(titre) == 'court') ? (_typesSuivi[titre] ?? 'complet') : 'complet',
                     isExpanded: true,
                     decoration: const InputDecoration(labelText: 'Type de visite'),
                     items: [
