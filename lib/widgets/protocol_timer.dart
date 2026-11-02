@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 /// Completion is explicit: no automatic advancement across an unknown duration.
 class ProtocolTimer extends StatefulWidget {
   final int seconds;
-  const ProtocolTimer({super.key,required this.seconds});
+  final int? initialRemaining;
+  final ValueChanged<int>? onChanged;
+  const ProtocolTimer({super.key,required this.seconds,this.initialRemaining,this.onChanged});
   @override
   State<ProtocolTimer> createState()=>_ProtocolTimerState();
 }
@@ -14,7 +16,7 @@ class _ProtocolTimerState extends State<ProtocolTimer> with WidgetsBindingObserv
   Timer? timer;
   bool running=false;
   @override
-  void initState(){super.initState();remaining=widget.seconds;WidgetsBinding.instance.addObserver(this);}
+  void initState(){super.initState();remaining=(widget.initialRemaining??widget.seconds).clamp(0,widget.seconds);WidgetsBinding.instance.addObserver(this);}
   @override
   void dispose(){timer?.cancel();WidgetsBinding.instance.removeObserver(this);super.dispose();}
   @override
@@ -26,6 +28,7 @@ class _ProtocolTimerState extends State<ProtocolTimer> with WidgetsBindingObserv
     timer?.cancel();timer=Timer.periodic(const Duration(seconds:1),(t){
       if(!mounted){t.cancel();return;}
       setState(()=>remaining--);
+      widget.onChanged?.call(remaining);
       if(remaining==0)pause();
     });
   }
@@ -35,7 +38,7 @@ class _ProtocolTimerState extends State<ProtocolTimer> with WidgetsBindingObserv
     Text('Durée documentée : ${widget.seconds} secondes. Minuteur silencieux.'),
     Wrap(spacing:8,children:[
       OutlinedButton(onPressed:remaining==0?null:running?pause:start,child:Text(running?'Pause locale':remaining==widget.seconds?'Démarrer le minuteur':'Reprendre le minuteur')),
-      TextButton(onPressed:(){pause();setState(()=>remaining=widget.seconds);},child:const Text('Réinitialiser le minuteur')),
+      TextButton(onPressed:(){pause();setState(()=>remaining=widget.seconds);widget.onChanged?.call(remaining);},child:const Text('Réinitialiser le minuteur')),
     ]),
     if(remaining==0)const Text('Durée écoulée. Validez le travail avant de passer à la suite.'),
   ]);

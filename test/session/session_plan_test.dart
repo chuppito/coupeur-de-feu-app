@@ -9,7 +9,7 @@ void main() {
   final guides=jsonDecode(File('assets/data/guide_v33.json').readAsStringSync()) as Map;
   for(final d in raw) { d['guideV33']=guides[d['id']]; }
   GuideFiche f(String id)=>GuideFiche.fromJson(Map<String,dynamic>.from(raw.firstWhere((d)=>d['id']==id) as Map));
-  SessionPlan plan(List<String> ids,{bool distance=false,bool thot=false,Map<String,String> visits=const {}})=>SessionPlanner.build(ids.map(f).toList(),distance:distance,thot:thot,visits:visits,zones:{'Eczéma':{'Coude droit · antérieure'},'Entorse':{'Cheville gauche','Cheville droite'}});
+  SessionPlan plan(List<String> ids,{bool distance=false,bool thot=false,Map<String,String> visits=const {}})=>SessionPlanner.build(ids.map(f).toList(),distance:distance,thot:thot,visits:visits,radioConnectionConfirmed:true,zones:{'Eczéma':{'Coude droit · antérieure'},'Entorse':{'Cheville gauche','Cheville droite'}});
   test('Trois SOINS maximum ; les prières ne sont pas limitées',(){
     final p=plan(['ft-eczema','ft-goutte','ft-hemorroides']);
     expect(p.canStart,isTrue);expect(p.steps.where((s)=>s.kind=='priere').length,greaterThan(3));

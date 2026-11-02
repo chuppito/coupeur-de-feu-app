@@ -80,6 +80,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   bool _utiliserRaphael = false;
   bool _zonesSuiviConfirmees = false;
+  bool _radioConnexionConfirmee = false;
+  final Map<String,int> _tempsLocaux = {};
   bool _cm9Vigilance = false;
   bool _chirurgieSuiviConfirmee = false;
 
@@ -654,6 +656,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     thot: _soinPenduleNecessaire,
     visits: {for (final d in _selectedFts) d.id: _typesSuivi[d.titre] ?? 'complet'},
     zones: _zonesParPathologie,
+    radioConnectionConfirmed:_radioConnexionConfirmee,
   );
 
   bool get _usesPlanV33 => _selectedFts.isNotEmpty &&
@@ -709,10 +712,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         const Divider(),
       ],
       if(step.kind == 'flux' && step.route.isNotEmpty) Text(step.route,style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.kind == 'flux') const Text('Contrôler chaque trajet et chaque côté séparément. Si le flux ne passe pas, reprendre les passes rapides sur le segment concerné, puis contrôler à nouveau.'),
       if(step.selectedRoute && _mode == 'Présentiel' && const ['rapide','flux'].contains(step.kind))
         ..._trajetsZones(step.zones).map((r)=>Padding(padding:const EdgeInsets.only(bottom:6),child:Text(r,style:const TextStyle(fontWeight:FontWeight.bold)))),
       SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
-      if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!),
+      if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!,
+        initialRemaining:_tempsLocaux[step.id],onChanged:(value)=>_tempsLocaux[step.id]=value),
       if(step.kind=='personnel') const Text('Contenu historique conservé. Protocole complet non vérifié dans les sources de formation ; adaptation distance et fusion non certifiées.'),
       if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
       if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
@@ -1038,6 +1043,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'zonesSuiviConfirmees': _zonesSuiviConfirmees,
       'chirurgieSuiviConfirmee': _chirurgieSuiviConfirmee,
       'versionGuide': '3.3.1',
+      'minuteursLocaux': Map<String,int>.from(_tempsLocaux),
+      'radioConnexionConfirmee': _radioConnexionConfirmee,
       'cm9Vigilance': _cm9Vigilance,
       'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
       'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
@@ -1290,6 +1297,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                 ]),
               if (_pathologies.length > 1 && _typesSuivi.values.contains('court'))
                 const Text('Chaque motif conserve son type de visite. Les étapes communes restent présentes pour les motifs en séance complète.', style: TextStyle(fontSize: 12)),
+              if(_mode=='À distance' && _typesSuivi.values.contains('radio')) CheckboxListTile(
+                title:const Text('Première séance complète réalisée ; connexion et photo déjà établies'),
+                value:_radioConnexionConfirmee,onChanged:(v)=>setState(()=>_radioConnexionConfirmee=v??false)),
               if (_pathologies.contains('Fibromyalgie')) CheckboxListTile(
                 title:const Text('J’ai confirmé les zones douloureuses du jour'),
                 value:_zonesSuiviConfirmees,onChanged:(v)=>setState(()=>_zonesSuiviConfirmees=v??false)),
@@ -1504,6 +1514,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   Widget _stepContent(int index) {
     if(widget.demarrerSuivi && _pathologies.contains('Fibromyalgie') && !_zonesSuiviConfirmees) {
       return const Text('Confirmez les zones douloureuses actuelles dans la préparation avant le guidage.');
+    }
+    if(widget.demarrerSuivi && _pathologies.any((t)=>t.startsWith('Intervention chirurgicale')) && !_chirurgieSuiviConfirmee) {
+      return const Text('Confirmez la fiche avant/après intervention dans la préparation avant le guidage.');
     }
     if (_usesPlanV33 && !_planV33.canStart) return Column(children:[..._planV33.conflicts.map((e)=>Text(e,style:const TextStyle(color:Colors.red)))]);
     if (_etapes[index].startsWith('V33 · ')) return _plannedContent(index);
@@ -1990,10 +2003,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         Text('${(remaining~/60).toString().padLeft(2,'0')}:${(remaining%60).toString().padLeft(2,'0')}',style:const TextStyle(fontSize:42,fontWeight:FontWeight.bold)),
       ]))),const SizedBox(height:16),
       Text('Durée utilisée : $duration secondes${_dureePersonnalisee>0 ? ' (réglage personnel)' : ''}.'),
+      if(m.convention==8 && m.intention.isNotEmpty) const Text('CM9 : la bibliothèque indique 30 s pour équilibrage/recharge ; les notes vidéo évoquent 15–20 s. Divergence conservée : ajustement personnel possible, sans prétendre à une durée unique validée.'),
       SelectableText(instruction,style:const TextStyle(fontSize:16,height:1.4)),
       const SizedBox(height:10),
-      Wrap(spacing:6,children:[for(final seconds in [0,30,60,120,180,240]) ChoiceChip(
-        label:Text(seconds==0?'Documentée':'$seconds s'), selected:_dureePersonnalisee==seconds,
+      Wrap(spacing:6,children:[for(final seconds in [0,15,20,30,60,120,180,240]) ChoiceChip(
+        label:Text(seconds==0?'Bibliothèque':'$seconds s'), selected:_dureePersonnalisee==seconds,
         onSelected:_lectureAuto?null:(_)=>setState((){_dureePersonnalisee=seconds;_secondesRestantes=_dureeConvention();_lectureSuspendue=false;}),
       )]),
       FilledButton.icon(onPressed:_lectureAuto?_arreterLecture:_demarrerLecture,icon:Icon(_lectureAuto?Icons.pause:Icons.play_arrow),label:Text(_lectureAuto?'Pause':(_lectureSuspendue?'Reprendre':'Démarrer'))),

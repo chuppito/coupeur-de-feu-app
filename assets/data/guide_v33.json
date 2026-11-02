@@ -1063,7 +1063,8 @@
       "route": "- 1. Passes rapides du chakra plexus au chakra racine.",
       "source": "Magnétisme (1).odt",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "seconds": 120
     },
     {
       "id": "s6-10",
@@ -3000,13 +3001,14 @@
     },
     {
       "id": "s5-5",
-      "kind": "autre",
+      "kind": "priere",
       "text": "6. Dites 3 fois sur la plaie, sans la toucher :\n - (+) Le Christ est né.\n - (+) Le Christ est mort.\n - (+) Le Christ est ressuscité.\n C'est Dieu lui-même qui commande : plaies, soyez fermées, douleurs cuisantes, passez ; mauvais sang, soit arrêté ; et qu'elles n'entrent en matière, ni senteur. Comme ont fait les cinq plaies de Notre Seigneur. Ainsi soit-il.",
       "target": "selection",
       "route": "",
       "source": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
       "selectedRoute": false,
-      "documented": true
+      "documented": true,
+      "repetitions": 3
     },
     {
       "id": "s6-6",

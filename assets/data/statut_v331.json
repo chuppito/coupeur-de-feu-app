@@ -6,7 +6,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 95,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4226669",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-angine",
@@ -15,7 +20,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 118,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-arthrite",
@@ -24,7 +34,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 78,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-arthrose",
@@ -33,7 +48,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 77,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213619",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-asthme",
@@ -42,7 +62,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 97,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214568",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-bronchite",
@@ -51,7 +76,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 119,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-capsulite-retractile",
@@ -60,7 +90,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 84,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214229",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-cervicalgie",
@@ -69,7 +104,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 72,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962659",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-constipation",
@@ -78,7 +118,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 103,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233320",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-cruralgie",
@@ -87,7 +132,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 74,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-cystite",
@@ -96,7 +146,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 98,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214754",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-dechirure-musculaire",
@@ -105,7 +160,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 82,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214029",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-deprime",
@@ -114,7 +174,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 115,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962966",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-eczema",
@@ -123,7 +188,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 89,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962908",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-endometriose",
@@ -132,7 +202,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 99,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4220507",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-entorse",
@@ -141,7 +216,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 80,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962662",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-fibromyalgie",
@@ -150,7 +230,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 102,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4231902",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-gastro-enterite",
@@ -159,7 +244,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 122,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-goutte",
@@ -168,7 +258,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 85,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214281",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-grippe",
@@ -177,7 +272,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 120,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-hemorroides",
@@ -186,7 +286,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 104,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233425",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-herpes",
@@ -195,7 +300,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 94,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214333",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-insuffisance-veineuse",
@@ -204,7 +314,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 105,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233562",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-intervention-chirurgicale-avant",
@@ -213,7 +328,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 124,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-intervention-chirurgicale-apres",
@@ -222,7 +342,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 125,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4251258",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-lombalgie",
@@ -231,7 +356,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 71,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962577",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-maladie-de-crohn",
@@ -240,7 +370,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 108,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4233755",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-maladie-de-lyme",
@@ -249,7 +384,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 110,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4234347",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-maladie-de-verneuil",
@@ -258,7 +398,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 96,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214441",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-migraine",
@@ -267,7 +412,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 112,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4234561",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-nevralgie-d-arnold",
@@ -276,7 +426,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 83,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4214161",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-otite",
@@ -285,7 +440,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 121,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-papillomavirus",
@@ -294,7 +454,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 101,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4220654",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-psoriasis",
@@ -303,7 +468,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 90,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962914",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-rhinopharyngite",
@@ -312,7 +482,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 117,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4254212",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-sciatique",
@@ -321,7 +496,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 73,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4213494",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-sclerose-en-plaques",
@@ -330,7 +510,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 113,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4234661",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-spondylarthrite-ankylosante",
@@ -339,7 +524,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 76,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4226483",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-tabac-arret-du",
@@ -348,7 +538,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 126,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/4253711",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-tendinite",
@@ -357,7 +552,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 81,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962663",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-traitements-lourds-aide-aux",
@@ -366,7 +566,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 123,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962979",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-troubles-du-sommeil",
@@ -375,7 +580,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 116,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962968",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-verrue",
@@ -384,7 +594,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 87,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962883",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-zona",
@@ -393,7 +608,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 91,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962918",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-couper-le-feu",
@@ -402,7 +622,12 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": "69–70",
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962467",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-coup-de-soleil",
@@ -411,7 +636,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-fievre-insolation",
@@ -420,7 +650,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-infection",
@@ -429,7 +664,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-piqure-guepe-abeille",
@@ -438,7 +678,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-piqure-moustique",
@@ -447,7 +692,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-protection-moustiques",
@@ -456,7 +706,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": null,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-aphtes",
@@ -465,7 +720,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 35,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-abces",
@@ -474,7 +734,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 35,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-calculs-renaux",
@@ -483,7 +748,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 36,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-maux-estomac",
@@ -492,7 +762,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 36,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-allergie",
@@ -501,7 +776,12 @@
     "conformite": "non vérifiée : provenance du protocole complet manquante",
     "limites": [
       "Adaptation distance non documentée"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 36,
+      "lecon": "",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   },
   {
     "id": "ft-douleurs-intestinales-pdf",
@@ -510,6 +790,11 @@
     "conformite": "partielle : corrections sourcées, certification exhaustive non acquise",
     "limites": [
       "Validation documentaire continue de tous les gestes et variantes non acquise"
-    ]
+    ],
+    "sources": {
+      "manuel_page": 86,
+      "lecon": "https://enligne.formationmagnetisme.fr/school/course/praticien/lecture/3962666",
+      "audit_commit": "e858fe25c666bd9f4040fc6743d9e3815fb17d71"
+    }
   }
 ]

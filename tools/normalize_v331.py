@@ -4,6 +4,8 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 P=R/'assets/data/guide_v33.json'
 g=json.loads(P.read_text())
+if 'ft-couper-le-feu' in g:
+ raise SystemExit('Migration déjà appliquée ; ne pas réécrire les corrections ou les fiches locales.')
 raw=json.loads((R/'assets/data/magnetisme_protocoles.json').read_text())['fiches']
 book='Manuel formation Stéphane Langlade, PDF 128 pages, '
 def action(id,kind,text,**kw):return dict(id=id,kind=kind,text=text,target='selection',source=book+kw.pop('page','page à rapprocher'),**kw)
@@ -21,7 +23,7 @@ for a in g['ft-tabac-arret-du']:a['text']=a['text'].replace('geôles mentales','
 for a in g['ft-lombalgie']:a['text']=a['text'].replace('droit, fer comme','droit, fier comme')
 for a in g['ft-hemorroides']:a['text']=a['text'].replace('circule dans par','circule dans ton corps [nom et prénom] par')
 for a in g['ft-intervention-chirurgicale-apres']:
- if a['kind']=='autre' and ('Amen' in a['text'] or 'prière' in a['text'].lower()):a['kind']='priere'
+ if a['kind']=='autre' and ('Christ est né' in a['text'] or 'Amen' in a['text'] or 'prière' in a['text'].lower()):a['kind']='priere'
 for a in g['ft-maladie-de-lyme']:
  if a['kind']=='autre' and 'Borrelia' in a['text']:a['kind']='intentions'
 for a in g['ft-cervicalgie']:
@@ -64,7 +66,7 @@ for id in ['ft-acne','ft-eczema']:
  for a in g[id]:
   if a['kind'] in ['imposition','visualisation'] and '5 minutes' in a['text']:a['seconds']=300
 for a in g['ft-constipation']:
- if '2 minutes' in a['text']:a['seconds']=120
+ if '2 minutes' in a['text'] or '2 min ' in a['text']:a['seconds']=120
 for a in g['ft-traitements-lourds-aide-aux']:
  if a['kind']=='priere':a['condition']='Si brûlure ou radiothérapie (PDF p. 123). Suivi radio : première séance complète et connexion/photo déjà établies.'
 # Each existing action carries a provenance; source status is deliberately not inflated.

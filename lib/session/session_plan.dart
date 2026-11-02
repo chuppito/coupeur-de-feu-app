@@ -46,9 +46,13 @@ class SessionPlanner {
   static SessionPlan build(List<GuideFiche> fiches, {
     bool distance = false, bool scan = false, bool thot = false,
     Map<String,String> visits = const {}, Map<String,Set<String>> zones = const {},
+    bool radioConnectionConfirmed=false,
   }) {
     if (fiches.length > 3) return const SessionPlan([], ['Maximum 3 soins par séance. Le nombre de prières n’est pas limité.']);
     final errors = <String>[];
+    if(distance && fiches.any((f)=>f.id=='ft-traitements-lourds-aide-aux'&&visits[f.id]=='radio') && !radioConnectionConfirmed){
+      errors.add('Suivi radiothérapie : confirmer une première séance complète et la connexion/photo déjà établie.');
+    }
     final nodes = <String,PlanStep>{};
     final deps = <String,Set<String>>{};
     void node(PlanStep s) { nodes[s.id] = s; deps.putIfAbsent(s.id, () => {}); }

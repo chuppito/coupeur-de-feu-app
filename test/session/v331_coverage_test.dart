@@ -58,4 +58,32 @@ void main(){
     expect(asthma.actions.singleWhere((a)=>a.id=='poumons-rapides').route,'Couronne → plexus');
     expect(fiches.singleWhere((f)=>f.id=='ft-couper-le-feu').actions.last.seconds,60);
   });
+  test('Radio : témoin et précondition de première visite obligatoires',(){
+    final f=fiches.singleWhere((f)=>f.id=='ft-traitements-lourds-aide-aux');
+    expect(SessionPlanner.build([f],distance:true,visits:{f.id:'radio'}).canStart,isFalse);
+    final p=SessionPlanner.build([f],distance:true,visits:{f.id:'radio'},radioConnectionConfirmed:true);
+    expect(p.canStart,isTrue);expect(p.steps.any((s)=>s.kind=='temoin'),isTrue);
+    expect(p.steps.where((s)=>s.ficheId==f.id).every((s)=>s.kind=='priere'),isTrue);
+  });
+  test('57 fiches : aucun retour court implicite hors zona/verrue présentiels',(){
+    for(final f in fiches)for(final distance in [false,true]){
+      final p=SessionPlanner.build([f],distance:distance,visits:{f.id:'court'});
+      final normal=SessionPlanner.build([f],distance:distance);
+      if(!distance&&['ft-zona','ft-verrue'].contains(f.id)){
+        expect(p.steps.any((s)=>s.kind=='communes'),isFalse);
+        expect(p.steps.where((s)=>s.ficheId==f.id).every((s)=>['priere','imposition'].contains(s.kind)),isTrue);
+      }else{
+        expect(p.steps.map((s)=>s.id),normal.steps.map((s)=>s.id));
+        expect(p.canStart,normal.canStart);
+      }
+    }
+  });
+  test('Durées locales : 5, 2 minutes et intentions séparées dans les sept fiches',(){
+    const expected={'ft-acne':[300],'ft-eczema':[300],'ft-constipation':[120],
+      'ft-herpes':[120,120],'ft-verrue':[120,120],'ft-zona':[120,120,120],'ft-psoriasis':[300,300]};
+    for(final e in expected.entries){
+      final f=fiches.singleWhere((f)=>f.id==e.key);
+      expect(f.actions.where((a)=>a.seconds!=null).map((a)=>a.seconds).toList(),e.value,reason:e.key);
+    }
+  });
 }
