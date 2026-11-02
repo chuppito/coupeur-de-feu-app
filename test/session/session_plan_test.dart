@@ -93,6 +93,14 @@ void main() {
     expect(a.where((m)=>m.convention==8).last.intention,'Je recharge son corps éthérique');
     expect(a.firstWhere((m)=>m.convention==11).seconds,120);
   });
+  test('CM3 : compléments par événement, durée bibliothèque et ordre avant CM4',(){
+    final m=ConventionTiming.build(medication:false,observations:'',lowBlood:false,events:['événement A en 2020','événement B en 2021']);
+    final cm3=m.where((m)=>m.convention==2).toList();
+    expect(cm3.map((m)=>m.seconds),[60,30,30]);
+    expect(cm3.first.last,isFalse);expect(cm3.last.last,isTrue);
+    expect(cm3.last.intention,contains('événement B en 2021'));
+    expect(m.indexWhere((m)=>m.convention==3),m.indexOf(cm3.last)+1);
+  });
   test('Conflit d’ordre détecté au lieu de réordonner silencieusement',(){
     const fiche=GuideFiche('test','Test',[
       GuideAction(id:'c1',kind:'communes',text:'Communes'),

@@ -15,11 +15,17 @@ class ConventionTiming {
     return 60;
   }
   static List<ConventionMoment> build({required bool medication, required String observations,
-    required bool lowBlood, Map<String,String> weakBodies=const {}}) {
+    required bool lowBlood, Map<String,String> weakBodies=const {}, List<String> events=const []}) {
     final out=<ConventionMoment>[];
     for(var i=0;i<14;i++) {
       if(i==7&&!medication)continue;
-      out.add(ConventionMoment(i,'','', i==8 ? cleaningSeconds(observations) : i==11&&lowBlood ?120:60,last:i!=8));
+      out.add(ConventionMoment(i,'','', i==8 ? cleaningSeconds(observations) : i==11&&lowBlood ?120:60,last:i!=8 && !(i==2&&events.isNotEmpty)));
+      if(i==2){
+        for(var e=0;e<events.length;e++){
+          out.add(ConventionMoment(2,'Événement particulier de la vie actuelle',
+            'Je nettoie toutes les mauvaises mémoires liées à ${events[e]}',30,last:e==events.length-1));
+        }
+      }
       if(i==8) {
         out.add(const ConventionMoment(8,'Équilibrer les six corps énergétiques','Je rééquilibre ses 6 corps énergétiques autour de son corps physique',30,last:false));
         out.add(ConventionMoment(8,'Recharger les six corps énergétiques','Je recharge ses 6 corps énergétiques',30,last:weakBodies.isEmpty));

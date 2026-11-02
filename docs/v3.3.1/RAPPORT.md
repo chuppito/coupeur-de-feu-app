@@ -11,6 +11,7 @@ Base : V3.3 `e858fe25c666bd9f4040fc6743d9e3815fb17d71`. Les branches V3.2 et V3.
 
 ## Corrections apportées
 
+- CM3 : événements particuliers saisis facultativement, un complément chronométré de 30 s par événement selon la bibliothèque ; divergence vidéo exposée, sans événement ou durée inventés.
 - Repères des conventions propres aux motifs transmis au plan et affichés avec les 14 CM ; étapes communes non répétées.
 - Ordre des prières arthrite : référence contre le feu remplacée à sa place, puis prière articulaire. Arthrose : intention et prière séparées.
 - Asthme : prière conditionnelle distincte, travail pulmonaire couronne → plexus, contrôle de flux, lentes puis imposition ; abdomen séparé.

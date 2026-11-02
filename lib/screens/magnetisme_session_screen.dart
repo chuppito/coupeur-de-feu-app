@@ -59,6 +59,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final _sang = TextEditingController();
   final _bilanNotes = TextEditingController();
   final _traitements = TextEditingController();
+  final _evenementsCM3 = TextEditingController();
   final _degagementNotes = TextEditingController();
   final _soinPenduleZone = TextEditingController();
   final _soinPenduleNotes = TextEditingController();
@@ -225,7 +226,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _entites, _negatives, _sang, _bilanNotes,
-      _traitements, _degagementNotes, _soinPenduleZone, _soinPenduleNotes,
+      _traitements, _evenementsCM3, _degagementNotes, _soinPenduleZone, _soinPenduleNotes,
       ..._anamneseFields.values,
       ..._corpsFields.values,
       ..._teteCouFields.values,
@@ -1064,6 +1065,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'conditionsConfirmees': _conditionsConfirmees.toList(),
       'etapesNonApplicables': _etapesNonApplicables.toList(),
       'cm9Vigilance': _cm9Vigilance,
+      'evenementsCM3': _evenementsCM3.text,
       'etapesIds': _usesPlanV33 ? _planV33.steps.map((s)=>s.id).toList() : _etapes,
       'conventionsSupplementairesFaites': _conventionsSupplementairesFaites.toList(),
       'seancePrecedenteDate': _seancePrecedente?['date'],
@@ -1962,6 +1964,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     medication:_traitements.text.trim().isNotEmpty,
     observations:_cm9Observation,
     lowBlood:_sangBelow70(),
+    events:_evenementsCM3.text.split('\n').map((s)=>s.trim()).where((s)=>s.isNotEmpty).toList(),
     weakBodies: {for(final e in _corpsFields.entries)
       if(const ['G','D','G + D','Oui'].contains(e.value.text)) e.key: const {'2':'éthérique','3':'astral','4':'mental','5':'causal','6':'bouddhique','7':'atmique'}[e.key]!},
   );
@@ -2042,6 +2045,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final complete=ids.every(_conventionsFaites.contains);
     final doc=_reference('14 conventions — version complète') ?? _reference('14 conventions');
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+      TextField(controller:_evenementsCM3,minLines:1,maxLines:3,enabled:!_lectureAuto,
+        decoration:const InputDecoration(labelText:'CM3 : événements particuliers (facultatif, un par ligne)',hintText:'Événement et date connus de la personne'),
+        onChanged:(_)=>setState((){_momentIndex=0;_lectureSuspendue=false;_conventionsFaites.clear();})),
+      const Text('Complément CM3 : 30 s par événement dans la bibliothèque ; les notes vidéo évoquent 15–20 s. La durée retenue reste affichée et ajustable.'),
       _lectureAutomatique(),
       if(_traitements.text.trim().isEmpty) const Text('Convention 8 omise : aucun traitement signalé au bilan.'),
       ExpansionTile(title:const Text('Les 14 conventions et leurs sources'),children:[
