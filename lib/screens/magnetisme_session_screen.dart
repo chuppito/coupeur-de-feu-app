@@ -536,6 +536,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       'troublesdusommeil': 'Trouble du sommeil',
       'maladiedecrohn': 'Crohn',
       'maladiedelyme': 'Lyme',
+      'maladiedeverneuil': 'Verneuil',
       'spondylarthriteankylosante': 'Spondylarthrite',
     };
     final canonical = _normaliserTitre(aliases[title] ?? doc.titre);
