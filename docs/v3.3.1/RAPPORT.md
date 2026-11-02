@@ -106,7 +106,7 @@ Référence Android : https://developer.android.com/studio/publish/app-signing
 
 ## Validation
 
-Résultats GitHub Actions à compléter après le dernier commit validé. Tests ajoutés : 57 fiches × 2 modes ; toutes les combinaisons de 1 à 3 fiches × 2 modes ; conservation des actions et de leur ordre ; cas non documentés bloqués ; durées et pause/reprise ; première visite/suivi ; bibliothèque personnelle et historique. Aucun test sur téléphone revendiqué.
+Tests Flutter : 155 réussis. Analyse : aucune erreur bloquante, 113 avertissements/informations restants (non traités comme succès sans réserve). Les deux compilations Android sont réussies. Workflow vérifié : https://github.com/chuppito/coupeur-de-feu-app/actions/runs/41466592974. Commit du code : 98fed8b1248f86c873f034da0bdeff430d6443d4. Tests ajoutés : 57 fiches × 2 modes ; toutes les combinaisons de 1 à 3 fiches × 2 modes ; conservation des actions et de leur ordre ; cas non documentés bloqués ; durées et pause/reprise ; première visite/suivi ; bibliothèque personnelle et historique. Aucun test sur téléphone revendiqué.
 
 ## Sources
 
@@ -114,3 +114,10 @@ Résultats GitHub Actions à compléter après le dernier commit validé. Tests 
 - Analyses vidéo pratiques et différences de visites suivantes existantes, 2 novembre 2026 ; transcription automatique et images échantillonnées selon le registre.
 - Audit exhaustif V3.3 du 2 novembre 2026 et son JSON/tableau, commit source indiqué ci-dessus.
 - `assets/data/statut_v331.json` fournit les références et les limites par fiche.
+
+## Empreintes des APK
+
+- Magnetisme-V3.3.1.apk : `1c2bf2df52c91222114080d12123f7f2d60c23af7f6db9effae23ef5b3273a47` ; paquet `com.tomtom.coupeurdefeu` ; version `3.3.1+11`.
+- Magnetisme-V3.3.1-test-parallele.apk : `d2a83e67035b08a888ec3779de2455bceb79cbcd155673a4a649623ecde7408d` ; paquet `com.tomtom.coupeurdefeu.v331test` ; version `3.3.1+11`.
+
+Les essais physiques Android restent à réaliser par Thomas. Les résultats automatisés ne prouvent ni une efficacité médicale ni la fidélité exhaustive aux gestes vidéo.
