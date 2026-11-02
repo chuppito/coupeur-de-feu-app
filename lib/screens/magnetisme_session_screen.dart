@@ -440,7 +440,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
 
   List<_Doc> get _selectedFts {
-    final selected = _fts.where((doc) => _pathologies.contains(doc.titre)).toList();
+    // L'ordre de sélection est la priorité : 1, 2 puis 3.
+    final selected = <_Doc>[];
+    for (final titre in _pathologies) {
+      final matches = _fts.where((doc) => doc.titre == titre);
+      if (matches.isNotEmpty) selected.add(matches.first);
+    }
     if (_ft != null && _ft!.type == 'fiche_technique' && !selected.any((doc) => doc.id == _ft!.id)) {
       selected.insert(0, _ft!);
     }
@@ -661,11 +666,22 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         _checkStep(index),
       ]);
     }
-    if (stage == 's') return _specific();
-    if (stage == 'p') {
+    if (stage == 's' || stage == 'p') {
+      final occurrence = int.tryParse(parts.last) ?? 1;
+      final instruction = stage == 's'
+          ? (_specificConventions(doc).isNotEmpty
+              ? _specificConventions(doc).join('\\n')
+              : _instructionFichePour(doc, stage, occurrence))
+          : _instructionFichePour(doc, stage, occurrence);
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        _prieres(),
+        Text(doc.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        if (instruction != null && instruction.isNotEmpty)
+          SelectableText(instruction, style: const TextStyle(fontSize: 16, height: 1.4))
+        else
+          const Text('Consulter la fiche source pour les instructions de cette étape.'),
         _sourcePdf(source),
+        _checkStep(index),
       ]);
     }
     final occurrence = int.tryParse(parts.last) ?? 1;
