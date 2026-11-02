@@ -78,8 +78,8 @@ void main(){
       }
     }
   });
-  test('Durées locales : 5, 2 minutes et intentions séparées dans les sept fiches',(){
-    const expected={'ft-acne':[300],'ft-eczema':[300],'ft-constipation':[120],
+  test('Durées locales : 5, 2 minutes et intentions séparées dans les fiches sourcées',(){
+    const expected={'ft-acne':[300],'ft-eczema':[300],'ft-constipation':[120],'ft-tendinite':[120],
       'ft-herpes':[120,120],'ft-verrue':[120,120],'ft-zona':[120,120,120],'ft-psoriasis':[300,300]};
     for(final e in expected.entries){
       final f=fiches.singleWhere((f)=>f.id==e.key);

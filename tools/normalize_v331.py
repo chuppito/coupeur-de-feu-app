@@ -69,6 +69,8 @@ for a in g['ft-constipation']:
  if '2 minutes' in a['text'] or '2 min ' in a['text']:a['seconds']=120
 for a in g['ft-traitements-lourds-aide-aux']:
  if a['kind']=='priere':a['condition']='Si brûlure ou radiothérapie (PDF p. 123). Suivi radio : première séance complète et connexion/photo déjà établies.'
+for a in g['ft-tendinite']:
+ if a['kind']=='visualisation':a['seconds']=120;a['source']=book+'p. 40 et 81'
 # Each existing action carries a provenance; source status is deliberately not inflated.
 for id,aa in g.items():
  for a in aa:a['documented']=True

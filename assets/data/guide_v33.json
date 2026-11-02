@@ -4836,10 +4836,11 @@
       "text": "- 4. Visualisation de reconstruction du tendon et de la gaine abîmés.",
       "target": "selection",
       "route": "- 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.",
-      "source": "Magnétisme (1).odt",
+      "source": "Manuel Stéphane Langlade p. 40 (exemple tendinite : 2 minutes) et fiche p. 81",
       "distanceText": "- 4. Visualisation de reconstruction du tendon et de la gaine abîmés.",
       "selectedRoute": true,
-      "documented": true
+      "documented": true,
+      "seconds": 120
     },
     {
       "id": "s7-11",

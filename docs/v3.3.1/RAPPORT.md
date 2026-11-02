@@ -17,7 +17,7 @@ Base : V3.3 `e858fe25c666bd9f4040fc6743d9e3815fb17d71`. Les branches V3.2 et V3.
 - Intentions acné, sommeil/pinéale, Verneuil, niveaux lombaires sciatique/cruralgie conservées à distance.
 - Repères arthrose/arthrite et insuffisance veineuse rectifiés ; transcription gestuels du tabac, fier lombalgie et phrase circulatoire hémorroïdes rapprochées du PDF. Les prières de la bibliothèque et les variantes personnelles ne sont pas réécrites.
 - Prières chirurgie après et intention Borrelia correctement typées. Position cervicale postérieure rectifiée.
-- Durées structurées et minuteur silencieux local pour acné, eczéma, constipation, herpès, psoriasis, verrue, zona et noyau Couper le feu. Les intentions chronométrées multiples sont séparées. Durée inconnue : validation manuelle.
+- Durées structurées et minuteur silencieux local pour acné, eczéma, constipation, herpès, psoriasis, verrue, zona, tendinite (exemple explicite p. 40) et noyau Couper le feu. Les intentions chronométrées multiples sont séparées. Durée inconnue : validation manuelle.
 - Zones choisies conservées sur les actions, y compris celles à cible fixe (affichées comme repères et non comme remplacement de cette cible). Contrôle explicite de chaque côté et segment.
 - Priorité de phases dans le graphe : intentions et prières regroupées quand les dépendances le permettent. L’ordre propre à chaque fiche et le zona avant CM restent prioritaires.
 - Limite trois SOINS ; nombre de prières non plafonné ; Thot conservé une fois si sélectionné.

@@ -81,6 +81,11 @@ class SessionPlanner {
     for(final f in fiches) {
       if(manualFor(f) && fiches.length>1) errors.add('${f.title} : fiche personnelle à vérifier avant une fusion de plusieurs soins.');
       if(f.actions.isEmpty) { errors.add('${f.title} : déroulé structuré absent.'); continue; }
+      final actionIds=<String>{};
+      for(final a in f.actions){
+        if(!actionIds.add(a.id))errors.add('${f.title} : identifiant d’action dupliqué ${a.id}.');
+        if((a.seconds!=null&&a.seconds!<=0)||a.repetitions<1)errors.add('${f.title} : durée ou répétitions invalides pour ${a.id}.');
+      }
       var prev=start;
       for(final a in f.actions) {
         if(distance && a.kind=='personnel') { errors.add('${f.title} : adaptation à distance de la fiche personnelle à préciser.'); continue; }
