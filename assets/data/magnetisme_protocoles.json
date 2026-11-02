@@ -135,6 +135,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur le nez et la gorge, et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite pas de deuxième séance."
+        }
       ]
     },
     {
@@ -179,6 +213,36 @@
         "p",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des bloquages et des blocages énergétiques."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre le feu en imposant les mains sur les points de douleur à répéter 3 fois.\n+ Prière contre le feu (voir la fiche « CONTRE LE FEU »).6. « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les points de douleur :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à répéter dans 1 mois si une douleur persiste."
+        }
       ]
     },
     {
@@ -224,6 +288,36 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages des différentes mémoires."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez une convention mentale supplémentaire / Boostez la fabrication d'ocytocine (hormone antidouleur sécrétée par l'hypothalamus).\n6. « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les points de douleur (ventre ou dos) :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -267,6 +361,36 @@
         "c",
         "t",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des différentes mémoires."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Si l'inflammation est importante, imposition des mains & prière contre le feu 3 fois.\n+ Prière contre le feu (voir la fiche « CONTRE LE FEU »).6. Travaillez en passes sur les poumons :\n - 1. Passes rapides du chakra couronne au chakra sacré.\n - 2. Passes lentes sur les poumons.\n - 3. Imposition des mains sur les poumons, avec intention de stopper l'état inflammatoire."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau), avec intention de doper la sérotonine (lutte contre le stress et l'anxiété)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Une deuxième séance à réaliser sous 1 mois est conseillée."
+        }
       ]
     },
     {
@@ -312,6 +436,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n\t1. Renforcez les défenses immunitaires,\n\t2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur les bronches et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les bronches :\n - 1. Passes rapides du chakra couronne au chakra sacré.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les bronches."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite pas de deuxième séance."
+        }
       ]
     },
     {
@@ -357,6 +515,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaires / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur l'épaule et récitez : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur l'épaule concernée :\n - 1. Passes rapides du chakra couronne au chakra épaule, puis du chakra épaule au chakra main.\n - 2. Passes lentes du chakra couronne au chakra épaule à la main.\n - 3. Imposition des mains sur la capsule articulaire.\n - 4. Visualisation de reconstruction de la capsule articulaire."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -402,6 +594,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaires / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre le feu en imposant les mains sur les points de douleur. /  Prière contre le feu (voir la fiche « CONTRE LE FEU »). À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les cervicales (Pictogramme : patient sur le dos) :\n - 1. Passes rapides du chakra couronne au chakra cœur derrière.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -447,6 +673,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle, des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez une convention mentale supplémentaire / renfort énergétique du côlon"
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre la constipation :\n\t+ De par la Sainte Mère Marie, qui daigna toujours secourir les pauvres affligés, coliques, passion \tqui êtes dans mon ventre, entre ma rate et mon foie, et vous aussi, sécheresse de mes entrailles, \tqui êtes entre mon fiel et mes reins, passez votre chemin ! + Au nom du Père, + du Fis, + et du \tSaint-Esprit +. Ainsi soit-il. + Amen"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Passes lentes circulaire sur le système intestinal (2 min sens horaire).\n - 4. Imposition des mains sur les intestins."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -492,6 +752,40 @@
         "s",
         "t",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "travail",
+          "texte": "6. Travaillez en passes sur le bas du dos :\n - 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.\n - 2. Passes lentes sur les lombaires.\n - 3. Imposition des mains sur la zone L2-L3-L4-L5."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la jambe douloureuse (sur le ventre) :\n - 1. Passes rapides du chakra aine au chakra genou, puis du chakra genou au chakra pied.\n - 2. Passes lentes devant la jambe."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Un suivi sous 5 jours est conseillé."
+        }
       ]
     },
     {
@@ -537,6 +831,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines et sur le nettoyage des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Main rapprochée, faites un signe de croix sur l'appareil urinaire et réciter : \n  Prière contre le feu (voir la fiche « CONTRE LE FEU »). \n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur l'appareil urinaire :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes.\n  - 3. Imposition des mains sur l'appareil urinaire."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite pas de deuxième séance."
+        }
       ]
     },
     {
@@ -690,6 +1018,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Bloquez la régurgitation du sang dans les trompes."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre le feu / Faites un signe de croix sur l'endomètre et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur l'endomètre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur l'endomètre.\n - 3. Imposition des mains sur l'endomètre."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à renouveler 1 semaine avant le prochain cycle"
+        }
       ]
     },
     {
@@ -735,6 +1097,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur l'entorse et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur l'entorse :\n - 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains en entourant le ou les ligaments douloureux.\n - 4. Visualisation de reconstruction du ou des ligaments abîmés."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -816,6 +1212,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur le ventre et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite pas de deuxième séance."
+        }
       ]
     },
     {
@@ -861,6 +1291,40 @@
         "p",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre le feu en imposant les mains sur les points de douleur / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre la goutte en imposant les mains sur la personne :\n « Cher Saint Thibault, cher saint Caprais, cher saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son coeur et dans son âme. Amen. »"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les points de douleur :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -906,6 +1370,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre le feu / Faites un signe de croix sur le front (contre la fièvre) et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "priere",
+          "texte": "7. Prière contre les maux de tête en imposant les mains sur la tête :\n Récitez : « Vous obtiendrez, glorieux saint Pancrace, par votre méditation, à tous vos fervents dévots, la guérison du mal de tête. Que la douleur d'un si grand mal soit promptement soulagée. »\n Faites ensuite un signe de croix 3 fois sur le front et 3 fois sur chaque oreille."
+        },
+        {
+          "type": "travail",
+          "texte": "8. Travaillez en passes sur les points de douleur :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur.\n9. & 10 Circulation énergétique entre les chakras / Balayage & débriefing, ne nécessite pas de deuxième séance."
+        }
       ]
     },
     {
@@ -951,6 +1449,40 @@
         "p",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre le feu en imposant les mains sur la zone douloureuse / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière pour la circulation sanguine / Faites 3 signes de croix sur le front, 3 sur le plexus, et 3 sur le ventre, et récitez :\n « Que ton sang circule dans par tes veines, veinules et artères, sans que rien ne gène ou l'arrête, comme le sang de Notre Seigneur Jésus-Christ circulait sans entrave dans son corps divin. Que la volonté divine s'accomplisse. Amen. »\n Faites à nouveau 3 signes de croix sur le front."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les hémorroïdes :\n - 1. Passes rapides du chakra sacré derrière au chakra racine.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la zone douloureuse."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Une deuxième séance peut être nécessaire."
+        }
       ]
     },
     {
@@ -996,6 +1528,40 @@
         "s",
         "p",
         "i"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Main rapprochée, faites un signe de croix sur l'herpès et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "imposition",
+          "texte": "7. Imposez vos mains sur l'herpès :\n - 1. Posez votre intention = tuer le virus (2 minutes).\n - 2. Visualisez l'herpès qui disparaît (2 minutes). Pensez au rayon avec vos doigts."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite généralement pas de deuxième séance."
+        }
       ]
     },
     {
@@ -1041,6 +1607,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des racines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Boostez le retour veineux."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière pour la circulation sanguine / Faites 3 signes de croix sur le front, 3 sur le plexus, et 3 sur le ventre, et récitez :\n « Que ton sang circule dans ton corps [nom et prénom] par tes veines, veinules et artères, sans que rien ne gène ou l'arrête, comme le sang de Notre Seigneur Jésus-Christ circulait sans entrave dans son corps divin. Que la volonté divine s'accomplisse. Amen. »\n Faites à nouveau 3 signes de croix sur le front."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les jambes :\n - 1. Passes rapides sur la jambe devant : du chakra aine au chakra genou, puis du chakra genou au chakra pied.\n - 2. Passes rapides sur la jambe derrière : du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.\n - 3. Passes lentes sur les 2 côtés.\n - 4. Imposition des mains sur les points de douleur et de gêne."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Une deuxième séance peut être nécessaire."
+        }
       ]
     },
     {
@@ -1088,6 +1688,40 @@
         "s",
         "t",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Diminuez la fabrication du cortisol.\n - 2. Renforcez les défenses immunitaires contre les maladies nosocomiales."
+        },
+        {
+          "type": "travail",
+          "texte": "6. Travaillez en passes sur la zone qui va être opérée :\n - 1. Passes rapides du chakra en amont au chakra en aval de la zone.\n - 2. Passes lentes.\n - 3. Imposition des mains avec intention de renfort énergétique."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Un suivi sous 5 jours est conseillé."
+        }
       ]
     },
     {
@@ -1135,6 +1769,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Boostez le foie pour mieux éliminer les produits anesthésiants.\n - 2. Renforcez les défenses immunitaires contre les maladies nosocomiales.\n - 3. Réparez les corps énergétiques."
+        },
+        {
+          "type": "autre",
+          "texte": "6. Dites 3 fois sur la plaie, sans la toucher :\n - (+) Le Christ est né.\n - (+) Le Christ est mort.\n - (+) Le Christ est ressuscité.\n C'est Dieu lui-même qui commande : plaies, soyez fermées, douleurs cuisantes, passez ; mauvais sang, soit arrêté ; et qu'elles n'entrent en matière, ni senteur. Comme ont fait les cinq plaies de Notre Seigneur. Ainsi soit-il."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la zone opérée :\n - 1. Passes rapides du chakra en amont au chakra en aval de la zone opérée.\n - 2. Passes lentes.\n - 3. Imposition des mains avec intention de renfort énergétique et de reconstruction."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing."
+        }
       ]
     },
     {
@@ -1180,6 +1848,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Imposez vos mains sur les lombaires et récitez :\n « (+) Dos cassé, échine courbée, dos meurtri, redresse-toi sans plus tarder. Fais, Seigneur, que [nom et prénom] marche droit, fer comme l'était notre Seigneur Jésus-Christ de sa mission d'amour sur la terre. Tu avances ainsi, guéri de toutes blessures, cassures ou courbatures, car notre Seigneur est près de toi et te soutient. Amen. (+) »"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le bas du dos :\n - 1. Passes rapides sur le bas du dos, du chakra plexus derrière au chakra racine.\n - 2. Passes lentes sur les lombaires.\n - 3. Imposition des mains sur la zone L1-L5."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -1225,6 +1927,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Rééquilibrez la flore intestinale."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur les points de douleur et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -1270,6 +2006,40 @@
         "s",
         "s",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "autre",
+          "texte": "6. Posez à nouveau 1 convention mentale / Neutralisez la bactérie Borrelia responsable."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les points douloureux :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à suivre dans 1 mois selon l'évolution."
+        }
       ]
     },
     {
@@ -1315,6 +2085,40 @@
         "p",
         "i",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre les abcès :\n « Cher saint Cloud, je te demande d'intervenir afin que cet abcès guérisse rapidement, merci. Abcès, je t'ordonne de mûrir, d'éclater, de sécher, puis de guérir, afin que [nom et prénom] ne souffre plus. Qu'il en soit ainsi. »"
+        },
+        {
+          "type": "imposition",
+          "texte": "6. Imposez vos mains sur les zones d'abcès / Visualisez les abcès qui disparaissent."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins, avec intention de doper la sérotonine (contre la déprime)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à suivre dans 1 mois selon l'évolution."
+        }
       ]
     },
     {
@@ -1360,6 +2164,40 @@
         "p",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre le feu / Faites un signe de croix sur la tête, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre les maux de tête / Imposez vos mains sur la tête et récitez :\n « Vous obtiendrez, glorieux saint Pancrace, par votre méditation, à tous vos fervents dévots, la guérison du mal de tête. Que la douleur d'un si grand mal, soit promptement soulagée. »\n Faites ensuite un signe de croix 3 fois sur le front et 3 fois sur chaque oreille."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre si récidive."
+        }
       ]
     },
     {
@@ -1405,6 +2243,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur l'arrière du crâne et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes derrière la tête :\n - 1. Passes rapides du chakra couronne au chakra coeur derrière (en passant également sur les deux côtés du crâne).\n - 2. Passes lentes.\n - 3. Imposition des mains sur le cou et l'arrière du crâne."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -1450,6 +2322,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre le feu / Faites un signe de croix sur la ou les oreilles touchés :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la sphère ORL (sur la ou les oreilles) :\n - 1. Passes rapides du chakra couronne au chakra oreille.\n - 2. Passes lentes.\n - 3. Imposition des mains la ou les oreilles."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à suivre lors du prochain contrôle."
+        }
       ]
     },
     {
@@ -1495,6 +2401,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires et des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n - 3. Neutralisez le virus HPV."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre les verrues si présence de verrues génitales (condylomes) :\n Avec l'index, faites un X au-dessus de chaque verrue dans l'idée de les supprimer, puis récitez :\n « [Nom et prénom], je t'enlève tes verrues de toutes à une et de une à rien. Qu'il en soit ainsi. (+) Au nom du Père, du Fils et du Saint-Esprit. »\n À répéter 3 fois de suite. La troisième fois, faites 3 fois le signe de croix."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la zone de l'utérus :\n - 1. Passes rapides du chakra sacré au chakra racine.\n - 2. Passes lentes sur la zone de l'utérus.\n - 3. Imposition des mains sur l'utérus."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à suivre lors du prochain contrôle."
+        }
       ]
     },
     {
@@ -1540,6 +2480,40 @@
         "s",
         "i",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcer le moral.\n - 2. Détente du consultant, souvent complexé."
+        },
+        {
+          "type": "imposition",
+          "texte": "6. Imposez vos mains sur le psoriasis :\n - 1. Par votre intention, bloquez l'accélération du renouvellement des cellules de l'épiderme (5 minutes).\n - 2. Visualisez le psoriasis qui sèche (5 minutes)."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à suivre dans 1 mois selon l'évolution."
+        }
       ]
     },
     {
@@ -1585,6 +2559,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite généralement pas de deuxième séance."
+        }
       ]
     },
     {
@@ -1630,6 +2638,40 @@
         "s",
         "t",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "travail",
+          "texte": "6. Travaillez en passes sur le bas du dos :\n - 1. Passes rapides sur le bas du dos : du chakra plexus derrière au chakra racine.\n - 2. Passes lentes sur les lombaires et le sacrum.\n - 3. Imposition des mains sur la zone L4-L5 et S1-S2-S3."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la jambe douloureuse :\n - 1. Passes rapides du chakra sacré derrière au chakra genou, puis du chakra genou au chakra pied.\n - 2. Passes lentes derrière la jambe."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Un suivi sous 5 jours est conseillé."
+        }
       ]
     },
     {
@@ -1675,6 +2717,40 @@
         "c",
         "s",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "priere",
+          "texte": "4. Prière de demande de guérison en imposant les mains sur le crâne :\n « Archange Raphaël, j'ai besoin que tu m'assistes afin de guérir [nom et prénom] de la sclérose en plaques. Aide-moi à canaliser ton énergie de guérison afin que celle-ci s'accomplisse. Merci. »"
+        },
+        {
+          "type": "communes",
+          "texte": "5. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques, des mauvaises mémoires de la vie actuelle et transgénérationnelles."
+        },
+        {
+          "type": "intentions",
+          "texte": "6. Posez 1 convention mentale supplémentaire / Protection des gaines de myéline, avec visualisation d'une énergie protectrice autour."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les parties les plus touchées :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les parties fragilisées."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À renouveler sur les périodes difficiles."
+        }
       ]
     },
     {
@@ -1720,6 +2796,40 @@
         "p",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des blocages énergétiques."
+        },
+        {
+          "type": "priere",
+          "texte": "5. Prière contre le feu / Faites un signe de croix et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre l'arthrite en imposant les mains sur la personne :\n « Cher Saint Thibault, cher Saint Caprais, cher Saint Marc de Trèves : nous vous demandons de soulager [nom et prénom] qui souffre terriblement de ses articulations. Merci de lui retirer ce mal, et de faire en sorte qu'il ne souffre plus, et qu'il se sente parfaitement bien dans son corps, dans son cœur et dans son âme. Amen. »"
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur toute la colonne vertébrale :\n - 1. Passes rapides du chakra couronne au chakra racine.\n - 2. Passes lentes du chakra couronne au chakra racine.\n - 3. Imposition des mains sur les points les plus douloureux."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à répéter dans 1 mois en cas de douleurs persistantes."
+        }
       ]
     },
     {
@@ -1765,6 +2875,40 @@
         "s",
         "t",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des différentes mémoires."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Déprogrammez les geôles mentales.\n - 2. Renforcez le moral pour mieux lutter.\n - 3. Boostez la fabrication naturelle de dopamine."
+        },
+        {
+          "type": "travail",
+          "texte": "6. Travaillez en passes sur les poumons et la trachée :\n - 1. Passes rapides du chakra couronne au chakra sacré.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la trachée et les poumons, avec intention de nettoyage."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Une deuxième séance peut être utile."
+        }
       ]
     },
     {
@@ -1810,6 +2954,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des blocages énergétiques et des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 1 convention mentale supplémentaire / Arrêt de la douleur."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur la tendinite et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la tendinite :\n - 1. Passes rapides du chakra en amont au chakra en aval du point de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains en entourant le tendon douloureux et sa gaine.\n - 4. Visualisation de reconstruction du tendon et de la gaine abîmés."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / À suivre en fonction de l'évolution."
+        }
       ]
     },
     {
@@ -1855,6 +3033,40 @@
         "s",
         "p",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si radiothérapie : prière contre le feu. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des mémoires de la vie actuelle."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 3 conventions mentales supplémentaires :\n - 1. Dopez la fabrication de la sérotonine.\n - 2. Diminuez la fabrication du cortisol.\n - 3. Nettoyez la chimio du traitement que le corps peine à éliminer."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Faites un signe de croix sur les points de douleur et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur les points de douleur :\n - 1. Passes rapides des chakras en amont aux chakras en aval des points de douleur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur les points de douleur."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Faire une deuxième séance selon l'évolution et suivi de radiothérapie."
+        }
       ]
     },
     {
@@ -1900,6 +3112,40 @@
         "s",
         "i",
         "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des tensions et des différentes mémoires."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Dopez la fabrication de la sérotonine.\n - 2. Diminuez la fabrication du cortisol."
+        },
+        {
+          "type": "imposition",
+          "texte": "6. Imposez vos mains au niveau de la glande pinéale / Rechargez la glande pinéale pour booster la fabrication de la mélatonine le moment venu."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur le ventre :\n - 1. Passes rapides du chakra plexus au chakra racine.\n - 2. Passes lentes sur le système intestinal.\n - 3. Imposition des mains sur les intestins (2e cerveau) avec intention de doper la sérotonine (contre le stress)."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Une deuxième séance peut être nécessaire."
+        }
       ]
     },
     {
@@ -1945,6 +3191,40 @@
         "s",
         "p",
         "i"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Prière contre les verrues :\n Avec l'index, faites un X sur chaque verrue dans l'idée de les supprimer, puis récitez :\n « [Nom et prénom], je t'enlève tes verrues de toutes à une et de une à rien. Qu'il en soit ainsi. (+) Au nom du Père, du Fils et du Saint-Esprit. »\n À répéter 3 fois de suite. La troisième fois, faites 3 fois le signe de croix."
+        },
+        {
+          "type": "imposition",
+          "texte": "7. Imposez vos mains sur la verrue :\n - 1. Posez votre intention : tuer le virus (2 minutes).\n - 2. Visualisez la verrue qui disparaît (2 minutes).\n - Pensez au rayon avec vos doigts."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Séance à répéter dans 1 mois si la verrue n'a pas disparu (voir ci-dessus).\n\nSI LA VERRUE NE PART PAS :\n- 1. Faites la séance complète en 10 points.\n- 2. Fixez un nouveau rendez-vous pour dans 1 mois, qui prendra environ 10 minutes : relates uniquement la prière et l'imposition des mains (points 6 et 7).\n- 3. Fixez un troisième rendez-vous pour dans 1 mois qui se déroulera de la même manière que le précédent (10 minutes).\n- 4. Continuez jusqu'à disparition de la verrue.\nImportant : Indiquez bien à la personne que vous traitez que la verrue peut mettre du temps à disparaître, afin de la rassurer."
+        }
       ]
     },
     {
@@ -1990,6 +3270,40 @@
         "i",
         "c",
         "s"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "priere",
+          "texte": "4. Prière contre le feu :\n Faites un signe de croix sur le zona et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À répéter 3 fois."
+        },
+        {
+          "type": "imposition",
+          "texte": "5. Imposez vos mains sur le zona :\n - 1. Posez une première intention : guérir les terminaisons nerveuses (2 minutes).\n - 2. Posez une seconde intention : tuer le virus (2 minutes).\n - 3. Visualisez le zona qui sèche (2 minutes)."
+        },
+        {
+          "type": "communes",
+          "texte": "6. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des mauvaises mémoires de la vie actuelle et des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "7. Posez 3 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n - 3. Boostez le moral."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Faire un suivi sous 48 heures, avec prière et imposition des mains si besoin (voir ci-dessus).\n\nSUIVI POST-SÉANCE :\nLe taux de réussite en magnétisme est proche de 100%. À l'issue de la première séance, demandez à votre client de vous rappeler sous 48 heures et posez-lui deux questions :\n- 1. Les sensations intenses de brûlures ont-elles disparu (il est en revanche toujours normal d'avoir une gêne) ?\n- 2. Les vésicules présentes lors du rendez-vous ont-elles commencé à sécher (elles deviennent légèrement marron), sans apparition de nouvelles vésicules rouges ?\n\n- S'il n'y a plus de douleurs fortes et pas de nouvelles vésicules, le zona est enrayé, une nouvelle séance n'est pas nécessaire.\n- S'il y a encore des douleurs et/ou que de nouvelles vésicules apparaissant, il faut prévoir une seconde séance de 15 minutes : refaites la prière contre le feu et une imposition des mains (points 4 et 5). Ce deuxième passage est généralement suffisant pour enrayer définitivement le zona.\n\nBON À SAVOIR :\nSi le zona persiste, renvoyez votre client chez son médecin pour un bilan. Chez les personnes de plus de 80 ans, les zones sont parfois plus longs à partir (défenses immunitaires plus faibles)."
+        }
       ]
     },
     {
