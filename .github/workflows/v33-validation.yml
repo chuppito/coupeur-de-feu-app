@@ -23,6 +23,11 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
+      - name: Conserver la clé de débogage pour les prochaines versions de test
+        uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: magnetisme-v331-test-signature-v1
       - name: Analyse statique (erreurs bloquantes)
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
       - name: Tests de parcours, minuteurs et sauvegarde
@@ -30,8 +35,16 @@ jobs:
         run: flutter test --reporter expanded
       - name: APK release
         run: flutter build apk --release
+      - run: cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Magnetisme-V3.3.1.apk
+      - name: APK de test parallèle sans remplacer les données existantes
+        env:
+          MAGNETISME_TEST_INSTALL: 'true'
+        run: flutter build apk --release
+      - run: cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Magnetisme-V3.3.1-test-parallele.apk
       - uses: actions/upload-artifact@v4
         with:
           name: Magnetisme-V3.3.1-APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: |
+            build/app/outputs/flutter-apk/Magnetisme-V3.3.1.apk
+            build/app/outputs/flutter-apk/Magnetisme-V3.3.1-test-parallele.apk
           if-no-files-found: error

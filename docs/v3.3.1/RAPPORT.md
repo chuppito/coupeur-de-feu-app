@@ -35,6 +35,12 @@ Base : V3.3 `e858fe25c666bd9f4040fc6743d9e3815fb17d71`. Les branches V3.2 et V3.
 - Les décisions conditionnelles (inflammation, brûlure, etc.) restent des consignes explicites pour le praticien, pas des déductions médicales de l’application.
 - Les séquences locales multiples restent à vérifier physiquement sur Android, ainsi que la latéralité, le défilement, l’absence de son et le maintien de l’écran.
 
+## Installation et données
+
+Les certificats des APK V3.3 et V3.3.1 intermédiaire diffèrent. Ne pas désinstaller l’application existante pour tester. Le workflow fournit aussi une installation parallèle `com.tomtom.coupeurdefeu.v331test`, nommée « Magnétisme V3.3.1 test », avec ses propres données. Elle ne remplace ni ne migre automatiquement les données de l’application actuelle. L’APK normal conserve `com.tomtom.coupeurdefeu` ; une mise à jour directe nécessite la clé de signature correspondante. La clé historique n’a pas été récupérée ou reconstruite. Le cache CI de clé de débogage stabilise les prochains builds de test tant que ce cache est disponible ; ce n’est pas une gestion définitive de signature de production.
+
+Référence Android : https://developer.android.com/studio/publish/app-signing
+
 ## Statut par fiche
 
 | Fiche | Migration technique | Conformité documentaire | Source PDF / leçon |

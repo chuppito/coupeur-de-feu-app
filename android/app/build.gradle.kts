@@ -17,6 +17,13 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.tomtom.coupeurdefeu"
+        // Optional CI-only test installation: never replace the existing patient database.
+        if (System.getenv("MAGNETISME_TEST_INSTALL") == "true") {
+            applicationIdSuffix = ".v331test"
+            manifestPlaceholders["appLabel"] = "Magnétisme V3.3.1 test"
+        } else {
+            manifestPlaceholders["appLabel"] = "Magnétisme"
+        }
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
