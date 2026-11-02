@@ -577,6 +577,34 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     ];
   }
 
+  List<String> _sectionsNumerotees(_Doc doc) {
+    final text = doc.contenu;
+    final starts = RegExp(r'(?m)^\s*(?:[1-9]|10)\.\s+(?=[A-ZÀÂÉÈÊÎÔÙÇ])')
+        .allMatches(text).toList();
+    if (starts.isEmpty) return <String>[];
+    final sections = <String>[];
+    for (var i = 0; i < starts.length; i++) {
+      final end = i + 1 < starts.length ? starts[i + 1].start : text.length;
+      sections.add(text.substring(starts[i].start, end).trim());
+    }
+    return sections;
+  }
+
+  String? _instructionFichePour(_Doc doc, String stage, int occurrence) {
+    final sections = _sectionsNumerotees(doc);
+    final pattern = stage == 't'
+        ? RegExp(r'travaillez? en passe|travail en passe|passes rapides', caseSensitive: false)
+        : stage == 'i'
+            ? RegExp(r'imposez vos mains|imposition des mains|imposez les mains', caseSensitive: false)
+            : stage == 'p'
+                ? RegExp(r'prière|récitez|signe de croix', caseSensitive: false)
+                : RegExp(r'conventions? mentales? supplémentaires?', caseSensitive: false);
+    final candidates = sections.where((section) =>
+        pattern.hasMatch(section.split('\n').first)).toList();
+    return occurrence >= 1 && occurrence <= candidates.length
+        ? candidates[occurrence - 1] : null;
+  }
+
   Widget _etapePdf(int index) {
     final stage = _etapes[index].split(' · ')[1];
     final doc = _selectedFts.single;
@@ -612,15 +640,9 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         _sourcePdf(source),
       ]);
     }
-    final lines = source.split('\n');
-    final matches = lines.where((line) {
-      if (stage == 'i') {
-        return RegExp(r'imposition|apposition|visualis|mains au-dessus|intention',
-            caseSensitive: false).hasMatch(line);
-      }
-      return RegExp(r'passes rapides|passes lentes|travail en passe|chakra|imposition',
-          caseSensitive: false).hasMatch(line);
-    }).map((line) => line.trim()).where((line) => line.isNotEmpty).toList();
+    final occurrence = int.tryParse(_etapes[index].split(' · ').last) ?? 1;
+    final instruction = _instructionFichePour(doc, stage, occurrence);
+    final matches = instruction == null ? <String>[] : <String>[instruction];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       Text(doc.titre, style: const TextStyle(fontWeight: FontWeight.bold)),
       const SizedBox(height: 8),
