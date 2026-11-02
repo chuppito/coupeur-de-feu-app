@@ -2,12 +2,13 @@
 /// Chaque fiche porte une liste d'actions explicites dans guideV33.
 class GuideAction {
   final String id, kind, text, target, route, source, distanceText;
+  final bool selectedRoute;
   const GuideAction({required this.id, required this.kind, required this.text,
-    this.target = '', this.route = '', this.source = '', this.distanceText = ''});
+    this.target = '', this.route = '', this.source = '', this.distanceText = '', this.selectedRoute=false});
   factory GuideAction.fromJson(Map<String, dynamic> j) => GuideAction(
     id: j['id'] as String, kind: j['kind'] as String, text: j['text'] as String,
     target: j['target'] as String? ?? '', route: j['route'] as String? ?? '',
-    source: j['source'] as String? ?? '', distanceText:j['distanceText'] as String? ?? '');
+    source: j['source'] as String? ?? '', distanceText:j['distanceText'] as String? ?? '', selectedRoute:j['selectedRoute']==true);
 }
 class GuideFiche {
   final String id, title;
@@ -20,9 +21,10 @@ class GuideFiche {
 class PlanStep {
   final String id, title, text, kind, ficheId, target, route, source;
   final List<String> zones;
+  final bool selectedRoute;
   const PlanStep({required this.id, required this.title, required this.kind,
     this.text = '', this.ficheId = '', this.target = '', this.route = '',
-    this.source = '', this.zones = const []});
+    this.source = '', this.zones = const [],this.selectedRoute=false});
 }
 class SessionPlan {
   final List<PlanStep> steps;
@@ -77,7 +79,7 @@ class SessionPlanner {
           'imposition':'Imposition / intention','visualisation':'Visualisation',
           'distance':'Travail sur planche anatomique','local':'Travail spécifique'};
         node(PlanStep(id:id,title:'${f.title} — ${labels[kind] ?? 'Instruction spécifique'}',
-          kind:kind,text:distance && kind=='distance' ? a.distanceText : a.text,ficheId:f.id,target:a.target,route:a.route,source:a.source,
+          kind:kind,text:distance && kind=='distance' ? a.distanceText : a.text,ficheId:f.id,target:a.target,route:a.route,source:a.source,selectedRoute:a.selectedRoute,
           zones: a.target=='selection' ? (zones[f.title]?.toList() ?? []) : const []));
         link(prev,id); prev=id;
       }

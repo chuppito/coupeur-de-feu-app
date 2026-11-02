@@ -22,9 +22,13 @@ void main() {
   });
   tearDown(() async {await Hive.close();await dir.delete(recursive:true);});
   Future<void> visible(WidgetTester t,Finder f) async {
+    if(f.evaluate().isEmpty) {
+      await t.scrollUntilVisible(f.first, 450, maxScrolls:100, scrollable:find.byType(Scrollable).first);
+    }
     await t.ensureVisible(f.first);await t.pumpAndSettle();
   }
   Future<void> start(WidgetTester t,{bool follow=false}) async {
+    await t.runAsync(() => MagnetismeLibraryService.loadAll());
     await t.pumpWidget(MaterialApp(home:MagnetismeSessionScreen(prefillNom:'Test',prefillNomFamille:'V33',demarrerSuivi:follow)));
     await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds:100)));
     await t.pumpAndSettle();

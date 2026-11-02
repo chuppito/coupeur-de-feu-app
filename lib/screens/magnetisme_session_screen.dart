@@ -699,6 +699,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         const Divider(),
       ],
       if(step.kind == 'flux' && step.route.isNotEmpty) Text(step.route,style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.selectedRoute && _mode == 'Présentiel' && const ['rapide','flux'].contains(step.kind))
+        ..._trajetsZones(step.zones).map((r)=>Padding(padding:const EdgeInsets.only(bottom:6),child:Text(r,style:const TextStyle(fontWeight:FontWeight.bold)))),
       SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
       if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
       if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
@@ -1169,6 +1171,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
               title: const Text('Réaliser un scan au pendule'),
               subtitle: const Text('Vitalité, taux vibratoire, chakras et zones du corps.'),
               onChanged: (value) => setState(() {
+                _timerConventions?.cancel();_lectureAuto=false;_lectureSuspendue=false;_etapeOuverte=0;
                 _scanPenduleNecessaire = value ?? false;
                 _etapesFaites.clear();
               }),
@@ -1265,7 +1268,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
                       if (_mode == 'À distance' && titre == 'Traitements lourds (aide aux)')
                         const DropdownMenuItem(value: 'radio', child: Text('Radiothérapie : suivi par prière contre le feu')),
                     ],
-                    onChanged: (v) => setState(() { if (v != null) { _typesSuivi[titre] = v; _etapesFaites.clear(); _etapeOuverte=0; } }),
+                    onChanged: (v) => setState(() { if (v != null) { _timerConventions?.cancel();_lectureAuto=false;_lectureSuspendue=false; _typesSuivi[titre] = v; _etapesFaites.clear(); _etapeOuverte=0; } }),
                   ),
                   const SizedBox(height: 12),
                 ]),
