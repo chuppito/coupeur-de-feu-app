@@ -41,6 +41,11 @@ class SessionPlan {
   final List<String> conflicts;
   const SessionPlan(this.steps, this.conflicts);
   bool get canStart => conflicts.isEmpty;
+  bool needsSupportPreparation(PlanStep step){
+    final index=steps.indexWhere((s)=>s.id==step.id);
+    return !steps.take(index<0?0:index).any((s)=>
+      const {'distance','support'}.contains(s.kind) && s.ficheId==step.ficheId && s.target==step.target && s.route==step.route);
+  }
 }
 class SessionPlanner {
   static SessionPlan build(List<GuideFiche> fiches, {
@@ -113,6 +118,10 @@ class SessionPlanner {
         // before Thot and its intention follows. Do not add physical passes.
         final support='${a.target}|${a.route}';
         if(thot && distance && kind=='distance' && a.kind!='rapide' && supportKeys.add(support)){
+          final preparation='support:${f.id}:${a.id}';
+          node(PlanStep(id:preparation,title:'${f.title} — Préparer le support de la zone',kind:'support',
+            ficheId:f.id,target:a.target,route:a.route,zones:zones[f.title]?.toList()??[],source:'Leçon 14.04, préparation de la planche avant le travail au Thot.'));
+          link(prev,preparation);prev=preparation;
           addThot(a,prev);
         }
         const cutaneous={'ft-eczema','ft-acne','ft-herpes','ft-verrue','ft-psoriasis','ft-zona','ft-maladie-de-verneuil','ft-couper-le-feu'};

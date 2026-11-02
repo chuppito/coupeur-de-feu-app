@@ -31,6 +31,11 @@ void main(){
     expect(p.steps.any((s)=>['flux','rapide','lente','imposition'].contains(s.kind)),isFalse);
     expect(p.steps.where((s)=>s.kind=='thot').length,3);
     for(final s in p.steps.where((s)=>s.kind=='thot')){expect(s.ficheId,isNotEmpty);}
+    final skin=p.steps.firstWhere((s)=>s.ficheId=='ft-eczema'&&s.kind=='support');
+    final thot=p.steps[p.steps.indexOf(skin)+1];expect(thot.kind,'thot');
+    final intention=p.steps[p.steps.indexOf(skin)+2];expect(intention.kind,'distance');
+    expect(p.needsSupportPreparation(intention),isFalse);
+    expect(p.needsSupportPreparation(skin),isTrue);
   });
   test('Genoux : trajets séparés avec départs et arrivées, sans consignes de passes',(){
     expect(GuidanceText.selectedRoutes(['Genou droit','Genou gauche']),[

@@ -663,6 +663,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         const SizedBox(height:12),_conventions(),
       ]);
       case 'thot': return _soinPenduleStep(step:step);
+      case 'support': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+        Text('Support : ${step.target=='selection'?step.zones.join(', '):step.target}'),
+        SelectableText(_find('planches_anatomiques_distance')?.contenu ?? 'Préparer la planche anatomique correspondant à la zone mémorisée, reliée au témoin.'),
+        _checkStep(index),
+      ]);
       case 'debrief': return _debrief();
       case 'temoin':
         final doc = _find('temoin_distance');
@@ -675,10 +680,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation),_checkStep(index)]);
       case 'balayage': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(_memoBalayage),_checkStep(index)]);
     }
-    final plan=_planV33.steps;
-    final position=plan.indexWhere((s)=>s.id==step.id);
-    final previous=position>0 ? plan[position-1] : null;
-    final newSupport = previous==null || previous.kind!='distance' || previous.ficheId!=step.ficheId || previous.target!=step.target || previous.route!=step.route;
+    final newSupport = _planV33.needsSupportPreparation(step);
     var text = GuidanceText.clean(step.text,kind:step.kind);
     text = text.replaceAll(RegExp(r'Prière contre le feu \(voir la fiche « CONTRE LE FEU »\)',caseSensitive:false),_priereFeu);
     text = MagnetismeLibraryService.personalized(text,prenom:_prenom.text,nom:_nom.text);
