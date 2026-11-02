@@ -564,10 +564,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   // Découpe les travaux mixtes : une seule fiche peut contenir passes
   // rapides, lentes, imposition et visualisation dans un même paragraphe.
   List<String> _gestesDeFiche(String texte, String phase) {
-    final lignes = texte.split(RegExp(r'\\n|\\s+/\\s+'));
+    final lignes = texte.split(RegExp(r'\n|\s+/\s+'));
     final fragments = <String>[];
     for (final ligne in lignes) {
-      final morceaux = ligne.split(RegExp(r'(?=\\s*-\\s*[1-9]\\.\\s*)'));
+      final morceaux = ligne.split(RegExp(r'(?=\s*-\s*[1-9]\.\s*)'));
       for (final morceau in morceaux) {
         final m = morceau.trim();
         if (m.isEmpty) continue;
