@@ -561,46 +561,62 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   // Chaque famille de gestes suit l'ordre de la fiche prioritaire.
   // Le guide suit les étapes textuelles originales de la fiche V3,
   // sans inférer de gestes à partir d'un simple mot-clé du PDF.
+  // Découpe les travaux mixtes : une seule fiche peut contenir passes
+  // rapides, lentes, imposition et visualisation dans un même paragraphe.
+  List<String> _gestesDeFiche(String texte, String phase) {
+    final lignes = texte.split(RegExp(r'\\n|\\s+/\\s+'));
+    final fragments = <String>[];
+    for (final ligne in lignes) {
+      final morceaux = ligne.split(RegExp(r'(?=\\s*-\\s*[1-9]\\.\\s*)'));
+      for (final morceau in morceaux) {
+        final m = morceau.trim();
+        if (m.isEmpty) continue;
+        final rapide = RegExp(r'passes? rapides?', caseSensitive: false).hasMatch(m);
+        final lente = RegExp(r'passes? lentes?', caseSensitive: false).hasMatch(m);
+        final autre = RegExp(r'imposition|imposez|visualisation|visualisez', caseSensitive: false).hasMatch(m);
+        if ((phase == 'rapide' && rapide) ||
+            (phase == 'lente' && lente) ||
+            (phase == 'specifique' && autre && !rapide && !lente)) {
+          fragments.add(m);
+        }
+      }
+    }
+    return fragments;
+  }
+
   List<String> get _parcoursFichesStructurees {
     final docs = _selectedFts;
     if (docs.isEmpty || docs.length > 3 ||
         docs.any((doc) => doc.etapesGuideSource.isEmpty)) return <String>[];
-
     final result = <String>[
       'Prise de contact',
       'Bilan énergétique',
       if (_scanPenduleNecessaire) 'Scan au pendule',
       'Dégagement des entités / énergies négatives si nécessaire',
     ];
-    const shared = <String>{'accueil', 'bilan', 'degagement',
-      'communes', 'circulation', 'balayage'};
+    const shared = <String>{'accueil', 'bilan', 'degagement', 'communes',
+      'circulation', 'balayage'};
     final primary = docs.first.etapesGuideSource;
-    final emitted = <String>{};
     final last = <String, int>{};
     for (var i = 0; i < primary.length; i++) {
       final type = primary[i]['type'] ?? '';
-      if (!shared.contains(type)) last[type] = i;
+      if (!shared.contains(type) && type != 'travail') last[type] = i;
     }
-
-    // Conserver l'ordre de la fiche prioritaire et insérer les gestes
-    // secondaires/tertiaires à la fin de chaque famille correspondante.
+    final emitted = <String>{};
     for (var i = 0; i < primary.length; i++) {
       final type = primary[i]['type'] ?? '';
       if (type == 'communes') {
         result.add('14 conventions mentales');
-      } else if (!shared.contains(type)) {
-        if (_mode == 'Présentiel' ||
-            (type != 'travail' && type != 'imposition')) {
+      } else if (!shared.contains(type) && type != 'travail') {
+        if (_mode == 'Présentiel' || type != 'imposition') {
           result.add('SOURCE · 0 · $i');
         }
       }
       if (last[type] == i) {
         for (var d = 1; d < docs.length; d++) {
-          final steps = docs[d].etapesGuideSource;
-          for (var j = 0; j < steps.length; j++) {
-            if (steps[j]['type'] == type &&
-                (_mode == 'Présentiel' ||
-                 (type != 'travail' && type != 'imposition'))) {
+          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
+            if (docs[d].etapesGuideSource[j]['type'] == type &&
+                (_mode == 'Présentiel' || type != 'imposition')) {
               result.add('SOURCE · $d · $j');
             }
           }
@@ -608,40 +624,62 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         emitted.add(type);
       }
     }
-    // Les types absents de la prioritaire restent accessibles.
     for (var d = 1; d < docs.length; d++) {
-      final steps = docs[d].etapesGuideSource;
-      for (var j = 0; j < steps.length; j++) {
-        final type = steps[j]['type'] ?? '';
-        if (!shared.contains(type) && !emitted.contains(type) &&
-            (_mode == 'Présentiel' ||
-             (type != 'travail' && type != 'imposition'))) {
+      for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
+        final type = docs[d].etapesGuideSource[j]['type'] ?? '';
+        if (!shared.contains(type) && type != 'travail' &&
+            !emitted.contains(type) &&
+            (_mode == 'Présentiel' || type != 'imposition')) {
           result.add('SOURCE · $d · $j');
         }
       }
     }
     if (_mode == 'Présentiel') {
-      // Flux et Thot se placent après les passes rapides, avant les lentes.
-      final firstSlow = result.indexWhere((title) {
-        if (!title.startsWith('SOURCE · ')) return false;
-        final parts = title.split(' · ');
-        final d = int.tryParse(parts[1]) ?? 0;
-        final j = int.tryParse(parts[2]) ?? 0;
-        final text = docs[d].etapesGuideSource[j]['texte']?.toLowerCase() ?? '';
-        return text.startsWith('passes lentes') ||
-            text.contains('2. passes lentes') ||
-            text.contains('2 – passes lentes');
-      });
-      final insertAt = firstSlow >= 0 ? firstSlow : result.length;
-      result.insert(insertAt, 'Contrôle des flux');
-      if (_soinPenduleNecessaire) {
-        result.insert(insertAt + 1, '7C · Pendule de Thot (facultatif)');
+      // Une phase complète pour les trois motifs, dans l'ordre de priorité.
+      for (final phase in <String>['rapide', 'lente', 'specifique']) {
+        if (phase == 'lente') {
+          result.add('Contrôle des flux');
+          if (_soinPenduleNecessaire) {
+            result.add('7C · Pendule de Thot (facultatif)');
+          }
+        }
+        for (var d = 0; d < docs.length; d++) {
+          for (var j = 0; j < docs[d].etapesGuideSource.length; j++) {
+            final step = docs[d].etapesGuideSource[j];
+            if (step['type'] != 'travail') continue;
+            if (_gestesDeFiche(step['texte'] ?? '', phase).isNotEmpty) {
+              result.add('GESTE · $phase · $d · $j');
+            }
+          }
+        }
       }
       result.add('Circulation énergétique entre les chakras');
       result.add('Balayage');
     }
     result.add('Débriefing / observation');
     return result;
+  }
+
+  Widget _etapeGeste(int index) {
+    final parts = _etapes[index].split(' · ');
+    final phase = parts[1];
+    final d = int.parse(parts[2]);
+    final j = int.parse(parts[3]);
+    final doc = _selectedFts[d];
+    final texte = doc.etapesGuideSource[j]['texte'] ?? '';
+    final gestes = _gestesDeFiche(texte, phase);
+    final zones = _zonesParPathologie[doc.titre] ?? <String>{};
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+      Text(doc.titre, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+      const SizedBox(height: 8),
+      ...gestes.map((geste) => Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SelectableText(geste, style: const TextStyle(fontSize: 16, height: 1.4)),
+      )),
+      if (zones.isNotEmpty)
+        Text('Zone(s) : ' + (zones.toList()..sort()).join(', ')),
+      _checkStep(index),
+    ]);
   }
 
   Widget _etapeFicheSource(int index) {
@@ -1223,6 +1261,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   final Map<int, GlobalKey> _stepKeys = <int, GlobalKey>{};
 
   String _titreEtapeVisible(String title) {
+    if (title.startsWith('GESTE · ')) {
+      final p = title.split(' · ');
+      final d = int.tryParse(p[2]) ?? 0;
+      final label = p[1] == 'rapide' ? 'Passes rapides' : p[1] == 'lente' ? 'Passes lentes' : 'Impositions / visualisations';
+      return '${_selectedFts[d].titre} — $label';
+    }
     if (!title.startsWith('SOURCE · ')) return title;
     final parts = title.split(' · ');
     if (parts.length != 3) return title;
@@ -1303,6 +1347,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     }
 
     final title = _etapes[index];
+    if (title.startsWith('GESTE · ')) return _etapeGeste(index);
     if (title.startsWith('SOURCE · ')) return _etapeFicheSource(index);
     if (title.startsWith('PDF45 · ')) return _etapePdf(index);
     if (title == 'Prise de contact') return _contactHelp();
