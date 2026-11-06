@@ -701,8 +701,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         Text('Zone(s) : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.kind=='rapide' && step.route.isNotEmpty && !step.route.toLowerCase().contains('chakra entrant') && !step.route.toLowerCase().contains('chakra sortant'))
         Text('Départ → arrivée : ${step.route}',style:const TextStyle(fontWeight:FontWeight.bold)),
-      if(step.kind=='rapide' && (step.route.toLowerCase().contains('chakra entrant') || step.route.toLowerCase().contains('chakra sortant')))
-        const Text('Chakras de départ et d’arrivée : correspondance anatomique à préciser.',style:TextStyle(fontWeight:FontWeight.bold)),
+      if(step.kind=='rapide' && (step.route.toLowerCase().contains('chakra entrant') || step.route.toLowerCase().contains('chakra sortant'))) ...[
+        if(GuidanceText.anatomicalRoutes(step.zones).isNotEmpty)
+          ...GuidanceText.anatomicalRoutes(step.zones).map((route)=>Text(route,style:const TextStyle(fontWeight:FontWeight.bold)))
+        else
+          const Text('Trajet non précisé pour cette zone dans le tableau de référence.',style:TextStyle(fontWeight:FontWeight.bold)),
+      ],
       if(step.condition.isNotEmpty) Text('Condition : ${step.condition}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.condition.isNotEmpty) CheckboxListTile(
         title:const Text('Condition remplie pour ce travail'),
@@ -724,7 +728,8 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       ] else ...[
         if(step.selectedRoute && _mode=='Présentiel' && step.kind=='rapide')
           ...GuidanceText.selectedRoutes(step.zones).map((r)=>Text(r,style:const TextStyle(fontWeight:FontWeight.bold))),
-        SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
+        if(!(step.kind=='rapide' && (step.route.toLowerCase().contains('chakra entrant') || step.route.toLowerCase().contains('chakra sortant')) && GuidanceText.anatomicalRoutes(step.zones).isNotEmpty))
+          SelectableText(text,style:const TextStyle(fontSize:16,height:1.4)),
       ],
       if(step.ficheId.isNotEmpty) TrainerAdvice(items:_find(step.ficheId)?.raw['conseilsFormateur'] as List? ?? const []),
       if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!,
