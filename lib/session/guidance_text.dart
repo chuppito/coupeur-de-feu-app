@@ -27,6 +27,10 @@ class GuidanceText {
       if(z.contains('genou') && side!=null){
         result.add('1. Chakra mineur aine $feminine → chakra mineur genou $side');
         result.add('2. Chakra mineur genou $side → chakra mineur pied $side');
+      }else if(z.contains('tibia') && side!=null){
+        result.add('Chakra mineur genou $side → chakra mineur pied $side');
+      }else if(z.contains('cuisse') && side!=null){
+        result.add('Chakra mineur aine $feminine → chakra mineur genou $side');
       }else if((z.contains('épaule')||z.contains('epaule'))&&side!=null){
         result.add('1. Chakra majeur couronne → chakra mineur épaule $feminine');
         result.add('2. Chakra mineur épaule $feminine → chakra mineur main $feminine');
@@ -57,6 +61,7 @@ class GuidanceText {
       if(z.contains('genou')){result.add('Genou $side : aine $f → genou $side → pied $side.');}
       else if(z.contains('coude')){result.add('Coude $side : épaule $f → coude $side → main $f.');}
       else if(z.contains('épaule')||z.contains('epaule')){result.add('Épaule $f : couronne → épaule $f → main $f.');}
+      else if(z.contains('tibia')){result.add('Tibia $side : chakra mineur genou $side → chakra mineur pied $side.');}
       else if(z.contains('cheville')){result.add('Cheville $f : genou $side → pied $side.');}
       else if(z.contains('poignet')){result.add('Poignet $side : coude $side → main $f.');}
       else if(z.contains('cuisse')){result.add('Cuisse $f : aine $f → genou $side.');}
