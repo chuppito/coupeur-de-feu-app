@@ -1,3 +1,4 @@
+import '../widgets/energy_ending_guidance.dart';
 import 'dart:async';
 import 'dart:convert';
 import '../session/session_plan.dart';
@@ -676,9 +677,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           SelectableText(source?.contenu ?? 'Préparer et vitaliser le témoin selon la fiche de la bibliothèque.'),
           _checkStep(index),
         ]);
-      case 'circulation': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-        SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation),_checkStep(index)]);
-      case 'balayage': return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text(_memoBalayage),_checkStep(index)]);
+      case 'circulation': return EnergyEndingGuidance(
+        circulation: true,
+        instructions: SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation),
+        validation: _checkStep(index),
+      );
+      case 'balayage': return EnergyEndingGuidance(
+        circulation: false,
+        instructions: const Text(_memoBalayage),
+        validation: _checkStep(index),
+      );
     }
     final newSupport = _planV33.needsSupportPreparation(step);
     var text = GuidanceText.clean(step.text,kind:step.kind);
@@ -2251,7 +2259,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   static const _memoBalayage =
       'Selon le manuel : placez les mains à 10 à 15 cm au-dessus du corps. '
-      'Effectuez des passages semi-rapides, pendant environ 30 secondes à 1 minute.\n\n'
+      'Effectuez deux séries de passes à vitesse moyenne, pendant environ 30 secondes à 1 minute au total.\n\n'
       '1. Passage à deux mains sur le bras gauche.\n'
       '2. Passage à deux mains sur le tronc côté gauche et centre.\n'
       '3. Passage à deux mains sur le tronc côté droit et centre.\n'
@@ -2273,6 +2281,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   Widget _technique(int index) {
     final titreEtape = _etapes[index];
+    if (titreEtape == 'Circulation énergétique entre les chakras' || titreEtape == 'Balayage') {
+      final circulation = titreEtape == 'Circulation énergétique entre les chakras';
+      return EnergyEndingGuidance(
+        circulation: circulation,
+        instructions: circulation
+            ? SelectableText(_find('circulation-energetique-entre-les-chakras')?.contenu ?? _memoCirculation)
+            : const Text(_memoBalayage),
+        validation: _checkStep(index),
+      );
+    }
     final distance = _mode == 'À distance';
     final techniques = _selectedFts.map((doc) {
       final section = _protocolSectionFor(doc, 7);
