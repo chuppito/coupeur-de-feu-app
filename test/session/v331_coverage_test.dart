@@ -9,8 +9,8 @@ void main(){
   final fiches=raw.where((f)=>f['type']=='fiche_technique').map((f)=>GuideFiche.fromJson({...Map<String,dynamic>.from(f as Map),'guideV33':guides[f['id']]})).toList();
   bool archived(GuideFiche f)=>f.actions.singleOrNull?.kind=='personnel';
   bool unsupported(GuideFiche f)=>archived(f)||f.id=='ft-couper-le-feu';
-  test('57 fiches : 46 structurées et 11 archives explicitement non vérifiées',(){
-    expect(fiches.length,57);expect(guides.length,57);
+  test('58 fiches : 47 structurées et 11 archives explicitement non vérifiées',(){
+    expect(fiches.length,58);expect(guides.length,58);
     expect(fiches.where(archived).length,11);
     for(final f in fiches.where(archived)){expect(f.actions.single.documented,isFalse);}
   });
@@ -65,7 +65,7 @@ void main(){
     expect(p.canStart,isTrue);expect(p.steps.any((s)=>s.kind=='temoin'),isTrue);
     expect(p.steps.where((s)=>s.ficheId==f.id).every((s)=>s.kind=='priere'),isTrue);
   });
-  test('57 fiches : aucun retour court implicite hors zona/verrue présentiels',(){
+  test('58 fiches : aucun retour court implicite hors zona/verrue présentiels',(){
     for(final f in fiches){for(final distance in [false,true]){
       final p=SessionPlanner.build([f],distance:distance,visits:{f.id:'court'});
       final normal=SessionPlanner.build([f],distance:distance);
