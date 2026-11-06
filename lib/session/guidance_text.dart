@@ -16,6 +16,37 @@ class GuidanceText {
     }
     return displayed.join('\n').trim();
   }
+  /// Repères issus du « Protocole contrôle des flux », ebook p. 37.
+  /// Les zones non décrites dans la source ne reçoivent pas de trajet inventé.
+  static List<String> anatomicalRoutes(Iterable<String> zones) {
+    final result=<String>[];
+    for(final zone in zones.toSet()){
+      final z=zone.toLowerCase();
+      final side=z.contains('gauche')?'gauche':z.contains('droit')?'droit':null;
+      final feminine=side=='droit'?'droite':side;
+      if(z.contains('genou') && side!=null){
+        result.add('1. Chakra mineur aine $feminine → chakra mineur genou $side');
+        result.add('2. Chakra mineur genou $side → chakra mineur pied $side');
+      }else if((z.contains('épaule')||z.contains('epaule'))&&side!=null){
+        result.add('1. Chakra majeur couronne → chakra mineur épaule $feminine');
+        result.add('2. Chakra mineur épaule $feminine → chakra mineur main $feminine');
+      }else if(z.contains('coude')&&side!=null){
+        result.add('1. Chakra mineur épaule $feminine → chakra mineur coude $side');
+        result.add('2. Chakra mineur coude $side → chakra mineur main $feminine');
+      }else if(z.contains('poignet')&&side!=null){
+        result.add('Chakra mineur coude $side → chakra mineur main $feminine');
+      }else if(z.contains('cheville')&&side!=null){
+        result.add('Chakra mineur genou $side → chakra mineur pied $side');
+      }else if(z.contains('abdomen')||z.contains('intestin')){
+        result.add('Chakra majeur plexus devant → chakra majeur racine');
+      }else if(z.contains('nuque')||z.contains('cervical')){
+        result.add('Chakra majeur couronne → chakra majeur cœur derrière');
+      }else if(z.contains('lombaire')||z.contains('bas du dos')){
+        result.add('Chakra majeur plexus derrière → chakra majeur racine');
+      }
+    }
+    return result;
+  }
   static List<String> selectedRoutes(Iterable<String> zones) {
     final result=<String>[];
     for(final zone in (zones.toSet().toList()..sort())){
