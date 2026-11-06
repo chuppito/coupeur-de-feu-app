@@ -693,9 +693,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     text = text.replaceAll(RegExp(r'Prière contre le feu \(voir la fiche « CONTRE LE FEU »\)',caseSensitive:false),_priereFeu);
     text = MagnetismeLibraryService.personalized(text,prenom:_prenom.text,nom:_nom.text);
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-      if(step.target != 'selection' && step.target.isNotEmpty)
-        Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold)),
-      if(step.zones.isNotEmpty) Text('${step.target=='selection'?'Zone(s)':'Zones sélectionnées (repères ; cible fixe ci-dessus)'} : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.zones.isNotEmpty && const {'rapide','lente','imposition','visualisation','flux','distance'}.contains(step.kind))
+        Text('À travailler : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold))
+      else if(step.target != 'selection' && step.target.isNotEmpty)
+        Text('Zone : ${step.target}',style:const TextStyle(fontWeight:FontWeight.bold))
+      else if(step.zones.isNotEmpty)
+        Text('Zone(s) : ${step.zones.join(', ')}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.kind=='rapide' && step.route.isNotEmpty && !step.route.toLowerCase().contains('chakra entrant') && !step.route.toLowerCase().contains('chakra sortant'))
+        Text('Départ → arrivée : ${step.route}',style:const TextStyle(fontWeight:FontWeight.bold)),
+      if(step.kind=='rapide' && (step.route.toLowerCase().contains('chakra entrant') || step.route.toLowerCase().contains('chakra sortant')))
+        const Text('Chakras de départ et d’arrivée : correspondance anatomique à préciser.',style:TextStyle(fontWeight:FontWeight.bold)),
       if(step.condition.isNotEmpty) Text('Condition : ${step.condition}',style:const TextStyle(fontWeight:FontWeight.bold)),
       if(step.condition.isNotEmpty) CheckboxListTile(
         title:const Text('Condition remplie pour ce travail'),
