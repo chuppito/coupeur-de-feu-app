@@ -5668,5 +5668,527 @@
       "distanceText": "Après-séance : maintenir une bonne hydratation pendant 3 jours ; refaire une séance un mois après selon l'évolution.",
       "label": "Consignes après-séance"
     }
+  ],
+  "ft-anxiete": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "bilan",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "degagement",
+      "kind": "degagement",
+      "text": "Dégagement si nécessaire.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "memoires",
+      "kind": "communes",
+      "text": "Insister sur le nettoyage des mauvaises mémoires de la vie actuelle, de la vie intra-utérine, transgénérationnelles et des vies antérieures.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "intentions",
+      "kind": "intentions",
+      "text": "Je dope la fabrication de sérotonine.\nJe diminue la fabrication de cortisol.\nJe diminue la fabrication d'adrénaline et de noradrénaline.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Imposer les mains sur le front et réciter mentalement.\n« Écoutez favorablement, Seigneur, les prières que nous vous adressons par l'intermédiaire de saint Mathurin, et faites que nous soyons aidés par les mérites de celui qui vous a servi si fidèlement ! Nous vous en prions, par notre Seigneur Jésus-le-Christ ; qu'il en soit ainsi ! Saint Mathurin, secourez favorablement ceux qui ont le malheur d'être angoissés, terrifiés, réconfortez-les, et guérissez-les avant que la folie ne gagne, s'il plaît à Dieu ! Nous vous en prions : au nom du Père créateur, au nom du Christ, au nom de l'Esprit saint, au nom de la Divine Mère, qu'il en soit ainsi ! »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": false
+    },
+    {
+      "id": "travail-1",
+      "kind": "rapide",
+      "text": "Passes rapides du chakra plexus devant au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "Plexus devant → chakra racine",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique, repérer le trajet Plexus devant → chakra racine ; ne pas réaliser de passes physiques à distance."
+    },
+    {
+      "id": "travail-2",
+      "kind": "lente",
+      "text": "Passes lentes sur le système intestinal.",
+      "target": "Abdomen et système intestinal",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-3",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les intestins (2e cerveau) avec l'intention de doper la sérotonine.",
+      "target": "Abdomen et système intestinal",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique correspondant, porter l'intention sur les intestins (2e cerveau) avec l'intention de doper la sérotonine."
+    },
+    {
+      "id": "suivi",
+      "kind": "local",
+      "text": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Une seconde séance sous un mois est conseillée.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818250.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Une seconde séance sous un mois est conseillée."
+    }
+  ],
+  "ft-bursite": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "bilan",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "degagement",
+      "kind": "degagement",
+      "text": "Dégagement si nécessaire.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "memoires",
+      "kind": "communes",
+      "text": "Insister sur le nettoyage des tensions, des blocages énergétiques et des corps énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "intentions",
+      "kind": "intentions",
+      "text": "J'arrête la douleur.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre le feu (3 fois) : main au-dessus de la bursite, signe de croix avant chaque prière ; laisser la main au-dessus de la zone pendant une minute en visualisant une lumière bleue représentant le froid qui se diffuse.\n« Feu de Dieu, perds ta chaleur, comme Judas jadis perdit sa couleur, quand il trahit notre Seigneur au mont des Oliviers. J'enlève le feu avec la main, que cela redevienne froid comme avant. »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": false
+    },
+    {
+      "id": "travail-1",
+      "kind": "rapide",
+      "text": "Passes rapides du chakra entrant au chakra sortant de la bursite, à moins de 3 cm de la personne.",
+      "target": "Zone de bursite",
+      "route": "Chakra entrant → chakra sortant",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique, repérer le trajet Chakra entrant → chakra sortant ; ne pas réaliser de passes physiques à distance."
+    },
+    {
+      "id": "travail-2",
+      "kind": "lente",
+      "text": "Passes lentes sur la bursite.",
+      "target": "Zone de bursite",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-3",
+      "kind": "imposition",
+      "text": "Imposition des mains sur la bursite avec visualisation de la bourse séreuse en parfait état.",
+      "target": "Zone de bursite",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique correspondant, porter l'intention sur la bursite avec visualisation de la bourse séreuse en parfait état."
+    },
+    {
+      "id": "suivi",
+      "kind": "local",
+      "text": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Premiers effets significatifs au bout de 48 heures environ selon la fiche. Une première séance doit avoir un effet important ; une seconde peut être programmée selon l'évolution sous deux semaines.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818251.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Premiers effets significatifs au bout de 48 heures environ selon la fiche. Une première séance doit avoir un effet important ; une seconde peut être programmée selon l'évolution sous deux semaines."
+    }
+  ],
+  "ft-contusions": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "bilan",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "degagement",
+      "kind": "degagement",
+      "text": "Dégagement si nécessaire.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "memoires",
+      "kind": "communes",
+      "text": "Insister sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre le feu (3 fois) : main au-dessus de la zone, signe de croix avant chaque prière ; main maintenue une minute avec visualisation d'une lumière bleue représentant le froid.\n« Feu de Dieu, perds ta chaleur, comme Judas jadis perdit sa couleur, quand il trahit notre Seigneur au mont des Oliviers. J'enlève le feu avec la main, que cela redevienne froid comme avant. »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": false
+    },
+    {
+      "id": "priere-chocs",
+      "kind": "priere",
+      "text": "Prière contre les coups, chocs et hématomes (4 fois), main au-dessus de la contusion.\n« Mauvais mal que voici, qui a tant de racines ici. Qu'au Ciel nous avons des amis, que Dieu te déracine, sans médecin ni médecines, je te conjure. Au nom du Père créateur, je te conjure. Au nom du Christ, je te conjure. Au nom du Père créateur, au nom du Christ, au nom de l'Esprit saint, au nom de la Divine Mère, qu'il en soit ainsi ! »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-1",
+      "kind": "rapide",
+      "text": "Passes rapides du chakra entrant au chakra sortant de la contusion.",
+      "target": "Zone de contusion",
+      "route": "Chakra entrant → chakra sortant",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique, repérer le trajet Chakra entrant → chakra sortant ; ne pas réaliser de passes physiques à distance."
+    },
+    {
+      "id": "travail-2",
+      "kind": "lente",
+      "text": "Passes lentes sur la contusion.",
+      "target": "Zone de contusion",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-3",
+      "kind": "imposition",
+      "text": "Imposition des mains sur la contusion avec visualisation des fibres musculaires ou capillaires (si contusion à la tête) en parfait état.",
+      "target": "Zone de contusion",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique correspondant, porter l'intention sur la contusion avec visualisation des fibres musculaires ou capillaires (si contusion à la tête) en parfait état."
+    },
+    {
+      "id": "suivi",
+      "kind": "local",
+      "text": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Ne nécessite pas de seconde séance selon la fiche.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818252.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Ne nécessite pas de seconde séance selon la fiche."
+    }
+  ],
+  "ft-fracture": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "bilan",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "degagement",
+      "kind": "degagement",
+      "text": "Dégagement si nécessaire.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "memoires",
+      "kind": "communes",
+      "text": "Insister sur le nettoyage des tensions et des blocages énergétiques.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "intentions",
+      "kind": "intentions",
+      "text": "J'accélère la fabrication des protéines « facteurs de croissance ».",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre les fractures, main au-dessus de la fracture, réciter mentalement.\n« Ô Jésus, toi qui as dit « Ils ont percé mes mains et mes pieds. Ils ont compté tous mes os. Ils se partagent mes vêtements. Ils tirent au sort ma tunique », regarde d'un œil favorable (prénom et nom), qui souffre de fracture. Guéris-le (la), promptement, s'il plaît à Dieu. Nous t'en prions : au nom du Père créateur, au nom du Christ, au nom de l'Esprit saint, au nom de la Divine Mère, qu'il en soit ainsi ! Dieu t'a guéri (prénom et nom), Remercie-le : au nom du Père créateur, au nom du Christ, au nom de l'Esprit saint, au nom de la Divine Mère, qu'il en soit ainsi ! »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": false
+    },
+    {
+      "id": "travail-1",
+      "kind": "rapide",
+      "text": "Passes rapides du chakra entrant au chakra sortant de la fracture.",
+      "target": "Zone de fracture",
+      "route": "Chakra entrant → chakra sortant",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique, repérer le trajet Chakra entrant → chakra sortant ; ne pas réaliser de passes physiques à distance."
+    },
+    {
+      "id": "travail-2",
+      "kind": "lente",
+      "text": "Passes lentes sur la fracture.",
+      "target": "Zone de fracture",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-3",
+      "kind": "imposition",
+      "text": "Imposition des mains sur la fracture avec une visualisation de l'os abîmé en parfait état.",
+      "target": "Zone de fracture",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique correspondant, porter l'intention sur la fracture avec une visualisation de l'os abîmé en parfait état."
+    },
+    {
+      "id": "suivi",
+      "kind": "local",
+      "text": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Une seconde séance peut être réalisée un mois après pour renforcer le travail.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818253.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Une seconde séance peut être réalisée un mois après pour renforcer le travail."
+    }
+  ],
+  "ft-parasites-intestinaux": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "bilan",
+      "kind": "bilan",
+      "text": "Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "degagement",
+      "kind": "degagement",
+      "text": "Dégagement si nécessaire.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "memoires",
+      "kind": "communes",
+      "text": "Insister sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "intentions",
+      "kind": "intentions",
+      "text": "Je renforce les défenses immunitaires.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre les parasites intestinaux : réciter mentalement ; faire un signe de croix sur le ventre ; réciter mentalement 3 « Notre Père » et 3 « Je vous salue Marie ».\n« Au nom du Père créateur, au nom du Christ, au nom du Saint-Esprit, au nom de la Divine Mère, je t'adjure. Que tu ne manges ni chair, ni os, ni sang de (prénom et nom). Et que tu sortes promptement, pour n'y plus revenir ! Par ma bouche, Dieu t'ordonne : au nom du Père créateur, au nom du Christ, au nom de l'Esprit saint, au nom de la Divine Mère, qu'il en soit ainsi ! »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": false
+    },
+    {
+      "id": "travail-1",
+      "kind": "rapide",
+      "text": "Passes rapides du chakra plexus devant au chakra racine.",
+      "target": "Abdomen et système intestinal",
+      "route": "Plexus devant → chakra racine",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique, repérer le trajet Plexus devant → chakra racine ; ne pas réaliser de passes physiques à distance."
+    },
+    {
+      "id": "travail-2",
+      "kind": "lente",
+      "text": "Passes lentes sur les intestins.",
+      "target": "Abdomen et système intestinal",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "travail-3",
+      "kind": "imposition",
+      "text": "Imposition des mains sur les intestins avec l'intention d'éradiquer les vers.",
+      "target": "Abdomen et système intestinal",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Sur le support anatomique correspondant, porter l'intention sur les intestins avec l'intention d'éradiquer les vers."
+    },
+    {
+      "id": "suivi",
+      "kind": "local",
+      "text": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Reprogrammer une seconde séance sous un mois selon l'évolution.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818254.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "distanceText": "Après-séance : Maintenir une bonne hydratation pendant 3 jours. Reprogrammer une seconde séance sous un mois selon l'évolution."
+    }
+  ],
+  "ft-saignement-hemorragie": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818256.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre l'hémorragie (3 fois), main au-dessus de la partie qui saigne, sans contact ; à la troisième répétition, refaire 3 fois un signe de croix : « Au nom du Père, du Fils et du Saint-Esprit. »\n« Par le sang d'Adam est venu la mort, par le sang du Christ est venu la vie. Sang arrête, toi ! (+) Au nom du Père, du Fils et du Saint-Esprit. »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818256.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": true
+    }
+  ],
+  "ft-coupure": [
+    {
+      "id": "accueil",
+      "kind": "accueil",
+      "text": "Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818257.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true
+    },
+    {
+      "id": "priere",
+      "kind": "priere",
+      "text": "Prière contre les coupures : faire un signe de croix sur la plaie, sans contact, et réciter mentalement. Après la prière, laisser la main au-dessus de la coupure pendant une minute en visualisant une réparation de l'épiderme.\n« Plaie ferme-toi, comme s'est fermée la plaie de notre Seigneur Jésus Christ sur l'arbre de la Croix. »",
+      "target": "selection",
+      "route": "",
+      "source": "Coffret Stéphane Langlade — photo 1818257.jpg fournie par l'utilisateur le 06/11/2026",
+      "documented": true,
+      "standalone": true
+    }
   ]
 }
