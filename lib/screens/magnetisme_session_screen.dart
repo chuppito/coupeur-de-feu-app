@@ -1935,7 +1935,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(_secondesRestantes>1){setState(()=>_secondesRestantes--);return;}
       final finished=_momentIndex==_moments.length-1;
       _nextMoment();
-      if(!finished) _demarrerLecture();
+      if(!finished) {
+        _demarrerLecture();
+      } else if (_allSpecificConventions.isNotEmpty) {
+        // La dernière convention de base déclenche immédiatement la première
+        // convention supplémentaire, sans second appui sur Démarrer.
+        _indexConventionSpecifique = 0;
+        _secondesConventionSpecifique = 0;
+        _pauseConventionsSpecifiques = false;
+        _conventionsSupplementairesFaites.clear();
+        _demarrerLectureSpecifique();
+      }
     });
   }
   Widget _lectureAutomatique() {
@@ -1981,7 +1991,24 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         decoration:const InputDecoration(labelText:'CM3 : événements particuliers (facultatif, un par ligne)',hintText:'Événement et date connus de la personne'),
         onChanged:(_)=>setState((){_momentIndex=0;_lectureSuspendue=false;_conventionsFaites.clear();})),
       const Text('Complément CM3 : 30 s par événement dans la bibliothèque ; les notes vidéo évoquent 15–20 s. La durée retenue reste affichée et ajustable.'),
-      _lectureAutomatique(),
+      if (_lectureConventionsSpecifiques || _pauseConventionsSpecifiques || (_conventionsFaites.length == ids.length && _conventionsSupplementairesFaites.isNotEmpty))
+        Card(child:Padding(padding:const EdgeInsets.all(16),child:Column(
+          crossAxisAlignment:CrossAxisAlignment.stretch,
+          children:[
+            const Text('Conventions supplémentaires',style:TextStyle(fontSize:18,fontWeight:FontWeight.bold)),
+            if (_indexConventionSpecifique < _allSpecificConventions.length) ...[
+              Text('Convention ${_indexConventionSpecifique + 1} / ${_allSpecificConventions.length}'),
+              SelectableText(_allSpecificConventions[_indexConventionSpecifique]),
+              Text('Temps restant : ${(_secondesConventionSpecifique ~/ 60).toString().padLeft(2,'0')}:${(_secondesConventionSpecifique % 60).toString().padLeft(2,'0')}'),
+            ],
+            FilledButton.icon(
+              onPressed:_lectureConventionsSpecifiques ? _pauseLectureSpecifique : _demarrerLectureSpecifique,
+              icon:Icon(_lectureConventionsSpecifiques ? Icons.pause : Icons.play_arrow),
+              label:Text(_lectureConventionsSpecifiques ? 'Pause' : (_pauseConventionsSpecifiques ? 'Reprendre' : 'Relancer les conventions supplémentaires')),
+            ),
+          ],
+        )))
+      else _lectureAutomatique(),
       if(_traitements.text.trim().isEmpty) const Text('Convention 8 omise : aucun traitement signalé au bilan.'),
       ExpansionTile(title:const Text('Les 14 conventions et leurs sources'),children:[
         for(var i=0;i<14;i++) ListTile(
