@@ -155,6 +155,11 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
   int _etapeOuverte = 0;
   int _conventionOuverte = 0;
   Timer? _timerConventions;
+  Timer? _timerConventionsSpecifiques;
+  int _indexConventionSpecifique = 0;
+  int _secondesConventionSpecifique = 0;
+  bool _lectureConventionsSpecifiques = false;
+  bool _pauseConventionsSpecifiques = false;
   int _secondesRestantes = 60;
   bool _lectureAuto = false;
   bool _lectureSuspendue = false;
@@ -227,6 +232,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     WidgetsBinding.instance.removeObserver(this);
     WakelockPlus.disable();
     _timerConventions?.cancel();
+    _timerConventionsSpecifiques?.cancel();
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _entites, _negatives, _sang, _bilanNotes,
@@ -2099,6 +2105,50 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     return result.isEmpty ? null : result.join('\n');
   }
 
+  void _pauseLectureSpecifique() {
+    _timerConventionsSpecifiques?.cancel();
+    setState(() {
+      _lectureConventionsSpecifiques = false;
+      _pauseConventionsSpecifiques = true;
+    });
+  }
+
+  void _demarrerLectureSpecifique() {
+    final conventions = _allSpecificConventions;
+    if (conventions.isEmpty) return;
+    _timerConventionsSpecifiques?.cancel();
+    setState(() {
+      if (_indexConventionSpecifique >= conventions.length) {
+        _indexConventionSpecifique = 0;
+        _conventionsSupplementairesFaites.clear();
+      }
+      if (!_pauseConventionsSpecifiques || _secondesConventionSpecifique <= 0) {
+        _secondesConventionSpecifique = _dureePersonnalisee > 0 ? _dureePersonnalisee : 60;
+      }
+      _lectureConventionsSpecifiques = true;
+      _pauseConventionsSpecifiques = false;
+    });
+    _timerConventionsSpecifiques = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) { timer.cancel(); return; }
+      setState(() {
+        if (_secondesConventionSpecifique > 1) {
+          _secondesConventionSpecifique--;
+          return;
+        }
+        _conventionsSupplementairesFaites.add(_indexConventionSpecifique);
+        if (_indexConventionSpecifique + 1 >= conventions.length) {
+          timer.cancel();
+          _lectureConventionsSpecifiques = false;
+          _pauseConventionsSpecifiques = false;
+          _secondesConventionSpecifique = 0;
+        } else {
+          _indexConventionSpecifique++;
+          _secondesConventionSpecifique = _dureePersonnalisee > 0 ? _dureePersonnalisee : 60;
+        }
+      });
+    });
+  }
+
   Widget _specific() {
     final zones = _zonesSoin.toList()..sort();
     final conventions = _allSpecificConventions;
@@ -2116,6 +2166,17 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
           const SizedBox(height: 6),
+          const Text('Lecture automatique des conventions supplémentaires, sans son ni vibration.'),
+          if (_indexConventionSpecifique < conventions.length) ...[
+            Text('Convention supplémentaire ${_indexConventionSpecifique + 1} / ${conventions.length}',style:const TextStyle(fontWeight:FontWeight.bold)),
+            SelectableText(conventions[_indexConventionSpecifique]),
+            Text('Temps restant : ${(_secondesConventionSpecifique ~/ 60).toString().padLeft(2,'0')}:${(_secondesConventionSpecifique % 60).toString().padLeft(2,'0')}'),
+          ],
+          FilledButton.icon(
+            onPressed: _lectureConventionsSpecifiques ? _pauseLectureSpecifique : _demarrerLectureSpecifique,
+            icon: Icon(_lectureConventionsSpecifiques ? Icons.pause : Icons.play_arrow),
+            label: Text(_lectureConventionsSpecifiques ? 'Pause' : (_pauseConventionsSpecifiques ? 'Reprendre' : 'Démarrer toutes les conventions supplémentaires')),
+          ),
           ...List<Widget>.generate(conventions.length, (i) => CheckboxListTile(
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,
