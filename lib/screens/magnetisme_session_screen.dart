@@ -747,9 +747,26 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         if ((_lectureIntentionsPlanifiees || _pauseIntentionsPlanifiees) &&
             _indicesIntentionsPlanifiees.isNotEmpty &&
             _indicesIntentionsPlanifiees[_indexIntentionPlanifiee] == index) ...[
-          Text('Intention ${_positionIntentionPlanifiee + 1} / ${_intentionsDeLEtape(index).length}',style:const TextStyle(fontWeight:FontWeight.bold)),
-          SelectableText(_intentionsDeLEtape(index)[_positionIntentionPlanifiee]),
-          Text('Temps restant : ${(_restantIntentionPlanifiee ~/ 60).toString().padLeft(2,'0')}:${(_restantIntentionPlanifiee % 60).toString().padLeft(2,'0')}'),
+          Text('Convention supplémentaire ${_positionIntentionPlanifiee + 1} / ${_intentionsDeLEtape(index).length}',style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold)),
+          SelectableText(_intentionsDeLEtape(index)[_positionIntentionPlanifiee],style:const TextStyle(fontSize:16,height:1.4)),
+          const SizedBox(height:16),
+          Center(child:SizedBox(width:200,height:200,child:Stack(alignment:Alignment.center,children:[
+            SizedBox.expand(child:CircularProgressIndicator(
+              value:(1-_restantIntentionPlanifiee/(_dureePersonnalisee > 0 ? _dureePersonnalisee : 60)).clamp(0.0,1.0),
+              strokeWidth:10,backgroundColor:Colors.black12)),
+            Text('${(_restantIntentionPlanifiee ~/ 60).toString().padLeft(2,'0')}:${(_restantIntentionPlanifiee % 60).toString().padLeft(2,'0')}',
+              style:const TextStyle(fontSize:42,fontWeight:FontWeight.bold)),
+          ]))),
+          const SizedBox(height:16),
+          Text('Durée utilisée : ${_dureePersonnalisee > 0 ? _dureePersonnalisee : 60} secondes.'),
+          Wrap(spacing:6,children:[for(final seconds in [15,20,30,60,120,180,240]) ChoiceChip(
+            label:Text('$seconds s'),
+            selected:(_dureePersonnalisee > 0 ? _dureePersonnalisee : 60)==seconds,
+            onSelected:_lectureIntentionsPlanifiees ? null : (_)=>setState((){
+              _dureePersonnalisee=seconds;
+              _restantIntentionPlanifiee=seconds;
+            }),
+          )]),
         ],
         FilledButton.icon(
           onPressed:_lectureIntentionsPlanifiees ? _pauseIntentionsPlanifieesLecture : _demarrerIntentionsPlanifiees,
@@ -2213,6 +2230,15 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
           _indexIntentionPlanifiee++;
           _positionIntentionPlanifiee = 0;
           _etapeOuverte = indices[_indexIntentionPlanifiee];
+          final nextIndex = _etapeOuverte;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
+            final target = _stepKeys[nextIndex]?.currentContext;
+            if (target != null) {
+              Scrollable.ensureVisible(target,
+                duration:const Duration(milliseconds:350),alignment:0.04);
+            }
+          });
         }
         _restantIntentionPlanifiee = _dureePersonnalisee > 0 ? _dureePersonnalisee : 60;
       });
