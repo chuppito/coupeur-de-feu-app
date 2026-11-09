@@ -233,6 +233,7 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     WakelockPlus.disable();
     _timerConventions?.cancel();
     _timerConventionsSpecifiques?.cancel();
+    _timerIntentionsPlanifiees?.cancel();
     for (final controller in <TextEditingController>[
       _prenom, _nom, _observations, _debriefController, _vitalite, _vibratoire,
       _entites, _negatives, _sang, _bilanNotes,
@@ -741,7 +742,22 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if(step.seconds!=null) ProtocolTimer(key:ValueKey(step.id),seconds:step.seconds!,
         initialRemaining:_tempsLocaux[step.id],onChanged:(value)=>_tempsLocaux[step.id]=value),
       if(step.kind=='personnel') const Text('Contenu historique conservé. Protocole complet non vérifié dans les sources de formation ; adaptation distance et fusion non certifiées.'),
-      if(step.kind=='intentions') const Padding(padding:EdgeInsets.only(top:8),child:Text('Durée non précisée : avancez manuellement après chaque intention.')),
+      if(step.kind=='intentions') ...[
+        const SizedBox(height:12),
+        if ((_lectureIntentionsPlanifiees || _pauseIntentionsPlanifiees) &&
+            _indicesIntentionsPlanifiees.isNotEmpty &&
+            _indicesIntentionsPlanifiees[_indexIntentionPlanifiee] == index) ...[
+          Text('Intention ${_positionIntentionPlanifiee + 1} / ${_intentionsDeLEtape(index).length}',style:const TextStyle(fontWeight:FontWeight.bold)),
+          SelectableText(_intentionsDeLEtape(index)[_positionIntentionPlanifiee]),
+          Text('Temps restant : ${(_restantIntentionPlanifiee ~/ 60).toString().padLeft(2,'0')}:${(_restantIntentionPlanifiee % 60).toString().padLeft(2,'0')}'),
+        ],
+        FilledButton.icon(
+          onPressed:_lectureIntentionsPlanifiees ? _pauseIntentionsPlanifieesLecture : _demarrerIntentionsPlanifiees,
+          icon:Icon(_lectureIntentionsPlanifiees ? Icons.pause : Icons.play_arrow),
+          label:Text(_lectureIntentionsPlanifiees ? 'Pause' : (_pauseIntentionsPlanifiees ? 'Reprendre' : 'Démarrer les conventions supplémentaires')),
+        ),
+        const Text('Enchaînement automatique sans son ni vibration. Durée réglable dans les conventions de base.'),
+      ],
       if(step.source.isNotEmpty) ExpansionTile(title:const Text('Source'),children:[SelectableText(step.source)]),
       if(step.condition.isEmpty || _conditionsConfirmees.contains(step.id)) _checkStep(index),
       if(step.condition.isNotEmpty && !_conditionsConfirmees.contains(step.id)) TextButton(
@@ -1937,14 +1953,23 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       _nextMoment();
       if(!finished) {
         _demarrerLecture();
-      } else if (_allSpecificConventions.isNotEmpty) {
-        // La dernière convention de base déclenche immédiatement la première
-        // convention supplémentaire, sans second appui sur Démarrer.
-        _indexConventionSpecifique = 0;
-        _secondesConventionSpecifique = 0;
-        _pauseConventionsSpecifiques = false;
-        _conventionsSupplementairesFaites.clear();
-        _demarrerLectureSpecifique();
+      } else {
+        // En parcours V33, les intentions sont des étapes du plan, et non
+        // nécessairement des entrées de _allSpecificConventions.
+        final nextIntentions = _usesPlanV33
+            ? _etapes.indexWhere((title) => title.startsWith('V33 · ') &&
+                _plannedStep(title).kind == 'intentions')
+            : -1;
+        if (nextIntentions >= 0) {
+          _etapeOuverte = nextIntentions;
+          _demarrerIntentionsPlanifiees();
+        } else if (_allSpecificConventions.isNotEmpty) {
+          _indexConventionSpecifique = 0;
+          _secondesConventionSpecifique = 0;
+          _pauseConventionsSpecifiques = false;
+          _conventionsSupplementairesFaites.clear();
+          _demarrerLectureSpecifique();
+        }
       }
     });
   }
@@ -2130,6 +2155,76 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       if (active && line.trim().isNotEmpty) result.add(line.trim());
     }
     return result.isEmpty ? null : result.join('\n');
+  }
+
+  List<int> get _indicesIntentionsPlanifiees => [
+    for (var i = 0; i < _etapes.length; i++)
+      if (_etapes[i].startsWith('V33 · ') &&
+          _plannedStep(_etapes[i]).kind == 'intentions') i,
+  ];
+
+  List<String> _intentionsDeLEtape(int index) {
+    final step = _plannedStep(_etapes[index]);
+    return step.text.split('\\n').map((s) => s.trim())
+        .where((s) => s.isNotEmpty).toList();
+  }
+
+  int _indexIntentionPlanifiee = 0;
+  int _positionIntentionPlanifiee = 0;
+  bool _lectureIntentionsPlanifiees = false;
+  bool _pauseIntentionsPlanifiees = false;
+  int _restantIntentionPlanifiee = 0;
+  Timer? _timerIntentionsPlanifiees;
+
+  void _demarrerIntentionsPlanifiees() {
+    final indices = _indicesIntentionsPlanifiees;
+    if (indices.isEmpty) return;
+    _timerIntentionsPlanifiees?.cancel();
+    if (!_pauseIntentionsPlanifiees) {
+      _indexIntentionPlanifiee = 0;
+      _positionIntentionPlanifiee = 0;
+      _restantIntentionPlanifiee = _dureePersonnalisee > 0 ? _dureePersonnalisee : 60;
+    }
+    setState(() {
+      _lectureIntentionsPlanifiees = true;
+      _pauseIntentionsPlanifiees = false;
+      _etapeOuverte = indices[_indexIntentionPlanifiee];
+    });
+    _timerIntentionsPlanifiees = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) { timer.cancel(); return; }
+      setState(() {
+        if (_restantIntentionPlanifiee > 1) {
+          _restantIntentionPlanifiee--;
+          return;
+        }
+        final index = indices[_indexIntentionPlanifiee];
+        final intentions = _intentionsDeLEtape(index);
+        if (_positionIntentionPlanifiee + 1 < intentions.length) {
+          _positionIntentionPlanifiee++;
+        } else {
+          _etapesFaites.add(index);
+          if (_indexIntentionPlanifiee + 1 == indices.length) {
+            timer.cancel();
+            _lectureIntentionsPlanifiees = false;
+            _pauseIntentionsPlanifiees = false;
+            _restantIntentionPlanifiee = 0;
+            return;
+          }
+          _indexIntentionPlanifiee++;
+          _positionIntentionPlanifiee = 0;
+          _etapeOuverte = indices[_indexIntentionPlanifiee];
+        }
+        _restantIntentionPlanifiee = _dureePersonnalisee > 0 ? _dureePersonnalisee : 60;
+      });
+    });
+  }
+
+  void _pauseIntentionsPlanifieesLecture() {
+    _timerIntentionsPlanifiees?.cancel();
+    setState(() {
+      _lectureIntentionsPlanifiees = false;
+      _pauseIntentionsPlanifiees = true;
+    });
   }
 
   void _pauseLectureSpecifique() {
