@@ -4589,6 +4589,85 @@
         "debriefing": "La fiche indique que cette prière peut être faite sur soi-même avec la même réussite.",
         "texteSource": "OBJECTIFS\nRefermer une plaie et réparer l'épiderme.\n\nPRIÈRE\nPrière contre les coupures : faire un signe de croix sur la plaie, sans contact, et réciter mentalement. Après la prière, laisser la main au-dessus de la coupure pendant une minute en visualisant une réparation de l'épiderme.\n« Plaie ferme-toi, comme s'est fermée la plaie de notre Seigneur Jésus Christ sur l'arbre de la Croix. »\n\nAPRÈS-SÉANCE / À SAVOIR\nLa fiche indique que cette prière peut être faite sur soi-même avec la même réussite."
       }
+    },
+    {
+      "id": "ft-sinusite",
+      "titre": "Sinusite",
+      "source": "Protocole Rhinopharyngite — reprise identique demandée par l'utilisateur",
+      "type": "fiche_technique",
+      "categorie": "Fiches techniques",
+      "aliases": [
+        "Sinusite"
+      ],
+      "description": "Fiche Sinusite : même protocole que la fiche Rhinopharyngite, selon la demande de l'utilisateur.",
+      "contenu": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n2. Bilan énergétique.\n3. Si besoin, dégagement d'entité ou magie noire.\n4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.\n5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.\n7. Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL.\n8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite généralement pas de deuxième séance.",
+      "protocoleStructure": {
+        "version": 1,
+        "accueil": "Accueil et prise de contact.",
+        "bilan": "Bilan énergétique.",
+        "degagement": "Si besoin, dégagement d'entité ou magie noire.",
+        "conventionsCommunes": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+        "conventionsSupplementaires": "Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+        "prieresEtFormulations": "Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+        "travauxEtTrajets": "Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL.",
+        "circulation": "Circulation énergétique entre les chakras.",
+        "balayage": "Balayage & débriefing / Ne nécessite généralement pas de deuxième séance.",
+        "debriefing": "",
+        "sectionsOriginales": {
+          "1": "Accueil et prise de contact.",
+          "2": "Bilan énergétique.",
+          "3": "Si besoin, dégagement d'entité ou magie noire.",
+          "4": "Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+          "5": "Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+          "6": "Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+          "7": "Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL.",
+          "8": "Circulation énergétique entre les chakras.",
+          "9": "Balayage & débriefing / Ne nécessite généralement pas de deuxième séance.",
+          "introduction": "LES 10 ÉTAPES CLÉS :"
+        },
+        "texteSource": "LES 10 ÉTAPES CLÉS :\n\n1. Accueil et prise de contact.\n2. Bilan énergétique.\n3. Si besoin, dégagement d'entité ou magie noire.\n4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.\n5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.\n6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.\n7. Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL.\n8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite généralement pas de deuxième séance."
+      },
+      "reference_pdf_45": "                                  Définition : La rhinopharyngite est une maladie bénigne appelée également rhinite ou rhume. Elle est causée par un virus\nRhinopharyngite                   (rhinovirus, influenzae, coronavirus, etc…) Les principaux symptômes sont la fatigue, des frissons, la tête lourde (maux de\n                                  tête), des brûlures à l’arrière du nez et éternuements. Pas ou peu de fièvre (moins de 38°)\n\n1 – Accueil du client\n2 – Bilan énergétique\n3 – Dégagement Entité ou Magie Noire si besoin                                        1 – Passes rapides : chakras Couronne à Cœur\n                                                                                                    2 – Passes lentes\n                              1 – Renfort des défenses immunitaires                    3 – Imposition des mains sur la sphère ORL\n                                     2 – Nettoyage du sang\n\n\n\n\n            14 Conventions                 Conventions                                                                             Circulation\n                                            mentales                                               Travail en passe               énergétique\n               mentales                                                    Prière\n                                         supplémentaires                                            sur la sphère                   entre les\n              classiques\n                                                                                                         ORL                        chakras\n\n\n\n\n Bien insister sur le nettoyage des toxines   Main rapprochée + signe de Croix sur le nez et la gorge\n                                              Feu de Dieu perds ta chaleur comme Judas jadis perdit sa couleur\n                                              quand il trahit notre Seigneur au Mont des Oliviers. J’enlève le Feu          9 – Balayage\n                                              avec la main, que ça redevienne froid comme avant.                            10 – Débriefing, ne nécessite\n                                              A faire 3 fois d’affilée                                                      pas une 2ème séance",
+      "ordre_pdf_45": [
+        "c",
+        "s",
+        "p",
+        "t"
+      ],
+      "etapesGuideSource": [
+        {
+          "type": "accueil",
+          "texte": "1. Accueil et prise de contact."
+        },
+        {
+          "type": "bilan",
+          "texte": "2. Bilan énergétique."
+        },
+        {
+          "type": "degagement",
+          "texte": "3. Si besoin, dégagement d'entité ou magie noire."
+        },
+        {
+          "type": "communes",
+          "texte": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines."
+        },
+        {
+          "type": "intentions",
+          "texte": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang."
+        },
+        {
+          "type": "priere",
+          "texte": "6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite."
+        },
+        {
+          "type": "travail",
+          "texte": "7. Travaillez en passes sur la sphère ORL :\n - 1. Passes rapides du chakra couronne au chakra cœur.\n - 2. Passes lentes.\n - 3. Imposition des mains sur la sphère ORL."
+        },
+        {
+          "type": "circulation",
+          "texte": "8. Circulation énergétique entre les chakras.\n9 & 10. Balayage & débriefing / Ne nécessite généralement pas de deuxième séance."
+        }
+      ]
     }
   ]
 }
