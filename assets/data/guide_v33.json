@@ -6190,5 +6190,119 @@
       "documented": true,
       "standalone": true
     }
+  ],
+  "ft-sinusite": [
+    {
+      "id": "s0-0",
+      "kind": "accueil",
+      "text": "1. Accueil et prise de contact.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s1-1",
+      "kind": "bilan",
+      "text": "2. Bilan énergétique.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s2-2",
+      "kind": "degagement",
+      "text": "3. Si besoin, dégagement d'entité ou magie noire.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s3-3",
+      "kind": "communes",
+      "text": "4. Posez les 14 conventions mentales classiques / Insistez bien sur le nettoyage des toxines.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s4-4",
+      "kind": "intentions",
+      "text": "5. Posez 2 conventions mentales supplémentaires :\n - 1. Renforcez les défenses immunitaires.\n - 2. Nettoyage du sang.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s5-5",
+      "kind": "priere",
+      "text": "6. Main rapprochée, faites un signe de croix sur le nez et la gorge, et récitez :\n  Prière contre le feu (voir la fiche « CONTRE LE FEU »).\n À faire 3 fois de suite.",
+      "target": "selection",
+      "route": "",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s6-6",
+      "kind": "rapide",
+      "text": "7. Travaillez en passes sur la sphère ORL :\n- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Localiser sur la planche anatomique la zone concernée par ce travail, puis suivre le travail sur support détaillé ci-dessous.",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s6-7",
+      "kind": "flux",
+      "text": "Contrôler le passage du flux sur chacun des trajets ci-dessus, pour chaque côté concerné. En cas de blocage, reprendre les passes rapides puis contrôler de nouveau.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s6-8",
+      "kind": "lente",
+      "text": "- 2. Passes lentes.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s6-9",
+      "kind": "imposition",
+      "text": "- 3. Imposition des mains sur la sphère ORL.",
+      "target": "Sphère ORL",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "distanceText": "Travailler sur la zone correspondante de la planche anatomique selon les intentions documentées de cette fiche.",
+      "selectedRoute": false,
+      "documented": true
+    },
+    {
+      "id": "s7-10",
+      "kind": "circulation",
+      "text": "circulation",
+      "target": "selection",
+      "route": "- 1. Passes rapides du chakra couronne au chakra cœur.",
+      "source": "Magnétisme (1).odt",
+      "selectedRoute": false,
+      "documented": true
+    }
   ]
 }
