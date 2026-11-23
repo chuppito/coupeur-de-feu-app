@@ -2209,18 +2209,18 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
 
   List<String> _intentionsDeLEtape(int index) {
     final step = _plannedStep(_etapes[index]);
-    final lines = step.text.split(RegExp(r'\\r?\\n')).map((s) => s.trim())
+    final lines = step.text.split(RegExp(r'\r?\n')).map((s) => s.trim())
         .where((s) => s.isNotEmpty).toList();
     // Les fiches importées comportent parfois un titre (« Posez 2... »),
     // suivi d'intentions numérotées : ne chronométrer que les intentions.
     final numbered = lines.where((line) =>
-        RegExp(r'^(?:[-•]\\s*)?\\d+[.)-]\\s+').hasMatch(line)).toList();
+        RegExp(r'^(?:[-•]\s*)?\d+[.)-]\s+').hasMatch(line)).toList();
     if (numbered.isNotEmpty) {
       return numbered.map((line) => line.replaceFirst(
-          RegExp(r'^(?:[-•]\\s*)?\\d+[.)-]\\s+'), '')).toList();
+          RegExp(r'^(?:[-•]\s*)?\d+[.)-]\s+'), '')).toList();
     }
     return lines.where((line) =>
-        !RegExp(r'^(?:posez|conventions? mentales? supplémentaires?)\\b',
+        !RegExp(r'^(?:posez|conventions? mentales? supplémentaires?)\b',
             caseSensitive:false).hasMatch(line)).toList();
   }
 
