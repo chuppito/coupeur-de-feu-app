@@ -1975,33 +1975,23 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final duration=_dureeConvention();
     final remaining=(!_lectureAuto&&!_lectureSuspendue) ? duration : _secondesRestantes;
     final progress=(1-remaining/duration).clamp(0.0,1.0);
-    final base=_conventionAction(m.convention);
-    final instruction=m.intention.isEmpty ? base :
-      '${_mode == 'À distance' ? 'Les deux mains au-dessus de la photo.' : 'Les mains sur le chakra couronne.'} Intention : « ${m.intention} ». ${m.seconds} secondes (manuel).';
     final title=m.label.isEmpty ? _conventionTitles[m.convention] : m.label;
     return Card(child:Padding(padding:const EdgeInsets.all(18),child:Column(
       crossAxisAlignment:CrossAxisAlignment.stretch,children:[
       Text('Convention ${m.convention+1} / 14',style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold)),
-      Text(title),const SizedBox(height:16),
+      const SizedBox(height:16),
       Center(child:SizedBox(width:200,height:200,child:Stack(alignment:Alignment.center,children:[
         SizedBox.expand(child:CircularProgressIndicator(value:progress,strokeWidth:10,backgroundColor:Colors.black12)),
         Text('${(remaining~/60).toString().padLeft(2,'0')}:${(remaining%60).toString().padLeft(2,'0')}',style:const TextStyle(fontSize:42,fontWeight:FontWeight.bold)),
       ]))),const SizedBox(height:16),
-      Text('Durée utilisée : $duration secondes${_dureePersonnalisee>0 ? ' (réglage personnel)' : ''}.'),
-      if(m.convention==8 && m.intention.isNotEmpty) const Text('CM9 : la bibliothèque indique 30 s pour équilibrage/recharge ; les notes vidéo évoquent 15–20 s. Divergence conservée : ajustement personnel possible, sans prétendre à une durée unique validée.'),
-      SelectableText(instruction,style:const TextStyle(fontSize:16,height:1.4)),
-      const SizedBox(height:10),
+      SelectableText(m.intention.isNotEmpty ? m.intention : title,
+        style:const TextStyle(fontSize:17,height:1.4)),
+      const SizedBox(height:12),
       Wrap(spacing:6,children:[for(final seconds in [0,15,20,30,60,120,180,240]) ChoiceChip(
         label:Text(seconds==0?'Bibliothèque':'$seconds s'), selected:_dureePersonnalisee==seconds,
         onSelected:_lectureAuto?null:(_)=>setState((){_dureePersonnalisee=seconds;_secondesRestantes=_dureeConvention();_lectureSuspendue=false;}),
       )]),
       FilledButton.icon(onPressed:_lectureAuto?_arreterLecture:_demarrerLecture,icon:Icon(_lectureAuto?Icons.pause:Icons.play_arrow),label:Text(_lectureAuto?'Pause':(_lectureSuspendue?'Reprendre':'Démarrer'))),
-      const Text('Sans son ni vibration',textAlign:TextAlign.center),
-      Row(children:[
-        OutlinedButton(onPressed:_momentIndex==0?null:()=>setState(()=>_moveMoment(_momentIndex-1)),child:const Text('Précédente')),
-        const Spacer(),
-        FilledButton(onPressed:_nextMoment,child:const Text('Réalisée → suivante')),
-      ]),
     ])));
   }
   Widget _minuteurIntentionsPlanifiees() {
@@ -2018,9 +2008,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
       crossAxisAlignment:CrossAxisAlignment.stretch,children:[
       Text('Convention supplémentaire ${_positionIntentionPlanifiee + 1} / ${intentions.length}',
         style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold)),
-      const SizedBox(height:8),
-      SelectableText(intentions[_positionIntentionPlanifiee],
-        style:const TextStyle(fontSize:16,height:1.4)),
       const SizedBox(height:16),
       Center(child:SizedBox(width:200,height:200,child:Stack(
         alignment:Alignment.center,children:[
@@ -2031,7 +2018,10 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
             style:const TextStyle(fontSize:42,fontWeight:FontWeight.bold)),
         ]))),
       const SizedBox(height:16),
-      Text('Durée utilisée : $duration secondes.'),
+      const SizedBox(height:12),
+      SelectableText(intentions[_positionIntentionPlanifiee],
+        style:const TextStyle(fontSize:17,height:1.4)),
+      const SizedBox(height:12),
       Wrap(spacing:6,children:[for(final seconds in [15,20,30,60,120,180,240]) ChoiceChip(
         label:Text('$seconds s'),
         selected:duration==seconds,
@@ -2045,7 +2035,6 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
         icon:Icon(_lectureIntentionsPlanifiees ? Icons.pause : Icons.play_arrow),
         label:Text(_lectureIntentionsPlanifiees ? 'Pause' : (_pauseIntentionsPlanifiees ? 'Reprendre' : 'Démarrer')),
       ),
-      const Text('Sans son ni vibration',textAlign:TextAlign.center),
     ])));
   }
 
@@ -2054,10 +2043,12 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     final complete=ids.every(_conventionsFaites.contains);
     final doc=_reference('14 conventions — version complète') ?? _reference('14 conventions');
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-      TextField(controller:_evenementsCM3,minLines:1,maxLines:3,enabled:!_lectureAuto,
-        decoration:const InputDecoration(labelText:'CM3 : événements particuliers (facultatif, un par ligne)',hintText:'Événement et date connus de la personne'),
-        onChanged:(_)=>setState((){_momentIndex=0;_lectureSuspendue=false;_conventionsFaites.clear();})),
-      const Text('Complément CM3 : 30 s par événement dans la bibliothèque ; les notes vidéo évoquent 15–20 s. La durée retenue reste affichée et ajustable.'),
+      ExpansionTile(title:const Text('Options CM3 (facultatif)'),children:[
+        TextField(controller:_evenementsCM3,minLines:1,maxLines:3,enabled:!_lectureAuto,
+          decoration:const InputDecoration(labelText:'Événements particuliers (un par ligne)',hintText:'Événement et date connus de la personne'),
+          onChanged:(_)=>setState((){_momentIndex=0;_lectureSuspendue=false;_conventionsFaites.clear();})),
+        const Text('Complément CM3 : 30 s par événement dans la bibliothèque ; les notes vidéo évoquent 15–20 s.'),
+      ]),
       if (_lectureIntentionsPlanifiees || _pauseIntentionsPlanifiees)
         _minuteurIntentionsPlanifiees()
       else if (_lectureConventionsSpecifiques || _pauseConventionsSpecifiques || (_conventionsFaites.length == ids.length && _conventionsSupplementairesFaites.isNotEmpty))
@@ -2214,13 +2205,16 @@ class _MagnetismeSessionScreenState extends State<MagnetismeSessionScreen> with 
     // Les fiches importées comportent parfois un titre (« Posez 2... »),
     // suivi d'intentions numérotées : ne chronométrer que les intentions.
     final numbered = lines.where((line) =>
-        RegExp(r'^(?:[-•]\s*)?\d+[.)-]\s+').hasMatch(line)).toList();
+        RegExp(r'^[-•]\s*\d+[.)-]\s+').hasMatch(line) ||
+        (RegExp(r'^\d+[.)-]\s+').hasMatch(line) &&
+         !RegExp(r'^\d+[.)-]\s*(?:posez|conventions?)\b',
+             caseSensitive:false).hasMatch(line))).toList();
     if (numbered.isNotEmpty) {
       return numbered.map((line) => line.replaceFirst(
           RegExp(r'^(?:[-•]\s*)?\d+[.)-]\s+'), '')).toList();
     }
     return lines.where((line) =>
-        !RegExp(r'^(?:posez|conventions? mentales? supplémentaires?)\b',
+        !RegExp(r'^(?:\d+[.)-]\s*)?(?:posez|conventions? mentales? supplémentaires?)\b',
             caseSensitive:false).hasMatch(line)).toList();
   }
 
