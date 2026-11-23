@@ -56,11 +56,11 @@ const List<_BodyZone> _zonesCommunes = [
 /// Zones visibles uniquement de face (se superposeraient avec les zones de
 /// dos si on les affichait toutes en même temps).
 const List<_BodyZone> _zonesFaceSeul = [
-  // Placé dans les zones de face pour rester cliquable au-dessus du torse.
-  _BodyZone('Cou', Rect.fromLTWH(105, 55, 30, 18)),
   _BodyZone('Torse', Rect.fromLTWH(84, 62, 72, 78)),
   _BodyZone('Abdomen', Rect.fromLTWH(88, 140, 64, 38)),
   _BodyZone('Bassin', Rect.fromLTWH(94, 178, 52, 25)),
+  // Dessiné en dernier pour rester cliquable devant le haut du torse.
+  _BodyZone('Cou', Rect.fromLTWH(105, 55, 30, 18)),
 ];
 
 /// Zones visibles uniquement de dos.
