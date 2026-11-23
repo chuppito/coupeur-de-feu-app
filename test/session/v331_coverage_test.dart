@@ -9,8 +9,8 @@ void main(){
   final fiches=raw.where((f)=>f['type']=='fiche_technique').map((f)=>GuideFiche.fromJson({...Map<String,dynamic>.from(f as Map),'guideV33':guides[f['id']]})).toList();
   bool archived(GuideFiche f)=>f.actions.singleOrNull?.kind=='personnel';
   bool unsupported(GuideFiche f)=>archived(f)||f.id=='ft-couper-le-feu';
-  test('65 fiches : 54 structurées et 11 archives explicitement non vérifiées',(){
-    expect(fiches.length,65);expect(guides.length,65);
+  test('66 fiches : 55 structurées et 11 archives explicitement non vérifiées',(){
+    expect(fiches.length,66);expect(guides.length,66);
     expect(fiches.where(archived).length,11);
     for(final f in fiches.where(archived)){expect(f.actions.single.documented,isFalse);}
   });
