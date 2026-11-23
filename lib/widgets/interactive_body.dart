@@ -23,6 +23,8 @@ const double _canvasHeight = 400;
 /// que tu le vois directement à l'écran, sans effet miroir.
 const List<_BodyZone> _zonesCommunes = [
   _BodyZone('Tête', Rect.fromLTWH(92, 4, 56, 56), isCircle: true),
+  // Cou : zone distincte de la nuque (vue de dos).
+  _BodyZone('Cou', Rect.fromLTWH(105, 57, 30, 16)),
   _BodyZone('Oreille gauche', Rect.fromLTWH(78, 22, 18, 20), isCircle: true),
   _BodyZone('Oreille droite', Rect.fromLTWH(144, 22, 18, 20), isCircle: true),
   // Bras = segment épaule-coude ; avant-bras = segment coude-poignet.
